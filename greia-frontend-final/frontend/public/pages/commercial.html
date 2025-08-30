@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Greia - Commercial</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="/css/global-nav.css" rel="stylesheet"/>
+<link href="/css/rent.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="/js/global-nav.js"></script>
+<script src="/js/global-search.js"></script>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="navbar-thirds">
+    <div class="navbar-third left">
+      <ul class="nav-links left-links" style="position:relative; z-index:100;">
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/buy.html" style="position:relative; z-index:101;">Property</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/buy.html">Buy</a></li>
+            <li><a href="/pages/rent.html">Rent</a></li>
+            <li><a href="/pages/commercial.html">Commercial</a></li>
+            <li><a href="/pages/buy.html">Apartments</a></li>
+            <li><a href="/pages/sell.html">Sell</a></li>
+            <li><a href="/pages/valuations.html">Valuations</a></li>
+            <li><a href="/pages/buy.html">New Homes</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/agents.html" style="color: rgb(78, 255, 146); position:relative; z-index:101;" class="referral-dropdown-toggle">Connect</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/agents.html">Find an Agent</a></li>
+            <li class="nested-dropdown" style="position: relative;">
+              <a href="/pages/agents.html" class="referral-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false">Referral Agents ▸</a>
+              <ul class="dropdown-menu referral-dropdown" style="display:none; position: absolute; left: 100%; top: 0; background: white; list-style:none; padding:10px; border:1px solid #ccc; min-width: 220px; z-index: 2000;">
+                <li><a href="/pages/agents.html?subtype=luxury">Luxury Home Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=lettings">Lettings Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=newhomes">New Homes Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=commercial">Commercial Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=residential">Residential Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=developer">Developer Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=timeshare">Timeshare Agents</a></li>
+              </ul>
+            </li>
+            <li><a href="/pages/coaching.html">Coaching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="/index.html">
+          <img alt="Logo" src="../assets/greia (4).png" style="height: auto; max-height: 140px;"/>
+        </a>
+      </div>
+    </div>
+    <div class="navbar-third right">
+      <ul class="nav-links right-links">
+        <li>
+          <a href="/pages/services.html" class="fancy-underline">Our Services</a>
+        </li>
+        <li>
+          <a href="/pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown" id="auth-menu">
+          <a href="/pages/login.html" id="login-btn">Log In</a>
+          <ul class="dropdown-menu" id="login-dropdown">
+            <li><a href="/pages/login.html">Sign In</a></li>
+            <li><a href="/pages/register.html">Register</a></li>
+            <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button aria-label="Toggle navigation" class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <!-- Mobile nav menu -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav">
+    <ul>
+      <li class="dropdown">
+        <a href="/pages/buy.html" class="dropdown-toggle">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/buy.html">Buy</a></li>
+          <li><a href="/pages/rent.html">Rent</a></li>
+          <li><a href="/pages/commercial.html">Commercial</a></li>
+          <li><a href="/pages/buy.html">Apartments</a></li>
+          <li><a href="/pages/sell.html">Sell</a></li>
+          <li><a href="/pages/valuations.html">Valuations</a></li>
+          <li><a href="/pages/buy.html">New Homes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" style="color: rgb(78, 255, 146);">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/agents.html">Find an Agent</a></li>
+          <li><a href="/pages/agents.html">Referral Agents</a></li>
+          <li><a href="/pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+      <li><a href="/pages/services.html">Our Services</a></li>
+      <li><a href="/pages/concierge.html">Concierge</a></li>
+      <li class="dropdown" id="mobile-auth-menu">
+        <a href="/pages/login.html" class="dropdown-toggle" id="mobile-login-btn">Log In</a>
+        <ul class="dropdown-menu" id="mobile-login-dropdown">
+          <li><a href="/pages/login.html">Sign In</a></li>
+          <li><a href="/pages/register.html">Register</a></li>
+          <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<main class="main-content">
+<section class="full-width-slideshow">
+<div class="slideshow-container">
+<div class="slide fade">
+<img alt="Slideshow Image 1" src="/assets/IMAGE1.jpg"/>
+</div>
+<div class="slide fade">
+<img alt="Slideshow Image 2" src="/assets/IMAGE2.jpg"/>
+</div>
+<div class="slide fade">
+<img alt="Slideshow Image 3" src="/assets/IMAGE3.jpg"/>
+</div>
+<div class="slideshow-text">
+<h2 style="font-size: smaller;; font-size: larger;">Let us Help You Find a Place to Grow</h2>
+</div>
+</div>
+</section>
+<!-- Page Title -->
+<section class="page-title">
+<h1 style="font-size: smaller;; font-size: larger;">Commercial Real Estate</h1>
+<p style="font-size: larger;">Buy, sell, lease, rent commercial real estate in Ireland</p>
+</section>
+<section class="search-filter">
+<form class="modern-search-bar" id="commercial-filter-form">
+<div id="dynamic-filters" style="display: flex; gap: 0.5em; flex-wrap: wrap;"></div>
+<button class="search-btn" type="submit">Search</button>
+</form>
+</section>
+<!-- Properties Section -->
+<section class="properties">
+<div class="property-grid" id="commercial-property-grid">
+<!-- Commercial properties will be rendered here by JS -->
+</div>
+</section>
+<!-- Commercial Map Section -->
+<section class="commercial-map-section" style="margin: 2em 0;">
+<h2 style="text-align:center;; font-size: smaller;"></h2>
+<div id="commercial-properties-map" style="height: 400px; width: 100%;"></div>
+</section>
+<!-- Add before </body> -->
+<div id="chatbot-widget"></div>
+<script src="/scripts/main.js"></script>
+<script>
+  const S3_BASE_URL = 'http://d4rent.ie.s3-website-eu-west-1.amazonaws.com/';
+  const API_BASE_URL = 'https://api.d4rent.ie'; // <-- Add your actual API base URL here
+
+  function getUniqueValues(properties, key) {
+    const values = new Set();
+    properties.forEach(p => {
+      if (p[key]) {
+        String(p[key]).split(',').map(v => v.trim()).forEach(v => {
+          if (v) values.add(v);
+        });
+      }
+    });
+    return Array.from(values).sort();
+  }
+  
+  function getMinMax(properties, key) {
+    const nums = properties.map(p => Number(p[key])).filter(n => !isNaN(n));
+    return nums.length ? { min: Math.min(...nums), max: Math.max(...nums) } : { min: 0, max: 0 };
+  }
+  
+  function renderDynamicFilters(properties, filters = {}) {
+    const container = document.getElementById('dynamic-filters');
+    if (!container) return;
+  
+    let html = '';
+  
+    // Property Types
+    const propertyTypes = getUniqueValues(properties, 'property_type');
+    if (propertyTypes.length) {
+      html += `<div class="search-dropdown">
+        <select id="type" name="type">
+          <option value="">All Property Types</option>
+          ${propertyTypes.map(type => `<option value="${type}"${filters.type === type ? ' selected' : ''}>${type.charAt(0).toUpperCase() + type.slice(1)}</option>`).join('')}
+        </select>
+      </div>`;
+    }
+  
+    // Price
+    const { min: minPrice, max: maxPrice } = getMinMax(properties, 'price');
+    if (maxPrice > 0) {
+      html += `<div class="search-dropdown">
+        <select id="price" name="price">
+          <option value="">Any Price</option>
+          <option value="0-${Math.ceil(maxPrice/4)}">Up to €${Math.ceil(maxPrice/4).toLocaleString()}</option>
+          <option value="${Math.ceil(maxPrice/4)}-${Math.ceil(maxPrice/2)}">€${Math.ceil(maxPrice/4).toLocaleString()} - €${Math.ceil(maxPrice/2).toLocaleString()}</option>
+          <option value="${Math.ceil(maxPrice/2)}-${maxPrice}">€${Math.ceil(maxPrice/2).toLocaleString()} - €${maxPrice.toLocaleString()}</option>
+          <option value="${maxPrice}+">€${maxPrice.toLocaleString()}+</option>
+        </select>
+      </div>`;
+    }
+  
+    // Size
+    const { min: minSize, max: maxSize } = getMinMax(properties, 'property_size');
+    if (maxSize > 0) {
+      html += `<div class="search-dropdown">
+        <select id="property_size" name="property_size">
+          <option value="">Any Size</option>
+          <option value="0-${Math.ceil(maxSize/4)}">Up to ${Math.ceil(maxSize/4)} sqm</option>
+          <option value="${Math.ceil(maxSize/4)}-${Math.ceil(maxSize/2)}">${Math.ceil(maxSize/4)} - ${Math.ceil(maxSize/2)} sqm</option>
+          <option value="${Math.ceil(maxSize/2)}-${maxSize}">${Math.ceil(maxSize/2)} - ${maxSize} sqm</option>
+          <option value="${maxSize}+">${maxSize}+ sqm</option>
+        </select>
+      </div>`;
+    }
+  
+    // Energy Ratings
+    const energyRatings = getUniqueValues(properties, 'energy_rating');
+    if (energyRatings.length) {
+      html += `<div class="search-dropdown">
+        <select id="energy_rating" name="energy_rating">
+          <option value="">Any BER</option>
+          ${energyRatings.map(r => `<option value="${r}"${filters.energy_rating === r ? ' selected' : ''}>${r}</option>`).join('')}
+        </select>
+      </div>`;
+    }
+  
+    // Area (text input)
+    html += `<div class="search-box">
+      <span class="search-icon">&#128269;</span>
+      <input type="text" id="area" name="area" placeholder="County, City, Town or Area" value="${filters.area || ''}">
+    </div>`;
+  
+    container.innerHTML = html;
+  }
+  
+  function filterPrice(price, range) {
+    if (!price) return false;
+    price = parseFloat(price);
+    if (range === "0-5000") return price >= 0 && price <= 5000;
+    if (range === "5000-10000") return price > 5000 && price <= 10000;
+    if (range === "10000-25000") return price > 10000 && price <= 25000;
+    if (range === "50000+") return price > 50000;
+    // Dynamic ranges
+    if (range && range.includes('-')) {
+      const [min, max] = range.split('-').map(Number);
+      return price >= min && price <= max;
+    }
+    if (range && range.endsWith('+')) {
+      const min = parseInt(range);
+      return price >= min;
+    }
+    return true;
+  }
+  
+  function filterSize(size, range) {
+    if (!size) return false;
+    size = parseFloat(size);
+    if (range && range.includes('-')) {
+      const [min, max] = range.split('-').map(Number);
+      return size >= min && size <= max;
+    }
+    if (range && range.endsWith('+')) {
+      const min = parseInt(range);
+      return size >= min;
+    }
+    return true;
+  }
+  
+  // List of commercial property types (expanded)
+  const COMMERCIAL_TYPES = [
+    'office',
+    'restaurant/bar',
+    'cafe',
+    'auction',
+    'agricultural site',
+    'investment property',
+    'development site',
+    'commercial site',
+    'retail unit',
+    'industrial unit',
+    'restaurant',
+    'bar',
+    'hotel',
+    'pub',
+    'shop',
+    'newsagent',
+    'other',
+    'restaraunt / bar / hotel',
+    'luxury commercial'
+  ];
+
+  function filterCommercialProperties(properties, filters) {
+    return properties.filter(p =>
+      // Only show approved properties
+      (p.approved === 1 || p.approved === true) &&
+      (p.workflow_status === 'approved') &&
+      // Only show commercial properties that are 'for sale' or 'to let'
+      (p.status && (p.status.toLowerCase() === 'for sale' || p.status.toLowerCase() === 'to let')) &&
+      // Existing filters
+      (!filters.title || (p.title && p.title.toLowerCase().includes(filters.title.toLowerCase()))) &&
+      (!filters.area || (p.address && p.address.toLowerCase().includes(filters.area.toLowerCase()))) &&
+      (!filters.price || filterPrice(p.price, filters.price)) &&
+      (!filters.property_size || filterSize(p.property_size, filters.property_size)) &&
+      (!filters.type || (p.property_type && p.property_type.toLowerCase() === filters.type.toLowerCase())) &&
+      (!filters.energy_rating || (p.energy_rating && p.energy_rating === filters.energy_rating)) &&
+      p.property_type && COMMERCIAL_TYPES.includes(p.property_type.trim().toLowerCase())
+    );
+  }
+  
+  function renderCommercialProperties(properties) {
+    const grid = document.getElementById('commercial-property-grid');
+    if (!grid) return;
+    if (!properties || properties.length === 0) {
+      grid.innerHTML = '<p style="grid-column: 1/-1; color: #888;">No commercial properties at the moment.</p>';
+      return;
+    }
+    grid.innerHTML = properties.map(listing => {
+      // Prepare features as bullet list if present
+      let featuresHtml = '';
+      if (listing.features) {
+        const featuresArr = listing.features.split('\n').filter(f => f.trim());
+        if (featuresArr.length) {
+          featuresHtml = `<ul class="property-features-list">${featuresArr.map(f => `<li>${f}</li>`).join('')}</ul>`;
+        }
+      }
+      return `
+        <div class="modern-property-card">
+          ${listing.company_logo ? `<img class="company-logo" src="${
+            listing.company_logo.startsWith('http')
+              ? listing.company_logo
+              : S3_BASE_URL + (listing.company_logo.startsWith('uploads/') ? listing.company_logo : 'uploads/' + listing.company_logo)
+          }" alt="Company Logo">` : ''}
+          <img class="property-image" src="${
+            listing.image
+              ? (listing.image.startsWith('http')
+                  ? listing.image
+                  : S3_BASE_URL + (listing.image.startsWith('uploads/') ? listing.image : 'uploads/' + listing.image))
+              : '/assets/placeholder-property.png'
+          }" alt="Property Photo">
+          <button class="favourite-btn" data-id="${listing.id}" title="Save to favourites">&#9825;</button>
+          <div class="property-details">
+            <div class="property-title">${listing.title || ''}</div>
+            <div class="property-address">${listing.address || ''}</div>
+            <div class="property-user">${listing.user_name ? 'Agent: ' + listing.user_name : ''}</div>
+            <div class="property-status">${listing.status ? listing.status.replace('_', ' ').toUpperCase() : ''}</div>
+            <div class="property-price"><strong>Price:</strong> €${listing.price}</div>
+            ${featuresHtml}
+            <div style="margin-top:0.7em;">
+              <a href="propertyPage.html?id=${listing.id}" class="view-property-btn">View Property</a>
+            </div>
+          </div>
+          ${listing.energy_rating ? `<img class="ber-corner" src="/assets/ber/ber-${listing.energy_rating}.png" alt="BER ${listing.energy_rating}">` : ''}
+        </div>
+      `;
+    }).join('');
+    // Attach favourite button logic here
+    grid.querySelectorAll('.favourite-btn').forEach(btn => {
+      btn.onclick = async function() {
+        const propertyId = this.getAttribute('data-id');
+        const token = localStorage.getItem('token');
+        if (!token) {
+          window.location.href = 'login.html';
+          return;
+        }
+        try {
+          const res = await fetch(`${API_BASE_URL}/api/favourites/favourite`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({ property_id: propertyId })
+          });
+          if (res.ok) {
+            this.innerHTML = '&#10084;';
+            this.classList.add('favourited');
+          } else {
+            alert('Failed to save favourite.');
+          }
+        } catch (e) {
+          alert('Failed to save favourite.');
+        }
+      };
+    });
+  }
+  
+  async function geocode(address) {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data && data.length) {
+        return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+      }
+    } catch (e) {}
+    return null;
+  }
+  
+  async function renderCommercialPropertiesMap(properties) {
+    const mapDiv = document.getElementById('commercial-properties-map');
+    if (!mapDiv) return;
+    if (window.commercialMapInstance) {
+      window.commercialMapInstance.remove();
+    }
+    const map = L.map('commercial-properties-map').setView([53.3498, -6.2603], 11);
+    window.commercialMapInstance = map;
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+  
+    for (const property of properties) {
+      if (!property.address) continue;
+      const coords = await geocode(property.address);
+      if (coords) {
+        L.marker(coords).addTo(map)
+          .bindPopup(`<b>${property.title || ''}</b><br>${property.address}`);
+      }
+    }
+  }
+  
+  async function fetchAndRenderCommercialProperties(filters = {}) {
+    let url = API_BASE_URL + '/api/properties';
+    const params = [];
+    
+    // Always request only approved properties
+    params.push('approved=1');
+    params.push('workflow_status=approved');
+    
+    if (filters.status) params.push('status=' + encodeURIComponent(filters.status));
+    if (filters.title) params.push('title=' + encodeURIComponent(filters.title));
+    if (filters.area) params.push('area=' + encodeURIComponent(filters.area));
+    if (filters.price) params.push('price=' + encodeURIComponent(filters.price));
+    if (filters.type) params.push('type=' + encodeURIComponent(filters.type));
+    if (filters.energy_rating) params.push('energy_rating=' + encodeURIComponent(filters.energy_rating));
+    if (filters.property_size) params.push('property_size=' + encodeURIComponent(filters.property_size));
+    if (params.length) url += '?' + params.join('&');
+  
+    let properties = [];
+    try {
+      const res = await fetch(url);
+      properties = await res.json();
+    } catch (e) {
+      properties = [];
+    }
+    // Only keep commercial properties
+    properties = properties.filter(p =>
+      p.property_type &&
+      COMMERCIAL_TYPES.includes(p.property_type.trim().toLowerCase())
+    );
+    renderDynamicFilters(properties, filters);
+    properties = filterCommercialProperties(properties, filters);
+    renderCommercialProperties(properties);
+    await renderCommercialPropertiesMap(properties);
+  }
+  
+  document.getElementById('commercial-filter-form').onsubmit = function(e) {
+    e.preventDefault();
+    const filters = {};
+    ['type', 'price', 'property_size', 'energy_rating', 'area'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.value) filters[id] = el.value;
+    });
+    fetchAndRenderCommercialProperties(filters);
+  };
+  
+  // Initial load
+  fetchAndRenderCommercialProperties();
+  
+  // Hamburger menu logic (if needed)
+  document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.querySelector(".hamburger-menu");
+    const navDropdown = document.querySelector(".nav-dropdown");
+    if (hamburger && navDropdown) {
+      hamburger.addEventListener("click", () => {
+        navDropdown.classList.toggle("show");
+      });
+    }
+  });
+  </script>
+
+<footer>
+<div class="footer-container">
+<div class="footer-image">
+<img alt="D4Rent Footer Logo" src="/assets/d4rent logo smaller.png" style="height: auto; max-height: 100px;"/>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;; font-size: larger;">Contact Details</h3>
+<p style="font-size: larger;">D4Rent.ie</p>
+<p style="font-size: larger;">36 Upper Baggot St, Ballsbridge, D4</p>
+<p style="font-size: larger;">Phone: 01 442 7303</p>
+<p style="font-size: larger;">087 169 9498</p>
+<p>Email: <a href="mailto:info@d4rent.ie">info@d4rent.ie</a></p>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;; font-size: larger;">Quick Links</h3>
+<ul>
+<li><a href="pages/buy.html">Buy</a></li>
+<li><a href="pages/rent.html">Rent</a></li>
+<li><a href="pages/sell.html">Sell</a></li>
+<li><a href="pages/commercial.html">Commercial</a></li>
+<li><a href="pages/agents.html">Agents</a></li>
+<li><a href="pages/contact-us.html">Contact Us</a></li>
+<li><a href="pages/listyourrentalsfree.html">List Your Rentals Free</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;; font-size: larger;">Policy Links</h3>
+<ul>
+<li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
+<li><a href="pages/terms-of-service.html">Terms of Service</a></li>
+<li><a href="pages/cookie-policy.html">Cookie Policy</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;; font-size: larger;">Connect with Us</h3>
+<ul>
+<li><a href="https://www.facebook.com/profile.php?id=61577099380616" target="_blank">Facebook</a></li>
+<li><a href="https://www.instagram.com/dublin4rent/" target="_blank">Instagram</a></li>
+<li><a href="https://www.tiktok.com/@d4rent.ie" target="_blank">Tiktok</a></li>
+</ul>
+</div>
+</div>
+</footer>
+
+<script src="/scripts/chatbot.js"></script>
+<script>
+  // Check user authentication status and update navigation
+  document.addEventListener("DOMContentLoaded", function() {
+    // Check if user is logged in (you can modify this logic based on your auth system)
+    function isUserLoggedIn() {
+      // Check for auth token in localStorage, sessionStorage, or cookies
+      const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+      return token && token.length > 0;
+    }
+
+    function updateNavigation() {
+      const isLoggedIn = isUserLoggedIn();
+      
+      // Desktop navigation
+      const authMenu = document.getElementById('auth-menu');
+      const loginBtn = document.getElementById('login-btn');
+      const loginDropdown = document.getElementById('login-dropdown');
+      
+      // Mobile navigation
+      const mobileAuthMenu = document.getElementById('mobile-auth-menu');
+      const mobileLoginBtn = document.getElementById('mobile-login-btn');
+      const mobileLoginDropdown = document.getElementById('mobile-login-dropdown');
+
+      if (isLoggedIn) {
+        // User is logged in - show direct link to dashboard
+        
+        // Desktop
+        if (authMenu && loginBtn && loginDropdown) {
+          authMenu.classList.remove('dropdown');
+          loginBtn.textContent = 'myGREIA';
+          loginBtn.href = '/pages/profile.html';
+          loginDropdown.style.display = 'none';
+        }
+        
+        // Mobile
+        if (mobileAuthMenu && mobileLoginBtn && mobileLoginDropdown) {
+          mobileAuthMenu.classList.remove('dropdown');
+          mobileLoginBtn.textContent = 'myGREIA';
+          mobileLoginBtn.href = '/pages/profile.html';
+          mobileLoginBtn.classList.remove('dropdown-toggle');
+          mobileLoginDropdown.style.display = 'none';
+        }
+      } else {
+        // User is not logged in - show login dropdown
+        
+        // Desktop
+        if (authMenu && loginBtn && loginDropdown) {
+          authMenu.classList.add('dropdown');
+          loginBtn.textContent = 'Log In';
+          loginBtn.href = '/pages/login.html';
+          loginDropdown.style.display = '';
+        }
+        
+        // Mobile
+        if (mobileAuthMenu && mobileLoginBtn && mobileLoginDropdown) {
+          mobileAuthMenu.classList.add('dropdown');
+          mobileLoginBtn.textContent = 'Log In';
+          mobileLoginBtn.href = '/pages/login.html';
+          mobileLoginBtn.classList.add('dropdown-toggle');
+          mobileLoginDropdown.style.display = '';
+        }
+      }
+    }
+
+    // Initial navigation update
+    updateNavigation();
+
+    // Listen for storage changes (when user logs in/out in another tab)
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'authToken') {
+        updateNavigation();
+      }
+    });
+
+    // Listen for custom login/logout events
+    window.addEventListener('userLoggedIn', updateNavigation);
+    window.addEventListener('userLoggedOut', updateNavigation);
+  });
+</script>
+<script>
+// Initialize global navigation
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof initializeGlobalNavigation === 'function') {
+        initializeGlobalNavigation();
+    }
+    if (typeof initializeGlobalSearch === 'function') {
+        initializeGlobalSearch();
+    }
+});
+</script>
+</body>
+</html>

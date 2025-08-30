@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Coaching | Greia</title>
+  <link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+  <link href="/css/main.css" rel="stylesheet" />
+  <link href="../css/global-nav.css" rel="stylesheet"/>
+  <script src="../js/global-nav.js"></script>
+  <script src="../js/global-search.js"></script>
+  <link href="../css/global-nav.css" rel="stylesheet"/>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f7f7f7; }
+    .section { padding: 40px 20px; max-width: 800px; margin: auto; background: white; margin-top: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.05);}
+    h2 { color: #222; }
+    p { color: #555; font-size: 16px; line-height: 1.6; }
+    .center-button { display: flex; justify-content: center; margin-top: 30px; }
+    .get-started-btn {
+      background: orange;
+      color: white;
+      padding: 14px 32px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .popup-form-bg {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+      background: rgba(0,0,0,0.15);
+    }
+    .popup-form {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 1001;
+      justify-content: center;
+      align-items: center;
+      overflow: auto;
+      /* allow scrolling if content is tall */
+    }
+    .form-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-sizing: border-box;
+      /* make sure it fits on small screens */
+      position: relative;
+    }
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .course-grid div {
+      background: #eee;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .popup-courses-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin: 18px 0 28px 0;
+    }
+    .popup-course-card {
+      position: relative;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(53,66,74,0.09);
+      padding: 0;
+      max-width: 340px;
+      min-width: 140px;
+      flex: 1 1 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      transition: box-shadow 0.18s, transform 0.18s, border 0.18s;
+      border: 1.5px solid #f3f3f3;
+      overflow: hidden;
+      cursor: pointer;
+      min-width: 0;
+    }
+    .popup-course-card.selected {
+      border: 2px solid #e8491d;
+      box-shadow: 0 8px 32px rgba(232,73,29,0.13);
+      transform: translateY(-2px) scale(1.02);
+    }
+    .popup-course-img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      display: block;
+      border-radius: 16px 16px 0 0;
+      transition: filter 0.18s;
+    }
+    .popup-course-card:hover .popup-course-img,
+    .popup-course-card.selected .popup-course-img {
+      filter: brightness(0.85);
+    }
+    .popup-course-info-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -70px;
+      background: rgba(10,10,10,0.97);
+      color: #fff;
+      padding: 14px 14px 10px 14px;
+      border-radius: 0 0 16px 16px;
+      transition: bottom 0.25s cubic-bezier(.4,0,.2,1), opacity 0.25s;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2;
+      min-height: 54px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .popup-course-card:hover .popup-course-info-bar,
+    .popup-course-card.selected .popup-course-info-bar,
+    .popup-course-card:focus-within .popup-course-info-bar {
+      bottom: 0;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .popup-course-title {
+      font-size: 0.98rem;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 3px;
+      text-align: left;
+      letter-spacing: 0.3px;
+    }
+    .popup-course-desc {
+      font-size: 0.87rem;
+      color: #eee;
+      text-align: left;
+      font-weight: 300;
+      line-height: 1.45;
+      margin: 0;
+    }
+    @media (max-width: 700px) {
+      .popup-courses-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .popup-course-img {
+        height: 90px;
+      }
+    }
+    /* Modern styles */
+    .modern-hero-img {
+      width: 100%;
+      max-width: 540px;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+      margin: 0 auto 32px auto;
+      display: block;
+      object-fit: cover;
+    }
+    .modern-section-img {
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.08);
+      margin: 0 auto 24px auto;
+      display: block;
+      object-fit: cover;
+    }
+    .modern-hero-img, .modern-section-img {
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    .slide-in {
+      opacity: 1 !important;
+      transform: translateY(0) scale(1) !important;
+    }
+    .slide-in-left {
+      opacity: 1 !important;
+      transform: translateX(0) scale(1) !important;
+      transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    .slide-in-right {
+      opacity: 1 !important;
+      transform: translateX(0) scale(1) !important;
+      transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    .slide-from-left {
+      opacity: 0;
+      transform: translateX(-60px) scale(0.98);
+    }
+    .slide-from-right {
+      opacity: 0;
+      transform: translateX(60px) scale(0.98);
+    }
+    .modern-section-flex {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 36px;
+      margin-bottom: 56px;
+      border-radius: 18px;
+      box-shadow: 0 4px 32px rgba(53,66,74,0.07);
+      background: linear-gradient(120deg, #fff 60%, #f7f7f7 100%);
+      overflow: hidden;
+    }
+    .modern-section-flex.reverse {
+      flex-wrap: wrap-reverse;
+      background: linear-gradient(120deg, #f7f7f7 60%, #fff 100%);
+    }
+    .modern-section-content {
+      flex: 2 1 340px;
+      min-width: 260px;
+      padding: 56px 6vw 56px 6vw;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .modern-section-content h2 {
+      margin-top: 0;
+      margin-bottom: 32px;
+      font-size: 2.7rem;
+      font-weight: 400;
+      color: #23272f;
+      letter-spacing: 2px;
+      line-height: 1.1;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      text-shadow: none;
+      text-align: left;
+    }
+    .modern-section-content p {
+      font-size: 1.18rem;
+      color: #444;
+      margin-bottom: 40px;
+      margin-top: 0;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      line-height: 1.7;
+      max-width: 600px;
+    }
+    .modern-section-img-col {
+      background: #fff;
+      border-radius: 0 18px 18px 0;
+      box-shadow: none;
+      padding: 0;
+    }
+    .modern-section-flex.reverse .modern-section-img-col {
+      border-radius: 18px 0 0 18px;
+    }
+    .modern-section-img, .modern-hero-img {
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(232,73,29,0.08);
+      margin: 0;
+      max-width: 420px;
+      width: 100%;
+      display: block;
+    }
+    .modern-heading {
+      margin-bottom: 40px;
+      margin-top: 24px;
+      font-size: 2.7rem;
+      font-weight: 400;
+      color: #23272f;
+      letter-spacing: 2px;
+      text-shadow: none;
+      text-align: left;
+      line-height: 1.1;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+    }
+    .modern-highlight {
+      color: #e8491d;
+      background: linear-gradient(90deg, #ffffff 60%, #fff 100%);
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 1.1em;
+      display: inline-block;
+      margin-bottom: 18px;
+      margin-top: 0;
+      letter-spacing: 1px;
+    }
+    .modern-feature-list {
+      margin: 0 0 36px 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px 36px;
+    }
+    .modern-feature-list li {
+      font-size: 1.08rem;
+      color: #23272f;
+      background: #f7f7f7;
+      border-radius: 8px;
+      padding: 14px 22px;
+      font-weight: 400;
+      box-shadow: 0 2px 8px rgba(53,66,74,0.04);
+      flex: 1 1 220px;
+      min-width: 180px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .modern-feature-list li:before {
+      content: "✓";
+      color: #e8491d;
+      font-weight: bold;
+      margin-right: 8px;
+      font-size: 1.2em;
+    }
+    .modern-book-btn {
+      display: flex;
+      justify-content: center;
+      margin: 72px 0 0 0;
+    }
+    .modern-book-btn button {
+      background: linear-gradient(90deg, #e8491d 60%, #e8491d 100%);
+      color: #fff;
+      padding: 18px 48px;
+      font-size: 1.25rem;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 2px 16px rgba(232,73,29,0.10);
+      transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+      letter-spacing: 1px;
+      margin-bottom: 200px;
+    }
+    .courses-showcase-section {
+      max-width: 1200px;
+      margin: 0 auto 64px auto;
+      padding: 0 2vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .courses-showcase-title {
+      font-size: 2.7rem;
+      font-weight: 400;
+      color: #23272f;
+      margin-bottom: 32px;
+      letter-spacing: 2px;
+      text-align: left;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      line-height: 1.1;
+    }
+    .courses-showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      justify-content: center;
+      width: 100%;
+    }
+    .course-showcase-card {
+      position: relative;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(53,66,74,0.09);
+      padding: 0;
+      max-width: 340px;
+      min-width: 260px;
+      flex: 1 1 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      transition: box-shadow 0.18s, transform 0.18s;
+      border: 1.5px solid #ffffff;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .course-showcase-card:hover {
+      box-shadow: 0 8px 32px rgba(232,73,29,0.13);
+      transform: translateY(-4px) scale(1.03);
+      border-color: #e8491d33;
+    }
+    .course-showcase-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      border-radius: 16px 16px 0 0;
+      transition: filter 0.18s;
+    }
+    .course-showcase-card:hover .course-showcase-img {
+      filter: brightness(0.85);
+    }
+    .course-showcase-info-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -48px;
+      background: rgba(10,10,10,0.97);
+      color: #fff;
+      padding: 8px 14px 6px 14px;
+      border-radius: 0 0 16px 16px;
+      transition: bottom 0.25s cubic-bezier(.4,0,.2,1), opacity 0.25s;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 2;
+      min-height: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .course-showcase-card:hover .course-showcase-info-bar,
+    .course-showcase-card:focus-within .course-showcase-info-bar {
+      bottom: 0;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .course-showcase-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 2px;
+      text-align: left;
+      letter-spacing: 0.5px;
+    }
+    .course-showcase-desc {
+      font-size: 0.85rem;
+      color: #eee;
+      text-align: left;
+      font-weight: 300;
+      line-height: 1.4;
+      margin: 0;
+    }
+    @media (max-width: 1100px) {
+      .courses-showcase-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 700px) {
+      .courses-showcase-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .courses-showcase-section {
+        padding: 0 0vw;
+      }
+      .course-showcase-img {
+        height: 160px;
+      }
+    }
+    @media (max-width: 900px) {
+      .modern-section-flex, .modern-section-flex.reverse {
+        flex-direction: column;
+        gap: 18px;
+        padding-bottom: 0;
+        border-radius: 18px;
+      }
+      .modern-section-img, .modern-hero-img {
+        max-width: 98vw;
+        border-radius: 18px;
+      }
+      .modern-section-content {
+        padding: 24px 0 24px 0;
+      }
+      .courses-showcase-grid {
+        flex-direction: column;
+        gap: 24px;
+        align-items: stretch;
+      }
+      .courses-showcase-section {
+        padding: 0 0vw;
+      }
+    }
+    .popup-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: transparent;
+      border: none;
+      font-size: 2rem;
+      color: #888;
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.18s;
+      line-height: 1;
+      padding: 0;
+    }
+    .popup-close-btn:hover {
+      color: #e8491d;
+    }
+  </style>
+</head>
+<body>
+<!-- Global Navigation -->
+<nav class="nav-header">
+<div class="nav-container">
+<div class="nav-brand">
+<a href="../index.html" class="brand-link">
+<img src="../assets/d4rent logo smaller.png" alt="D4Rent" class="brand-logo">
+</a>
+</div>
+
+<div class="nav-search">
+<div class="search-container">
+<input type="text" class="search-input" placeholder="Search properties, locations, or keywords...">
+<button class="search-button">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<circle cx="11" cy="11" r="8"></circle>
+<path d="21 21l-4.35-4.35"></path>
+</svg>
+</button>
+</div>
+</div>
+
+<ul class="nav-menu">
+<li class="nav-item dropdown">
+<a href="buy.html" class="nav-link">Buy</a>
+<div class="dropdown-content">
+<a href="buy.html">New Homes</a>
+<a href="buy.html">Residential</a>
+<a href="buy.html">Commercial</a>
+<a href="buy.html">Luxury Homes</a>
+<a href="buy.html">New Developments</a>
+<a href="buy.html">Country Homes</a>
+<a href="buy.html">Apartments</a>
+</div>
+</li>
+<li class="nav-item dropdown">
+<a href="rent.html" class="nav-link">Rent</a>
+<div class="dropdown-content">
+<a href="rent.html">Apartments</a>
+<a href="rent.html">Lettings</a>
+<a href="rent.html">Residential</a>
+<a href="rent.html">Luxury Homes</a>
+<a href="rent.html">Timeshare Homes</a>
+<a href="rent.html">Houses</a>
+<a href="rent.html">Short-Term</a>
+<a href="rent.html">Student Accommodation</a>
+<a href="rent.html">Sublets</a>
+</div>
+</li>
+<li class="nav-item dropdown">
+<a href="commercial.html" class="nav-link">Commercial</a>
+<div class="dropdown-content">
+<a href="commercial.html">Office Space</a>
+<a href="commercial.html">Retail Unit</a>
+<a href="commercial.html">Industrial Unit</a>
+<a href="commercial.html">Restaurant / Bar / Hotel</a>
+<a href="commercial.html">Luxury Commercial</a>
+<a href="commercial.html">Commercial Site</a>
+<a href="commercial.html">Auction</a>
+<a href="commercial.html">Agricultural Site</a>
+<a href="commercial.html">Development Land</a>
+<a href="commercial.html">Investment Property</a>
+</div>
+</li>
+<li class="nav-item"><a href="agents.html" class="nav-link">Find an Agent</a></li>
+<li class="nav-item dropdown">
+<a href="services.html" class="nav-link">Our Services</a>
+<div class="dropdown-content">
+<a href="services.html">Property Management</a>
+<a href="services.html">Consulting</a>
+<a href="services.html">Legal Advice</a>
+<a href="services.html">Tradesmen</a>
+<a href="services.html">Interior Designers</a>
+<a href="services.html">Architect</a>
+<a href="services.html">Others</a>
+</div>
+</li>
+<li class="nav-item"><a href="concierge.html" class="nav-link">Our Concierge</a></li>
+<li class="nav-item"><a href="sell.html" class="nav-link">Sell with D4rent?</a></li>
+<li class="nav-item"><a href="login.html" class="nav-link" id="login-btn">Sign In</a></li>
+</ul>
+
+<div class="nav-toggle">
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+</nav>
+
+<!-- Mobile Navigation -->
+<div class="mobile-nav">
+<div class="mobile-nav-header">
+<span class="mobile-nav-title">Menu</span>
+<button class="mobile-nav-close">&times;</button>
+</div>
+<div class="mobile-search">
+<div class="search-container">
+<input type="text" class="search-input" placeholder="Search properties...">
+<button class="search-button">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<circle cx="11" cy="11" r="8"></circle>
+<path d="21 21l-4.35-4.35"></path>
+</svg>
+</button>
+</div>
+</div>
+<ul class="mobile-nav-menu">
+<li class="mobile-nav-item">
+<a href="buy.html" class="mobile-nav-link">Buy</a>
+<ul class="mobile-submenu">
+<li><a href="buy.html">New Homes</a></li>
+<li><a href="buy.html">Residential</a></li>
+<li><a href="buy.html">Commercial</a></li>
+<li><a href="buy.html">Luxury Homes</a></li>
+<li><a href="buy.html">New Developments</a></li>
+<li><a href="buy.html">Country Homes</a></li>
+<li><a href="buy.html">Apartments</a></li>
+</ul>
+</li>
+<li class="mobile-nav-item">
+<a href="rent.html" class="mobile-nav-link">Rent</a>
+<ul class="mobile-submenu">
+<li><a href="rent.html">Apartments</a></li>
+<li><a href="rent.html">Lettings</a></li>
+<li><a href="rent.html">Residential</a></li>
+<li><a href="rent.html">Luxury Homes</a></li>
+<li><a href="rent.html">Timeshare Homes</a></li>
+<li><a href="rent.html">Houses</a></li>
+<li><a href="rent.html">Short-Term</a></li>
+<li><a href="rent.html">Student Accommodation</a></li>
+<li><a href="rent.html">Sublets</a></li>
+</ul>
+</li>
+<li class="mobile-nav-item">
+<a href="commercial.html" class="mobile-nav-link">Commercial</a>
+<ul class="mobile-submenu">
+<li><a href="commercial.html">Office Space</a></li>
+<li><a href="commercial.html">Retail Unit</a></li>
+<li><a href="commercial.html">Industrial Unit</a></li>
+<li><a href="commercial.html">Restaurant / Bar / Hotel</a></li>
+<li><a href="commercial.html">Luxury Commercial</a></li>
+<li><a href="commercial.html">Commercial Site</a></li>
+<li><a href="commercial.html">Auction</a></li>
+<li><a href="commercial.html">Agricultural Site</a></li>
+<li><a href="commercial.html">Development Land</a></li>
+<li><a href="commercial.html">Investment Property</a></li>
+</ul>
+</li>
+<li class="mobile-nav-item"><a href="agents.html" class="mobile-nav-link">Find an Agent</a></li>
+<li class="mobile-nav-item">
+<a href="services.html" class="mobile-nav-link">Our Services</a>
+<ul class="mobile-submenu">
+<li><a href="services.html">Property Management</a></li>
+<li><a href="services.html">Consulting</a></li>
+<li><a href="services.html">Legal Advice</a></li>
+<li><a href="services.html">Tradesmen</a></li>
+<li><a href="services.html">Interior Designers</a></li>
+<li><a href="services.html">Architect</a></li>
+<li><a href="services.html">Others</a></li>
+</ul>
+</li>
+<li class="mobile-nav-item"><a href="concierge.html" class="mobile-nav-link">Our Concierge</a></li>
+<li class="mobile-nav-item"><a href="sell.html" class="mobile-nav-link">Sell with D4rent?</a></li>
+<li class="mobile-nav-item"><a href="login.html" class="mobile-nav-link" id="mobile-login-btn">Sign In</a></li>
+</ul>
+</div>
+
+<main class="main-content">
+
+<div id="page-content">
+  <div class="modern-section-flex">
+    <div class="modern-section-img-col">
+      <img src="../assets/coaching.jpg" alt="Coaching" class="modern-hero-img slide-from-left" />
+    </div>
+    <div class="modern-section-content slide-from-right">
+      <div class="modern-heading">Quinn It To Win It</div>
+      <div class="modern-highlight">Empowerment Coaching for Real Estate Agents</div>
+      <p>
+        Experience <strong>empowerment coaching</strong> designed for today's property professionals. Learn how to leverage digital platforms, optimize listings, and engage clients with proven techniques used by top-performing agents in the market today.
+      </p>
+      <ul class="modern-feature-list">
+        <li>Personalized 1:1 and group coaching</li>
+        <li>Actionable digital marketing strategies</li>
+        <li>Accountability and mindset growth</li>
+        <li>Weekly Zoom sessions</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="modern-section-flex reverse">
+    <div class="modern-section-content slide-from-left">
+      <div class="modern-highlight">Real Results</div>
+      <h2>Practical Knowledge. Real Empowerment.</h2>
+      <p>
+        Our empowerment coaching is hands-on and action-focused. With industry-driven curriculum, you'll build real skills and confidence to grow your business and empower your career.
+      </p>
+      <ul class="modern-feature-list">
+        <li>Build your brand and online presence</li>
+        <li>Master lead generation and conversion</li>
+        <li>Enhance client relationships</li>
+        <li>Overcome obstacles with expert support</li>
+      </ul>
+    </div>
+    <div class="modern-section-img-col">
+      <img src="../assets/coaching2.jpg" alt="Coaching Session" class="modern-section-img slide-from-right" />
+    </div>
+  </div>
+
+  <div class="modern-section-flex">
+    <div class="modern-section-img-col">
+      <img src="../assets/coaching.jpg" alt="Empowerment Coaching" class="modern-hero-img slide-from-left" style="filter: grayscale(0.2) brightness(0.97);" />
+    </div>
+    <div class="modern-section-content slide-from-right">
+      <div class="modern-highlight">Why Empowerment Coaching?</div>
+      <h2>Unlock Your Potential</h2>
+      <p>
+        Empowerment coaching is about unlocking your potential and building the mindset to succeed. We focus on practical strategies, personal growth, and accountability—helping you overcome obstacles, embrace new opportunities, and achieve your goals in real estate and beyond.
+      </p>
+      <ul class="modern-feature-list">
+        <li>Mindset and motivation tools</li>
+        <li>Goal setting and achievement</li>
+        <li>Supportive coaching community</li>
+        <li>Continuous growth and learning</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Courses Showcase Section -->
+  <section class="courses-showcase-section">
+    <div class="courses-showcase-title">Explore Our Courses</div>
+    <div class="courses-showcase-grid">
+      <div class="course-showcase-card" tabindex="0">
+        <img src="../assets/photo-1533478784933-5fdbddc8ea7c.jpg" alt="Social Media Mastery" class="course-showcase-img" />
+        <div class="course-showcase-info-bar">
+          <div class="course-showcase-title">Social Media Mastery</div>
+          <div class="course-showcase-desc">
+            Learn to build your brand and attract clients with advanced social media strategies tailored for real estate professionals.
+          </div>
+        </div>
+      </div>
+      <div class="course-showcase-card" tabindex="0">
+        <img src="../assets/pexels-fauxels-3184338.jpg" alt="Property Pitching" class="course-showcase-img" />
+        <div class="course-showcase-info-bar">
+          <div class="course-showcase-title">Property Pitching</div>
+          <div class="course-showcase-desc">
+            Master the art of presenting and pitching properties to stand out in a competitive market and win more listings.
+          </div>
+        </div>
+      </div>
+      <div class="course-showcase-card" tabindex="0">
+        <img src="../assets/pexels-photo-3183150.jpeg" alt="Lead Generation" class="course-showcase-img" />
+        <div class="course-showcase-info-bar">
+          <div class="course-showcase-title">Lead Generation</div>
+          <div class="course-showcase-desc">
+            Discover proven techniques to generate, nurture, and convert leads into loyal clients for long-term business growth.
+          </div>
+        </div>
+      </div>
+      <div class="course-showcase-card" tabindex="0">
+        <img src="../assets/coaching.jpg" alt="Client Relationship Building" class="course-showcase-img" />
+        <div class="course-showcase-info-bar">
+          <div class="course-showcase-title">Client Relationship Building</div>
+          <div class="course-showcase-desc">
+            Build lasting relationships and deliver exceptional service to clients for repeat business and referrals.
+          </div>
+        </div>
+      </div>
+      <div class="course-showcase-card" tabindex="0">
+        <img src="../assets/coaching.jpg" alt="Mindset & Motivation" class="course-showcase-img" />
+        <div class="course-showcase-info-bar">
+          <div class="course-showcase-title">Mindset & Motivation</div>
+          <div class="course-showcase-desc">
+            Develop a winning mindset, boost your motivation, and overcome obstacles to achieve your real estate goals.
+          </div>
+        </div>
+      </div>
+      <div class="course-showcase-card" tabindex="0">
+        <img src="../assets/photo-1533478784933-5fdbddc8ea7c.jpg" alt="Continuous Growth" class="course-showcase-img" />
+        <div class="course-showcase-info-bar">
+          <div class="course-showcase-title">Continuous Growth</div>
+          <div class="course-showcase-desc">
+            Embrace lifelong learning with strategies for ongoing personal and professional development in real estate.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modern-book-btn">
+    <button class="get-started-btn" onclick="showPopup();">Book a Course</button>
+  </div>
+
+  <!-- Blur background for popup -->
+  <div class="popup-form-bg" id="popup-blur"></div>
+  <div class="popup-form" id="popup">
+    <div class="form-container">
+      <button class="popup-close-btn" onclick="hidePopup();" aria-label="Close">&times;</button>
+      <h3>Register for Coaching</h3>
+      <form id="coachingForm">
+        <label>Email Address:</label>
+        <input type="email" name="email" required />
+
+        <label>Select a Course:</label>
+        <div class="popup-courses-grid" id="popupCoursesGrid">
+          <div class="popup-course-card" data-value="social-media" tabindex="0">
+            <img src="../assets/photo-1533478784933-5fdbddc8ea7c.jpg" alt="Social Media Mastery" class="popup-course-img" />
+            <div class="popup-course-info-bar">
+              <div class="popup-course-title">Social Media Mastery</div>
+              <div class="popup-course-desc">
+                Learn to build your brand and attract clients with advanced social media strategies tailored for real estate professionals.
+              </div>
+            </div>
+          </div>
+          <div class="popup-course-card" data-value="pitching" tabindex="0">
+            <img src="../assets/pexels-fauxels-3184338.jpg" alt="Property Pitching" class="popup-course-img" />
+            <div class="popup-course-info-bar">
+              <div class="popup-course-title">Property Pitching</div>
+              <div class="popup-course-desc">
+                Master the art of presenting and pitching properties to stand out in a competitive market and win more listings.
+              </div>
+            </div>
+          </div>
+          <div class="popup-course-card" data-value="lead-gen" tabindex="0">
+            <img src="../assets/pexels-photo-3183150.jpeg" alt="Lead Generation" class="popup-course-img" />
+            <div class="popup-course-info-bar">
+              <div class="popup-course-title">Lead Generation</div>
+              <div class="popup-course-desc">
+                Discover proven techniques to generate, nurture, and convert leads into loyal clients for long-term business growth.
+              </div>
+            </div>
+          </div>
+          <div class="popup-course-card" data-value="client-rel" tabindex="0">
+            <img src="../assets/coaching.jpg" alt="Client Relationship Building" class="popup-course-img" />
+            <div class="popup-course-info-bar">
+              <div class="popup-course-title">Client Relationship Building</div>
+              <div class="popup-course-desc">
+                Build lasting relationships and deliver exceptional service to clients for repeat business and referrals.
+              </div>
+            </div>
+          </div>
+          <div class="popup-course-card" data-value="mindset" tabindex="0">
+            <img src="../assets/coaching.jpg" alt="Mindset & Motivation" class="popup-course-img" />
+            <div class="popup-course-info-bar">
+              <div class="popup-course-title">Mindset & Motivation</div>
+              <div class="popup-course-desc">
+                Develop a winning mindset, boost your motivation, and overcome obstacles to achieve your real estate goals.
+              </div>
+            </div>
+          </div>
+          <div class="popup-course-card" data-value="growth" tabindex="0">
+            <img src="../assets/photo-1533478784933-5fdbddc8ea7c.jpg" alt="Continuous Growth" class="popup-course-img" />
+            <div class="popup-course-info-bar">
+              <div class="popup-course-title">Continuous Growth</div>
+              <div class="popup-course-desc">
+                Embrace lifelong learning with strategies for ongoing personal and professional development in real estate.
+              </div>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" name="course" id="selectedCourse" required />
+
+        <label>Choose a Date:</label>
+        <input type="date" name="date" required />
+
+        <label>Preferred Time:</label>
+        <input type="time" name="time" required />
+
+        <button type="submit">Submit</button>
+        <button type="button" onclick="hidePopup();" style="margin-left: 10px;">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Footer (reuse from index.html) -->
+
+<script>
+  function showPopup() {
+    document.getElementById('popup').style.display = 'flex';
+    document.getElementById('popup-blur').style.display = 'block';
+  }
+  function hidePopup() {
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById('popup-blur').style.display = 'none';
+  }
+
+  // Modern course selection logic
+  document.addEventListener("DOMContentLoaded", function() {
+    var courseGrid = document.getElementById('courseGrid');
+    var selectedInput = document.getElementById('selectedCourse');
+    if (courseGrid && selectedInput) {
+      courseGrid.querySelectorAll('.course-option').forEach(function(opt) {
+        opt.onclick = function() {
+          courseGrid.querySelectorAll('.course-option').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          selectedInput.value = opt.getAttribute('data-value');
+        };
+      });
+    }
+    // Popup course selection logic
+    var popupCoursesGrid = document.getElementById('popupCoursesGrid');
+    var selectedInput = document.getElementById('selectedCourse');
+    if (popupCoursesGrid && selectedInput) {
+      popupCoursesGrid.querySelectorAll('.popup-course-card').forEach(function(opt) {
+        opt.onclick = function() {
+          popupCoursesGrid.querySelectorAll('.popup-course-card').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          selectedInput.value = opt.getAttribute('data-value');
+        };
+        opt.onkeydown = function(e) {
+          if (e.key === "Enter" || e.key === " ") {
+            opt.click();
+          }
+        };
+      });
+    }
+    // Prevent submit if no course selected
+    var form = document.getElementById('coachingForm');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        if (!selectedInput.value) {
+          alert('Please select a course.');
+          e.preventDefault();
+        }
+      });
+    }
+  });
+
+  // Animate sections/images/text on scroll
+  document.addEventListener("DOMContentLoaded", function() {
+    function animateOnScroll() {
+      document.querySelectorAll('.slide-from-left').forEach(function(el) {
+        if (el.getBoundingClientRect().top < window.innerHeight - 60) {
+          el.classList.add('slide-in-left');
+        }
+      });
+      document.querySelectorAll('.slide-from-right').forEach(function(el) {
+        if (el.getBoundingClientRect().top < window.innerHeight - 60) {
+          el.classList.add('slide-in-right');
+        }
+      });
+    }
+    animateOnScroll();
+    window.addEventListener('scroll', animateOnScroll);
+  });
+</script>
+</main>
+
+<!-- Updated Footer -->
+
+
+<script src="../scripts/coaching-form.js"></script>
+
+<!-- Global Navigation and Search Scripts -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof GlobalNavigation !== 'undefined') {
+      GlobalNavigation.init();
+    }
+    if (typeof GlobalSearch !== 'undefined') {
+      GlobalSearch.init();
+    }
+  });
+</script>
+<div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body>
+</html>

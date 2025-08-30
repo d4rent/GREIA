@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Service Details</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<style>
+  body { margin: 0; padding: 0; }
+  .service-details-container {
+    max-width: 1200px;
+    margin: 6rem auto 2rem auto;
+    padding: 0;
+    background: #fff;
+    border-radius: 32px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.13);
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    overflow: hidden;
+    border: none;
+  }
+  .service-main {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: #f7f8fa;
+    padding: 2.5rem 2rem 2.5rem 2.5rem;
+    border-right: 1px solid #f0f0f0;
+    min-width: 0;
+  }
+  .service-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid #0077cc;
+    padding-bottom: 1rem;
+  }
+  .service-image {
+    width: 100%;
+    max-width: 480px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: #f8f9fa;
+  }
+  .service-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+  .service-info-list li {
+    background: #e8f4fd;
+    padding: 1rem;
+    border-left: 4px solid #0077cc;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .service-info-list li::before {
+    content: "✓";
+    color: #0077cc;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  .service-description {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    margin: 1rem 0;
+    line-height: 1.6;
+    font-style: italic;
+  }
+  .contact-service-btn {
+    background: linear-gradient(90deg,#00c6a2 60%,#0077cc 100%);
+    color: #fff;
+    border: none;
+    padding: 1.1rem 2.2rem;
+    font-size: 1.13rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+    margin-top: 1.2rem;
+    width: 100%;
+    border-radius: 22px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    letter-spacing: 0.5px;
+  }
+  .contact-service-btn:hover {
+    background: linear-gradient(90deg,#0077cc 60%,#00c6a2 100%);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+  }
+  .service-contact {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    margin-top: 1.2rem;
+    background: #f7f8fa;
+    border-radius: 28px;
+    padding: 2rem 1.5rem;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    transition: box-shadow 0.18s,transform 0.18s;
+  }
+  .service-contact .contact-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.7rem 1rem;
+    background: #fff;
+    border-radius: 10px;
+    margin: 0.3rem 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .service-contact .contact-row span {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #333;
+  }
+  .service-contact .contact-row a {
+    color: #0077cc;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.05rem;
+    transition: color 0.18s;
+  }
+  .service-contact .contact-row a:hover {
+    color: #00c6a2;
+    text-decoration: underline;
+  }
+  @media (max-width: 900px) {
+    .service-details-container { grid-template-columns: 1fr; gap: 2rem; }
+    .service-image { max-width: 100%; height: 220px; }
+  }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-thirds">
+    <div class="navbar-third left">
+      <ul class="nav-links left-links" style="position:relative; z-index:100;">
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/buy.html" style="position:relative; z-index:101;">Property</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/buy.html">Buy</a></li>
+            <li><a href="/pages/rent.html">Rent</a></li>
+            <li><a href="/pages/commercial.html">Commercial</a></li>
+            <li><a href="/pages/buy.html">Apartments</a></li>
+            <li><a href="/pages/sell.html">Sell</a></li>
+            <li><a href="/pages/valuations.html">Valuations</a></li>
+            <li><a href="/pages/buy.html">New Homes</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" style="position:relative;">
+          <a href="#" style="color: rgb(78, 255, 146); position:relative; z-index:101;" class="referral-dropdown-toggle">Connect</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/agents.html">Find an Agent</a>
+            <li class="nested-dropdown" style="position: relative;">
+              <a href="/pages/agents.html" class="referral-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false">Referral Agents ▸</a>
+              <ul class="dropdown-menu referral-dropdown" style="display:none; position: absolute; left: 100%; top: 0; background: white; list-style:none; padding:10px; border:1px solid #ccc; min-width: 220px; z-index: 2000;">
+                <li><a href="/pages/agents.html?subtype=luxury">Luxury Home Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=lettings">Lettings Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=newhomes">New Homes Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=commercial">Commercial Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=residential">Residential Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=developer">Developer Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=timeshare">Timeshare Agents</a></li>
+              </ul>
+            </li>
+            <li><a href="/pages/coaching.html">Coaching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="/index.html">
+          <img alt="Logo" src="../assets/greia (4).png" style="height: auto; max-height: 140px;"/>
+        </a>
+      </div>
+    </div>
+    <div class="navbar-third right">
+      <ul class="nav-links right-links">
+        <li>
+          <a href="/pages/services.html" class="fancy-underline">Our Services</a>
+        </li>
+        <li>
+          <a href="/pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown">
+          <a href="/pages/login.html" id="login-btn">Log In</a>
+          <ul class="dropdown-menu">
+            <li><a href="/pages/login.html">Sign In</a></li>
+            <li><a href="/pages/register.html">Register</a></li>
+            <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button aria-label="Toggle navigation" class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav">
+    <ul>
+      <li class="dropdown">
+        <a href="/pages/buy.html" class="dropdown-toggle">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/buy.html">Buy</a></li>
+          <li><a href="/pages/rent.html">Rent</a></li>
+          <li><a href="/pages/commercial.html">Commercial</a></li>
+          <li><a href="/pages/buy.html">Apartments</a></li>
+          <li><a href="/pages/sell.html">Sell</a></li>
+          <li><a href="/pages/valuations.html">Valuations</a></li>
+          <li><a href="/pages/buy.html">New Homes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" style="color: rgb(78, 255, 146);">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/agents.html">Find an Agent</a></li>
+          <li><a href="/pages/agents.html">Referral Agents</a></li>
+          <li><a href="/pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+      <li><a href="/pages/services.html">Our Services</a></li>
+      <li><a href="/pages/concierge.html">Concierge</a></li>
+      <li class="dropdown">
+        <a href="/pages/login.html" class="dropdown-toggle">Log In</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/login.html">Sign In</a></li>
+          <li><a href="/pages/register.html">Register</a></li>
+          <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+<section class="service-details-container">
+  <div class="service-main">
+    <img id="service-image" class="service-image" src="/assets/greia (4).png" alt="Service Image" />
+    <h1 class="service-title" id="service-title">Loading...</h1>
+    <ul class="service-info-list" id="service-info-list"></ul>
+    <div class="service-description" id="service-description"></div>
+    <button class="contact-service-btn" id="contact-service-btn">Contact Service</button>
+    <div id="booking-table-section" style="margin-top:2.5rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+        <h2 style="font-size:1.4rem;font-weight:700;">Bookings</h2>
+        <button id="open-booking-modal-btn" style="background:#2ecc40;color:#fff;border:none;padding:8px 18px;font-size:1rem;font-weight:600;border-radius:7px;cursor:pointer;box-shadow:0 2px 6px #e0e7ef;">Book Service</button>
+      </div>
+      <table id="booking-table" style="width:100%;border-collapse:collapse;background:#f8f9fa;box-shadow:0 2px 8px #e0e7ef;">
+        <thead>
+          <tr style="background:#e8f4fd;">
+            <th style="padding:10px 8px;border:1px solid #ddd;">Date</th>
+            <th style="padding:10px 8px;border:1px solid #ddd;">Time</th>
+            <th style="padding:10px 8px;border:1px solid #ddd;">Client</th>
+            <th style="padding:10px 8px;border:1px solid #ddd;">Status</th>
+            <th style="padding:10px 8px;border:1px solid #ddd;">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="booking-table-body">
+          <tr><td colspan="5" style="text-align:center;padding:18px;color:#888;">No bookings found.</td></tr>
+        </tbody>
+      </table>
+      <!-- Booking Modal -->
+      <div id="booking-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:9999;align-items:center;justify-content:center;">
+        <div style="background:#fff;padding:2rem 2.5rem;border-radius:12px;box-shadow:0 4px 18px #e0e7ef;max-width:400px;width:100%;position:relative;">
+          <button id="close-booking-modal-btn" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#888;">&times;</button>
+          <h3 style="margin-bottom:1.2rem;font-size:1.2rem;font-weight:700;">Book This Service</h3>
+          <form id="booking-form">
+            <label style="display:block;margin-bottom:0.5rem;font-weight:600;">Date:<input type="date" name="date" required style="width:100%;padding:8px;margin-top:4px;margin-bottom:1rem;border-radius:6px;border:1px solid #ddd;"/></label>
+            <label style="display:block;margin-bottom:0.5rem;font-weight:600;">Time:<input type="time" name="time" required style="width:100%;padding:8px;margin-top:4px;margin-bottom:1rem;border-radius:6px;border:1px solid #ddd;"/></label>
+            <label style="display:block;margin-bottom:0.5rem;font-weight:600;">Your Name:<input type="text" name="client_name" required style="width:100%;padding:8px;margin-top:4px;margin-bottom:1rem;border-radius:6px;border:1px solid #ddd;"/></label>
+            <label style="display:block;margin-bottom:0.5rem;font-weight:600;">Your Email:<input type="email" name="client_email" required style="width:100%;padding:8px;margin-top:4px;margin-bottom:1rem;border-radius:6px;border:1px solid #ddd;"/></label>
+            <button type="submit" style="background:#0077cc;color:#fff;border:none;padding:10px 22px;font-size:1.1rem;font-weight:600;border-radius:7px;cursor:pointer;width:100%;margin-top:1rem;">Submit Booking</button>
+            <div id="booking-form-msg" style="margin-top:1rem;font-size:1rem;color:#ff4136;display:none;"></div>
+          </form>
+        </div>
+      </div>
+      <!-- Booking Details Modal -->
+      <div id="booking-details-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.35);z-index:9999;align-items:center;justify-content:center;">
+        <div id="booking-details-content" style="background:#fff;padding:2rem 2.5rem;border-radius:12px;box-shadow:0 4px 18px #e0e7ef;max-width:400px;width:100%;position:relative;">
+          <button id="close-booking-details-btn" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#888;">&times;</button>
+          <h3 style="margin-bottom:1.2rem;font-size:1.2rem;font-weight:700;">Booking Details</h3>
+          <div id="booking-details-fields" style="font-size:1.05rem;line-height:1.7;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="service-contact" style="display: flex; flex-direction: row; gap: 2.2rem; justify-content: center; align-items: flex-start; margin-top: 2.2rem; background: #fff; border-radius: 14px; box-shadow: 0 1px 6px rgba(0,0,0,0.04); padding: 1.1rem 1.5rem;">
+      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem;">
+        <span style="font-size: 1.05rem; font-weight: 600; color: #333;">Email</span>
+        <a href="#" id="service-email" style="color: #0077cc; text-decoration: none; font-weight: 500; font-size: 1.05rem; transition: color 0.18s;"></a>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem;">
+        <span style="font-size: 1.05rem; font-weight: 600; color: #333;">Phone</span>
+        <a href="#" id="service-phone" style="color: #0077cc; text-decoration: none; font-weight: 500; font-size: 1.05rem; transition: color 0.18s;"></a>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem;">
+        <span style="font-size: 1.05rem; font-weight: 600; color: #333;">Website</span>
+        <a href="#" id="service-website" target="_blank" style="color: #0077cc; text-decoration: none; font-weight: 500; font-size: 1.05rem; transition: color 0.18s;"></a>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem;">
+        <span style="font-size: 1.05rem; font-weight: 600; color: #333;">Address</span>
+        <span id="service-address" style="font-size: 1.05rem; color: #555;"></span>
+      </div>
+    </div>
+</section>
+<footer>
+<div class="footer-container">
+<div class="footer-image">
+<img alt="D4Rent Footer Logo" src="../assets/greia (4).png" style="height: auto; max-height: 100px;"/>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;; font-size: larger;">Contact Details</h3>
+<p style="font-size: larger;">Greia</p>
+<p style="font-size: larger;">36 Upper Baggot St, Ballsbridge, D4</p>
+<p style="font-size: larger;">Phone: 01 442 7303</p>
+<p style="font-size: larger;">087 169 9498</p>
+<p>Email: <a href="mailto:info@greia.ie">info@greia.ie</a></p>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;; font-size: larger;">Quick Links</h3>
+<ul>
+<li><a href="pages/buy.html">Buy</a></li>
+<li><a href="pages/rent.html">Rent</a></li>
+<li><a href="pages/sell.html">Sell</a></li>
+<li><a href="pages/commercial.html">Commercial</a></li>
+<li><a href="pages/agents.html">Agents</a></li>
+<li><a href="pages/contact-us.html">Contact Us</a></li>
+<li><a href="pages/listyourrentalsfree.html">List Your Rentals Free</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;; font-size: larger;">Policy Links</h3>
+<ul>
+<li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
+<li><a href="pages/terms-of-service.html">Terms of Service</a></li>
+<li><a href="pages/cookie-policy.html">Cookie Policy</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;; font-size: larger;">Connect with Us</h3>
+<ul>
+<li><a href="https://www.facebook.com/profile.php?id=61577099380616" target="_blank">Facebook</a></li>
+<li><a href="https://www.instagram.com/dublin4rent/" target="_blank">Instagram</a></li>
+<li><a href="https://www.tiktok.com/@d4rent.ie" target="_blank">Tiktok</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<script>
+const S3_BASE_URL = 'http://d4rent.ie.s3-website-eu-west-1.amazonaws.com/';
+function getQueryParam(name) {
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+function getImageUrl(photo) {
+  if (!photo) return '/assets/greia (4).png';
+  if (photo.startsWith('http')) return photo;
+  return S3_BASE_URL + (photo.startsWith('uploads/') ? photo : 'uploads/' + photo);
+}
+document.addEventListener('DOMContentLoaded', async () => {
+  // Booking modal logic
+  // Booking details modal logic
+  const bookingDetailsModal = document.getElementById('booking-details-modal');
+  const bookingDetailsContent = document.getElementById('booking-details-content');
+  const bookingDetailsFields = document.getElementById('booking-details-fields');
+  const closeBookingDetailsBtn = document.getElementById('close-booking-details-btn');
+  closeBookingDetailsBtn.onclick = () => {
+    bookingDetailsModal.style.display = 'none';
+  };
+  bookingDetailsModal.onclick = (e) => {
+    if (e.target === bookingDetailsModal) bookingDetailsModal.style.display = 'none';
+  };
+  const bookingModal = document.getElementById('booking-modal');
+  const openBookingModalBtn = document.getElementById('open-booking-modal-btn');
+  const closeBookingModalBtn = document.getElementById('close-booking-modal-btn');
+  const bookingForm = document.getElementById('booking-form');
+  const bookingFormMsg = document.getElementById('booking-form-msg');
+  openBookingModalBtn.onclick = () => {
+    bookingModal.style.display = 'flex';
+    bookingFormMsg.style.display = 'none';
+    bookingForm.reset();
+  };
+  closeBookingModalBtn.onclick = () => {
+    bookingModal.style.display = 'none';
+  };
+  bookingModal.onclick = (e) => {
+    if (e.target === bookingModal) bookingModal.style.display = 'none';
+  };
+  bookingForm.onsubmit = async (e) => {
+    e.preventDefault();
+    bookingFormMsg.style.display = 'none';
+    const formData = new FormData(bookingForm);
+    const bookingData = Object.fromEntries(formData.entries());
+    bookingFormMsg.style.color = '#888';
+    bookingFormMsg.textContent = 'Submitting...';
+    bookingFormMsg.style.display = 'block';
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/services/${serviceId}/bookings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bookingData)
+      });
+      if (res.ok) {
+        bookingFormMsg.style.color = '#2ecc40';
+        bookingFormMsg.textContent = 'Booking submitted!';
+        setTimeout(() => {
+          bookingModal.style.display = 'none';
+          window.location.reload();
+        }, 1200);
+      } else {
+        const err = await res.json();
+        bookingFormMsg.style.color = '#ff4136';
+        bookingFormMsg.textContent = err.message || 'Booking failed.';
+      }
+    } catch (err) {
+      bookingFormMsg.style.color = '#ff4136';
+      bookingFormMsg.textContent = 'Booking failed.';
+    }
+  };
+  const serviceId = getQueryParam('id');
+  if (!serviceId) return;
+  const serviceUrl = `${API_BASE_URL}/api/services/${serviceId}`;
+  console.log('Fetching service from:', serviceUrl);
+  let service;
+  try {
+    const res = await fetch(serviceUrl, {
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+    if (!res.ok) {
+      let msg = `Failed to load service. Status: ${res.status}`;
+      if (res.status === 401) msg += ' (Unauthorized - this endpoint should be public)';
+      document.getElementById('service-title').textContent = msg;
+      document.getElementById('service-description').textContent = '';
+      document.getElementById('service-image').src = '/assets/greia (4).png';
+      return;
+    }
+    service = await res.json();
+  } catch (err) {
+    document.getElementById('service-title').textContent = 'Error loading service.';
+    document.getElementById('service-description').textContent = '';
+    document.getElementById('service-image').src = '/assets/greia (4).png';
+    return;
+  }
+  // Try multiple possible title fields
+  let serviceTitle = service.title || service.name || service.service_title || service.heading || '';
+  if (!serviceTitle) {
+    // Show raw object for debugging if no title found
+    serviceTitle = '[No title found]';
+    const debugDiv = document.createElement('div');
+    debugDiv.style = 'background:#ffecec;color:#d8000c;padding:10px;margin-bottom:10px;border-radius:8px;';
+    debugDiv.innerHTML = '<strong>Debug:</strong> Service API response:<br><pre style="white-space:pre-wrap;font-size:0.95em;">'+JSON.stringify(service,null,2)+'</pre>';
+    document.querySelector('.service-main').prepend(debugDiv);
+  }
+  document.getElementById('service-title').textContent = serviceTitle;
+  document.getElementById('service-image').src = getImageUrl(service.photo);
+  document.getElementById('service-description').textContent = service.bio || service.description || '';
+  document.getElementById('service-email').textContent = service.email || 'No email available';
+  document.getElementById('service-email').href = service.email ? `mailto:${service.email}` : '#';
+  document.getElementById('service-phone').textContent = service.phone_number || 'No phone available';
+  document.getElementById('service-phone').href = service.phone_number ? `tel:${service.phone_number}` : '#';
+  const websiteElem = document.getElementById('service-website');
+  if (service.website && service.website !== 'No website') {
+    let url = service.website;
+    if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+    websiteElem.textContent = url.replace(/^https?:\/\//i, '');
+    websiteElem.href = url;
+    websiteElem.target = '_blank';
+    websiteElem.rel = 'noopener noreferrer';
+    websiteElem.style.pointerEvents = 'auto';
+  } else {
+    websiteElem.textContent = 'No website';
+    websiteElem.href = '#';
+    websiteElem.style.pointerEvents = 'none';
+  }
+  document.getElementById('service-address').textContent = service.address || 'No address';
+  // Info list with all key fields
+  const infoList = document.getElementById('service-info-list');
+  const infoItems = [];
+  if (service.category) infoItems.push(`<li><span style='font-weight:600;'>Category:</span> ${service.category}</li>`);
+  if (service.service_type) infoItems.push(`<li><span style='font-weight:600;'>Type:</span> ${service.service_type}</li>`);
+  if (service.price_structure) infoItems.push(`<li><span style='font-weight:600;'>Price Structure:</span> ${service.price_structure}</li>`);
+  if (service.price_range) infoItems.push(`<li><span style='font-weight:600;'>Price Range:</span> ${service.price_range}</li>`);
+  if (service.availability) infoItems.push(`<li><span style='font-weight:600;'>Availability:</span> ${typeof service.availability === 'string' ? service.availability : JSON.stringify(service.availability)}</li>`);
+  if (service.response_time) infoItems.push(`<li><span style='font-weight:600;'>Response Time:</span> ${service.response_time}</li>`);
+  if (service.experience_years !== undefined && service.experience_years !== null) infoItems.push(`<li><span style='font-weight:600;'>Experience:</span> ${service.experience_years} years</li>`);
+  if (service.certifications) infoItems.push(`<li><span style='font-weight:600;'>Certifications:</span> ${service.certifications}</li>`);
+  if (service.insurance) infoItems.push(`<li><span style='font-weight:600;'>Insurance:</span> ${service.insurance}</li>`);
+  if (service.service_areas) infoItems.push(`<li><span style='font-weight:600;'>Service Areas:</span> ${service.service_areas}</li>`);
+  if (service.tags) infoItems.push(`<li><span style='font-weight:600;'>Tags:</span> ${service.tags}</li>`);
+  if (service.social_links) infoItems.push(`<li><span style='font-weight:600;'>Social:</span> ${typeof service.social_links === 'string' ? service.social_links : JSON.stringify(service.social_links)}</li>`);
+  infoList.innerHTML = infoItems.join('');
+  // Contact button
+  document.getElementById('contact-service-btn').onclick = function() {
+    if (service.email) {
+      window.location.href = `mailto:${service.email}`;
+    } else if (service.phone_number) {
+      window.location.href = `tel:${service.phone_number}`;
+    }
+  };
+  // Booking table fetch and render with spinner and actions
+  const bookingTableBody = document.getElementById('booking-table-body');
+  bookingTableBody.innerHTML = `<tr><td colspan='5' style='text-align:center;padding:18px;color:#888;'><span id='booking-spinner'>Loading bookings...</span></td></tr>`;
+  try {
+    const bookingsRes = await fetch(`${API_BASE_URL}/api/services/${serviceId}/bookings`);
+    if (bookingsRes.ok) {
+      const bookings = await bookingsRes.json();
+      if (Array.isArray(bookings) && bookings.length) {
+        bookingTableBody.innerHTML = bookings.map((b, idx) => {
+          let statusColor = '#888';
+          if (b.status === 'Confirmed') statusColor = '#2ecc40';
+          else if (b.status === 'Cancelled') statusColor = '#ff4136';
+          else if (b.status === 'Pending') statusColor = '#ffdc00';
+          // Add data-index for row
+          return `
+            <tr class='booking-row' data-index='${idx}' style='cursor:pointer;'>
+              <td style='padding:8px;border:1px solid #ddd;'>${b.date || ''}</td>
+              <td style='padding:8px;border:1px solid #ddd;'>${b.time || ''}</td>
+              <td style='padding:8px;border:1px solid #ddd;'>${b.client_name || b.client_email || ''}</td>
+              <td style='padding:8px;border:1px solid #ddd;'><span style='padding:4px 10px;border-radius:6px;background:${statusColor};color:#fff;'>${b.status || 'Pending'}</span></td>
+              <td style='padding:8px;border:1px solid #ddd;'>
+                <button style='margin-right:6px;padding:4px 10px;border-radius:5px;border:none;background:#0077cc;color:#fff;cursor:pointer;font-size:0.95rem;' onclick='event.stopPropagation();alert("Edit booking coming soon!")'>Edit</button>
+                <button style='padding:4px 10px;border-radius:5px;border:none;background:#ff4136;color:#fff;cursor:pointer;font-size:0.95rem;' onclick='event.stopPropagation();alert("Cancel booking coming soon!")'>Cancel</button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+        // Add click event to each booking row
+        Array.from(document.querySelectorAll('.booking-row')).forEach(row => {
+          row.onclick = function() {
+            const idx = this.getAttribute('data-index');
+            const booking = bookings[idx];
+            let detailsHtml = '';
+            detailsHtml += `<div><strong>Date:</strong> ${booking.date || ''}</div>`;
+            detailsHtml += `<div><strong>Time:</strong> ${booking.time || ''}</div>`;
+            detailsHtml += `<div><strong>Client Name:</strong> ${booking.client_name || ''}</div>`;
+            detailsHtml += `<div><strong>Client Email:</strong> ${booking.client_email || ''}</div>`;
+            detailsHtml += `<div><strong>Status:</strong> <span style='padding:4px 10px;border-radius:6px;background:${statusColor};color:#fff;'>${booking.status || 'Pending'}</span></div>`;
+            if (booking.notes) detailsHtml += `<div><strong>Notes:</strong> ${booking.notes}</div>`;
+            bookingDetailsFields.innerHTML = detailsHtml;
+            bookingDetailsModal.style.display = 'flex';
+          };
+        });
+      } else {
+        bookingTableBody.innerHTML = `<tr><td colspan='5' style='text-align:center;padding:18px;color:#888;'>No bookings found.</td></tr>`;
+      }
+    }
+  } catch (e) {
+    bookingTableBody.innerHTML = `<tr><td colspan='5' style='text-align:center;padding:18px;color:#888;'>Error loading bookings.</td></tr>`;
+  }
+});
+</script>
+<script src="/scripts/chatbot.js"></script>
+<script src="/scripts/main.js"></script>
+</body>
+</html>

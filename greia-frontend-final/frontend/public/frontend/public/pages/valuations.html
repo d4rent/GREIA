@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=480, initial-scale=1.0" name="viewport"/>
+<title>Get Your House Valuation - Greia</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="../css/login.css" rel="stylesheet"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="../css/chatbot.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<style>
+    @keyframes scroll-left {
+      0% { transform: translateX(100%);}
+      100% { transform: translateX(-100%);}
+    }
+    .banner-text {
+      white-space: nowrap;
+      display: inline-block;
+      animation: scroll-left 33s linear infinite;
+      font-size: 20px;
+      line-height: 30px;
+      font-weight: 700;
+    }
+    .switch {
+      position: relative;
+      width: 40px;
+      height: 20px;
+      appearance: none;
+      -webkit-appearance: none;
+      background: #ccc;
+      outline: none;
+      border-radius: 20px;
+      transition: background 0.3s;
+      margin: 0;
+    }
+    .switch:checked {
+      background: #FFD600;
+    }
+    .switch::before {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      top: 1px;
+      left: 1px;
+      background: #fff;
+      transition: 0.3s;
+    }
+    .switch:checked::before {
+      left: 21px;
+    }
+    /* Header section with background image and overlay */
+    .valuation-header-section {
+      position: relative;
+      background: url('../assets/IMAGE10.jpg') center center/cover no-repeat;
+      padding: 140px 0 140px 0;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .valuation-header-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10,35,66,0.55);
+      z-index: 1;
+    }
+    .valuation-header-title {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      font-size: 2.5em;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      margin: 0 0 12px 0;
+      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    }
+    .valuation-header-sub {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+      font-size: 1.2em;
+      font-weight: 300;
+      margin: 0;
+      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    }
+    /* Form container with bigger shadow and margins */
+    .form-container {
+      max-width: 480px;
+      margin: 0 auto 60px auto;
+      padding: 40px 32px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 12px 40px rgba(10,35,66,0.32), 0 2px 8px rgba(0,0,0,0.12);
+      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    }
+    .form-container label {
+      font-size: 1.1em;
+      font-weight: 300;
+      margin-bottom: 6px;
+      display: block;
+      color: #0a2342;
+      letter-spacing: 0.01em;
+    }
+    .form-container input,
+    .form-container select,
+    .form-container textarea {
+      font-size: 1.08em;
+      font-weight: 300;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      width: 100%;
+      font-family: inherit;
+    }
+    .form-container textarea {
+      resize: none;
+    }
+    .form-container .button-link,
+    .form-container button.button-link {
+      background: #00ffbb;
+      color: #000000;
+      display: block;
+    text-align: center;
+    padding: 14px 0;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.15em;
+    margin-top: 10px;
+    letter-spacing: 0.02em;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    background: linear-gradient(90deg, #0004ff 0%, #00c86b 100%);
+    color: #fff;
+    }
+    .form-container .button-link:hover,
+    .form-container button.button-link:hover {
+      background: linear-gradient(90deg, #00c86b 0%, #0004ff 100%);
+      color: #fff;
+    }
+    .valuation-main-flex {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0;
+      max-width: 1200px;
+      margin: 0 auto 60px auto;
+      padding: 0 10px;
+      min-height: 600px;
+    }
+    .valuation-form-col {
+      flex: 1 1 50%;
+      max-width: 600px;
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 2;
+      background: #fff;
+    }
+    .valuation-image-col {
+      flex: 1 1 50%;
+      min-width: 320px;
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+      background: url('../assets/IMAGE10.jpg') center center/cover no-repeat;
+      border-radius: 0 12px 12px 0;
+      margin-left: 0;
+      padding: 0;
+      position: relative;
+      min-height: 600px;
+    }
+    @media (max-width: 900px) {
+      .valuation-main-flex {
+        flex-direction: column;
+        gap: 0;
+        max-width: 98vw;
+        min-height: 0;
+      }
+      .valuation-form-col, .valuation-image-col {
+        max-width: 100vw;
+        min-width: 0;
+        border-radius: 0;
+      }
+      .valuation-image-col {
+        min-height: 240px;
+        border-radius: 0 0 12px 12px;
+      }
+    }
+
+    .form-container .button-link:hover,
+    .form-container button.button-link:hover {
+      background: #32ffbe;
+      color: #35424a;
+    }
+</style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="navbar-thirds">
+    <div class="navbar-third left">
+      <ul class="nav-links left-links" style="position:relative; z-index:100;">
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/buy.html" style="position:relative; z-index:101;">Property</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/buy.html">Buy</a></li>
+            <li><a href="/pages/rent.html">Rent</a></li>
+            <li><a href="/pages/commercial.html">Commercial</a></li>
+            <li><a href="/pages/buy.html">Apartments</a></li>
+            <li><a href="/pages/sell.html">Sell</a></li>
+            <li><a href="/pages/valuations.html">Valuations</a></li>
+            <li><a href="/pages/buy.html">New Homes</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" style="position:relative;">
+          <a href="#" style="color: rgb(78, 255, 146); position:relative; z-index:101;" class="referral-dropdown-toggle">Connect</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/agents.html">Find an Agent</a>
+            <li class="nested-dropdown" style="position: relative;">
+              <a href="/pages/agents.html" class="referral-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false">Referral Agents ▸</a>
+              <ul class="dropdown-menu referral-dropdown" style="display:none; position: absolute; left: 100%; top: 0; background: white; list-style:none; padding:10px; border:1px solid #ccc; min-width: 220px; z-index: 2000;">
+                <li><a href="/pages/agents.html?subtype=luxury">Luxury Home Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=lettings">Lettings Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=newhomes">New Homes Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=commercial">Commercial Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=residential">Residential Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=developer">Developer Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=timeshare">Timeshare Agents</a></li>
+              </ul>
+            </li>
+            <li><a href="/pages/coaching.html">Coaching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="/index.html">
+          <img alt="Logo" src="../assets/greia (4).png" style="height: auto; max-height: 80px;"/>
+        </a>
+      </div>
+    </div>
+    <div class="navbar-third right">
+      <ul class="nav-links right-links">
+        <li>
+          <a href="/pages/services.html" class="fancy-underline">Our Services</a>
+        </li>
+        <li>
+          <a href="/pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown">
+          <a href="/pages/login.html" id="login-btn">Log In</a>
+          <ul class="dropdown-menu">
+            <li><a href="/pages/login.html">Sign In</a></li>
+            <li><a href="/pages/register.html">Register</a></li>
+            <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button aria-label="Toggle navigation" class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <!-- Mobile nav menu -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav">
+    <ul>
+      <li class="dropdown">
+        <a href="/pages/buy.html" class="dropdown-toggle">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/buy.html">Buy</a></li>
+          <li><a href="/pages/rent.html">Rent</a></li>
+          <li><a href="/pages/commercial.html">Commercial</a></li>
+          <li><a href="/pages/buy.html">Apartments</a></li>
+          <li><a href="/pages/sell.html">Sell</a></li>
+          <li><a href="/pages/valuations.html">Valuations</a></li>
+          <li><a href="/pages/buy.html">New Homes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" style="color: rgb(78, 255, 146);">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/agents.html">Find an Agent</a></li>
+          <li><a href="/pages/agents.html">Referral Agents</a></li>
+          <li><a href="/pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+      <li><a href="/pages/services.html">Our Services</a></li>
+      <li><a href="/pages/concierge.html">Concierge</a></li>
+      <li class="dropdown">
+        <a href="/pages/login.html" class="dropdown-toggle">Log In</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/login.html">Sign In</a></li>
+          <li><a href="/pages/register.html">Register</a></li>
+          <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- AI Valuation Intro Section -->
+<section class="valuation-hero">
+  <div class="valuation-hero-bg"></div>
+  <div class="valuation-hero-content">
+    <h1 class="valuation-hero-title">See your Greia Estimate</h1>
+    <!-- Removed valuation-tabs header buttons -->
+    <form class="valuation-address-form" autocomplete="off">
+      <input type="text" id="address-input" placeholder="Enter your home address" class="valuation-address-input" aria-label="Enter your home address" />
+      <button type="submit" class="valuation-address-btn">Continue</button>
+    </form>
+    <div class="valuation-hero-sub">Edit your home facts <span style="color:#00c86b;font-weight:600;">Updated home details factor into your Greia Estimate.</span></div>
+    <button class="valuation-hero-cta">Get started</button>
+  </div>
+</section>
+<!-- Zillow-style hero section -->
+<style>
+    .valuation-hero {
+      position: relative;
+      width: 100%;
+      min-height: 420px;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 120px;
+      margin-bottom: 32px;
+    }
+    .valuation-hero-bg {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: #fff;
+      z-index: 1;
+    }
+    .valuation-hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 48px 32px 32px 32px;
+      text-align: center;
+      background: rgba(255,255,255,0.82);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(10,35,66,0.12);
+    }
+    .valuation-hero-title {
+      font-family: 'SF Pro Display', 'San Francisco', 'Helvetica Neue', 'Segoe UI', Arial, sans-serif !important;
+      font-size: 2.8em;
+      font-weight: 300;
+      color: #0004ff;
+      margin-bottom: 18px;
+      letter-spacing: 0.02em;
+    }
+    .valuation-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 24px;
+    }
+    .valuation-tab {
+      font-family: 'SF Pro Text','San Francisco','Segoe UI',Arial,sans-serif;
+      font-size: 1.08em;
+      font-weight: 600;
+      color: #222;
+      background: none;
+      border: none;
+      padding: 12px 32px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .valuation-tab.active {
+      border-bottom: 2.5px solid #00c86b;
+      color: #00c86b;
+    }
+    .valuation-tab-highlight {
+      background: linear-gradient(90deg, #0072dc 0%, #00c86b 100%);
+      color: #fff;
+      border-radius: 8px;
+      margin-left: 8px;
+      padding: 12px 32px;
+      font-weight: 700;
+    }
+    .valuation-address-form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 18px;
+    }
+    .valuation-address-input {
+      font-size: 1.15em;
+      padding: 14px 18px;
+      border-radius: 8px 0 0 8px;
+      border: 1px solid #d1f7e7;
+      width: 320px;
+      font-family: inherit;
+      outline: none;
+    }
+    .valuation-address-btn {
+      font-size: 1.15em;
+      padding: 14px 24px;
+      border-radius: 0 8px 8px 0;
+      border: none;
+      background: linear-gradient(90deg, #0072cf 0%, #00c86b 100%);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .valuation-address-btn:hover {
+      background: linear-gradient(90deg, #00c86b 0%, #006aff 100%);
+    }
+    .valuation-hero-sub {
+      font-size: 1.08em;
+      color: #222;
+      margin-bottom: 18px;
+    }
+    .valuation-hero-cta {
+      font-size: 1.08em;
+      padding: 12px 32px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #0055ff 0%, #00c86b 100%);
+      color: #fff;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,255,187,0.10);
+      transition: background 0.2s;
+    }
+    .valuation-hero-cta:hover {
+      background: linear-gradient(90deg, #00c86b 0%, #0004ff 100%);
+    }
+    /* Removed animated gradient background and gradients */
+    .glass-info-box {
+      background:rgba(255,255,255,0.55);backdrop-filter:blur(8px);border-radius:18px;padding:22px 32px;margin-bottom:32px;box-shadow:0 4px 24px rgba(0,255,187,0.10),0 2px 8px rgba(10,35,66,0.08);display:inline-block;max-width:540px;border:1px solid #e0f7ef;
+    }
+    .ai-badge {
+      display:inline-block;padding:6px 18px;margin-bottom:12px;border-radius:18px;background:#00c86b;color:#fff;font-size:1em;font-family:'SF Pro Text','San Francisco','Segoe UI',Arial,sans-serif;font-weight:700;box-shadow:0 2px 8px rgba(0,255,187,0.10);letter-spacing:0.5px;
+    }
+    @keyframes floatLogo {
+      0% { transform: translateY(0px) scale(1); }
+      100% { transform: translateY(-12px) scale(1.04); }
+    }
+    @keyframes pop {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.18); }
+    }
+    .button-link {
+      transition:transform 0.18s,box-shadow 0.18s;
+    }
+    .button-link:hover {
+      transform:scale(1.04);
+      box-shadow:0 6px 24px rgba(0,255,187,0.18);
+    }
+  </style>
+<style>
+/* Removed animated gradient background and gradients */
+.glass-info-box {
+  background:rgba(255,255,255,0.55);backdrop-filter:blur(8px);border-radius:18px;padding:22px 32px;margin-bottom:32px;box-shadow:0 4px 24px rgba(0,255,187,0.10),0 2px 8px rgba(10,35,66,0.08);display:inline-block;max-width:540px;border:1px solid #e0f7ef;
+}
+.ai-badge {
+  display:inline-block;padding:6px 18px;margin-bottom:12px;border-radius:18px;background:#00c86b;color:#fff;font-size:1em;font-family:'SF Pro Text','San Francisco','Segoe UI',Arial,sans-serif;font-weight:700;box-shadow:0 2px 8px rgba(0,255,187,0.10);letter-spacing:0.5px;
+}
+@keyframes floatLogo {
+  0% { transform: translateY(0px) scale(1); }
+  100% { transform: translateY(-12px) scale(1.04); }
+}
+@keyframes pop {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.18); }
+}
+.button-link {
+  transition:transform 0.18s,box-shadow 0.18s;
+}
+.button-link:hover {
+  transform:scale(1.04);
+  box-shadow:0 6px 24px rgba(0,255,187,0.18);
+}
+</style>
+</section>
+
+<!-- Valuation Form Section (hidden until sign-in) -->
+<div id="valuation-form-section" style="display:none;">
+  <div class="valuation-main-flex">
+    <div class="valuation-form-col">
+      <div class="form-container glass-info-box" style="margin-top:24px;">
+        <form style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+          <!-- ...existing code... -->
+          <label for="address">Address</label>
+          <textarea id="address" name="address" rows="4"></textarea>
+          <label for="eircode">Eircode</label>
+          <input id="eircode" maxlength="10" name="eircode" type="text"/>
+          <label for="property-type">Property Type</label>
+          <input id="property-type" name="property-type" type="text"/>
+          <label for="bedrooms">Bedrooms</label>
+          <input id="bedrooms" min="0" name="bedrooms" type="number"/>
+          <label for="kitchens">Kitchen</label>
+          <input id="kitchens" min="0" name="kitchens" type="number"/>
+          <label for="bathrooms">Bathrooms</label>
+          <input id="bathrooms" min="0" name="bathrooms" type="number"/>
+          <label for="living-rooms">Living Room</label>
+          <input id="living-rooms" min="0" name="living-rooms" type="number"/>
+          <label for="size">Size (sqm)</label>
+          <input id="size" min="0" name="size" type="number"/>
+          <label for="year-built">Year Built</label>
+          <input id="year-built" max="2100" min="1800" name="year-built" type="number"/>
+          <label for="condition">Condition</label>
+          <select id="condition" name="condition">
+            <option value="">Select...</option>
+            <option value="new">New</option>
+            <option value="good">Good</option>
+            <option value="needs renovation">Needs Renovation</option>
+          </select>
+          <label for="heating">Heating Type</label>
+          <input id="heating" name="heating" type="text"/>
+          <label for="energy-rating">BER (Building Energy Rating)</label>
+          <input id="energy-rating" name="energy-rating" type="text"/>
+          <label for="garden">Garden/Outdoor Space</label>
+          <select id="garden" name="garden">
+            <option value="">Select...</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="shared">Shared</option>
+          </select>
+          <label for="parking">Parking</label>
+          <input id="parking" name="parking" type="text"/>
+          <label for="recent-renovations">Recent Renovations/Upgrades</label>
+          <input id="recent-renovations" name="recent-renovations" type="text"/>
+          <label for="special-features">Special Features (e.g., attic conversion, extension, solar panels)</label>
+          <textarea id="special-features" name="special-features" rows="4"></textarea>
+          <button class="button-link" id="get-valuation-btn" type="button">Get Valuation</button>
+        </form>
+      </div>
+    </div>
+    <div class="valuation-image-col"></div>
+  </div>
+</div>
+
+<!-- Sign-in Modal -->
+<div id="signin-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;">
+  <div style="background:#fff;max-width:420px;width:90vw;padding:32px 24px 24px 24px;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,0.18);position:relative;display:flex;flex-direction:column;align-items:center;">
+    <button id="close-signin-modal" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5em;cursor:pointer;">&times;</button>
+    <h3 style="margin-bottom:16px;">Sign In Required</h3>
+    <p style="margin-bottom:18px;text-align:center;">To access the AI valuation, please sign in or register.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+      <a href="/pages/login.html" class="button-link" style="width:120px;">Sign In</a>
+      <a href="/pages/register.html" class="button-link" style="width:120px;">Register</a>
+    </div>
+  </div>
+</div>
+
+<!-- Valuation Result Modal -->
+<div id="valuation-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;">
+  <div style="background:#fff;max-width:420px;width:90vw;padding:32px 24px 24px 24px;border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,0.18);position:relative;display:flex;flex-direction:column;align-items:center;">
+    <button id="close-valuation-modal" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.5em;cursor:pointer;">&times;</button>
+    <h3 style="margin-bottom:16px;">Your Valuation Result</h3>
+    <div id="valuation-modal-content" style="white-space:pre-line;margin-bottom:18px;text-align:left;"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+      <button id="valuation-email-btn" style="padding:8px 14px;">Email to Me</button>
+      <button id="valuation-copy-btn" style="padding:8px 14px;">Copy Link</button>
+      <button id="valuation-share-btn" style="padding:8px 14px;">Share</button>
+      <button id="valuation-print-btn" style="padding:8px 14px;">Print</button>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+
+<script src="/scripts/chatbot.js"></script>
+<script>
+
+// Role selection and sign-in logic with personalized message
+const continueBtn = document.getElementById('continue-btn');
+const roleSelect = document.getElementById('role-select');
+const valuationFormSection = document.getElementById('valuation-form-section');
+const signinModal = document.getElementById('signin-modal');
+const closeSigninModal = document.getElementById('close-signin-modal');
+const personalizedMessage = document.getElementById('personalized-message');
+
+let isSignedIn = false; // Replace with real auth check if available
+
+const roleMessages = {
+  buyer: "Welcome, Buyer! Greia AI will help you find the true value before you make your move.",
+  seller: "Welcome, Seller! Get a data-driven valuation to maximize your sale.",
+  investor: "Welcome, Investor! Greia AI gives you the edge with instant market insights.",
+  agent: "Welcome, Agent! Use Greia AI to impress your clients with fast, accurate valuations."
+};
+
+roleSelect.onchange = function() {
+  const role = roleSelect.value;
+  if (roleMessages[role]) {
+    personalizedMessage.textContent = roleMessages[role];
+    personalizedMessage.style.display = 'block';
+  } else {
+    personalizedMessage.style.display = 'none';
+  }
+};
+
+continueBtn.onclick = function() {
+  const role = roleSelect.value;
+  if (!role) {
+    alert('Please select your role to continue.');
+    return;
+  }
+  // Check sign-in status (simulate for now)
+  if (!isSignedIn) {
+    signinModal.style.display = 'flex';
+  } else {
+    valuationFormSection.style.display = 'block';
+    window.scrollTo({ top: valuationFormSection.offsetTop - 40, behavior: 'smooth' });
+  }
+};
+
+closeSigninModal.onclick = function() {
+  signinModal.style.display = 'none';
+};
+
+// If user signs in, show the form (simulate)
+// In real app, set isSignedIn = true after login
+window.showValuationForm = function() {
+  isSignedIn = true;
+  signinModal.style.display = 'none';
+  valuationFormSection.style.display = 'block';
+  window.scrollTo({ top: valuationFormSection.offsetTop - 40, behavior: 'smooth' });
+};
+<!-- Testimonials Section -->
+<section style="max-width:700px;margin:0 auto 48px auto;padding:0 28px;text-align:center;">
+  <h2 style="font-family:'SF Pro Display','San Francisco','Segoe UI',Arial,sans-serif;font-size:1.6em;font-weight:700;color:#222;margin-bottom:18px;">Trusted by Real Users</h2>
+  <div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:center;">
+    <div style="background:rgba(255,255,255,0.7);backdrop-filter:blur(6px);border-radius:14px;padding:18px 22px;box-shadow:0 2px 8px rgba(0,255,187,0.08);max-width:280px;text-align:left;">
+      <span style="font-size:1.2em;font-weight:600;color:#00c86b;">“</span> Greia AI gave me a valuation in seconds. Super easy and accurate! <span style="font-size:1.2em;font-weight:600;color:#00c86b;">”</span>
+      <div style="margin-top:8px;font-size:0.98em;color:#222;font-weight:500;">— Sarah, Seller</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.7);backdrop-filter:blur(6px);border-radius:14px;padding:18px 22px;box-shadow:0 2px 8px rgba(0,255,187,0.08);max-width:280px;text-align:left;">
+      <span style="font-size:1.2em;font-weight:600;color:#00c86b;">“</span> As an agent, I use Greia AI to impress my clients. Fast and reliable! <span style="font-size:1.2em;font-weight:600;color:#00c86b;">”</span>
+      <div style="margin-top:8px;font-size:0.98em;color:#222;font-weight:500;">— Mark, Agent</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.7);backdrop-filter:blur(6px);border-radius:14px;padding:18px 22px;box-shadow:0 2px 8px rgba(0,255,187,0.08);max-width:280px;text-align:left;">
+      <span style="font-size:1.2em;font-weight:600;color:#00c86b;">“</span> I got a valuation before buying—helped me negotiate a better price. <span style="font-size:1.2em;font-weight:600;color:#00c86b;">”</span>
+      <div style="margin-top:8px;font-size:0.98em;color:#222;font-weight:500;">— Alex, Buyer</div>
+    </div>
+  </div>
+</section>
+
+// ...existing code for valuation modal actions...
+document.getElementById('close-valuation-modal').onclick = function() {
+  document.getElementById('valuation-modal').style.display = 'none';
+};
+document.getElementById('valuation-email-btn').onclick = function() {
+  const content = document.getElementById('valuation-modal-content').textContent;
+  const subject = encodeURIComponent('Your D4Rent Property Valuation');
+  const body = encodeURIComponent(content);
+  window.location.href = `mailto:?subject=${subject}&body=${body}`;
+};
+document.getElementById('valuation-copy-btn').onclick = function() {
+  navigator.clipboard.writeText(window.location.href);
+  alert('Link copied to clipboard!');
+};
+document.getElementById('valuation-share-btn').onclick = function() {
+  const content = document.getElementById('valuation-modal-content').textContent;
+  if (navigator.share) {
+    navigator.share({
+      title: 'My D4Rent Valuation',
+      text: content,
+      url: window.location.href
+    });
+  } else {
+    alert('Sharing is not supported on this device.');
+  }
+};
+document.getElementById('valuation-print-btn').onclick = function() {
+  const content = document.getElementById('valuation-modal-content').textContent;
+  const win = window.open('', '', 'width=600,height=600');
+  win.document.write('<pre style="font-family:inherit;font-size:1.1em;">' + content + '</pre>');
+  win.print();
+  win.close();
+};
+</script>
+<div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body>
+</html>

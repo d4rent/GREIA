@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">\1
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="../css/profile.css" rel="stylesheet"/>
+<link href="../css/profile-nav.css" rel="stylesheet"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<link href="../css/footer.css" rel="stylesheet"/>
+<script src="../scripts/main.js"></script>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Moderation - Profile - GREIA</title>
+<link href="../css/profile.css" rel="stylesheet"/><link href="../css/profile-nav.css" rel="stylesheet"/><link href="../css/main.css" rel="stylesheet"/></head>
+<body>
+<div class="profile-container">
+  <aside class="profile-sidebar">
+    <nav class="sidebar-nav">
+      <a href="./profile.html" class="nav-link">Profile</a>
+      <a href="./profile-marketplace.html" class="nav-link">Marketplace</a>
+      <a href="./profile-properties.html" class="nav-link">Properties</a>
+      <a href="./profile-ads.html" class="nav-link">Advertisements</a>
+      <a href="./profile-inbox.html" class="nav-link">Inbox</a>
+      <a href="./profile-saved.html" class="nav-link">Saved Items</a>
+      <a href="./analytics.html" class="nav-link">Analytics</a>
+      <a href="./profile-subscriptions.html" class="nav-link">Packages & Memberships</a>
+      <a href="./profile-settings.html" class="nav-link">Settings</a>
+      <a href="./profile-admin.html" class="nav-link" id="nav-admin-dashboard">Admin</a>
+      <a href="./profile-moderation.html" class="nav-link active">Moderation</a>
+    </nav>
+  </aside>
+  <section class="profile-content-card">
+    <h1>Moderation</h1>
+    <h3>Marketplace posts</h3>
+    <table id="mp" class="table"><thead><tr><th>ID</th><th>Property</th><th>Title</th><th>Owner</th><th>Status</th><th>Action</th></tr></thead><tbody></tbody></table>
+    <h3 style="margin-top:24px;">Ads</h3>
+    <table id="ads" class="table"><thead><tr><th>Model</th><th>ID</th><th>Placement</th><th>Media</th><th>Action</th></tr></thead><tbody></tbody></table>
+  </section>
+</div>
+<script>
+async function api(p, opts={}){ const r = await fetch(p, {credentials:'include', headers:{'Content-Type':'application/json'}, ...opts}); const d = await r.json(); if(!r.ok) throw new Error(d.message||('HTTP '+r.status)); return d; }
+async function loadMP(){
+  const rows = await api('/api/admin/moderation/marketplace');
+  const tb = document.querySelector('#mp tbody'); tb.innerHTML='';
+  rows.forEach(r=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+r.id+'</td><td>'+r.property_id+'</td><td>'+ (r.title||'') +'</td><td>'+ (r.owner||'') +'</td><td>'+ (r.status||'') +'</td>' +
+                   '<td><button data-app="mp-'+r.id+'">Approve</button> <button data-rej="mp-'+r.id+'">Reject</button></td>';
+    tb.appendChild(tr);
+  });
+}
+async function loadAds(){
+  const rows = await api('/api/admin/moderation/ads');
+  const tb = document.querySelector('#ads tbody'); tb.innerHTML='';
+  rows.forEach(r=>{
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>'+r.model+'</td><td>'+r.id+'</td><td>'+ (r.placement||'') +'</td><td>'+ (r.media_url||'') +'</td>' +
+                   '<td><button data-app="ad-'+r.model+'-'+r.id+'">Approve</button> <button data-rej="ad-'+r.model+'-'+r.id+'">Reject</button></td>';
+    tb.appendChild(tr);
+  });
+}
+document.addEventListener('click', async (e)=>{
+  const a = e.target.getAttribute('data-app');
+  const r = e.target.getAttribute('data-rej');
+  if(a){
+    if(a.startsWith('mp-')){
+      const id = a.split('-')[1];
+      await api('/api/admin/moderation/marketplace/'+id+'/approve', {method:'POST'});
+    }else if(a.startsWith('ad-')){
+      const parts = a.split('-'); const model = parts[1]; const id = parts[2];
+      await api('/api/admin/moderation/ads/'+model+'/'+id+'/approve', {method:'POST'});
+    }
+    loadMP(); loadAds(); return;
+  }
+  if(r){
+    if(r.startsWith('mp-')){
+      const id = r.split('-')[1];
+      await api('/api/admin/moderation/marketplace/'+id+'/reject', {method:'POST'});
+    }else if(r.startsWith('ad-')){
+      const parts = r.split('-'); const model = parts[1]; const id = parts[2];
+      await api('/api/admin/moderation/ads/'+model+'/'+id+'/reject', {method:'POST'});
+    }
+    loadMP(); loadAds(); return;
+  }
+});
+loadMP(); loadAds();
+</script>
+</body></html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Referral Agents</title>
+<link href="/css/agents.css" rel="stylesheet"/>
+<link href="/css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<script src="../js/global-nav.js"></script>
+<script src="../js/global-search.js"></script>
+<style>
+/* Carousel agent card styles */
+.user-card {
+  width: 220px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 1.2em 1em 1.2em 1em;
+  margin: 0 0 1em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-height: 340px;
+}
+
+.user-photo-wrap {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 1em;
+}
+
+.user-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #e8491d;
+  background: #f4f4f4;
+  display: block;
+}
+
+.company-logo-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #e8491d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+
+.company-logo-overlay img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.user-card .agent-name {
+  font-weight: 700;
+  font-size: 1.1em;
+  margin-bottom: 0.2em;
+  color: #222;
+  text-align: center;
+}
+
+.user-card .agent-role {
+  font-size: 0.98em;
+  color: #e8491d;
+  font-weight: 600;
+  margin-bottom: 0.1em;
+  text-align: center;
+}
+
+.user-card .agent-profession,
+.user-card .agent-tags,
+.user-card .agent-address {
+  font-size: 0.97em;
+  color: #555;
+  margin-bottom: 0.1em;
+  text-align: center;
+  word-break: break-word;
+}
+
+.user-card .agent-tags {
+  color: #888;
+  font-size: 0.95em;
+}
+
+.user-card .agent-address {
+  color: #888;
+  font-size: 0.95em;
+}
+
+/* Modern Agent Search Bar Styles */
+.agent-search-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(53,66,74,0.08);
+  padding: 18px 24px 12px 24px;
+  margin: 2em auto 1.5em auto;
+  max-width: 900px;
+}
+
+.agent-search-bar input,
+.agent-search-bar select {
+  padding: 12px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1em;
+  background: #fafbfc;
+  outline: none;
+  transition: border 0.2s;
+  min-width: 120px;
+  margin: 0;
+}
+
+.agent-search-bar input:focus,
+.agent-search-bar select:focus {
+  border-color: #e8491d;
+  background: #fff;
+}
+
+.agent-search-bar button[type="submit"] {
+  padding: 12px 28px;
+  background: #e8491d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s;
+  margin-left: 0.5em;
+}
+
+.agent-search-bar button[type="submit"]:hover {
+  background: #b93c13;
+}
+
+@media (max-width: 700px) {
+  .agent-search-bar {
+    flex-direction: column;
+    gap: 0.7em;
+    padding: 12px 6px 10px 6px;
+    max-width: 98vw;
+  }
+  .agent-search-bar input,
+  .agent-search-bar select {
+    width: 100%;
+    min-width: 0;
+    font-size: 0.98em;
+  }
+  .agent-search-bar button[type="submit"] {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .user-card {
+    width: 92vw;
+    min-width: 260px;
+    max-width: 98vw;
+    margin: 0 0.5em 1em 0.5em;
+    padding: 1em 0.5em;
+  }
+  .user-photo-wrap {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 0.7em;
+  }
+  .user-photo {
+    width: 64px;
+    height: 64px;
+  }
+  #agents-carousel-track {
+    gap: 12px;
+    padding: 1em 0.5em;
+  }
+}
+  </style>
+<script src="/scripts/referral-agents.js"></script>
+</head>
+<body>
+<!-- Global Navigation -->
+<nav class="nav-header">
+<div class="nav-container">
+<div class="nav-brand">
+<a href="../index.html" class="brand-link">
+<img src="../assets/d4rent logo smaller.png" alt="D4Rent" class="brand-logo">
+</a>
+</div>
+
+<div class="nav-search">
+<div class="search-container">
+<input type="text" class="search-input" placeholder="Search properties, locations, or keywords...">
+<button class="search-button">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<circle cx="11" cy="11" r="8"></circle>
+<path d="21 21l-4.35-4.35"></path>
+</svg>
+</button>
+</div>
+</div>
+
+<ul class="nav-menu">
+<li class="nav-item dropdown">
+<a href="buy.html" class="nav-link">Buy</a>
+<div class="dropdown-content">
+<a href="buy.html">New Homes</a>
+<a href="buy.html">Residential</a>
+<a href="buy.html">Commercial</a>
+<a href="buy.html">Luxury Homes</a>
+<a href="buy.html">New Developments</a>
+<a href="buy.html">Country Homes</a>
+<a href="buy.html">Apartments</a>
+</div>
+</li>
+<li class="nav-item dropdown">
+<a href="rent.html" class="nav-link">Rent</a>
+<div class="dropdown-content">
+<a href="rent.html">Apartments</a>
+<a href="rent.html">Lettings</a>
+<a href="rent.html">Residential</a>
+<a href="rent.html">Luxury Homes</a>
+<a href="rent.html">Timeshare Homes</a>
+<a href="rent.html">Houses</a>
+<a href="rent.html">Short-Term</a>
+<a href="rent.html">Student Accommodation</a>
+<a href="rent.html">Sublets</a>
+</div>
+</li>
+<li class="nav-item dropdown">
+<a href="commercial.html" class="nav-link">Commercial</a>
+<div class="dropdown-content">
+<a href="commercial.html">Office Space</a>
+<a href="commercial.html">Retail Unit</a>
+<a href="commercial.html">Industrial Unit</a>
+<a href="commercial.html">Restaurant / Bar / Hotel</a>
+<a href="commercial.html">Luxury Commercial</a>
+<a href="commercial.html">Commercial Site</a>
+<a href="commercial.html">Auction</a>
+<a href="commercial.html">Agricultural Site</a>
+<a href="commercial.html">Development Land</a>
+<a href="commercial.html">Investment Property</a>
+</div>
+</li>
+<li class="nav-item"><a href="agents.html" class="nav-link">Find an Agent</a></li>
+<li class="nav-item dropdown">
+<a href="services.html" class="nav-link">Our Services</a>
+<div class="dropdown-content">
+<a href="services.html">Property Management</a>
+<a href="services.html">Consulting</a>
+<a href="services.html">Legal Advice</a>
+<a href="services.html">Tradesmen</a>
+<a href="services.html">Interior Designers</a>
+<a href="services.html">Architect</a>
+<a href="services.html">Others</a>
+</div>
+</li>
+<li class="nav-item"><a href="concierge.html" class="nav-link">Our Concierge</a></li>
+<li class="nav-item"><a href="sell.html" class="nav-link">Sell with D4rent?</a></li>
+<li class="nav-item"><a href="login.html" class="nav-link" id="login-btn">Sign In</a></li>
+</ul>
+
+<div class="nav-toggle">
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+</nav>
+
+<!-- Mobile Navigation -->
+<div class="mobile-nav">
+<div class="mobile-nav-header">
+<span class="mobile-nav-title">Menu</span>
+<button class="mobile-nav-close">&times;</button>
+</div>
+<div class="mobile-search">
+<div class="search-container">
+<input type="text" class="search-input" placeholder="Search properties...">
+<button class="search-button">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<circle cx="11" cy="11" r="8"></circle>
+<path d="21 21l-4.35-4.35"></path>
+</svg>
+</button>
+</div>
+</div>
+<ul class="mobile-nav-menu">
+<li class="mobile-nav-item">
+<a href="buy.html" class="mobile-nav-link">Buy</a>
+<ul class="mobile-submenu">
+<li><a href="buy.html">New Homes</a></li>
+<li><a href="buy.html">Residential</a></li>
+<li><a href="buy.html">Commercial</a></li>
+<li><a href="buy.html">Luxury Homes</a></li>
+<li><a href="buy.html">New Developments</a></li>
+<li><a href="buy.html">Country Homes</a></li>
+<li><a href="buy.html">Apartments</a></li>
+</ul>
+</li>
+<li class="mobile-nav-item">
+<a href="rent.html" class="mobile-nav-link">Rent</a>
+<ul class="mobile-submenu">
+<li><a href="rent.html">Apartments</a></li>
+<li><a href="rent.html">Lettings</a></li>
+<li><a href="rent.html">Residential</a></li>
+<li><a href="rent.html">Luxury Homes</a></li>
+<li><a href="rent.html">Timeshare Homes</a></li>
+<li><a href="rent.html">Houses</a></li>
+<li><a href="rent.html">Short-Term</a></li>
+<li><a href="rent.html">Student Accommodation</a></li>
+<li><a href="rent.html">Sublets</a></li>
+</ul>
+</li>
+<li class="mobile-nav-item">
+<a href="commercial.html" class="mobile-nav-link">Commercial</a>
+<ul class="mobile-submenu">
+<li><a href="commercial.html">Office Space</a></li>
+<li><a href="commercial.html">Retail Unit</a></li>
+<li><a href="commercial.html">Industrial Unit</a></li>
+<li><a href="commercial.html">Restaurant / Bar / Hotel</a></li>
+<li><a href="commercial.html">Luxury Commercial</a></li>
+<li><a href="commercial.html">Commercial Site</a></li>
+<li><a href="commercial.html">Auction</a></li>
+<li><a href="commercial.html">Agricultural Site</a></li>
+<li><a href="commercial.html">Development Land</a></li>
+<li><a href="commercial.html">Investment Property</a></li>
+</ul>
+</li>
+<li class="mobile-nav-item"><a href="agents.html" class="mobile-nav-link">Find an Agent</a></li>
+<li class="mobile-nav-item">
+<a href="services.html" class="mobile-nav-link">Our Services</a>
+<ul class="mobile-submenu">
+<li><a href="services.html">Property Management</a></li>
+<li><a href="services.html">Consulting</a></li>
+<li><a href="services.html">Legal Advice</a></li>
+<li><a href="services.html">Tradesmen</a></li>
+<li><a href="services.html">Interior Designers</a></li>
+<li><a href="services.html">Architect</a></li>
+<li><a href="services.html">Others</a></li>
+</ul>
+</li>
+<li class="mobile-nav-item"><a href="concierge.html" class="mobile-nav-link">Our Concierge</a></li>
+<li class="mobile-nav-item"><a href="sell.html" class="mobile-nav-link">Sell with D4rent?</a></li>
+<li class="mobile-nav-item"><a href="login.html" class="mobile-nav-link" id="mobile-login-btn">Sign In</a></li>
+</ul>
+</div>
+
+<main class="main-content">
+<!-- Replace static agent filter form with a dynamic one -->
+<form class="agent-search-bar" id="agent-filter-form">
+<input autocomplete="off" id="filter-query" placeholder="Search agents by name, address, phone, area..." style="flex:2; min-width:180px;" type="text"/>
+<select id="filter-role" style="min-width:140px;">
+<option value="">All Roles</option>
+<option value="Service Agent">Service Agent</option>
+<option value="Real Estate Agent">Real Estate Agent</option>
+</select>
+<select id="filter-tag" style="min-width:140px;">
+<option value="">All Tags</option>
+<option value="Lettings">Lettings</option>
+<option value="Commercial">Commercial</option>
+<option value="Valuations">Valuations</option>
+</select>
+<button type="submit">Search</button>
+</form>
+<!-- Carousel container -->
+<div class="agents-carousel">
+<div id="agents-carousel-track" style="display: flex; gap: 24px; overflow-x: auto; padding: 1em 0;">
+<!-- Agent cards will be rendered here by JS -->
+</div>
+</div>
+<script>
+async function fetchUsers() {
+  const res = await fetch(`${API_BASE_URL}/api/users`);
+  const users = await res.json();
+  // Only Service Agent and Real Estate Agent
+  return users.filter(u =>
+    u.role === "Service Agent" || u.role === "Real Estate Agent"
+  );
+}
+
+// Build dynamic filter form fields from user data
+function buildDynamicAgentFilterForm(users) {
+  const names = [...new Set(users.map(u => u.full_name).filter(Boolean))];
+  const addresses = [...new Set(users.map(u => u.address).filter(Boolean))];
+  const phones = [...new Set(users.map(u => u.phone_number).filter(Boolean))];
+  const types = [
+    { value: '', label: 'All' },
+    { value: 'service_agent', label: 'Service Agents' },
+    { value: 'real_estate_agent', label: 'Real Estate Agents' }
+  ];
+  const areas = [...new Set(users.map(u => u.address).filter(Boolean))];
+
+  // Optionally, you can add more dynamic selects for roles, professions, etc.
+
+  document.getElementById('agent-filter-form').innerHTML = `
+    <input type="text" id="filter-name" placeholder="Name" list="name-list">
+    <datalist id="name-list">
+      ${names.map(n => `<option value="${n}">`).join('')}
+    </datalist>
+    <input type="text" id="filter-address" placeholder="Address" list="address-list">
+    <datalist id="address-list">
+      ${addresses.map(a => `<option value="${a}">`).join('')}
+    </datalist>
+    <input type="text" id="filter-phone" placeholder="Phone" list="phone-list">
+    <datalist id="phone-list">
+      ${phones.map(p => `<option value="${p}">`).join('')}
+    </datalist>
+    <select id="filter-type">
+      ${types.map(t => `<option value="${t.value}">${t.label}</option>`).join('')}
+    </select>
+    <input type="text" id="filter-area" placeholder="Area" list="area-list">
+    <datalist id="area-list">
+      ${areas.map(a => `<option value="${a}">`).join('')}
+    </datalist>
+    <button type="submit">Search</button>
+  `;
+}
+
+// ...existing renderUsersCarousel and getUserProfilePic/getCompanyLogo...
+
+document.addEventListener('DOMContentLoaded', async () => {
+  window.allUsers = await fetchUsers();
+  renderUsersCarousel(window.allUsers, '');
+
+  // --- Add this block to pre-fill and trigger search from URL ---
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get('query') || '';
+  const role = params.get('role') || '';
+  const tag = params.get('tag') || '';
+
+  if (query) document.getElementById('filter-query').value = query;
+  if (role) document.getElementById('filter-role').value = role;
+  if (tag) document.getElementById('filter-tag').value = tag;
+
+  if (query || role || tag) {
+    // Trigger the search automatically
+    document.getElementById('agent-filter-form').dispatchEvent(new Event('submit'));
+  }
+  // --- End block ---
+
+  document.getElementById('agent-filter-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const query = document.getElementById('filter-query').value.trim().toLowerCase();
+    const role = document.getElementById('filter-role').value;
+    const tag = document.getElementById('filter-tag').value;
+
+    const filtered = window.allUsers.filter(user => {
+      // Match query against name, address, phone, area (all as string, case-insensitive)
+      const q = query;
+      const match =
+        !q ||
+        (user.full_name && user.full_name.toLowerCase().includes(q)) ||
+        (user.address && user.address.toLowerCase().includes(q)) ||
+        (user.phone_number && user.phone_number.toLowerCase().includes(q)) ||
+        (user.area && user.area.toLowerCase().includes(q));
+      if (!match) return false;
+      if (role && user.role !== role) return false;
+      if (tag) {
+        const tagsArr = Array.isArray(user.tags)
+          ? user.tags.map(t => t.toLowerCase())
+          : (user.tags ? user.tags.toLowerCase().split(',').map(t => t.trim()) : []);
+        if (!tagsArr.includes(tag.toLowerCase())) return false;
+      }
+      return true;
+    });
+
+    renderUsersCarousel(filtered, role);
+  });
+});
+</script>
+<script src="/scripts/main.js"></script>
+<script>
+    let allUsers = [];
+
+    async function fetchUsers() {
+      const res = await fetch(`${API_BASE_URL}/api/users`);
+      return await res.json();
+    }
+
+    function getUserProfilePic(user) {
+      if (user.profile_picture) {
+        if (user.profile_picture.startsWith('http')) return user.profile_picture;
+        if (user.profile_picture.startsWith('/uploads/')) return user.profile_picture;
+        return '/uploads/' + user.profile_picture;
+      }
+      return '/assets/default-user.png';
+    }
+    function getCompanyLogo(user) {
+      if (user.company_logo) {
+        if (user.company_logo.startsWith('http')) return user.company_logo;
+        if (user.company_logo.startsWith('/uploads/')) return user.company_logo;
+        return '/uploads/' + user.company_logo;
+      }
+      return '';
+    }
+
+    function renderUsersCarousel(users, filterType) {
+      const track = document.getElementById('agents-carousel-track');
+      track.innerHTML = '';
+      if (!users.length) {
+        track.innerHTML = '<p>No users found.</p>';
+        return;
+      }
+      users.forEach(user => {
+        // Only show company logo overlay if present
+        const companyLogo = getCompanyLogo(user);
+        const tags = user.tags
+          ? (Array.isArray(user.tags) ? user.tags.join(', ') : user.tags)
+          : '';
+        const card = document.createElement('div');
+        card.className = 'user-card';
+        card.innerHTML = `
+          <a href="agentprofile.html?id=${user.id}" style="text-decoration:none;color:inherit;">
+            <div class="user-photo-wrap">
+              <img class="user-photo" src="${getUserProfilePic(user)}" alt="${user.full_name || ''}">
+              ${companyLogo ? `
+                <span class="company-logo-overlay">
+                  <img src="${companyLogo}" alt="Company Logo">
+                </span>
+              ` : ''}
+            </div>
+            <div class="agent-name">${user.full_name || ''}</div>
+            <div class="agent-role">${user.role || ''}</div>
+            <div class="agent-company">${user.company_name || user.company || ''}</div>
+            <div class="agent-profession">${user.profession || ''}</div>
+            <div class="agent-address">${user.address || ''}</div>
+            <div class="agent-phone">${user.phone_number || ''}</div>
+            <div class="agent-email">${user.email || ''}</div>
+            <div class="agent-tags">${tags}</div>
+          </a>
+        `;
+        track.appendChild(card);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      allUsers = await fetchUsers();
+      renderUsersCarousel(allUsers, '');
+
+      // --- Add this block to pre-fill and trigger search from URL ---
+      const params = new URLSearchParams(window.location.search);
+      const query = params.get('query') || '';
+      const role = params.get('role') || '';
+      const tag = params.get('tag') || '';
+
+      if (query) document.getElementById('filter-query').value = query;
+      if (role) document.getElementById('filter-role').value = role;
+      if (tag) document.getElementById('filter-tag').value = tag;
+
+      if (query || role || tag) {
+        // Trigger the search automatically
+        document.getElementById('agent-filter-form').dispatchEvent(new Event('submit'));
+      }
+      // --- End block ---
+
+      document.getElementById('agent-filter-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const query = document.getElementById('filter-query').value.trim().toLowerCase();
+        const role = document.getElementById('filter-role').value;
+        const tag = document.getElementById('filter-tag').value;
+
+        const filtered = allUsers.filter(user => {
+          // Match query against name, address, phone, area (all as string, case-insensitive)
+          const q = query;
+          const match =
+            !q ||
+            (user.full_name && user.full_name.toLowerCase().includes(q)) ||
+            (user.address && user.address.toLowerCase().includes(q)) ||
+            (user.phone_number && user.phone_number.toLowerCase().includes(q)) ||
+            (user.area && user.area.toLowerCase().includes(q));
+          if (!match) return false;
+          if (role && user.role !== role) return false;
+          if (tag) {
+            const tagsArr = Array.isArray(user.tags)
+              ? user.tags.map(t => t.toLowerCase())
+              : (user.tags ? user.tags.toLowerCase().split(',').map(t => t.trim()) : []);
+            if (!tagsArr.includes(tag.toLowerCase())) return false;
+          }
+          return true;
+        });
+
+        renderUsersCarousel(filtered, role);
+      });
+    });
+  </script>
+</main>
+
+<!-- Updated Footer -->
+<footer class="site-footer">
+<div class="footer-content">
+<div class="footer-section">
+<div class="footer-logo">
+<img src="../assets/d4rent logo smaller.png" alt="D4Rent" class="footer-logo-img">
+</div>
+<div class="footer-contact">
+<h3>Contact Details</h3>
+<p>D4Rent.ie</p>
+<p>36 Upper Baggot St, Ballsbridge, D4</p>
+<p>Phone: 01 442 7303</p>
+<p>Mobile: 087 169 9498</p>
+<p>Email: <a href="mailto:info@d4rent.ie">info@d4rent.ie</a></p>
+</div>
+</div>
+<div class="footer-section">
+<h3>Quick Links</h3>
+<ul>
+<li><a href="buy.html">Buy</a></li>
+<li><a href="rent.html">Rent</a></li>
+<li><a href="sell.html">Sell</a></li>
+<li><a href="commercial.html">Commercial</a></li>
+<li><a href="agents.html">Agents</a></li>
+<li><a href="contact-us.html">Contact Us</a></li>
+<li><a href="listyourrentalsfree.html">List Your Rentals Free</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Services</h3>
+<ul>
+<li><a href="services.html">Property Management</a></li>
+<li><a href="services.html">Consulting</a></li>
+<li><a href="concierge.html">Concierge Services</a></li>
+<li><a href="landlords.html">Landlord Services</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Legal</h3>
+<ul>
+<li><a href="privacy-policy.html">Privacy Policy</a></li>
+<li><a href="terms-of-service.html">Terms of Service</a></li>
+<li><a href="cookie-policy.html">Cookie Policy</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Connect with Us</h3>
+<div class="social-links">
+<a href="https://www.facebook.com/profile.php?id=61577099380616" target="_blank" rel="noopener">Facebook</a>
+<a href="https://www.instagram.com/dublin4rent/" target="_blank" rel="noopener">Instagram</a>
+<a href="https://www.tiktok.com/@d4rent.ie" target="_blank" rel="noopener">TikTok</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2024 D4Rent.ie. All rights reserved.</p>
+</div>
+</footer>
+
+<script src="../scripts/chatbot.js"></script>
+
+<!-- Global Navigation and Search Scripts -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof GlobalNavigation !== 'undefined') {
+      GlobalNavigation.init();
+    }
+    if (typeof GlobalSearch !== 'undefined') {
+      GlobalSearch.init();
+    }
+  });
+</script>
+</body>
+</html>

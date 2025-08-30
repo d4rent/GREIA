@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Subscriptions & Packages - Profile - Greia</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="../css/profile.css" rel="stylesheet"/>
+<link href="../css/profile-nav.css" rel="stylesheet"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<link href="../css/footer.css" rel="stylesheet"/>
+<script src="../scripts/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+/* Navigation Bar */
+.navbar {
+  background: linear-gradient(90deg, #1c0bff, #00c6d4, #1c0bff);
+  background-size: 200% 100%;
+  padding: 0.5rem 2rem;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(28,11,255,0.15);
+  margin-bottom: 2rem;
+  animation: gradientFlow 15s linear infinite;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Navigation styles */
+.profile-sidebar {
+  margin: 0;
+  min-width: 220px;
+  background: #fff;
+  border-radius: 18px 0 0 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 0;
+  height: 100%;
+  position: relative;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nav-link {
+  display: block;
+  padding: 14px 32px;
+  color: #222;
+  text-decoration: none;
+  font-size: 1.08em;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  transition: all 0.2s ease-out;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #1c0bff;
+  background: rgba(28,11,255,0.05);
+}
+
+.nav-link.active {
+  color: #1c0bff;
+  background: rgba(28,11,255,0.08);
+}
+
+.nav-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: #1c0bff;
+}
+
+/* Package Cards */
+.package-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.package-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.package-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #8A2BE2, #9400D3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.package-card:hover::before {
+  opacity: 1;
+}
+
+.package-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.package-header {
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.package-header::after {
+  content: '★';
+  font-size: 24px;
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  color: #8A2BE2;
+  opacity: 0.2;
+  transform: rotate(25deg);
+}
+
+.package-name {
+  font-size: 1.75em;
+  font-weight: 700;
+  background: linear-gradient(135deg, #8A2BE2, #9400D3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+
+.package-price {
+  font-size: 3em;
+  font-weight: 800;
+  color: #222;
+  line-height: 1;
+  margin: 16px 0 8px;
+}
+
+.package-duration {
+  color: #666;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.package-features {
+  list-style: none;
+  padding: 0;
+  margin: 32px 0;
+}
+
+.package-features li {
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #444;
+  font-weight: 500;
+}
+
+.package-features li i {
+  color: #8A2BE2;
+  font-size: 1.1em;
+}
+
+.package-button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #8A2BE2, #9400D3);
+  color: white;
+  font-weight: 600;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(138,43,226,0.2);
+}
+
+.package-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(138,43,226,0.3);
+}
+
+/* Exposure Packages */
+.exposure-section {
+  margin-top: 48px;
+}
+
+.exposure-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.exposure-card {
+  border-radius: 20px;
+  padding: 32px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Silver Theme */
+.exposure-card:nth-child(1) {
+  background: linear-gradient(135deg, #F5F5F5, #E0E0E0);
+  border: 1px solid rgba(192,192,192,0.3);
+}
+
+/* Gold Theme */
+.exposure-card:nth-child(2) {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  border: 1px solid rgba(255,215,0,0.3);
+  color: #444;
+}
+
+/* Purple Theme */
+.exposure-card:nth-child(3) {
+  background: linear-gradient(135deg, #8A2BE2, #9400D3);
+  border: 1px solid rgba(138,43,226,0.3);
+  color: white;
+}
+
+.exposure-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.exposure-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  position: relative;
+}
+
+/* Silver Icon */
+.exposure-card:nth-child(1) .exposure-icon {
+  background: linear-gradient(135deg, #FFFFFF, #C0C0C0);
+  color: #666;
+  box-shadow: 0 4px 15px rgba(192,192,192,0.3);
+}
+
+/* Gold Icon */
+.exposure-card:nth-child(2) .exposure-icon {
+  background: linear-gradient(135deg, #FFD700, #DAA520);
+  color: #B8860B;
+  box-shadow: 0 4px 15px rgba(218,165,32,0.3);
+}
+
+/* Purple Icon */
+.exposure-card:nth-child(3) .exposure-icon {
+  background: linear-gradient(135deg, #9400D3, #8A2BE2);
+  color: white;
+  box-shadow: 0 4px 15px rgba(138,43,226,0.3);
+}
+
+.exposure-details {
+  margin: 24px 0;
+}
+
+.exposure-details p {
+  font-size: 1.1em;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.exposure-price {
+  font-size: 2.5em;
+  font-weight: 800;
+  margin: 16px 0;
+  background: linear-gradient(135deg, #8A2BE2, #9400D3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Override price colors for different themes */
+.exposure-card:nth-child(1) .exposure-price {
+  background: linear-gradient(135deg, #808080, #A9A9A9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.exposure-card:nth-child(2) .exposure-price {
+  background: linear-gradient(135deg, #FFD700, #DAA520);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.exposure-card:nth-child(3) .exposure-price {
+  background: none;
+  -webkit-text-fill-color: white;
+  text-shadow: 0 2px 10px rgba(255,255,255,0.2);
+}
+
+/* Stats Section */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.stat-card h3 {
+  margin: 0 0 8px;
+  color: #1c0bff;
+  font-size: 16px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Profile Layout */
+.profile-flex-layout {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 80vh;
+}
+
+/* Profile Sidebar */
+.profile-sidebar {
+  margin: 0;
+  min-width: 220px;
+  background: #fff;
+  border-radius: 18px 0 0 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 0;
+  height: 100%;
+  position: relative;
+}
+
+/* Main Content */
+.profile-content-card {
+  flex: 1;
+  background: #fff;
+  border-radius: 0 18px 18px 0;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 40px 32px;
+  min-height: 80vh;
+}
+
+/* Updated Card Styles */
+.package-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.package-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+.exposure-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.exposure-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+.exposure-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.package-features {
+  margin: 24px 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.package-features li {
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.package-features li:last-child {
+  border-bottom: none;
+}
+
+.package-features li i {
+  color: #1c0bff;
+  font-size: 18px;
+}
+
+.package-button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.package-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(28,11,255,0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .package-grid {
+    grid-template-columns: repeat(2, minmax(280px, 320px));
+  }
+  .exposure-grid {
+    grid-template-columns: repeat(2, minmax(280px, 320px));
+  }
+}
+
+@media (max-width: 768px) {
+  .package-grid, .exposure-grid {
+    grid-template-columns: minmax(280px, 320px);
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .profile-flex-layout {
+    flex-direction: column;
+  }
+  
+  .profile-sidebar {
+    width: 100%;
+    min-width: unset;
+    border-radius: 18px 18px 0 0;
+    padding: 16px 0;
+  }
+  
+  .sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 16px;
+  }
+  
+  .nav-link {
+    padding: 10px 16px;
+  }
+  
+  .profile-content-card {
+    border-radius: 0 0 18px 18px;
+    padding: 24px 16px;
+  }
+}
+</style>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="navbar-thirds">
+    <div class="navbar-third left">
+      <ul class="nav-links left-links" style="position:relative; z-index:100;">
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/buy.html" style="position:relative; z-index:101;">Property</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/buy.html">Buy</a></li>
+            <li><a href="/pages/rent.html">Rent</a></li>
+            <li><a href="/pages/commercial.html">Commercial</a></li>
+            <li><a href="/pages/buy.html">Apartments</a></li>
+            <li><a href="/pages/sell.html">Sell</a></li>
+            <li><a href="/pages/valuations.html">Valuations</a></li>
+            <li><a href="/pages/buy.html">New Homes</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/agents.html" style="color: rgb(78, 255, 146); position:relative; z-index:101;" class="referral-dropdown-toggle">Connect</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/agents.html">Find an Agent</a></li>
+            <li><a href="/pages/coaching.html">Coaching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="/index.html">
+          <img alt="Logo" src="../assets/greia (4).png" style="height: auto; max-height: 140px;"/>
+        </a>
+      </div>
+    </div>
+    <div class="navbar-third right">
+      <ul class="nav-links right-links">
+        <li>
+          <a href="/pages/services.html" class="fancy-underline">Our Services</a>
+        </li>
+        <li>
+          <a href="/pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown" id="auth-menu">
+          <a href="/pages/login.html" id="login-btn">Log In</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="profile-flex-layout">
+  <!-- Sidebar Navigation -->
+  <aside class="profile-sidebar">
+    <nav class="sidebar-nav">
+      <a href="./profile.html" class="nav-link">Profile</a>
+      <a href="./profile-properties.html" class="nav-link">Properties</a>
+      <a href="./profile-ads.html" class="nav-link">Advertisements</a>
+      <a href="./profile-services.html" class="nav-link">Services</a>
+      <a href="./profile-inbox.html" class="nav-link">Inbox</a>
+      <a href="./profile-saved.html" class="nav-link">Saved Items</a>
+      <a href="./analytics.html" class="nav-link">Analytics</a>
+      <a href="./profile-subscriptions.html" class="nav-link active">Packages & Memberships</a>
+      <a href="./profile-settings.html" class="nav-link">Settings</a>
+      <a href="./admindashboard.html" class="nav-link" id="nav-admin-dashboard" style="display:none;">Admin Dashboard</a>
+      <a href="../auth/logout.html" class="nav-link" id="nav-logout">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <section class="profile-content-card">
+    <div class="profile-section-content">
+      <h3 style="margin: 40px 0 24px; color: #1c0bff;">GREIA Membership</h3>
+      <div class="package-grid" style="display: grid; grid-template-columns: repeat(2, minmax(300px, 350px)); gap: 24px; justify-content: center; margin: 0 auto;">
+        <!-- Free Package -->
+        <div class="membership-card" style="background: #fafafa; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #eee;">
+          <div style="text-align: center;">
+            <div style="width: 24px; height: 24px; margin: 0 auto 16px; background: #666; border-radius: 50%;"></div>
+            <h4 style="font-family: Arial, Helvetica, sans-serif; font-size: 1.1em; color: #333; margin-bottom: 12px;">Free Membership</h4>
+            <div style="font-size: 1.4em; color: #666; font-weight: 600; margin: 12px 0;">Free</div>
+            <p style="color: #666; font-size: 0.9em; margin-bottom: 20px;">forever</p>
+          </div>
+          <ul style="list-style: none; padding: 0; margin: 20px 0;">
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #666; margin-right: 8px;"></i> Unlimited property listings</li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #666; margin-right: 8px;"></i> Basic profile</li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #666; margin-right: 8px;"></i> Standard search visibility</li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #666; margin-right: 8px;"></i> Basic analytics</li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #666; margin-right: 8px;"></i> Email support</li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-times" style="color: #999; margin-right: 8px;"></i> <span style="color: #999;">Featured agent status</span></li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-times" style="color: #999; margin-right: 8px;"></i> <span style="color: #999;">Property opportunities alerts</span></li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-times" style="color: #999; margin-right: 8px;"></i> <span style="color: #999;">Advanced analytics</span></li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-times" style="color: #999; margin-right: 8px;"></i> <span style="color: #999;">50% off exposure packages</span></li>
+          </ul>
+          <button onclick="selectPackage('free')" style="width: 100%; background: #666; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-size: 0.9em;">Current Plan</button>
+        </div>
+
+        <!-- Pro Package -->
+        <div class="membership-card" style="background: #fafafa; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #eee;">
+          <div style="text-align: center;">
+            <div style="width: 24px; height: 24px; margin: 0 auto 16px; background: #8A2BE2; border-radius: 50%;"></div>
+            <h4 style="font-family: Arial, Helvetica, sans-serif; font-size: 1.1em; color: #333; margin-bottom: 12px;">Pro Membership</h4>
+            <div style="font-size: 1.4em; color: #1c0bff; font-weight: 600; margin: 12px 0;">€29/mo</div>
+            <p style="color: #666; font-size: 0.9em; margin-bottom: 20px;">Cancel anytime</p>
+          </div>
+          <ul style="list-style: none; padding: 0; margin: 20px 0;">
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> <strong>Everything in Free, plus:</strong></li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Featured agent status</li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Advanced analytics dashboard</li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Boosted listings visibility</li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Property opportunities alerts</li>
+            <li style="padding: 8px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> <strong>50% off all exposure packages</strong></li>
+          </ul>
+          <button onclick="selectPackage('pro')" style="width: 100%; background: #1c0bff; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-size: 0.9em;">Upgrade to Pro</button>
+        </div>
+      </div>
+
+      <!-- Exposure Packages -->
+      <div class="exposure-section">
+        <h3 style="margin-bottom: 24px; color: #1c0bff;">Exposure Packages</h3>
+        <div class="exposure-grid" style="display: grid; grid-template-columns: repeat(3, minmax(300px, 350px)); gap: 24px; justify-content: center; margin: 0 auto;">
+          <!-- Silver Exposure -->
+          <div class="exposure-card" style="background: #fafafa; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #eee;">
+            <div style="width: 24px; height: 24px; margin: 0 auto 16px; background: linear-gradient(135deg, #C0C0C0, #E8E8E8); border-radius: 50%;"></div>
+            <h4 style="font-family: Arial, Helvetica, sans-serif; font-size: 1.1em; color: #333; margin-bottom: 12px;">Silver Exposure</h4>
+            <div class="exposure-details">
+              <p style="color: #666; font-size: 0.9em; margin-bottom: 8px;">14-day listing boost</p>
+              <div style="font-size: 1.4em; color: #1c0bff; font-weight: 600; margin: 12px 0;">€99</div>
+              <ul style="list-style: none; padding: 0; margin: 20px 0; text-align: left;">
+                <li style="padding: 6px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Priority listing placement</li>
+                <li style="padding: 6px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Featured on our social media</li>
+                <li style="padding: 6px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> "Boosted" badge on listing</li>
+              </ul>
+            </div>
+            <button class="package-button" onclick="selectExposure('silver')" style="background: #f5f5f5; color: #333; border: 1px solid #ddd; padding: 10px 20px; border-radius: 6px; font-size: 0.9em;">Boost Listing</button>
+          </div>
+
+          <!-- Gold Exposure -->
+          <div class="exposure-card" style="background: #fafafa; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #eee;">
+            <div style="width: 24px; height: 24px; margin: 0 auto 16px; background: linear-gradient(135deg, #FFD700, #DAA520); border-radius: 50%;"></div>
+            <h4 style="font-family: Arial, Helvetica, sans-serif; font-size: 1.1em; color: #333; margin-bottom: 12px;">Premium Exposure</h4>
+            <div class="exposure-details">
+              <p style="color: #666; font-size: 0.9em; margin-bottom: 8px;">30-day premium promotion</p>
+              <div style="font-size: 1.4em; color: #1c0bff; font-weight: 600; margin: 12px 0;">€249</div>
+              <ul style="list-style: none; padding: 0; margin: 20px 0; text-align: left;">
+                <li style="padding: 6px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Everything in Boost, plus:</li>
+                <li style="padding: 6px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Premium spotlight placement</li>
+                <li style="padding: 6px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Featured in email newsletters</li>
+                <li style="padding: 6px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Promoted across partner sites</li>
+              </ul>
+            </div>
+            <button class="package-button" onclick="selectExposure('gold')" style="background: #f5f5f5; color: #333; border: 1px solid #ddd; padding: 10px 20px; border-radius: 6px; font-size: 0.9em;">Premium Promote</button>
+          </div>
+
+          <!-- Elite Exposure -->
+          <div class="exposure-card" style="background: #fafafa; padding: 24px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #eee;">
+            <div style="width: 24px; height: 24px; margin: 0 auto 16px; background: linear-gradient(135deg, #8A2BE2, #9400D3); border-radius: 50%;"></div>
+            <h4 style="font-family: Arial, Helvetica, sans-serif; font-size: 1.1em; color: #333; margin-bottom: 12px;">Elite Promotion</h4>
+            <div class="exposure-details">
+              <p style="color: #666; font-size: 0.9em; margin-bottom: 8px;">90-day elite promotion</p>
+              <div style="font-size: 1.4em; color: #1c0bff; font-weight: 600; margin: 12px 0;">€499</div>
+              <ul style="list-style: none; padding: 0; margin: 20px 0; text-align: left;">
+                <li style="padding: 6px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Everything in Premium, plus:</li>
+                <li style="padding: 6px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Featured in news outlets</li>
+                <li style="padding: 6px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Billboard/poster promotion</li>
+                <li style="padding: 6px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Dedicated social campaign</li>
+                <li style="padding: 6px 0; color: #666; font-size: 0.9em;"><i class="fas fa-check" style="color: #1c0bff; margin-right: 8px;"></i> Premium marketing materials</li>
+              </ul>
+            </div>
+            <button class="package-button" onclick="selectExposure('elite')" style="background: #1c0bff; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-size: 0.9em;">Select Elite</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- Footer -->
+
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<script>
+// API Configuration
+const API_BASE_URL = window.API_BASE_URL || 'https://api.d4rent.ie';
+const token = localStorage.getItem('token');
+
+// Stripe configuration
+const stripe = Stripe('pk_test_51OvCexP5gP5gUQw1DlmT4VjZhp7VbP3NkE4vKWXwC6SfGAMmhKNO6qS6VcfQ2QvhTxPqKyIlQ9J5n9zI5QS9pYdF00w1234567'); // Replace with your actual publishable key
+
+// Package pricing (in cents)
+const PACKAGE_PRICES = {
+  pro: 2900,    // €29.00 per month
+  silver: 9900, // €99.00 for 14 days (€49.50 for members)
+  gold: 24900,  // €249.00 for 30 days (€124.50 for members)
+  elite: 49900  // €499.00 for 90 days (€249.50 for members)
+};
+
+let userListings = { properties: [], services: [] };
+let currentUser = null;
+
+// Handle package selection (memberships)
+async function selectPackage(type) {
+  if (type === 'free') {
+    try {
+      // Update user membership to free in database
+      const response = await fetch(`${API_BASE_URL}/api/user/membership`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          membership_type: 'free',
+          status: 'active'
+        })
+      });
+      
+      if (response.ok) {
+        alert('Successfully switched to Free plan!');
+        location.reload();
+      } else {
+        alert('Failed to update subscription');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred');
+    }
+    return;
+  }
+  
+  // Handle paid membership packages
+  await initiatePayment(type, 'membership');
+}
+
+// Handle exposure package selection
+async function selectExposure(type) {
+  await showListingSelectionModal(type);
+}
+
+// Show listing selection modal
+async function showListingSelectionModal(exposureType) {
+  try {
+    if (!token) {
+      alert('Please log in to purchase exposure packages');
+      window.location.href = '/pages/login.html';
+      return;
+    }
+
+    await loadUserListings();
+    createListingSelectionModal(exposureType);
+    const modal = document.getElementById('listing-selection-modal');
+    modal.style.display = 'flex';
+    setTimeout(() => modal.classList.add('show'), 10);
+  } catch (error) {
+    console.error('Error loading listings:', error);
+    alert('Failed to load your listings. Please try again.');
+  }
+}
+
+// Load user's properties and services
+async function loadUserListings() {
+  try {
+    if (!token) throw new Error('Please log in to continue');
+
+    const [propertiesResponse, servicesResponse] = await Promise.all([
+      fetch(`${API_BASE_URL}/api/properties?user=${currentUser?.id}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      }),
+      fetch(`${API_BASE_URL}/api/services?user=${currentUser?.id}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+    ]);
+    
+    if (propertiesResponse.ok) {
+      userListings.properties = await propertiesResponse.json();
+    }
+    if (servicesResponse.ok) {
+      userListings.services = await servicesResponse.json();
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
+// Create listing selection modal
+function createListingSelectionModal(exposureType) {
+  const existingModal = document.getElementById('listing-selection-modal');
+  if (existingModal) existingModal.remove();
+  
+  const packageName = getPackageName(exposureType, 'exposure');
+  const packagePrice = formatPrice(PACKAGE_PRICES[exposureType]);
+  const memberPrice = currentUser?.membership_type === 'pro' ? formatPrice(Math.floor(PACKAGE_PRICES[exposureType] / 2)) : null;
+  
+  const modalHTML = `
+    <div id="listing-selection-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;">
+      <div class="modal-content" style="background: white; max-width: 600px; width: 90%; border-radius: 16px; position: relative; transform: scale(0.9); transition: transform 0.3s ease; max-height: 80vh; overflow-y: auto;">
+        <button onclick="hideListingSelectionModal()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; color: #666; z-index: 10;">&times;</button>
+        
+        <div style="text-align: center; padding: 24px 32px 16px; border-bottom: 1px solid #eee;">
+          <img src="../assets/greia (4).png" alt="Greia" style="height: 60px; width: auto; margin-bottom: 8px; filter: brightness(0);">
+          <h2 style="margin: 0; color: #1c0bff; font-size: 1.5em;">Select Listing for ${packageName}</h2>
+          <div style="margin: 8px 0;">
+            ${memberPrice ? `
+              <span style="text-decoration: line-through; color: #666;">${packagePrice}</span>
+              <span style="color: #1c0bff; font-weight: 600; margin-left: 8px;">${memberPrice} (Pro Member)</span>
+            ` : `<span style="color: #1c0bff; font-weight: 600;">${packagePrice}</span>`}
+          </div>
+          <p style="margin: 8px 0 0; color: #666; font-size: 14px;">Choose which listing to promote</p>
+        </div>
+        
+        <div style="padding: 24px 32px;">
+          <div style="margin-bottom: 32px;">
+            <h3 style="margin: 0 0 16px; color: #1c0bff; font-size: 1.2em;">Your Properties</h3>
+            <div id="property-listings-container">
+              ${generateListingsHTML(userListings.properties, 'property')}
+            </div>
+          </div>
+          
+          <div style="margin-bottom: 32px;">
+            <h3 style="margin: 0 0 16px; color: #1c0bff; font-size: 1.2em;">Your Services</h3>
+            <div id="service-listings-container">
+              ${generateListingsHTML(userListings.services, 'service')}
+            </div>
+          </div>
+          
+          <div style="text-align: center; padding-top: 16px; border-top: 1px solid #eee;">
+            <button onclick="hideListingSelectionModal()" style="padding: 12px 24px; border: 1px solid #ddd; background: white; color: #666; border-radius: 6px; cursor: pointer;">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+  window.selectedExposureType = exposureType;
+}
+
+// Generate HTML for listings
+function generateListingsHTML(listings, type) {
+  if (!listings || listings.length === 0) {
+    return `<p style="text-align: center; color: #666; padding: 20px; background: #f8f9fa; border-radius: 8px;">No ${type} listings found. <a href="/pages/profile-${type === 'property' ? 'properties' : 'services'}.html" style="color: #1c0bff;">Add your first ${type}</a></p>`;
+  }
+  
+  return listings.map(listing => {
+    const title = listing.title || listing.name || `${type} listing`;
+    const price = listing.price ? `€${listing.price}` : 'Price on request';
+    const location = listing.location || listing.address || 'Location not specified';
+    const image = listing.photo || listing.image || '../assets/default-listing.jpg';
+    
+    return `
+      <div onclick="selectListingForExposure('${listing.id}', '${type}')" style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s ease; background: white;">
+        <img src="${image}" alt="${title}" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px; background: #f0f0f0;">
+        <div style="flex: 1;">
+          <h4 style="margin: 0 0 4px; color: #333; font-size: 16px;">${title}</h4>
+          <p style="margin: 0 0 4px; color: #666; font-size: 14px;">${location}</p>
+          <p style="margin: 0; color: #1c0bff; font-weight: 600; font-size: 14px;">${price}</p>
+        </div>
+        <div style="padding: 8px 16px; background: #1c0bff; color: white; border-radius: 6px; font-size: 14px;">
+          Select
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Select listing for exposure
+async function selectListingForExposure(listingId, listingType) {
+  const exposureType = window.selectedExposureType;
+  hideListingSelectionModal();
+  
+  window.selectedListing = {
+    id: listingId,
+    type: listingType,
+    exposureType: exposureType
+  };
+  
+  await initiatePayment(exposureType, 'exposure');
+}
+
+// Hide listing selection modal
+function hideListingSelectionModal() {
+  const modal = document.getElementById('listing-selection-modal');
+  if (modal) {
+    modal.classList.remove('show');
+    setTimeout(() => {
+      modal.style.display = 'none';
+      modal.remove();
+    }, 300);
+  }
+}
+
+// Initiate payment flow
+async function initiatePayment(packageType, category) {
+  try {
+    if (!token) {
+      alert('Please log in to purchase packages');
+      window.location.href = '/pages/login.html';
+      return;
+    }
+
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = 'Processing...';
+    button.disabled = true;
+    
+    // Check for member discounts
+    let finalAmount = PACKAGE_PRICES[packageType];
+    if (category === 'exposure' && currentUser?.membership_type === 'pro') {
+      finalAmount = Math.floor(finalAmount / 2); // 50% off for Pro members
+    }
+    
+    const response = await fetch(`${API_BASE_URL}/api/create-subscription-payment-intent`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        package_type: packageType,
+        category: category,
+        amount: finalAmount,
+        currency: 'eur',
+        listing_id: window.selectedListing?.id,
+        listing_type: window.selectedListing?.type,
+        user_id: currentUser?.id
+      })
+    });
+    
+    if (!response.ok) throw new Error('Failed to create payment intent');
+    
+    const { client_secret } = await response.json();
+    showPaymentModal(packageType, category, client_secret, finalAmount);
+    
+    button.textContent = originalText;
+    button.disabled = false;
+    
+  } catch (error) {
+    console.error('Payment error:', error);
+    alert('Failed to initiate payment. Please try again.');
+    
+    const button = event.target;
+    button.textContent = 'Try Again';
+    button.disabled = false;
+  }
+}
+
+// Show payment modal
+function showPaymentModal(packageType, category, clientSecret, amount) {
+  if (!document.getElementById('subscription-payment-modal')) {
+    createPaymentModal();
+  }
+  
+  const modal = document.getElementById('subscription-payment-modal');
+  const packageName = getPackageName(packageType, category);
+  const packagePrice = formatPrice(amount);
+  
+  document.getElementById('modal-package-name').textContent = packageName;
+  document.getElementById('modal-package-price').textContent = packagePrice;
+  document.getElementById('modal-package-duration').textContent = getPackageDuration(packageType, category);
+  
+  // Show member discount if applicable
+  if (category === 'exposure' && currentUser?.membership_type === 'pro' && amount < PACKAGE_PRICES[packageType]) {
+    const originalPrice = formatPrice(PACKAGE_PRICES[packageType]);
+    document.getElementById('modal-discount-info').innerHTML = `
+      <div style="background: #e8f5e9; padding: 12px; border-radius: 6px; margin: 16px 0;">
+        <strong>🎉 Pro Member Discount Applied!</strong><br>
+        <span style="text-decoration: line-through; color: #666;">${originalPrice}</span> → <strong>${packagePrice}</strong> (50% off)
+      </div>
+    `;
+    document.getElementById('modal-discount-info').style.display = 'block';
+  }
+  
+  // Add selected listing info if it's an exposure package
+  if (category === 'exposure' && window.selectedListing) {
+    const listing = getUserListingById(window.selectedListing.id, window.selectedListing.type);
+    const listingTitle = listing?.title || listing?.name || `${window.selectedListing.type} listing`;
+    document.getElementById('modal-listing-info').innerHTML = `
+      <div style="background: #e3f2fd; padding: 12px; border-radius: 6px; margin: 16px 0; border-left: 4px solid #1c0bff;">
+        <strong>Selected listing:</strong> ${listingTitle}
+        <br><small style="color: #666;">This ${window.selectedListing.type} will receive the exposure boost</small>
+      </div>
+    `;
+    document.getElementById('modal-listing-info').style.display = 'block';
+  } else {
+    document.getElementById('modal-listing-info').style.display = 'none';
+  }
+  
+  const elements = stripe.elements({
+    clientSecret: clientSecret,
+    appearance: { 
+      theme: 'stripe', 
+      variables: { 
+        colorPrimary: '#1c0bff',
+        colorBackground: '#ffffff',
+        colorText: '#333333',
+        borderRadius: '8px'
+      } 
+    }
+  });
+  
+  const paymentElement = elements.create('payment');
+  const paymentContainer = document.getElementById('subscription-payment-element');
+  paymentContainer.innerHTML = '';
+  paymentElement.mount('#subscription-payment-element');
+  
+  window.subscriptionPaymentData = { elements, clientSecret, packageType, category };
+  
+  modal.style.display = 'flex';
+  setTimeout(() => modal.classList.add('show'), 10);
+}
+
+// Create payment modal
+function createPaymentModal() {
+  const modalHTML = `
+    <div id="subscription-payment-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;">
+      <div class="modal-content" style="background: white; max-width: 500px; width: 90%; border-radius: 16px; position: relative; transform: scale(0.9); transition: transform 0.3s ease; overflow: hidden;">
+        <button onclick="hidePaymentModal()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer; z-index: 10; color: #666;">&times;</button>
+        
+        <div style="text-align: center; padding: 24px 32px 16px; border-bottom: 1px solid #eee;">
+          <img src="../assets/greia (4).png" alt="Greia" style="height: 60px; width: auto; margin-bottom: 8px; filter: brightness(0);">
+          <h2 style="margin: 0; color: #1c0bff;">Complete Purchase</h2>
+        </div>
+        
+        <div style="padding: 24px 32px;">
+          <div style="text-align: center; margin-bottom: 24px;">
+            <h3 id="modal-package-name" style="margin: 0 0 8px; color: #333;"></h3>
+            <div id="modal-package-price" style="font-size: 2rem; font-weight: bold; color: #1c0bff;"></div>
+            <p id="modal-package-duration" style="margin: 4px 0 0; color: #666; font-size: 14px;"></p>
+            <div id="modal-discount-info" style="display: none;"></div>
+            <div id="modal-listing-info" style="display: none;"></div>
+          </div>
+          
+          <div id="subscription-payment-element" style="margin-bottom: 24px;"></div>
+          <div id="subscription-payment-messages" style="color: #dc3545; margin-bottom: 16px; font-size: 14px;"></div>
+          
+          <div style="display: flex; gap: 12px;">
+            <button onclick="hidePaymentModal()" style="flex: 1; padding: 12px; border: 1px solid #ddd; background: white; color: #666; border-radius: 6px; cursor: pointer;">Cancel</button>
+            <button onclick="submitSubscriptionPayment()" id="submit-subscription-btn" style="flex: 2; padding: 12px; background: rgb(78, 255, 146); color: black; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;">Complete Purchase</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+// Submit payment
+async function submitSubscriptionPayment() {
+  if (!window.subscriptionPaymentData) {
+    console.error('No payment data available');
+    return;
+  }
+  
+  const { elements, clientSecret, packageType, category } = window.subscriptionPaymentData;
+  const submitButton = document.getElementById('submit-subscription-btn');
+  const messagesElement = document.getElementById('subscription-payment-messages');
+  
+  submitButton.disabled = true;
+  submitButton.textContent = 'Processing...';
+  messagesElement.textContent = '';
+  
+  try {
+    const { error, paymentIntent } = await stripe.confirmPayment({
+      elements,
+      confirmParams: { return_url: window.location.href },
+      redirect: 'if_required'
+    });
+    
+    if (error) {
+      messagesElement.textContent = error.message;
+      submitButton.disabled = false;
+      submitButton.textContent = 'Complete Purchase';
+      return;
+    }
+    
+    if (paymentIntent.status === 'succeeded') {
+      // Create subscription/exposure record
+      const subscriptionData = {
+        package_type: packageType,
+        category: category,
+        payment_intent_id: paymentIntent.id,
+        status: 'active',
+        user_id: currentUser?.id
+      };
+      
+      // Add listing info for exposure packages
+      if (category === 'exposure' && window.selectedListing) {
+        subscriptionData.listing_id = window.selectedListing.id;
+        subscriptionData.listing_type = window.selectedListing.type;
+      }
+      
+      const response = await fetch(`${API_BASE_URL}/api/subscriptions`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(subscriptionData)
+      });
+      
+      if (response.ok) {
+        hidePaymentModal();
+        const successMessage = category === 'exposure' 
+          ? `Exposure package activated! Your ${window.selectedListing?.type} listing will now receive premium visibility.`
+          : 'Subscription activated successfully!';
+        alert(successMessage);
+        location.reload();
+      } else {
+        const errorData = await response.json();
+        messagesElement.textContent = errorData.message || 'Payment succeeded but activation failed. Please contact support.';
+      }
+    }
+  } catch (error) {
+    console.error('Payment error:', error);
+    messagesElement.textContent = 'An unexpected error occurred. Please try again.';
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = 'Complete Purchase';
+  }
+}
+
+// Hide payment modal
+function hidePaymentModal() {
+  const modal = document.getElementById('subscription-payment-modal');
+  if (modal) {
+    modal.classList.remove('show');
+    setTimeout(() => {
+      modal.style.display = 'none';
+      if (window.subscriptionPaymentData) window.subscriptionPaymentData = null;
+    }, 300);
+  }
+}
+
+// Helper functions
+function getPackageName(packageType, category) {
+  if (category === 'membership') {
+    return packageType === 'pro' ? 'Pro Membership' : 'Free Membership';
+  } else {
+    const names = {
+      silver: 'Silver Exposure Package',
+      gold: 'Premium Exposure Package', 
+      elite: 'Elite Promotion Package'
+    };
+    return names[packageType] || packageType;
+  }
+}
+
+function getPackageDuration(packageType, category) {
+  if (category === 'membership') {
+    return packageType === 'pro' ? 'Monthly subscription' : 'Forever free';
+  } else {
+    const durations = {
+      silver: '14-day boost',
+      gold: '30-day premium promotion',
+      elite: '90-day elite campaign'
+    };
+    return durations[packageType] || '';
+  }
+}
+
+function formatPrice(cents) {
+  return `€${(cents / 100).toFixed(2)}`;
+}
+
+function getUserListingById(id, type) {
+  const listings = type === 'property' ? userListings.properties : userListings.services;
+  return listings.find(listing => listing.id == id);
+}
+
+// Load current subscription data
+async function loadSubscriptionData() {
+  try {
+    if (!token) return;
+    
+    const response = await fetch(`${API_BASE_URL}/api/subscriptions/current`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    
+    if (response.ok) {
+      const subscription = await response.json();
+      updateUIForCurrentSubscription(subscription);
+    }
+  } catch (error) {
+    console.error('Error loading subscription data:', error);
+  }
+}
+
+// Update UI for current subscription
+function updateUIForCurrentSubscription(subscription) {
+  const buttons = document.querySelectorAll('button[onclick*="selectPackage"], button[onclick*="selectExposure"]');
+  buttons.forEach(button => {
+    const onclick = button.getAttribute('onclick');
+    if (onclick) {
+      const match = onclick.match(/'(\w+)'/);
+      if (match) {
+        const packageType = match[1];
+        if (subscription.package_type === packageType && subscription.status === 'active') {
+          button.textContent = 'Current Plan';
+          button.disabled = true;
+          button.style.background = '#666';
+          button.style.cursor = 'not-allowed';
+        }
+      }
+    }
+  });
+}
+
+// Add modal animations CSS
+const style = document.createElement('style');
+style.textContent = `
+  .modal-overlay.show { opacity: 1 !important; }
+  .modal-overlay.show .modal-content { transform: scale(1) !important; }
+  .modal-close:hover { background: #f0f0f0 !important; color: #333 !important; }
+`;
+document.head.appendChild(style);
+
+// Initialize page
+document.addEventListener('DOMContentLoaded', async function() {
+  if (token) {
+    try {
+      // Load current user data
+      const response = await fetch(`${API_BASE_URL}/api/user/profile`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) {
+        currentUser = await response.json();
+      }
+      
+      // Load subscription data
+      await loadSubscriptionData();
+    } catch (error) {
+      console.error('Error loading user data:', error);
+    }
+  }
+  
+  // Close modals on outside click
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('modal-overlay')) {
+      hidePaymentModal();
+      hideListingSelectionModal();
+    }
+  });
+  
+  // Close modals with Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      hidePaymentModal();
+      hideListingSelectionModal();
+    }
+  });
+});
+</script>
+
+<div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body>
+</html>

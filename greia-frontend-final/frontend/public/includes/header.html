@@ -1,0 +1,213 @@
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="navbar-thirds">
+    <div class="navbar-third left">
+      <ul class="nav-links left-links">
+        <li class="dropdown">
+          <a href="../pages/buy.html">Property</a>
+          <ul class="dropdown-menu">
+            <li><a href="../pages/buy.html">Buy</a></li>
+            <li><a href="../pages/buy.html">Rent</a></li>
+            <li><a href="../pages/buy.html">Commercial</a></li>
+            <li><a href="../pages/buy.html">Apartments</a></li>
+            <li><a href="../pages/buy.html">Sell</a></li>
+            <li><a href="../pages/buy.html">Valuations</a></li>
+            <li><a href="../pages/buy.html">New Homes</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" style="color: rgb(78, 255, 146);" class="referral-dropdown-toggle">Connect</a>
+          <ul class="dropdown-menu">
+            <li><a href="../pages/agents.html">Find an Agent</a></li>
+            <li class="nested-dropdown" style="position: relative;">
+              <a href="../pages/agents.html" class="referral-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false">Referral Agents ▸</a>
+              <ul class="dropdown-menu referral-dropdown" style="display:none; position: absolute; left: 100%; top: 0; background: white; list-style:none; padding:10px; border:1px solid #ccc; min-width: 220px; z-index: 2000;">
+                <li><a href="../pages/agents.html?subtype=luxury">Luxury Home Agents</a></li>
+                <li><a href="../pages/agents.html?subtype=lettings">Lettings Agents</a></li>
+                <li><a href="../pages/agents.html?subtype=newhomes">New Homes Agents</a></li>
+                <li><a href="../pages/agents.html?subtype=commercial">Commercial Agents</a></li>
+                <li><a href="../pages/agents.html?subtype=residential">Residential Agents</a></li>
+                <li><a href="../pages/agents.html?subtype=developer">Developer Agents</a></li>
+                <li><a href="../pages/agents.html?subtype=timeshare">Timeshare Agents</a></li>
+              </ul>
+            </li>
+            <li><a href="../pages/coaching.html">Coaching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="../index.html">
+          <img alt="Logo" src="../assets/d4rent logo smaller.png" style="height: auto; max-height: 80px;"/>
+        </a>
+      </div>
+    </div>
+    <div class="navbar-third right">
+      <ul class="nav-links right-links">
+        <li>
+          <a href="../pages/services.html" class="fancy-underline">Our Services</a>
+        </li>
+        <li>
+          <a href="../pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown">
+          <a href="../pages/login.html" id="login-btn">Log In</a>
+          <ul class="dropdown-menu">
+            <li><a href="../pages/login.html">Sign In</a></li>
+            <li><a href="../pages/register.html">Register</a></li>
+            <li><a href="../pages/forgot-password.html">Forgot Password?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button aria-label="Toggle navigation" class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <!-- Mobile nav menu -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav">
+    <ul>
+      <li class="dropdown">
+        <a href="../pages/buy.html" class="dropdown-toggle">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="../pages/buy.html">Buy</a></li>
+          <li><a href="../pages/buy.html">Rent</a></li>
+          <li><a href="../pages/buy.html">Commercial</a></li>
+          <li><a href="../pages/buy.html">Apartments</a></li>
+          <li><a href="../pages/buy.html">Sell</a></li>
+          <li><a href="../pages/buy.html">Valuations</a></li>
+          <li><a href="../pages/buy.html">New Homes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" style="color: rgb(78, 255, 146);">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="../pages/agents.html">Find an Agent</a></li>
+          <li><a href="../pages/agents.html">Referral Agents</a></li>
+          <li><a href="../pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+      <li><a href="../pages/services.html">Our Services</a></li>
+      <li><a href="../pages/concierge.html">Concierge</a></li>
+      <li class="dropdown">
+        <a href="../pages/login.html" class="dropdown-toggle">Log In</a>
+        <ul class="dropdown-menu">
+          <li><a href="../pages/login.html">Sign In</a></li>
+          <li><a href="../pages/register.html">Register</a></li>
+          <li><a href="../pages/forgot-password.html">Forgot Password?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+// Header JavaScript - Mobile Menu Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+    const dropdownToggles = document.querySelectorAll('.mobile-nav .dropdown-toggle');
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        hamburgerMenu.classList.toggle('active');
+        mobileNav.classList.toggle('open');
+        mobileNavOverlay.classList.toggle('show');
+        document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    }
+
+    // Close mobile menu
+    function closeMobileMenu() {
+        hamburgerMenu.classList.remove('active');
+        mobileNav.classList.remove('open');
+        mobileNavOverlay.classList.remove('show');
+        document.body.style.overflow = '';
+        
+        // Close all dropdowns
+        document.querySelectorAll('.mobile-nav .dropdown').forEach(dropdown => {
+            dropdown.classList.remove('open');
+        });
+    }
+
+    // Hamburger menu click
+    if (hamburgerMenu) {
+        hamburgerMenu.addEventListener('click', toggleMobileMenu);
+    }
+
+    // Overlay click to close
+    if (mobileNavOverlay) {
+        mobileNavOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // Dropdown functionality
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const dropdown = this.parentElement;
+            const isOpen = dropdown.classList.contains('open');
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.mobile-nav .dropdown').forEach(otherDropdown => {
+                if (otherDropdown !== dropdown) {
+                    otherDropdown.classList.remove('open');
+                }
+            });
+            
+            // Toggle current dropdown
+            dropdown.classList.toggle('open', !isOpen);
+        });
+    });
+
+    // Close menu when clicking on non-dropdown links
+    document.querySelectorAll('.mobile-nav a:not(.dropdown-toggle)').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close menu on window resize if open
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 700 && mobileNav && mobileNav.classList.contains('open')) {
+            closeMobileMenu();
+        }
+    });
+
+    // Desktop dropdown functionality
+    const dropdowns = document.querySelectorAll("li.dropdown, li.nested-dropdown");
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener("mouseenter", () => {
+            const menu = dropdown.querySelector(":scope > ul.dropdown-menu");
+            if (menu) menu.style.display = "block";
+        });
+        dropdown.addEventListener("mouseleave", () => {
+            const menu = dropdown.querySelector(":scope > ul.dropdown-menu");
+            if (menu) menu.style.display = "none";
+        });
+    });
+    
+    // Keyboard accessibility for nested dropdown
+    document.querySelectorAll('.nested-dropdown > a.referral-dropdown-toggle').forEach(function(link) {
+        link.addEventListener('focus', function() {
+            const menu = this.parentElement.querySelector(':scope > ul.dropdown-menu');
+            if (menu) menu.style.display = "block";
+        });
+        link.addEventListener('blur', function() {
+            const menu = this.parentElement.querySelector(':scope > ul.dropdown-menu');
+            if (menu) menu.style.display = "none";
+        });
+        link.addEventListener('keydown', function(e) {
+            if (e.key === "ArrowRight" || e.key === "Enter" || e.key === " ") {
+                const menu = this.parentElement.querySelector(':scope > ul.dropdown-menu');
+                if (menu) {
+                    menu.style.display = "block";
+                    menu.querySelector('a').focus();
+                    e.preventDefault();
+                }
+            }
+        });
+    });
+});
+</script>

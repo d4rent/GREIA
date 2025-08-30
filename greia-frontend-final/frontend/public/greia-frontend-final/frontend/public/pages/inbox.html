@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inbox – GREIA</title>
+  <link rel="icon" type="image/png" href="/assets/greia (4).png"/>
+  <link href="/css/main.css" rel="stylesheet"/>
+  <link href="/css/global-nav.css" rel="stylesheet"/>
+  <link href="/css/greia-theme.css" rel="stylesheet"/>
+  <style>
+    .inbox-shell { display: grid; grid-template-columns: 320px 1fr; gap: 16px; padding: 16px; }
+    .card { background:#fff; border-radius:12px; box-shadow: 0 6px 18px rgba(0,0,0,.06); overflow: hidden; }
+    .list { max-height: calc(100vh - 220px); overflow: auto; }
+    .list-item { padding: 12px 14px; border-bottom: 1px solid #eee; cursor: pointer; }
+    .list-item.active { background: #f5f8ff; }
+    .thread { display:flex; flex-direction: column; height: calc(100vh - 220px); }
+    .messages { flex:1; overflow:auto; padding: 12px; }
+    .message { margin: 8px 0; }
+    .message.me { text-align: right; }
+    .composer { display:flex; gap:10px; padding:10px; border-top:1px solid #eee; }
+    .composer input, .composer button { padding:10px; border-radius:8px; border:1px solid #ddd; }
+    .toolbar { display:flex; gap:8px; padding:10px; border-bottom:1px solid #eee; align-items:center; }
+    .toolbar button { padding:8px 12px; border-radius:10px; border:0; background:#1c0bff; color:#fff; }
+    .toolbar .small { background:#00c6d4; }
+    .muted { color:#667; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <!-- nav injected by includes.js -->
+  <main class="inbox-shell">
+    <aside class="card">
+      <div class="toolbar gradient-animated">
+        <div style="color:#fff;font-weight:700;">Inbox</div>
+        <div class="muted" id="unread-badge"></div>
+      </div>
+      <div class="list" id="conversations"></div>
+    </aside>
+
+    <section class="card">
+      <div class="toolbar">
+        <div id="thread-title">Select a conversation</div>
+        <div style="margin-left:auto;display:flex;gap:8px;">
+          <button id="btn-new-contract" class="small" title="Send a contract">Send Contract</button>
+          <input id="contract-file" type="file" accept="application/pdf" style="display:none"/>
+        </div>
+      </div>
+      <div class="thread">
+        <div class="messages" id="messages"></div>
+        <div id="contracts" style="padding:10px;border-top:1px solid #eee;"></div>
+        <div id="contract-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);align-items:center;justify-content:center;z-index:9999;">
+          <div style="background:#fff;width:90%;max-width:900px;height:80%;border-radius:12px;display:flex;flex-direction:column;">
+            <div style="padding:10px;border-bottom:1px solid #eee;display:flex;gap:8px;align-items:center;">
+              <div id="contract-modal-title" style="font-weight:700;">Contract</div>
+              <button id="contract-modal-close" style="margin-left:auto;padding:6px 10px;border:0;border-radius:8px;">Close</button>
+              <button id="contract-modal-sign" style="padding:6px 10px;border:0;border-radius:8px;background:#1c0bff;color:#fff;">Sign</button>
+            </div>
+            <div style="flex:1;overflow:hidden;">
+              <iframe id="contract-frame" style="width:100%;height:100%;border:0;"></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="composer">
+          <input id="msg-text" type="text" placeholder="Type a message..."/>
+          <button id="send-btn">Send</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/scripts/includes.js"></script>
+  <script src="/scripts/inbox.js"></script>
+<div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body>
+</html>

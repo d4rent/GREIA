@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Greia</title>
+<link rel="icon" type="image/png" href="/assets/greia (4).png"/>
+<link href="css/main.css" rel="stylesheet"/>
+<link href="css/rent.css" rel="stylesheet"/>
+<link href="css/chatbot.css" rel="stylesheet"/>
+<link href="css/global-nav.css" rel="stylesheet"/>
+<!-- Add Google Fonts for rounded fonts -->
+<link href="https://fonts.googleapis.com/css?family=Quicksand:700|Nunito:700|Poppins:700&display=swap" rel="stylesheet"/>
+<style>
+    /* --- Minimal thirds layout for navbar (desktop only) --- */
+    .navbar-thirds {
+      display: flex;
+      width: 100%;
+      align-items: center;
+    }
+    .navbar-third {
+      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+    }
+    .navbar-third.center {
+      flex: 0 0 auto;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+    }
+    .navbar-third.center .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+    .navbar-third.center .logo img {
+      margin: 0 auto;
+      display: block;
+      max-height: 80px;
+      height: auto;
+    }
+    .navbar .logo img {
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.18));
+    }
+    /* Horizontal scroll for property slideshow */
+    .property-slideshow {
+      display: flex;
+      flex-direction: row;
+      gap: 32px;
+      overflow-x: auto;
+      padding: 24px 0;
+      scroll-snap-type: x mandatory;
+    }
+    .property-slideshow .modern-property-card {
+      flex: 0 0 340px;
+      scroll-snap-align: start;
+    }
+    /* Optional: Hide scrollbar for webkit browsers */
+    .property-slideshow::-webkit-scrollbar {
+      display: none;
+    }
+    .property-slideshow {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Removed mobile styles for .local-global and .featured-properties */
+
+    .nav-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100vw;
+      background: #fff;
+      z-index: 2000;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+      padding: 16px 0;
+    }
+    .nav-dropdown.open {
+      display: block;
+    }
+    /* Removed all mobile styles for .nav-dropdown, .hero-overlay, .search-bar-container, .hero-text, .hero-ad-wrapper, .hero-section */
+
+    @keyframes scroll-left {
+      0% { transform: translateX(100%);}
+      100% { transform: translateX(-100%);}
+    }
+
+    .banner-text {
+      white-space: nowrap;
+      display: inline-block;
+      animation: scroll-left 33s linear infinite;
+      font-size: 20px;
+      line-height: 30px;
+      font-weight: 700;
+    }
+
+    /* Animation for local-global section */
+    @keyframes slideInLeft {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Only keep this if you want to override main.css for this page */
+    .search-bar-container {
+      position: relative !important;
+      z-index: 25 !important;
+      background: #fff !important;
+      border-radius: 28px !important;
+      box-shadow: 0 4px 24px rgba(53, 66, 74, 0.10) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      overflow: hidden !important;
+      max-width: 600px !important;
+      margin: 0 auto 32px auto !important;
+      box-sizing: border-box !important;
+    }
+    
+    .selection-tab {
+      display: flex !important;
+      justify-content: center !important;
+      gap: 0 !important;
+      background: #f7f7f7 !important;
+      border-bottom: 1px solid #ececec !important;
+    }
+    
+    .tab-btn {
+      flex: 1 1 0 !important;
+      background: transparent !important;
+      color: #000000 !important;
+      border: none !important;
+      border-radius: 0 !important;
+      padding: 10px 30px !important;
+      font-size: .8em !important;
+      cursor: pointer !important;
+      outline: none !important;
+      border-right: 1px solid #ececec !important;
+      min-width: 0 !important;
+      transition: color 0.18s !important;
+    }
+    
+    .tab-btn:last-child {
+      border-right: none !important;
+    }
+    
+    .tab-btn.active {
+      color: #00ffc3 !important;
+    }
+    .search-button {
+      padding: 0 32px !important;
+      background-color: #00ffc3 !important; /* Teal */
+      color: #000000 !important;
+      border: none !important;
+      border-radius: 0 0 28px 0 !important;
+      font-size: 1.08rem !important;
+      cursor: pointer !important;
+      transition: background 0.18s !important;
+      box-sizing: border-box !important;
+    }
+    
+    .search-button:hover {
+      background-color: #32ffbe !important; /* Lighter teal on hover */
+    }
+    .service-link {
+      background: #00ffc3 !important;
+      color: #000 !important;
+      padding: 10px 20px !important;
+      border-radius: 4px !important;
+      display: inline-block !important;
+      text-align: center !important;
+      font-weight: 500 !important;
+      transition: background 0.18s, color 0.18s !important;
+    }
+    .service-link:hover {
+      background: #32ffbe !important;
+      color: #35424a !important;
+    }
+    .contact-btn {
+      background: #00ffc3 !important;
+      color: #000 !important;
+      padding: 10px 20px !important;
+      border-radius: 4px !important;
+      display: inline-block !important;
+      text-align: center !important;
+      font-weight: 500 !important;
+      transition: background 0.18s, color 0.18s !important;
+    }
+    .contact-btn:hover {
+      background: #32ffbe !important;
+      color: #35424a !important;
+    }
+    .profile-btn {
+      border: 2px solid #00ffc3 !important;
+      color: #00ffc3 !important;
+      padding: 10px 20px !important;
+      border-radius: 4px !important;
+      display: inline-block !important;
+      text-align: center !important;
+      font-weight: 500 !important;
+      transition: background 0.18s, color 0.18s !important;
+    }
+    .profile-btn:hover {
+      background: #00ffc3 !important;
+      color: #000 !important;
+    }
+    .hero-overlay {
+      position: relative !important;
+      z-index: 10 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    
+    .hero-section {
+      position: relative !important;
+      z-index: 5 !important;
+      overflow: hidden !important;
+      display: flex !important;
+      min-height: 500px !important;
+    }
+    
+    .hero-text {
+      position: relative !important;
+      z-index: 15 !important;
+      display: block !important;
+      text-align: center !important;
+    }
+
+    /* Mobile specific fixes */
+    @media (max-width: 768px) {
+      /* Only keep essential mobile overrides here */
+      .straight-heading {
+        font-size: 2.4rem !important;
+        margin-bottom: 10px !important;
+      }
+      
+      .hero-text p {
+        font-size: 1.6rem !important;
+        margin-bottom: 15px !important;
+      }
+      
+      .hero-text p span {
+        font-size: 1.3rem !important;
+      }
+      
+      /* Mobile search bar overrides */
+      .search-bar-container {
+        width: 95% !important;
+        max-width: 95% !important;
+        margin: -30px auto 0 auto !important;
+        z-index: 1000 !important;
+        box-sizing: border-box !important;
+        overflow: visible !important;
+        min-height: auto !important;
+      }
+      
+      .tab-btn {
+        padding: 12px 18px !important;
+        font-size: 0.95em !important;
+        box-sizing: border-box !important;
+      }
+      
+      .search-input {
+        padding: 18px 22px !important;
+        font-size: 1.1rem !important;
+        box-sizing: border-box !important;
+        border-radius: 0 0 0 28px !important;
+      }
+      
+      .search-button {
+        padding: 18px 28px !important;
+        font-size: 1.1rem !important;
+        min-width: 90px !important;
+        box-sizing: border-box !important;
+        border-radius: 0 0 28px 0 !important;
+      }
+      
+      .search-form {
+        display: flex !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      
+      .selection-tab {
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+    }
+
+    .straight-heading {
+      font-size: 3.6rem;
+      font-weight: 700 !important;
+      letter-spacing: 2px;
+      color: #1c0bff !important;
+      margin-bottom: 18px;
+      font-family: "Quicksand", "Nunito", "Poppins", Arial, Helvetica, sans-serif !important;
+    }
+    .hero-text p {
+      font-size: 2.8rem;
+      font-weight: 400;
+      font-style: light;
+      margin-bottom: 44px;
+      color: #000000;
+      z-index: 2;
+      transform: scaleY(1.0);
+      font-family: "Quicksand", "Nunito", "Poppins", Arial, Helvetica, sans-serif !important;
+    }
+    .hero-text p span {
+      font-size: 2rem;
+      font-weight: bold;
+      display: block;
+      color: #333333;
+      font-family: "Quicksand", "Nunito", "Poppins", Arial, Helvetica, sans-serif !important;
+    }
+    /* Removed mobile styles for .hero-text p, .hero-text p span, .selection-tab .tab-btn */
+
+    /* Property Tools Section */
+.property-tools {
+  background: #f7f7f7;
+  padding: 48px 0 32px 0;
+}
+.property-tools-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+.property-tools h2 {
+  text-align: center;
+  font-size: 3.2rem;
+  font-weight: 300;
+  margin-bottom: 32px;
+  color: #35424a;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+/* Removed mobile styles for .property-tools h2 */
+.tools-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  position: relative;
+  gap: 0;
+  width: 100%;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 44px;
+}
+.tools-tab-btn {
+  flex: 1 1 0;
+  background: transparent;
+  border: none;
+  color: #35424a;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 10px 0;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  z-index: 2;
+  transition: color 0.2s;
+}
+.tools-tab-btn.active {
+  color: #0008ff;
+}
+.tools-slider {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 50%;
+  /* Gradient fade on both sides, similar to concierge underline */
+  background: linear-gradient(
+    to right,
+    rgba(232,73,29,0),
+    #0008ff 30%,
+    #0022ff 70%,
+    rgba(232,73,29,0)
+  );
+  border-radius: 2px;
+  z-index: 1;
+  transition: left 0.3s cubic-bezier(.4,0,.2,1);
+}
+.tools-tabs .tools-tab-btn:first-child.active ~ .tools-slider {
+  left: 0;
+}
+.tools-tabs .tools-tab-btn:last-child.active ~ .tools-slider {
+  left: 50%;
+}
+.property-tools .tools-column {
+  flex: 1 1 300px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(53,66,74,0.07);
+  padding: 32px 24px;
+  min-width: 260px;
+  max-width: 400px;
+}
+/* Removed mobile styles for .tools-tabs, .tools-tab-btn, .tools-slider, .tools-columns, .tools-column, .property-tools h2, .tools-column h3, .tools-column ul li a */
+.tools-column ul li strong {
+  color: #555;
+  font-size: 1.18rem;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  margin-bottom: 2px;
+  display: inline-block;
+}
+/* Removed mobile styles for .tools-column ul li strong */
+.tool-desc {
+  display: inline-block;
+  color: #1976d2;
+  font-size: 1.01rem;
+  margin-top: 2px;
+  font-weight: 400;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.18s;
+}
+.tool-desc:hover {
+  color: #0015ff;
+  text-decoration: underline;
+}
+.tools-columns.tools-columns-centered {
+  justify-content: center !important;
+  align-items: center !important;
+  display: flex;
+  gap: 48px;
+}
+.property-tools .tools-column {
+  margin-left: auto;
+  margin-right: auto;
+}
+    .tools-column.tools-selling {
+      background: #ffffff !important; /* Deep blue */
+      color: #001eff !important;
+    }
+    .tools-column.tools-selling h3,
+    .tools-column.tools-selling ul li strong,
+    .tools-column.tools-selling a.tool-desc {
+      color: #0f0f0f !important;
+    }
+    .tools-column.tools-selling a.tool-desc:hover {
+      color: #0e16ff !important;
+    }
+</style>
+<link href="/css/chatbot.css" rel="stylesheet"/></head>
+<body style="padding-top: 80px;">
+
+<!-- Navigation Bar -->
+<nav class="navbar" style="z-index:2001; position:fixed; top:0; left:0; width:100vw;">
+    <div class="navbar-thirds">
+      <div class="navbar-third left">
+        <ul class="nav-links left-links">
+      <li class="dropdown">
+        <a href="pages/buy.html">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="pages/buy.html">Buy</a></li>
+          <li><a href="pages/buy.html">Rent</a></li>
+          <li><a href="pages/buy.html">Commercial</a></li>
+          <li><a href="pages/buy.html">Apartments</a></li>
+          <li><a href="pages/buy.html">Sell</a></li>
+          <li><a href="pages/buy.html">Valuations</a></li>
+          <li><a href="pages/buy.html">New Homes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown" style="position:relative;">
+        <a href="pages/agents.html" style="color: rgb(78, 255, 146);" class="referral-dropdown-toggle">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="pages/agents.html">Find an Agent</a>
+          <li class="nested-dropdown" style="position: relative;">
+            <a href="pages/agents.html" class="referral-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false">Referral Agents ▸</a>
+            <ul class="dropdown-menu referral-dropdown" style="display:none; position: absolute; left: 100%; top: 0; background: white; list-style:none; padding:10px; border:1px solid #ccc; min-width: 220px; z-index: 2000;">
+              <li><a href="pages/agents.html">Luxury Home Agents</a></li>
+              <li><a href="pages/agents.html">Lettings Agents</a></li>
+              <li><a href="pages/agents.html">New Homes Agents</a></li>
+              <li><a href="pages/agents.html">Commercial Agents</a></li>
+              <li><a href="pages/agents.html">Residential Agents</a></li>
+              <li><a href="pages/agents.html">Developer Agents</a></li>
+              <li><a href="pages/agents.html?subtype=timeshare">Timeshare Agents</a></li>
+            </ul>
+          </li>
+          <li><a href="pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+    </ul>
+      </ul>
+    </div>
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="index.html">
+          <img alt="Logo" src="assets/greia (4).png" style="height: auto; max-height: 80px;"/>
+        </a>
+      </div>
+    </div>
+    <div class="navbar-third right" style="position:relative;">
+      <!-- Country selector: just the flag, extra small, very top right -->
+      <div style="position:fixed;top:6px;right:8px;z-index:3000;">
+        <button id="country-flag-btn" style="background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;">
+          <img src="https://flagcdn.com/ie.svg" alt="Ireland" style="width:14px;height:10px;border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,0.08);"/>
+        </button>
+        <div id="country-dropdown" style="display:none;position:absolute;top:110%;right:0;background:#0a2342;border-radius:8px;box-shadow:0 4px 18px rgba(0,0,0,0.13);padding:4px 0;min-width:90px;z-index:3001;">
+          <ul style="list-style:none;padding:0;margin:0;">
+            <li style="padding:3px 10px;cursor:pointer;display:flex;align-items:center;gap:5px;" data-flag="ie"><img src="https://flagcdn.com/ie.svg" style="width:12px;height:8px;border-radius:2px;"/>Ireland</li>
+            <li style="padding:3px 10px;cursor:pointer;display:flex;align-items:center;gap:5px;" data-flag="gb"><img src="https://flagcdn.com/gb.svg" style="width:12px;height:8px;border-radius:2px;"/>UK</li>
+            <li style="padding:3px 10px;cursor:pointer;display:flex;align-items:center;gap:5px;" data-flag="fr"><img src="https://flagcdn.com/fr.svg" style="width:12px;height:8px;border-radius:2px;"/>France</li>
+            <li style="padding:3px 10px;cursor:pointer;display:flex;align-items:center;gap:5px;" data-flag="de"><img src="https://flagcdn.com/de.svg" style="width:12px;height:8px;border-radius:2px;"/>Germany</li>
+            <li style="padding:3px 10px;cursor:pointer;display:flex;align-items:center;gap:5px;" data-flag="es"><img src="https://flagcdn.com/es.svg" style="width:12px;height:8px;border-radius:2px;"/>Spain</li>
+            <li style="padding:3px 10px;cursor:pointer;display:flex;align-items:center;gap:5px;" data-flag="it"><img src="https://flagcdn.com/it.svg" style="width:12px;height:8px;border-radius:2px;"/>Italy</li>
+            <li style="padding:3px 10px;cursor:pointer;display:flex;align-items:center;gap:5px;" data-flag="nl"><img src="https://flagcdn.com/nl.svg" style="width:12px;height:8px;border-radius:2px;"/>Netherlands</li>
+            <li style="padding:3px 10px;cursor:pointer;display:flex;align-items:center;gap:5px;" data-flag="se"><img src="https://flagcdn.com/se.svg" style="width:12px;height:8px;border-radius:2px;"/>Sweden</li>
+            <li style="padding:3px 10px;cursor:pointer;display:flex;align-items:center;gap:5px;" data-flag="eu"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg" style="width:12px;height:8px;border-radius:2px;"/>Europe</li>
+          </ul>
+        </div>
+      </div>
+      <!-- ...existing code for nav-links right... -->
+      <ul class="nav-links right-links">
+        <li>
+          <a href="#" class="fancy-underline" id="our-services-link">Our Services</a>
+        </li>
+        <li>
+          <a href="pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown" id="auth-menu">
+          <a href="pages/login.html" id="login-btn">Log In</a>
+          <ul class="dropdown-menu" id="login-dropdown">
+            <li><a href="pages/login.html">Sign In</a></li>
+            <li><a href="pages/login.html">Register</a></li>
+            <li><a href="pages/login.html">Forgot Password?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button aria-label="Toggle navigation" class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <!-- Mobile nav menu -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav">
+    <ul>
+      <li class="dropdown">
+        <a href="pages/buy.html" class="dropdown-toggle">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="pages/buy.html">Buy</a></li>
+          <li><a href="pages/buy.html">Rent</a></li>
+          <li><a href="pages/buy.html">Commercial</a></li>
+          <li><a href="pages/buy.html">Apartments</a></li>
+          <li><a href="pages/buy.html">Sell</a></li>
+          <li><a href="pages/buy.html">Valuations</a></li>
+          <li><a href="pages/buy.html">New Homes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" style="color: rgb(78, 255, 146);">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="pages/agents.html">Find an Agent</a></li>
+          <li><a href="pages/referral-agents.html">Referral Agents</a></li>
+          <li><a href="pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+      <li><a href="pages/services.html">Services</a></li>
+      <li><a href="pages/concierge.html">Concierge</a></li>
+      <li class="dropdown" id="mobile-auth-menu">
+        <a href="pages/login.html" class="dropdown-toggle" id="mobile-login-btn">Log In</a>
+        <ul class="dropdown-menu" id="mobile-login-dropdown">
+          <li><a href="pages/login.html">Sign In</a></li>
+          <li><a href="pages/login.html">Register</a></li>
+          <li><a href="pages/login.html">Forgot Password?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+    <!-- Fullscreen Modal for Our Services -->
+  <div id="services-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(255,255,255,1); z-index:1500; align-items:center; justify-content:center; pointer-events:auto;">
+    <div id="services-modal-inner" style="background:#fff; border-radius:18px; padding:40px 32px 32px 32px; max-width:420px; width:90vw; position:relative; margin:auto; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+      <button id="close-services-modal" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.6rem; color:#888; cursor:pointer;">×</button>
+      <div style="font-size:1.9rem; font-weight:700; color:#0a2342; margin-bottom:24px; text-align:center; width:100%; font-family:'Segoe UI', Arial, sans-serif;">Lets Find Services Near You!</div>
+      <form id="services-search-form" autocomplete="off" style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+        <select id="services-location-input"
+          style="width:80%; max-width:320px; padding:18px 18px; font-size:1.2rem; border-radius:22px; border:2px solid #0a2342; outline:none; margin-bottom:12px; text-align:center; appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=\'%230a2342\' height=\'18\' viewBox=\'0 0 24 24\' width=\'18\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/></svg>') no-repeat right 18px center/18px 18px; box-shadow: none;">
+          <option value="">Select your county...</option>
+          <option>Antrim</option>
+          <option>Armagh</option>
+          <option>Carlow</option>
+          <option>Cavan</option>
+          <option>Clare</option>
+          <option>Cork</option>
+          <option>Derry</option>
+          <option>Donegal</option>
+          <option>Down</option>
+          <option>Dublin</option>
+          <option>Fermanagh</option>
+          <option>Galway</option>
+          <option>Kerry</option>
+          <option>Kildare</option>
+          <option>Kilkenny</option>
+          <option>Laois</option>
+          <option>Leitrim</option>
+          <option>Limerick</option>
+          <option>Longford</option>
+          <option>Louth</option>
+          <option>Mayo</option>
+          <option>Meath</option>
+          <option>Monaghan</option>
+          <option>Offaly</option>
+          <option>Roscommon</option>
+          <option>Sligo</option>
+          <option>Tipperary</option>
+          <option>Tyrone</option>
+          <option>Waterford</option>
+          <option>Westmeath</option>
+          <option>Wexford</option>
+          <option>Wicklow</option>
+        </select>
+        <button type="submit" style="width:100%; max-width:320px; background:#35d68b; color:#fff; border:none; font-size:1.1rem; font-weight:600; padding:14px 0; border-radius:22px; cursor:pointer; transition:background 0.18s;">Next</button>
+      </form>
+      <a href="pages/services.html" style="margin-top:18px; color:#0015ff; text-decoration:underline; font-size:1.05rem; font-weight:500; background:none; border:none; cursor:pointer; display:inline-block;">Skip and View Directory</a>
+    </div>
+    </div> <!-- Close #services-modal-inner -->
+  </div> <!-- Close #services-modal -->
+</nav>
+<div class="hero-ad-wrapper">
+<div class="ad-space ad-left" id="adLeft"></div>
+<header class="hero-section">
+<div class="hero-overlay">
+<div class="hero-text">
+  <!-- Make sure inline style does not override font-weight -->
+  <div class="straight-heading" style="font-size:3.6rem;letter-spacing:1px;color:#fff;margin-bottom:18px;">
+      MAKE YOUR MOVE
+  </div>
+  <p>
+    <span>List For Free, Get Noticed Today.</span>
+  </p>
+</div>
+<!-- Move search bar here, inside hero-overlay -->
+<div class="search-bar-container">
+<div class="selection-tab">
+<button class="tab-btn active" data-tab="buy">Buy</button>
+<button class="tab-btn" data-tab="rent">Rent</button>
+<button class="tab-btn" data-tab="commercial">Commercial</button>
+<button class="tab-btn" data-tab="services">Services</button>
+<button class="tab-btn" data-tab="concierge">Concierge</button>
+</div>
+<form class="search-form" id="searchForm">
+<input class="search-input" id="searchInput" name="query" placeholder="Enter an address, city, or Eircode" type="text"/>
+<button class="search-button" type="submit">Search</button>
+</form>
+</div>
+</div>
+</header>
+<div class="ad-space ad-right" id="adRight"></div>
+</div>
+
+<!-- Wrap content in main-content for proper spacing -->
+<main class="main-content">
+<section class="featured-properties">
+<div class="featured-properties-container">
+<h2>Featured Properties</h2>
+<div class="property-slideshow" id="featuredProperties">
+<!-- Property cards will be loaded here by JS -->
+</div>
+</div>
+</section>
+<!-- Featured Services Section -->
+<section class="featured-services">
+<div class="featured-services-container">
+<h2>Featured Services</h2>
+<div class="services-grid">
+<div class="service-card">
+<div class="service-icon">🏠</div>
+<h3>Property Management</h3>
+<p>Comprehensive property management services for landlords and property investors.</p>
+<a href="pages/services.html" class="service-link">Learn More</a>
+</div>
+<div class="service-card">
+<div class="service-icon">💰</div>
+<h3>Property Valuations</h3>
+<p>Professional property valuations by certified experts for accurate market assessments.</p>
+<a href="pages/valuations.html" class="service-link">Learn More</a>
+</div>
+<div class="service-card">
+<div class="service-icon">🔍</div>
+<h3>Property Search</h3>
+<p>Personalized property search services to find your perfect home or investment.</p>
+<a href="pages/rent.html" class="service-link">Learn More</a>
+</div>
+<div class="service-card">
+<div class="service-icon">🤝</div>
+<h3>Concierge Services</h3>
+<p>Premium concierge services for all your property and lifestyle needs.</p>
+<a href="pages/concierge.html" class="service-link">Learn More</a>
+</div>
+<div class="service-card">
+<div class="service-icon">📋</div>
+<h3>Legal Services</h3>
+<p>Professional legal assistance for property transactions, contracts, and disputes.</p>
+<a href="pages/legal.html" class="service-link">Learn More</a>
+</div>
+<div class="service-card">
+<div class="service-icon">🏗️</div>
+<h3>Renovation Services</h3>
+<p>Expert renovation and construction services to enhance your property value.</p>
+<a href="pages/renovation.html" class="service-link">Learn More</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Agents Section -->
+<section class="featured-agents">
+<div class="featured-agents-container">
+<h2>Featured Agents</h2>
+<div class="agents-grid" id="featuredAgents">
+<!-- Agent cards will be loaded here by JS -->
+</div>
+</div>
+</section>
+
+
+<!-- Terms & Conditions Modal for Personalized Ads & AI Data Usage -->
+<div id="terms-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:3000; background:rgba(255,255,255,0.85); backdrop-filter: blur(12px); align-items:center; justify-content:center;">
+  <div id="terms-modal-inner" style="background:rgba(255,255,255,0.98); border-radius:18px; box-shadow:0 8px 32px rgba(0,0,0,0.18); padding:48px 32px 32px 32px; max-width:520px; width:90vw; position:relative; margin:auto; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+    <h2 style="font-size:2.2rem; font-weight:700; color:#0a2342; margin-bottom:18px;">Terms & Conditions</h2>
+    <p style="font-size:1.18rem; color:#222; margin-bottom:18px; font-weight:500;">We use your data to improve our website, enhance AI models, and provide analytics to help you grow your business.<br>Your data powers personalized ads, smarter search, and tailored services.<br>We respect your privacy and <span style='color:#00ffc3;font-weight:700;'>never sell your data</span>.</p>
+    <ul style="text-align:left; margin:0 auto 18px auto; max-width:440px; color:#333; font-size:1.05rem;">
+      <li>Your data helps us improve the website and AI models for better recommendations and features.</li>
+      <li>We provide analytics to help you improve your business and make informed decisions.</li>
+      <li>Personalized ads and AI features use your browsing and search data to tailor your experience.</li>
+      <li>Your data is protected and never sold to third parties.</li>
+      <li>You can review our <a href="pages/privacy-policy.html" style="color:#0015ff; text-decoration:underline;">Privacy Policy</a> anytime.</li>
+    </ul>
+    <div style="margin:24px 0 0 0; display:flex; gap:24px; justify-content:center;">
+      <button id="terms-agree-btn" style="background:#00ffc3; color:#000; border:none; font-size:1.1rem; font-weight:600; padding:14px 32px; border-radius:22px; cursor:pointer; transition:background 0.18s;">I Agree</button>
+      <button id="terms-decline-btn" style="background:#fff; color:#0015ff; border:2px solid #0015ff; font-size:1.1rem; font-weight:600; padding:14px 32px; border-radius:22px; cursor:pointer; transition:background 0.18s;">Decline</button>
+    </div>
+    <div style="margin-top:18px; font-size:0.98rem; color:#888;">You can change your preferences at any time in your account settings.</div>
+  </div>
+</div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var termsModal = document.getElementById('terms-modal');
+    var termsAgreeBtn = document.getElementById('terms-agree-btn');
+    var termsDeclineBtn = document.getElementById('terms-decline-btn');
+    var termsModalInner = document.getElementById('terms-modal-inner');
+    // Only show modal if not previously agreed
+    if (localStorage.getItem('termsAgreed') !== 'true') {
+      termsModal.style.display = 'flex';
+    }
+    if (termsAgreeBtn) {
+      termsAgreeBtn.onclick = function() {
+        localStorage.setItem('termsAgreed', 'true');
+        termsModal.style.display = 'none';
+      };
+    }
+    if (termsDeclineBtn) {
+      termsDeclineBtn.onclick = function() {
+        localStorage.setItem('termsAgreed', 'false');
+        termsModal.style.display = 'none';
+        alert('You declined the Terms & Conditions. Some features may be limited.');
+      };
+    }
+    // Remove click-out and Escape key close functionality
+    // Only allow closing via Accept or Decline buttons
+    if (termsModalInner) {
+      termsModalInner.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    }
+  });
+</script>
+
+<!-- Selling Section: First Two Items -->
+<section class="selling-section">
+  <div class="selling-container" style="max-width:1100px;margin:32px auto 0 auto;padding:0 16px;">
+    <h2>Thinking of Selling?</h2>
+    <div class="selling-items" style="display:flex;flex-wrap:wrap;gap:32px;">
+      <div class="selling-item" style="flex:1 1 340px;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(53,66,74,0.07);padding:32px 24px;min-width:260px;max-width:400px;">
+        <h3>How to sell my home</h3>
+        <p>Find a Local Agent and Learn How to Sell Your Home Today.</p>
+        <a class="tool-desc" href="pages/valuations.html">Get Started</a>
+      </div>
+      <div class="selling-item" style="flex:1 1 340px;background:#fff;border-radius:10px;box-shadow:0 2px 8px rgba(53,66,74,0.07);padding:32px 24px;min-width:260px;max-width:400px;">
+        <h3>What is my home worth?</h3>
+        <p>Get an instant online valuation and see what your home could sell for.</p>
+        <a class="tool-desc" href="pages/valuations.html">Check Value</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Map Section -->
+<section class="map-section">
+<div id="map" style="width:100%;height:700px;"></div>
+</section>
+
+<!-- Add before </body> -->
+<div id="chatbot-bubble">💬</div>
+<div id="chatbot-window">
+  <header class="chatbot-header">D4Rent Artificial Agents</header>
+  <div id="chatbot-popup-messages" style="flex:1;overflow-y:auto;padding:10px;height:220px;"></div>
+  <div style="display:flex;border-top:1px solid #eee;">
+    <input id="chatbot-popup-text" placeholder="Type your message..." style="flex:1;border:none;padding:10px;" type="text"/>
+    <button id="chatbot-popup-send" style="background:#008080;color:#fff;border:none;padding:10px 16px;cursor:pointer;">Send</button>
+  </div>
+</div>
+<!-- Footer -->
+<footer>
+<div class="footer-container">
+<div class="footer-image">
+<img alt="D4Rent Footer Logo" src="../assets/greia (4).png" style="height: auto; max-height: 100px;"/>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Contact Details</h3>
+<p>Greia</p>
+<p>36 Upper Baggot St, Ballsbridge, D4</p>
+<p>Phone: 01 442 7303</p>
+<p>087 169 9498</p>
+<p>Email: <a href="mailto:info@greia.ie">info@greia.ie</a></p>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Quick Links</h3>
+<ul>
+<li><a href="pages/buy.html">Buy</a></li>
+<li><a href="pages/rent.html">Rent</a></li>
+<li><a href="pages/sell.html">Sell</a></li>
+<li><a href="pages/commercial.html">Commercial</a></li>
+<li><a href="pages/agents.html">Agents</a></li>
+<li><a href="pages/contact-us.html">Contact Us</a></li>
+<li><a href="pages/listyourrentalsfree.html">List Your Rentals Free</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Policy Links</h3>
+<ul>
+<li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
+<li><a href="pages/terms-of-service.html">Terms of Service</a></li>
+<li><a href="pages/cookie-policy.html">Cookie Policy</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Connect with Us</h3>
+<ul>
+<li><a href="https://www.facebook.com/profile.php?id=61577099380616" target="_blank">Facebook</a></li>
+<li><a href="https://www.instagram.com/dublin4rent/" target="_blank">Instagram</a></li>
+<li><a href="https://www.tiktok.com/@d4rent.ie" target="_blank">Tiktok</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<!-- Add Leaflet CSS/JS for this page only -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+// --- Search bar tab logic ---
+document.addEventListener("DOMContentLoaded", function () {
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const searchForm = document.getElementById('searchForm');
+  const searchInput = document.getElementById('searchInput');
+  let currentTab = 'buy';
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      tabBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      currentTab = this.getAttribute('data-tab');
+      // Optionally change placeholder text
+      switch(currentTab) {
+        case 'buy':
+          searchInput.placeholder = 'Enter an address, city, or Eircode';
+          break;
+        case 'rent':
+          searchInput.placeholder = 'Find rentals by address, city, or Eircode';
+          break;
+        case 'commercial':
+          searchInput.placeholder = 'Search commercial properties...';
+          break;
+        case 'services':
+          searchInput.placeholder = 'Search for services (e.g. cleaning, legal, etc.)';
+          break;
+        case 'concierge':
+          searchInput.placeholder = 'What do you need help with?';
+          break;
+        default:
+          searchInput.placeholder = 'Enter an address, city, or Eircode';
+      }
+    });
+  });
+
+  // On submit, redirect based on tab
+  if (searchForm) {
+    searchForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const query = searchInput.value.trim();
+      if (!query) {
+        searchInput.focus();
+        return;
+      }
+      let url = '';
+      switch(currentTab) {
+        case 'buy':
+          url = 'pages/buy.html?query=' + encodeURIComponent(query);
+          break;
+        case 'rent':
+          url = 'pages/rent.html?query=' + encodeURIComponent(query);
+          break;
+        case 'commercial':
+          url = 'pages/commercial.html?query=' + encodeURIComponent(query);
+          break;
+        case 'services':
+          url = 'pages/services.html?search=' + encodeURIComponent(query);
+          break;
+        case 'concierge':
+          url = 'pages/concierge.html?query=' + encodeURIComponent(query);
+          break;
+        default:
+          url = 'pages/buy.html?query=' + encodeURIComponent(query);
+      }
+      window.location.href = url;
+    });
+  }
+});
+// Replace Google Maps with Leaflet for the homepage map
+document.addEventListener("DOMContentLoaded", function () {
+  // Only run if #map exists
+  var mapDiv = document.getElementById("map");
+  if (!mapDiv) return;
+
+  // Center on Dublin 4
+  var dublin4 = [53.3331, -6.2489];
+  var map = L.map('map').setView(dublin4, 14);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Custom SVG marker
+  var svgIcon = L.divIcon({
+    className: '',
+    html: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32"><path fill="#008080" d="M12 2C8.13 2 5 5.13 5 9c0 3.55 4.29 8.55 6.74 11.19.2.24.51.39.85.39s.65-.15.85-.39C14.71 17.55 19 12.55 19 9c0-3.87-3.13-7-7-7zm0 2c2.76 0 5 2.24 5 5 0 2.28-2.69 6.28-5 8.74C9.69 15.28 7 11.28 7 9c0-2.76 2.24-5 5-5zm-1 8h2v2h-2zm0-4h2v2h-2z"/></svg>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 32]
+  });
+
+  L.marker(dublin4, { icon: svgIcon }).addTo(map)
+    .bindPopup("Dublin 4 Location")
+    .openPopup();
+});
+</script>
+<!-- Remove or comment out the Google Maps script and initMap function -->
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+<script>
+function initMap() { ... }
+</script> -->
+<script>
+document.getElementById("chatbot-widget").style.display = "none";
+document.getElementById("chatbot-bubble").addEventListener("click", function() {
+  var widget = document.getElementById("chatbot-widget");
+  if (widget.style.display === "none" || widget.style.display === "") {
+    widget.style.display = "block";
+    setTimeout(function() {
+      widget.style.opacity = "1";
+    }, 10);
+  } else {
+    widget.style.opacity = "0";
+    setTimeout(function() {
+      widget.style.display = "none";
+    }, 300);
+  }
+});
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Main and nested dropdown hover logic
+    const dropdowns = document.querySelectorAll("li.dropdown, li.nested-dropdown");
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener("mouseenter", () => {
+        const menu = dropdown.querySelector(":scope > ul.dropdown-menu");
+        if (menu) menu.style.display = "block";
+      });
+      dropdown.addEventListener("mouseleave", () => {
+        const menu = dropdown.querySelector(":scope > ul.dropdown-menu");
+        if (menu) menu.style.display = "none";
+      });
+    });
+    
+    // Keyboard accessibility for nested dropdown
+    document.querySelectorAll('.nested-dropdown > a.referral-dropdown-toggle').forEach(function(link) {
+      link.addEventListener('focus', function() {
+        const menu = this.parentElement.querySelector(':scope > ul.dropdown-menu');
+        if (menu) menu.style.display = "block";
+      });
+      link.addEventListener('blur', function() {
+        const menu = this.parentElement.querySelector(':scope > ul.dropdown-menu');
+        if (menu) menu.style.display = "none";
+      });
+      link.addEventListener('keydown', function(e) {
+        if (e.key === "ArrowRight" || e.key === "Enter" || e.key === " ") {
+          const menu = this.parentElement.querySelector(':scope > ul.dropdown-menu');
+          if (menu) {
+            menu.style.display = "block";
+            menu.querySelector('a').focus();
+            e.preventDefault();
+          }
+        }
+      });
+    });
+  });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const hamburger = document.querySelector('.hamburger-menu');
+  const mobileNav = document.querySelector('.mobile-nav');
+  const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+
+  if (hamburger && mobileNav && mobileNavOverlay) {
+    hamburger.addEventListener('click', function () {
+      mobileNav.classList.toggle('open');
+      mobileNavOverlay.classList.toggle('show');
+      hamburger.classList.toggle('active');
+    });
+
+    mobileNavOverlay.addEventListener('click', function () {
+      mobileNav.classList.remove('open');
+      mobileNavOverlay.classList.remove('show');
+      hamburger.classList.remove('active');
+    });
+  }
+});
+</script>
+<script>
+// --- Load featured properties and agents (rent.html/agents.html style) ---
+document.addEventListener("DOMContentLoaded", function () {
+  // Featured Properties (fetch and filter like buy.html)
+  const propertiesContainer = document.getElementById('featuredProperties');
+  const S3_BASE_URL = 'http://d4rent.ie.s3-website-eu-west-1.amazonaws.com/';
+  const API_BASE_URL = window.API_BASE_URL || '';
+  async function fetchAndRenderFeaturedProperties() {
+    if (!propertiesContainer) return;
+    let url = `${API_BASE_URL}/api/properties`;
+    // Add approved and active status filters
+    const params = [
+      'approved=1',
+      'status=active'
+    ];
+    url += '?' + params.join('&');
+    let properties = [];
+    try {
+      const res = await fetch(url);
+      properties = await res.json();
+    } catch (e) {
+      properties = [];
+    }
+    propertiesContainer.innerHTML = '';
+    if (Array.isArray(properties) && properties.length > 0) {
+      properties.forEach(property => {
+        let imageUrl = property.image || property.photo || '';
+        if (imageUrl) {
+          imageUrl = imageUrl.startsWith('http')
+            ? imageUrl
+            : S3_BASE_URL + (imageUrl.startsWith('uploads/') ? imageUrl : 'uploads/' + imageUrl);
+        } else {
+          imageUrl = 'https://via.placeholder.com/340x220?text=No+Photo';
+        }
+        propertiesContainer.innerHTML += `
+          <div class="modern-property-card">
+            <a href="pages/propertytemplateRENT.html?id=${property.id}" style="text-decoration:none;color:inherit;">
+              <img src="${imageUrl}" alt="${property.title || 'Property'}" style="width:100%;height:180px;object-fit:cover;border-radius:8px 8px 0 0;">
+              <div class="property-card-content" style="padding:12px;">
+                <div class="property-card-title" style="font-weight:700;font-size:1.1rem;">${property.title || ''}</div>
+                <div class="property-card-address" style="color:#555;">${property.address || ''}</div>
+                <div class="property-card-price" style="color:#008080;font-weight:600;">${property.price ? '€' + property.price : ''} <span style="color:#888;font-size:0.95em;">${property.status || ''}</span></div>
+                <div class="property-card-features" style="font-size:0.97em;color:#444;">
+                  ${property.beds ? `<span>${property.beds} bed${property.beds > 1 ? 's' : ''}</span>` : ''}
+                  ${property.baths ? `<span>${property.baths} bath${property.baths > 1 ? 's' : ''}</span>` : ''}
+                  ${property.property_size ? `<span>${property.property_size}</span>` : ''}
+                </div>
+                <div class="property-card-type" style="color:#888;">${property.property_type || ''}</div>
+              </div>
+            </a>
+          </div>
+        `;
+      });
+    } else {
+      propertiesContainer.innerHTML = '<div>No featured properties found.</div>';
+    }
+  }
+  fetchAndRenderFeaturedProperties();
+
+  // Featured Agents (fetch and render like agents.html)
+  const agentsContainer = document.getElementById('featuredAgents');
+  function agentCard(agent) {
+    return `
+      <div class="agent-card">
+        <div class="agent-photo">
+          <img src="${agent.photo || 'https://via.placeholder.com/120x120?text=Agent'}" alt="Agent Photo" />
+        </div>
+        <h3>${agent.full_name || agent.name || 'Agent'}</h3>
+        <p class="agent-title">${agent.title || agent.profession || ''}</p>
+        <p class="agent-specialty">${agent.specialty || (agent.tags ? (Array.isArray(agent.tags) ? agent.tags.join(', ') : agent.tags) : '')}</p>
+        <div class="agent-contact">
+          <a href="mailto:${agent.email || ''}" class="contact-btn">Contact</a>
+          <a href="pages/profile-public.html?id=${agent.id}" class="profile-btn">View Profile</a>
+        </div>
+      </div>
+    `;
+  }
+  async function fetchAndRenderFeaturedAgents() {
+    if (!agentsContainer) return;
+    let url = `${API_BASE_URL}/api/users`;
+    let agents = [];
+    try {
+      const res = await fetch(url);
+      if (res.ok) {
+        agents = await res.json();
+      } else {
+        agents = [];
+      }
+    } catch (e) {
+      agents = [];
+    }
+    agentsContainer.innerHTML = '';
+    if (Array.isArray(agents) && agents.length > 0) {
+      // Shuffle for random featured selection
+      const shuffled = [...agents].sort(() => 0.5 - Math.random());
+      shuffled.slice(0, 8).forEach(agent => {
+        agentsContainer.innerHTML += agentCard(agent);
+      });
+    } else {
+      agentsContainer.innerHTML = '<div>No featured agents found.</div>';
+    }
+  }
+  fetchAndRenderFeaturedAgents();
+});
+</script>
+<script>
+
+  // Our Services Modal logic
+  document.addEventListener("DOMContentLoaded", function() {
+    const ourServicesLink = document.getElementById('our-services-link');
+    const servicesModal = document.getElementById('services-modal');
+    const closeServicesModal = document.getElementById('close-services-modal');
+    const servicesSearchForm = document.getElementById('services-search-form');
+    const servicesLocationInput = document.getElementById('services-location-input');
+    const servicesModalInner = document.getElementById('services-modal-inner');
+
+    if (ourServicesLink && servicesModal && closeServicesModal && servicesSearchForm && servicesLocationInput && servicesModalInner) {
+      ourServicesLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        servicesModal.style.display = 'flex';
+        setTimeout(() => servicesLocationInput.focus(), 100);
+      });
+      closeServicesModal.addEventListener('click', function(e) {
+        e.preventDefault();
+        servicesModal.style.display = 'none';
+        servicesLocationInput.value = '';
+      });
+      servicesModal.addEventListener('click', function(e) {
+        if (e.target === servicesModal) {
+          servicesModal.style.display = 'none';
+          servicesLocationInput.value = '';
+        }
+      });
+      servicesModalInner.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+      servicesSearchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const location = servicesLocationInput.value.trim();
+        if (!location) {
+          servicesLocationInput.focus();
+          return;
+        }
+        // Change to link to the new services page
+        window.location.href = 'pages/services.html?location=' + encodeURIComponent(location);
+      });
+      // Close modal on Esc key
+      document.addEventListener('keydown', function(e) {
+        if (servicesModal.style.display === 'flex' && e.key === 'Escape') {
+          servicesModal.style.display = 'none';
+          servicesLocationInput.value = '';
+        }
+      });
+    }
+  });
+</script>
+<script>
+  // Check user authentication status and update navigation
+  document.addEventListener("DOMContentLoaded", function() {
+    // Check if user is logged in (you can modify this logic based on your auth system)
+    function isUserLoggedIn() {
+      // Check for auth token in localStorage, sessionStorage, or cookies
+      const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+      return token && token.length > 0;
+    }
+
+    function updateNavigation() {
+      const isLoggedIn = isUserLoggedIn();
+      
+      // Desktop navigation
+      const authMenu = document.getElementById('auth-menu');
+      const loginBtn = document.getElementById('login-btn');
+      const loginDropdown = document.getElementById('login-dropdown');
+      
+      // Mobile navigation
+      const mobileAuthMenu = document.getElementById('mobile-auth-menu');
+      const mobileLoginBtn = document.getElementById('mobile-login-btn');
+      const mobileLoginDropdown = document.getElementById('mobile-login-dropdown');
+
+      if (isLoggedIn) {
+        // User is logged in - show direct link to dashboard
+        
+        // Desktop
+        if (authMenu && loginBtn && loginDropdown) {
+          authMenu.classList.remove('dropdown');
+          loginBtn.textContent = 'myGREIA';
+          loginBtn.href = 'pages/profile.html';
+          loginDropdown.style.display = 'none';
+        }
+        
+        // Mobile
+        if (mobileAuthMenu && mobileLoginBtn && mobileLoginDropdown) {
+          mobileAuthMenu.classList.remove('dropdown');
+          mobileLoginBtn.textContent = 'myGREIA';
+          mobileLoginBtn.href = 'pages/profile.html';
+          mobileLoginBtn.classList.remove('dropdown-toggle');
+          mobileLoginDropdown.style.display = 'none';
+        }
+      } else {
+        // User is not logged in - show login dropdown
+        
+        // Desktop
+        if (authMenu && loginBtn && loginDropdown) {
+          authMenu.classList.add('dropdown');
+          loginBtn.textContent = 'Log In';
+          loginBtn.href = 'pages/login.html';
+          loginDropdown.style.display = '';
+        }
+        
+        // Mobile
+        if (mobileAuthMenu && mobileLoginBtn && mobileLoginDropdown) {
+          mobileAuthMenu.classList.add('dropdown');
+          mobileLoginBtn.textContent = 'Log In';
+          mobileLoginBtn.href = 'pages/login.html';
+          mobileLoginBtn.classList.add('dropdown-toggle');
+          mobileLoginDropdown.style.display = '';
+        }
+      }
+    }
+
+    // Initial navigation update
+    updateNavigation();
+
+    // Listen for storage changes (when user logs in/out in another tab)
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'authToken') {
+        updateNavigation();
+      }
+    });
+
+    // Listen for custom login/logout events
+    window.addEventListener('userLoggedIn', updateNavigation);
+    window.addEventListener('userLoggedOut', updateNavigation);
+  });
+</script>
+<!-- ...existing code... -->
+<script>
+  // Country flag dropdown logic (tiny flag only)
+  document.addEventListener('DOMContentLoaded', function() {
+    const flagBtn = document.getElementById('country-flag-btn');
+    const dropdown = document.getElementById('country-dropdown');
+    let selectedFlag = 'ie';
+
+    if (flagBtn && dropdown) {
+      flagBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+      });
+      dropdown.addEventListener('click', function(e) {
+        if (e.target.closest('li[data-flag]')) {
+          const li = e.target.closest('li[data-flag]');
+          selectedFlag = li.getAttribute('data-flag');
+          // Update flag image only
+          flagBtn.querySelector('img').src = selectedFlag === 'eu'
+            ? 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg'
+            : `https://flagcdn.com/${selectedFlag}.svg`;
+          dropdown.style.display = 'none';
+          // Optionally: reload or redirect for country-specific content
+        }
+      });
+      document.addEventListener('click', function() {
+        dropdown.style.display = 'none';
+      });
+    }
+  });
+</script>

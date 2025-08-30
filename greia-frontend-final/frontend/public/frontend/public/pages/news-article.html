@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Article • GREIA</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<link href="../css/footer.css" rel="stylesheet"/>
+<script src="../scripts/main.js"></script>
+</head><body>
+
+<main class="container" style="max-width:900px;margin:0 auto;padding:20px;">
+  <h1 id="title">Article</h1>
+  <div class="muted" id="meta"></div>
+  <article id="body"></article>
+</main>
+
+<script>
+function qp(k){ return new URLSearchParams(location.search).get(k); }
+async function api(p){ const r = await fetch(p); return r.json(); }
+(async function(){
+  const id = qp('id'); if(!id) return;
+  const d = await api('/api/news/'+id);
+  document.getElementById('title').textContent = d.title;
+  document.getElementById('meta').textContent = (d.author||'') + ' • ' + new Date(d.published_at).toLocaleString();
+  document.getElementById('body').innerHTML = d.body_html || '';
+})();
+</script>
+<div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body></html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Greia Concierge</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<link href="../css/concierge.css" rel="stylesheet"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<!-- Leaflet CSS -->
+<link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet"/>
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="/js/global-nav.js"></script>
+<script src="/js/global-search.js"></script>
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-thirds">
+    <div class="navbar-third left">
+      <ul class="nav-links left-links" style="position:relative; z-index:100;">
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/buy.html" style="position:relative; z-index:101;">Property</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/buy.html">Buy</a></li>
+            <li><a href="/pages/rent.html">Rent</a></li>
+            <li><a href="/pages/commercial.html">Commercial</a></li>
+            <li><a href="/pages/buy.html">Apartments</a></li>
+            <li><a href="/pages/sell.html">Sell</a></li>
+            <li><a href="/pages/valuations.html">Valuations</a></li>
+            <li><a href="/pages/buy.html">New Homes</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" style="position:relative;">
+          <a href="#" style="color: rgb(78, 255, 146); position:relative; z-index:101;" class="referral-dropdown-toggle">Connect</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/agents.html">Find an Agent</a>
+            <li class="nested-dropdown" style="position: relative;">
+              <a href="/pages/agents.html" class="referral-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false">Referral Agents ▸</a>
+              <ul class="dropdown-menu referral-dropdown" style="display:none; position: absolute; left: 100%; top: 0; background: white; list-style:none; padding:10px; border:1px solid #ccc; min-width: 220px; z-index: 2000;">
+                <li><a href="/pages/agents.html?subtype=luxury">Luxury Home Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=lettings">Lettings Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=newhomes">New Homes Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=commercial">Commercial Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=residential">Residential Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=developer">Developer Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=timeshare">Timeshare Agents</a></li>
+              </ul>
+            </li>
+            <li><a href="/pages/coaching.html">Coaching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="/index.html">
+          <img alt="Logo" src="../assets/greia (4).png" style="height: auto; max-height: 140px;"/>
+        </a>
+      </div>
+    </div>
+    <div class="navbar-third right">
+      <ul class="nav-links right-links">
+        <li>
+          <a href="/pages/services.html" class="fancy-underline">Our Services</a>
+        </li>
+        <li>
+          <a href="/pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown" id="auth-menu">
+          <a href="/pages/login.html" id="login-btn">Log In</a>
+          <ul class="dropdown-menu" id="login-dropdown">
+            <li><a href="/pages/login.html">Sign In</a></li>
+            <li><a href="/pages/register.html">Register</a></li>
+            <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button aria-label="Toggle navigation" class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <!-- Mobile nav menu -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav">
+    <ul>
+      <li class="dropdown">
+        <a href="/pages/buy.html" class="dropdown-toggle">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/buy.html">Buy</a></li>
+          <li><a href="/pages/rent.html">Rent</a></li>
+          <li><a href="/pages/commercial.html">Commercial</a></li>
+          <li><a href="/pages/buy.html">Apartments</a></li>
+          <li><a href="/pages/sell.html">Sell</a></li>
+          <li><a href="/pages/valuations.html">Valuations</a></li>
+          <li><a href="/pages/buy.html">New Homes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" style="color: rgb(78, 255, 146);">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/agents.html">Find an Agent</a></li>
+          <li><a href="/pages/agents.html">Referral Agents</a></li>
+          <li><a href="/pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+      <li><a href="/pages/services.html">Our Services</a></li>
+      <li><a href="/pages/concierge.html">Concierge</a></li>
+      <li class="dropdown" id="mobile-auth-menu">
+        <a href="/pages/login.html" class="dropdown-toggle" id="mobile-login-btn">Log In</a>
+        <ul class="dropdown-menu" id="mobile-login-dropdown">
+          <li><a href="/pages/login.html">Sign In</a></li>
+          <li><a href="/pages/register.html">Register</a></li>
+          <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+    
+    <!-- Global Search Bar -->
+    <div class="global-search-container">
+        <div class="search-wrapper">
+            <input type="text" id="global-search" placeholder="Search properties, locations, or services..." class="global-search-input">
+            <button type="button" class="global-search-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+        <div id="global-search-results" class="global-search-results"></div>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/buy.html" class="mobile-nav-link">Buy</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/buy.html">New Homes</a>
+                <a href="/pages/buy.html">Residential</a>
+                <a href="/pages/buy.html">Commercial</a>
+                <a href="/pages/buy.html">Luxury Homes</a>
+                <a href="/pages/buy.html">New Developments</a>
+                <a href="/pages/buy.html">Country Homes</a>
+                <a href="/pages/buy.html">Apartments</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/rent.html" class="mobile-nav-link">Rent</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/rent.html">Apartments</a>
+                <a href="/pages/rent.html">Lettings</a>
+                <a href="/pages/rent.html">Residential</a>
+                <a href="/pages/rent.html">Luxury Homes</a>
+                <a href="/pages/rent.html">Timeshare Homes</a>
+                <a href="/pages/rent.html">Houses</a>
+                <a href="/pages/rent.html">Short-Term</a>
+                <a href="/pages/rent.html">Student Accommodation</a>
+                <a href="/pages/rent.html">Sublets</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/commercial.html" class="mobile-nav-link">Commercial</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/commercial.html">Office Space</a>
+                <a href="/pages/commercial.html">Retail Unit</a>
+                <a href="/pages/commercial.html">Industrial Unit</a>
+                <a href="/pages/commercial.html">Restaurant / Bar / Hotel</a>
+                <a href="/pages/commercial.html">Luxury Commercial</a>
+                <a href="/pages/commercial.html">Commercial Site</a>
+                <a href="/pages/commercial.html">Auction</a>
+                <a href="/pages/commercial.html">Agricultural Site</a>
+                <a href="/pages/commercial.html">Development Land</a>
+                <a href="/pages/commercial.html">Investment Property</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/agents.html" class="mobile-nav-link">Find an Agent</a>
+        </div>
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/services.html" class="mobile-nav-link">Our Services</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/services.html">Property Management</a>
+                <a href="/pages/services.html">Consulting</a>
+                <a href="/pages/services.html">Legal Advice</a>
+                <a href="/pages/services.html">Tradesmen</a>
+                <a href="/pages/services.html">Interior Designers</a>
+                <a href="/pages/services.html">Architect</a>
+                <a href="/pages/services.html">Others</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/concierge.html" class="mobile-nav-link active">Our Concierge</a>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/sell.html" class="mobile-nav-link">Sell with D4rent?</a>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/login.html" class="mobile-nav-link" id="mobile-login-btn">Sign In</a>
+        </div>
+    </div>
+</nav>
+
+<main class="main-content">
+<main>
+<h1 style="text-align:center;margin-top:32px;; font-size: smaller;">Concierge Board</h1>
+<section class="search-filter">
+<form class="modern-search-bar" id="rent-filter-form">
+<div class="search-box">
+<span class="search-icon">🔍</span>
+<input id="area" name="area" placeholder="County, City, Town or Area" type="text"/>
+</div>
+<div class="search-dropdown">
+<button class="dropdown-btn" type="button">+0km <span class="arrow">▾</span></button>
+<!-- Optional: dropdown menu here -->
+</div>
+<div class="search-dropdown">
+<button class="dropdown-btn" type="button">Business Type <span class="arrow">▾</span></button>
+<!-- Optional: dropdown menu here -->
+</div>
+<!-- Add this search button -->
+<button class="search-btn" type="submit">Search</button>
+</form>
+</section>
+<div class="concierge-board" id="concierge-board">
+<!-- Advertisement rectangles will be injected here by JS -->
+</div>
+<div id="concierge-map" style="height: 400px; width: 100%;"></div>
+<section class="they-do-care-section" style="text-align:center; margin: 48px 0 24px 0;">
+<p style="font-size:13px; color:#444;">
+        To get in touch with us about renting a space on the concierge board, please contact info@d4rent.ie
+      </p>
+<h2 style="font-size:2rem; color:#cf3b01; margin-bottom:16px;; font-size: smaller;">theydocare.com</h2>
+<p style="font-size:14px; color:#444;">a percentage of all money made from the concierge board is donated to charity</p>
+</section>
+</main>
+<script src="/scripts/main.js"></script>
+<script>
+    // Always build the image URL using the filename only, now from S3 bucket
+    function getAdImageUrl(photo) {
+  if (!photo) return null;
+  if (photo.startsWith('http')) return photo;
+  // If photo is just a filename or relative path, fetch from S3 bucket
+  const S3_BASE_URL = 'http://d4rent.ie.s3-website-eu-west-1.amazonaws.com/';
+  return S3_BASE_URL + (photo.startsWith('uploads/') ? photo : 'uploads/' + photo);
+}
+
+    let allAds = [];
+
+    async function loadConciergeAds() {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/advertisements?approved=1`);
+        const ads = await res.json();
+        // Filter client-side for additional security - only show approved ads
+        allAds = ads.filter(ad => ad.approved === 1);
+        renderConciergeAds(allAds);
+      } catch (err) {
+        const board = document.getElementById('concierge-board');
+        if (board) board.innerHTML = '<p>Could not load advertisements.</p>';
+      }
+    }
+
+    function renderConciergeAds(ads) {
+      const board = document.getElementById('concierge-board');
+      if (!board) return;
+      board.innerHTML = '';
+      if (!Array.isArray(ads) || ads.length === 0) {
+        board.innerHTML = '<p>No advertisements available at this time.</p>';
+        return;
+      }
+      ads.forEach(ad => {
+        const rect = document.createElement('a');
+        rect.className = 'concierge-ad-rect';
+        rect.href = ad.link || '#';
+        rect.target = '_blank';
+        rect.innerHTML = `
+          <img class="ad-bg-img" src="${
+            ad.photo
+              ? getAdImageUrl(ad.photo)
+              : (ad.advertisement && ad.advertisement.photo
+                  ? getAdImageUrl(ad.advertisement.photo)
+                  : 'https://via.placeholder.com/120?text=No+Photo')
+          }" alt="${ad.title}">
+          <div class="ad-overlay">
+            <div class="ad-title">${ad.title || ''}</div>
+            <div class="ad-address">${ad.address || ''}</div>
+            <div class="ad-email">${ad.email || ''}</div>
+            ${ad.link ? `<span class="ad-link">Visit Website</span>` : ''}
+          </div>
+        `;
+        // Track ad link clicks
+        rect.addEventListener('click', function(e) {
+          if (ad.id) {
+            fetch(`${API_BASE_URL}/api/advertisements/${ad.id}/click`, { method: 'POST' });
+          }
+          // Allow normal navigation to the link
+        });
+        board.appendChild(rect);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadConciergeAds);
+  </script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const hamburger = document.querySelector(".hamburger-menu");
+      const navDropdown = document.querySelector(".nav-dropdown");
+
+      if (hamburger && navDropdown) {
+        hamburger.addEventListener("click", () => {
+          navDropdown.classList.toggle("show");
+        });
+      }
+    });
+  </script>
+<script>
+    document.addEventListener("DOMContentLoaded", async function() {
+      // Initialize the map centered on Dublin
+      const map = L.map('concierge-map').setView([53.339, -6.260], 12);
+
+      // Add OpenStreetMap tiles
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      // Helper: Geocode address to [lat, lon]
+      async function geocode(address) {
+        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (data && data[0]) return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+        return null;
+      }
+
+      // Fetch approved ads only from your API
+      const res = await fetch(`${API_BASE_URL}/api/advertisements?approved=1`);
+      const ads = await res.json();
+      
+      // Filter for approved ads only
+      const approvedAds = ads.filter(ad => ad.approved === 1);
+
+      // Add markers for each approved ad with an address
+      for (const ad of approvedAds) {
+  if (!ad.address) continue;
+  // Eircode pattern: one letter, two digits, optional space, four alphanumeric
+  const eircodeMatch = ad.address.match(/\b([A-Za-z]\d{2}\s?[A-Za-z0-9]{4})\b/);
+  if (!eircodeMatch) continue; // Skip if no Eircode found
+  const eircode = eircodeMatch[1];
+  const coords = await geocode(eircode);
+  if (coords) {
+    L.marker(coords).addTo(map)
+      .bindPopup(`<b>${ad.title || ''}</b><br>${ad.address}`);
+  }
+}
+    });
+
+    // Listen for search
+document.addEventListener('DOMContentLoaded', function() {
+  loadConciergeAds();
+  const form = document.getElementById('rent-filter-form');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const area = document.getElementById('area').value.trim().toLowerCase();
+    // You can add more filters here if needed
+    const filtered = allAds.filter(ad =>
+      (ad.address && ad.address.toLowerCase().includes(area)) ||
+      (ad.title && ad.title.toLowerCase().includes(area))
+    );
+    renderConciergeAds(filtered);
+  });
+});
+  </script>
+<!-- Chatbot icon -->
+<!-- Chatbot popup -->
+
+
+
+<script src="/scripts/chatbot.js"></script>
+<script>
+  // Check user authentication status and update navigation
+  document.addEventListener("DOMContentLoaded", function() {
+    // Check if user is logged in (you can modify this logic based on your auth system)
+    function isUserLoggedIn() {
+      // Check for auth token in localStorage, sessionStorage, or cookies
+      const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+      return token && token.length > 0;
+    }
+
+    function updateNavigation() {
+      const isLoggedIn = isUserLoggedIn();
+      
+      // Desktop navigation
+      const authMenu = document.getElementById('auth-menu');
+      const loginBtn = document.getElementById('login-btn');
+      const loginDropdown = document.getElementById('login-dropdown');
+      
+      // Mobile navigation
+      const mobileAuthMenu = document.getElementById('mobile-auth-menu');
+      const mobileLoginBtn = document.getElementById('mobile-login-btn');
+      const mobileLoginDropdown = document.getElementById('mobile-login-dropdown');
+
+      if (isLoggedIn) {
+        // User is logged in - show direct link to dashboard
+        
+        // Desktop
+        if (authMenu && loginBtn && loginDropdown) {
+          authMenu.classList.remove('dropdown');
+          loginBtn.textContent = 'myGREIA';
+          loginBtn.href = '/pages/profile.html';
+          loginDropdown.style.display = 'none';
+        }
+        
+        // Mobile
+        if (mobileAuthMenu && mobileLoginBtn && mobileLoginDropdown) {
+          mobileAuthMenu.classList.remove('dropdown');
+          mobileLoginBtn.textContent = 'myGREIA';
+          mobileLoginBtn.href = '/pages/profile.html';
+          mobileLoginBtn.classList.remove('dropdown-toggle');
+          mobileLoginDropdown.style.display = 'none';
+        }
+      } else {
+        // User is not logged in - show login dropdown
+        
+        // Desktop
+        if (authMenu && loginBtn && loginDropdown) {
+          authMenu.classList.add('dropdown');
+          loginBtn.textContent = 'Log In';
+          loginBtn.href = '/pages/login.html';
+          loginDropdown.style.display = '';
+        }
+        
+        // Mobile
+        if (mobileAuthMenu && mobileLoginBtn && mobileLoginDropdown) {
+          mobileAuthMenu.classList.add('dropdown');
+          mobileLoginBtn.textContent = 'Log In';
+          mobileLoginBtn.href = '/pages/login.html';
+          mobileLoginBtn.classList.add('dropdown-toggle');
+          mobileLoginDropdown.style.display = '';
+        }
+      }
+    }
+
+    // Initial navigation update
+    updateNavigation();
+
+    // Listen for storage changes (when user logs in/out in another tab)
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'authToken') {
+        updateNavigation();
+      }
+    });
+
+    // Listen for custom login/logout events
+    window.addEventListener('userLoggedIn', updateNavigation);
+    window.addEventListener('userLoggedOut', updateNavigation);
+  });
+</script>
+<script>
+// Initialize global navigation
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof initializeGlobalNavigation === 'function') {
+        initializeGlobalNavigation();
+    }
+    if (typeof initializeGlobalSearch === 'function') {
+        initializeGlobalSearch();
+    }
+});
+</script>
+<div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body>
+</html>

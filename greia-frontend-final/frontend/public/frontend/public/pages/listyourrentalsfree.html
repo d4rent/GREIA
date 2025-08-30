@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>List Your Rentals Free - D4Rent</title>
+<link href="../css/login.css" rel="stylesheet"/>
+<link href="/css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<script src="../js/global-nav.js"></script>
+<script src="../js/global-search.js"></script>
+</head>
+<style>
+@keyframes scroll-left {
+  0% { transform: translateX(100%);}
+  100% { transform: translateX(-100%);}
+}
+
+.banner-text {
+  white-space: nowrap;
+  display: inline-block;
+  animation: scroll-left 33s linear infinite; /* Slower scroll */
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.switch {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: #ccc;
+  outline: none;
+  border-radius: 20px;
+  transition: background 0.3s;
+  margin: 0;
+}
+.switch:checked {
+  background: #FFD600;
+}
+
+.switch::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  top: 1px;
+  left: 1px;
+  background: #fff;
+  transition: 0.3s;
+}
+.switch:checked::before {
+  left: 21px;
+}
+</style>
+<body>
+<!-- Global Navigation -->
+<nav class="nav-header">
+<div class="nav-container">
+<div class="nav-brand">
+<a href="../index.html" class="brand-link">
+<img src="../assets/d4rent logo smaller.png" alt="D4Rent" class="brand-logo">
+</a>
+</div>
+
+<div class="nav-search">
+<div class="search-container">
+<input type="text" class="search-input" placeholder="Search properties, locations, or keywords...">
+<button class="search-button">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<circle cx="11" cy="11" r="8"></circle>
+<path d="21 21l-4.35-4.35"></path>
+</svg>
+</button>
+</div>
+</div>
+
+<ul class="nav-menu">
+<li class="nav-item dropdown">
+<a href="buy.html" class="nav-link">Buy</a>
+<div class="dropdown-content">
+<a href="buy.html">New Homes</a>
+<a href="buy.html">Residential</a>
+<a href="buy.html">Commercial</a>
+<a href="buy.html">Luxury Homes</a>
+<a href="buy.html">New Developments</a>
+<a href="buy.html">Country Homes</a>
+<a href="buy.html">Apartments</a>
+</div>
+</li>
+<li class="nav-item dropdown">
+<a href="rent.html" class="nav-link">Rent</a>
+<div class="dropdown-content">
+<a href="rent.html">Apartments</a>
+<a href="rent.html">Lettings</a>
+<a href="rent.html">Residential</a>
+<a href="rent.html">Luxury Homes</a>
+<a href="rent.html">Timeshare Homes</a>
+<a href="rent.html">Houses</a>
+<a href="rent.html">Short-Term</a>
+<a href="rent.html">Student Accommodation</a>
+<a href="rent.html">Sublets</a>
+</div>
+</li>
+<li class="nav-item dropdown">
+<a href="commercial.html" class="nav-link">Commercial</a>
+<div class="dropdown-content">
+<a href="commercial.html">Office Space</a>
+<a href="commercial.html">Retail Unit</a>
+<a href="commercial.html">Industrial Unit</a>
+<a href="commercial.html">Restaurant / Bar / Hotel</a>
+<a href="commercial.html">Luxury Commercial</a>
+<a href="commercial.html">Commercial Site</a>
+<a href="commercial.html">Auction</a>
+<a href="commercial.html">Agricultural Site</a>
+<a href="commercial.html">Development Land</a>
+<a href="commercial.html">Investment Property</a>
+</div>
+</li>
+<li class="nav-item"><a href="agents.html" class="nav-link">Find an Agent</a></li>
+<li class="nav-item dropdown">
+<a href="services.html" class="nav-link">Our Services</a>
+<div class="dropdown-content">
+<a href="services.html">Property Management</a>
+<a href="services.html">Consulting</a>
+<a href="services.html">Legal Advice</a>
+<a href="services.html">Tradesmen</a>
+<a href="services.html">Interior Designers</a>
+<a href="services.html">Architect</a>
+<a href="services.html">Others</a>
+</div>
+</li>
+<li class="nav-item"><a href="concierge.html" class="nav-link">Our Concierge</a></li>
+<li class="nav-item"><a href="sell.html" class="nav-link">Sell with D4rent?</a></li>
+<li class="nav-item"><a href="login.html" class="nav-link" id="login-btn">Sign In</a></li>
+</ul>
+
+<div class="nav-toggle">
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+</nav>
+
+<!-- Mobile Navigation -->
+<div class="mobile-nav">
+<div class="mobile-nav-header">
+<span class="mobile-nav-title">Menu</span>
+<button class="mobile-nav-close">&times;</button>
+</div>
+<div class="mobile-search">
+<div class="search-container">
+<input type="text" class="search-input" placeholder="Search properties...">
+<button class="search-button">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<circle cx="11" cy="11" r="8"></circle>
+<path d="21 21l-4.35-4.35"></path>
+</svg>
+</button>
+</div>
+</div>
+<ul class="mobile-nav-menu">
+<li class="mobile-nav-item">
+<a href="buy.html" class="mobile-nav-link">Buy</a>
+<ul class="mobile-submenu">
+<li><a href="buy.html">New Homes</a></li>
+<li><a href="buy.html">Residential</a></li>
+<li><a href="buy.html">Commercial</a></li>
+<li><a href="buy.html">Luxury Homes</a></li>
+<li><a href="buy.html">New Developments</a></li>
+<li><a href="buy.html">Country Homes</a></li>
+<li><a href="buy.html">Apartments</a></li>
+</ul>
+</li>
+<li class="mobile-nav-item">
+<a href="rent.html" class="mobile-nav-link">Rent</a>
+<ul class="mobile-submenu">
+<li><a href="rent.html">Apartments</a></li>
+<li><a href="rent.html">Lettings</a></li>
+<li><a href="rent.html">Residential</a></li>
+<li><a href="rent.html">Luxury Homes</a></li>
+<li><a href="rent.html">Timeshare Homes</a></li>
+<li><a href="rent.html">Houses</a></li>
+<li><a href="rent.html">Short-Term</a></li>
+<li><a href="rent.html">Student Accommodation</a></li>
+<li><a href="rent.html">Sublets</a></li>
+</ul>
+</li>
+<li class="mobile-nav-item">
+<a href="commercial.html" class="mobile-nav-link">Commercial</a>
+<ul class="mobile-submenu">
+<li><a href="commercial.html">Office Space</a></li>
+<li><a href="commercial.html">Retail Unit</a></li>
+<li><a href="commercial.html">Industrial Unit</a></li>
+<li><a href="commercial.html">Restaurant / Bar / Hotel</a></li>
+<li><a href="commercial.html">Luxury Commercial</a></li>
+<li><a href="commercial.html">Commercial Site</a></li>
+<li><a href="commercial.html">Auction</a></li>
+<li><a href="commercial.html">Agricultural Site</a></li>
+<li><a href="commercial.html">Development Land</a></li>
+<li><a href="commercial.html">Investment Property</a></li>
+</ul>
+</li>
+<li class="mobile-nav-item"><a href="agents.html" class="mobile-nav-link">Find an Agent</a></li>
+<li class="mobile-nav-item">
+<a href="services.html" class="mobile-nav-link">Our Services</a>
+<ul class="mobile-submenu">
+<li><a href="services.html">Property Management</a></li>
+<li><a href="services.html">Consulting</a></li>
+<li><a href="services.html">Legal Advice</a></li>
+<li><a href="services.html">Tradesmen</a></li>
+<li><a href="services.html">Interior Designers</a></li>
+<li><a href="services.html">Architect</a></li>
+<li><a href="services.html">Others</a></li>
+</ul>
+</li>
+<li class="mobile-nav-item"><a href="concierge.html" class="mobile-nav-link">Our Concierge</a></li>
+<li class="mobile-nav-item"><a href="sell.html" class="mobile-nav-link">Sell with D4rent?</a></li>
+<li class="mobile-nav-item"><a href="login.html" class="mobile-nav-link" id="mobile-login-btn">Sign In</a></li>
+</ul>
+</div>
+
+<main class="main-content">
+<!-- List Your Rental Free Today Form -->
+<div style="background: url('../assets/IMAGE10.jpg') center center/cover no-repeat; padding: 60px 0;">
+<div style="max-width: 400px; margin: 0 auto 40px auto; padding: 24px; background: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.07);">
+<h2 style="text-align:center; margin-bottom: 20px; font-size: 1.5em;; font-size: smaller;; font-size: larger;">List Your Rental Free Today!</h2>
+<form>
+<label for="address" style="display:block; margin-bottom:8px;">Address</label>
+<input id="address" name="address" style="width:100%; padding:8px; margin-bottom:16px; border:1px solid #ccc; border-radius:4px;" type="text"/>
+<label for="property-type" style="display:block; margin-bottom:8px;">Property Type</label>
+<input id="property-type" name="property-type" style="width:100%; padding:8px; margin-bottom:24px; border:1px solid #ccc; border-radius:4px;" type="text"/>
+<label style="display: flex; align-items: center; margin-bottom: 24px;">
+<span style="margin-right: 12px;">Shared Living Space</span>
+<input class="switch" id="shared-living" name="shared-living" type="checkbox"/>
+<span class="slider"></span>
+</label>
+<a href="login.html" style="display:block; text-align:center; background:#f34a08; color:#ffffff; padding:10px 0; border-radius:4px; text-decoration:none; font-weight:bold;">Continue</a>
+</form>
+</main>
+
+<!-- Updated Footer -->
+
+
+<!-- Load main.js first so API_BASE_URL is available -->
+<script src="../scripts/main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Toggle Register/Login forms
+      const loginBox = document.getElementById('login-box');
+      const registerForm = document.getElementById('register-form');
+      const showRegister = document.getElementById('show-register');
+      const showLoginLink = document.getElementById('show-login-link');
+      if (showRegister && loginBox && registerForm) {
+        showRegister.onclick = function(e) {
+          e.preventDefault();
+          loginBox.classList.add('hidden');
+          registerForm.classList.remove('hidden');
+        };
+      }
+      if (showLoginLink && registerForm && loginBox) {
+        showLoginLink.onclick = function(e) {
+          e.preventDefault();
+          registerForm.classList.add('hidden');
+          loginBox.classList.remove('hidden');
+        };
+      }
+
+      // Show/hide PSRA input for Real Estate Agent
+      const agentRadios = document.querySelectorAll('input[name="role"]');
+      const psraInput = document.getElementById('register-psra');
+      const psraLabel = document.querySelector('label[for="register-license"]');
+      agentRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+          if (this.value === 'Real Estate Agent') {
+            psraInput && psraInput.classList.remove('hidden');
+            psraLabel && psraLabel.classList.remove('hidden');
+          } else {
+            psraInput && psraInput.classList.add('hidden');
+            psraLabel && psraLabel.classList.add('hidden');
+          }
+        });
+      });
+
+      // Login form submission
+      const loginForm = document.getElementById('loginForm');
+      if (loginForm) {
+        loginForm.onsubmit = async function(e) {
+          e.preventDefault();
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+          try {
+            const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+            if(res.ok && data.access_token) {
+              localStorage.setItem('token', data.access_token);
+              alert('Login successful!');
+              window.location.href = '/pages/profile.html';
+            } else {
+              alert(data.error || 'Login failed');
+            }
+          } catch (err) {
+            alert('Server error. Please try again later.');
+          }
+        };
+      }
+
+      // Register form submission (actual registration)
+      if (registerForm) {
+        registerForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const form = e.target;
+          const data = {
+            full_name: form['full_name'].value,
+            email: form['email'].value,
+            phone_number: form['phone_number'].value,
+            password: form['password'].value,
+            role: form['role'].value,
+            psra_number: form['psra_number'].value,
+            receive_notifications: form['receive_notifications'].checked,
+            receive_sms: form['receive_sms'].checked
+          };
+          try {
+            const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+            const result = await res.json();
+            if(res.ok) {
+              alert('Registration successful! Please log in.');
+              registerForm.classList.add('hidden');
+              loginBox.classList.remove('hidden');
+            } else {
+              alert(result.error || 'Registration failed');
+            }
+          } catch (err) {
+            alert('Server error. Please try again later.');
+          }
+        });
+      }
+    });
+  </script>
+<script src="../scripts/chatbot.js"></script>
+
+<!-- Global Navigation and Search Scripts -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof GlobalNavigation !== 'undefined') {
+      GlobalNavigation.init();
+    }
+    if (typeof GlobalSearch !== 'undefined') {
+      GlobalSearch.init();
+    }
+  });
+</script>
+<div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body>
+</html>

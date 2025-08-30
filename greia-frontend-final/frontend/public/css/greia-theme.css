@@ -1,0 +1,43 @@
+/* GREIA Theme: animated gradient header/footer + unified hero font */
+
+/* Animated gradient background */
+@keyframes greiaGradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-animated {
+  background: linear-gradient(90deg, #1c0bff, #00c6d4, #1c0bff);
+  background-size: 200% 200%;
+  animation: greiaGradientShift 8s ease infinite;
+}
+
+/* Ensure nav/footer text remains readable */
+.gradient-animated, .gradient-animated a {
+  color: #fff !important;
+}
+
+/* Unify big hero/header fonts to match "MAKE YOUR MOVE" heading */
+:root { --greia-hero-font: Arial, Helvetica, sans-serif; }
+
+.greia-hero-title,
+h1.big-hero {
+  font-family: var(--greia-hero-font) !important;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+/* Override existing straight-heading to match */
+.straight-heading {
+  font-family: var(--greia-hero-font) !important;
+  letter-spacing: 1px;
+  font-weight: 700 !important;
+  color: #fff; /* assume on gradient/hero */
+}
+
+/* Footer base */
+.site-footer.gradient-animated {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}

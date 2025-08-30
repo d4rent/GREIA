@@ -1,0 +1,188 @@
+<!-- Global Navigation Bar Template -->
+<!-- Copy this navigation structure to all pages -->
+
+<nav class="navbar">
+  <div class="navbar-thirds">
+    <!-- Left Navigation -->
+    <div class="navbar-third left">
+      <ul class="nav-links left-links">
+        <li class="dropdown">
+          <a href="/pages/buy.html">Property</a>
+          <ul class="dropdown-menu">
+            <li><a href="/pages/buy.html">Buy</a></li>
+            <li><a href="/pages/rent.html">Rent</a></li>
+            <li><a href="/pages/commercial.html">Commercial</a></li>
+            <li><a href="/pages/apartments.html">Apartments</a></li>
+            <li><a href="/pages/sell.html">Sell</a></li>
+            <li><a href="/pages/valuations.html">Valuations</a></li>
+            <li><a href="/pages/new-homes.html">New Homes</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" style="color: var(--primary-accent);" class="referral-dropdown-toggle">Connect</a>
+          <ul class="dropdown-menu">
+            <li><a href="/pages/agents.html">Find an Agent</a></li>
+            <li class="nested-dropdown" style="position: relative;">
+              <a href="/pages/agents.html" class="referral-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false">Referral Agents ▸</a>
+              <ul class="dropdown-menu referral-dropdown">
+                <li><a href="/pages/agents.html?subtype=luxury">Luxury Home Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=lettings">Lettings Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=newhomes">New Homes Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=commercial">Commercial Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=residential">Residential Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=developer">Developer Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=timeshare">Timeshare Agents</a></li>
+              </ul>
+            </li>
+            <li><a href="/pages/coaching.html">Coaching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Center Logo -->
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="/index.html">
+          <img alt="GREIA Logo" src="/assets/greia (4).png" style="height: auto; max-height: 80px;"/>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Navigation -->
+    <div class="navbar-third right">
+      <ul class="nav-links right-links">
+        <li>
+          <a href="/pages/services.html" class="fancy-underline">Our Services</a>
+        </li>
+        <li>
+          <a href="/pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown">
+          <a href="/pages/login.html" id="login-btn">Log In</a>
+          <ul class="dropdown-menu">
+            <li><a href="/pages/login.html">Sign In</a></li>
+            <li><a href="/pages/register.html">Register</a></li>
+            <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Mobile Hamburger Menu -->
+  <button aria-label="Toggle navigation" class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Mobile Navigation Overlay -->
+  <div class="mobile-nav-overlay"></div>
+
+  <!-- Mobile Navigation Menu -->
+  <div class="mobile-nav">
+    <ul>
+      <li class="dropdown">
+        <a href="/pages/buy.html" class="dropdown-toggle">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/buy.html">Buy</a></li>
+          <li><a href="/pages/rent.html">Rent</a></li>
+          <li><a href="/pages/commercial.html">Commercial</a></li>
+          <li><a href="/pages/apartments.html">Apartments</a></li>
+          <li><a href="/pages/sell.html">Sell</a></li>
+          <li><a href="/pages/valuations.html">Valuations</a></li>
+          <li><a href="/pages/new-homes.html">New Homes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" style="color: var(--primary-accent);">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/agents.html">Find an Agent</a></li>
+          <li><a href="/pages/agents.html">Referral Agents</a></li>
+          <li><a href="/pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+      <li><a href="/pages/services.html">Our Services</a></li>
+      <li><a href="/pages/concierge.html">Concierge</a></li>
+      <li class="dropdown">
+        <a href="/pages/login.html" class="dropdown-toggle">Log In</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/login.html">Sign In</a></li>
+          <li><a href="/pages/register.html">Register</a></li>
+          <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Global Search Bar (optional - can be placed anywhere on the page) -->
+<div class="global-search-container">
+  <form class="global-search-form" id="globalSearchForm">
+    <input 
+      class="global-search-input" 
+      id="globalSearchInput" 
+      name="query" 
+      placeholder="Search properties, services, or locations..." 
+      type="text"
+      autocomplete="off"
+    />
+    <button class="global-search-button" type="submit">
+      <span class="search-icon">🔍</span>
+      <span class="search-text">Search</span>
+    </button>
+  </form>
+</div>
+
+<!-- Page Content Container -->
+<main class="main-content">
+  <!-- All page content goes here -->
+  <!-- The main-content class ensures proper spacing below the fixed navbar -->
+</main>
+
+<!-- Required CSS and JS includes for all pages -->
+<link href="/css/global-nav.css" rel="stylesheet"/>
+<script src="/js/global-nav.js"></script>
+
+<!-- 
+IMPLEMENTATION INSTRUCTIONS:
+
+1. Add these CSS and JS files to all pages:
+   <link href="/css/global-nav.css" rel="stylesheet"/>
+   <script src="/js/global-nav.js"></script>
+
+2. Replace existing navigation with the above template
+
+3. Wrap page content in <main class="main-content"> for proper spacing
+
+4. Customize search tabs for homepage:
+   <div class="search-bar-container">
+     <div class="selection-tab">
+       <button class="tab-btn active" data-tab="buy">Buy</button>
+       <button class="tab-btn" data-tab="rent">Rent</button>
+       <button class="tab-btn" data-tab="commercial">Commercial</button>
+       <button class="tab-btn" data-tab="services">Services</button>
+       <button class="tab-btn" data-tab="concierge">Concierge</button>
+     </div>
+     <form class="search-form" id="searchForm">
+       <input class="search-input" id="searchInput" name="query" placeholder="Enter an address, city, or Eircode" type="text"/>
+       <button class="search-button" type="submit">Search</button>
+     </form>
+   </div>
+
+5. Color variables are available in CSS:
+   - var(--primary-teal)
+   - var(--primary-light-teal)
+   - var(--primary-accent)
+   - var(--text-primary)
+   - var(--bg-primary)
+   - etc.
+
+6. Utility classes available:
+   - .btn, .btn-primary, .btn-secondary
+   - .card, .card-header, .card-body
+   - .text-center, .text-primary
+   - .hidden, .visible
+   - etc.
+-->

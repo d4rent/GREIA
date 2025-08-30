@@ -1,0 +1,1316 @@
+/* General Reset */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1, h2, h3 {
+    color: #ffffff;
+    margin: 0;
+    font-weight: lighter;
+}
+
+a {
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #008080;
+}
+
+/* Utility Classes */
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-dark {
+    background-color: #35424a;
+    color: #ffffff;
+}
+
+.padding-large {
+    padding: 80px 20px;
+}
+
+.padding-medium {
+    padding: 20px 30px;
+}
+
+.box-shadow {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.rounded {
+    border-radius: 5px;
+}
+
+/* --- NAVIGATION BAR --- */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 50px;
+    background: linear-gradient(to right, #35424a, #1f2a31);
+    position: relative;
+    z-index: 100;
+}
+
+.logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0px;
+    margin-left: 26px;
+    z-index: 1001;
+     mix-blend-mode: screen;
+
+}
+
+.logo img {
+    height: 150px;
+    width: auto;
+    margin: 0;
+    mix-blend-mode: screen;
+
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    margin: 0;
+    text-align: left;
+}
+
+.nav-links.left-links li {
+    margin-right: 43px;
+}
+
+.nav-links.right-links li {
+    margin-left: 19px;
+}
+
+.nav-links a {
+    font-size: 10px;
+    padding: 15px;
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+}
+
+.nav-links a:hover {
+    color: #008080;
+}
+
+.nav-links .dropdown {
+    position: relative;
+}
+
+.nav-links .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.nav-links .dropdown-menu a {
+    color: #333;
+    padding: 10px 20px;
+    background: none;
+}
+
+.nav-links .dropdown-menu a:hover {
+    color: #008080;
+}
+
+.nav-links .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Hamburger menu (hidden on desktop) */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 101;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    margin: 4px 0;
+    background: #fff !important;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* --- MOBILE/TABLET NAVIGATION --- */
+@media (max-width: 1024px) {
+    .navbar {
+    min-height: 70px;
+    padding: 14px 10px;
+    align-items: center;
+  }
+    .logo {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+    .logo img {
+    height: 60px;
+    max-width: 120px;
+    margin: 0 auto;
+    display: block;
+    object-fit: contain;
+  }
+    /* Only hide direct children of .navbar, not those inside .nav-dropdown */
+    .navbar > .nav-links {
+        display: none !important;
+    }
+    .nav-dropdown .nav-links {
+        display: block !important;
+        flex-direction: column;
+    }
+    .hamburger-menu {
+        display: flex !important;
+    }
+    .nav-dropdown {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 270px;
+        background: #22303a;
+        box-shadow: -4px 0 16px rgba(0,0,0,0.18);
+        z-index: 2000;
+        padding: 40px 0 20px 0;
+        flex-direction: column;
+        animation: slideInRight 0.25s;
+        overflow-y: auto;
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+    }
+    .nav-dropdown.show {
+        display: flex !important;
+        flex-direction: column;
+    }
+    .nav-dropdown li {
+        margin: 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-dropdown a {
+        font-size: 1.15rem;
+        color: #fff;
+        font-weight: 500;
+        padding: 18px 32px;
+        border-radius: 0;
+        width: 100%;
+        display: block;
+        text-align: left;
+        background: none;
+        letter-spacing: 0.02em;
+        transition: background 0.2s, color 0.2s;
+        box-sizing: border-box;
+    }
+    .nav-dropdown a:hover,
+    .nav-dropdown a:focus {
+        background: #008080;
+        color: #fff;
+    }
+    .nav-dropdown .dropdown-menu {
+        display: block !important;
+        position: static;
+        background: none;
+        box-shadow: none;
+        padding-left: 24px;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    .nav-dropdown .dropdown-menu a {
+        font-size: 1rem;
+        color: #fff;
+        font-weight: 400;
+        padding: 12px 0 12px 12px;
+        border-radius: 0;
+        background: none;
+        border-left: 3px solid #008080;
+        margin-bottom: 2px;
+    }
+    .nav-dropdown .dropdown-menu a:hover,
+    .nav-dropdown .dropdown-menu a:focus {
+        background: #35424a;
+        color: #008080;
+    }
+}
+
+/* Slide-in animation */
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Desktop only: show nav links, hide hamburger/dropdown */
+@media (min-width: 1025px) {
+    .hamburger-menu,
+    .nav-dropdown {
+        display: none !important;
+    }
+    .nav-links {
+        display: flex !important;
+    }
+}
+
+/* --- AGENT PROFILES SECTION --- */
+.agent-profiles {
+    text-align: center;
+    padding: 40px 20px;
+    gap: 30px;
+    /* Remove the background image and dark gradient: */
+    /* background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), 
+                url('/assets/IMAGE10.jpg') no-repeat center center/cover; */
+    /* Add a subtle white to light grey gradient: */
+    background: linear-gradient(180deg, #fff 0%, #f4f4f4 100%);
+    color: #222; /* Use a dark text color for readability */
+}
+
+.agent-profiles h2 {
+    font-size: 5rem;
+    font-weight: thin;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    color: #171a26;
+    text-shadow: 3px 4px 5px rgba(0, 0, 0, 0.4);
+}
+
+.agent-profiles h3 {
+    font-size: 1rem;
+    font-weight: thin;
+    color: #171a26;
+    text-shadow: 3px 2px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Carousel Container */
+.carousel {
+    position: relative;
+    margin-top: 100px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 2 auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.carousel-track-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.agent-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Agent Card */
+.agent-card {
+    flex: 0 0 200px;
+    text-align: center;
+    margin: 50px 60px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: visible;
+}
+
+.agent-card:hover {
+    transform: scale(1.01);
+}
+
+.agent-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.agent-card:hover .agent-photo {
+    transform: scale(1.2);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.agent-card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.agent-card p {
+    font-size: 14px;
+    color: #dddddd;
+}
+
+/* Agent Card Container - Modern, Clean, Tidy */
+.user-card {
+  width: 250px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(53,66,74,0.10);
+  padding: 1.5em 1em 1.5em 1em;
+  margin: 0 0 2em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-height: 370px;
+  transition: box-shadow 0.18s, transform 0.18s;
+  border: 1px solid #f2f2f2;
+}
+
+.user-card:hover {
+  box-shadow: 0 8px 32px rgba(53,66,74,0.16);
+  transform: translateY(-2px) scale(1.025);
+}
+
+/* Profile Photo - Large Circle */
+.user-photo-wrap {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  margin-bottom: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-photo {
+  width: 104px;
+  height: 104px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #008080;
+  background: #f4f4f4;
+  display: block;
+  box-shadow: 0 2px 8px rgba(232,73,29,0.08);
+  transition: box-shadow 0.18s;
+}
+
+/* Company Logo - Small Circle, Overlapping Bottom Right */
+.company-logo-overlay {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2.5px solid #008080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(232,73,29,0.13);
+  z-index: 2;
+}
+
+.company-logo-overlay img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #fff;
+  display: block;
+}
+
+/* Agent Info Text */
+.agent-name {
+  font-weight: 700;
+  font-size: 1.15em;
+  margin-bottom: 0.15em;
+  color: #222;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.agent-role {
+  font-size: 1em;
+  color: #008080;
+  font-weight: 600;
+  margin-bottom: 0.1em;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.agent-company {
+  font-size: 1em;
+  color: #35424a;
+  font-weight: 600;
+  margin-bottom: 0.1em;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.agent-profession {
+  font-size: 0.98em;
+  color: #555;
+  margin-bottom: 0.1em;
+  text-align: center;
+  font-style: italic;
+}
+
+.agent-address {
+  font-size: 0.97em;
+  color: #888;
+  margin-bottom: 0.1em;
+  text-align: center;
+  word-break: break-word;
+}
+
+.agent-phone,
+.agent-email {
+  font-size: 0.97em;
+  color: #555;
+  margin-bottom: 0.1em;
+  text-align: center;
+  word-break: break-word;
+}
+
+.agent-tags {
+  color: #008080;
+  font-size: 0.95em;
+  margin-top: 0.2em;
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  word-break: break-word;
+  padding: 0.1em 0.2em;
+}
+
+/* Responsive tweaks */
+@media (max-width: 900px) {
+  .user-card {
+    width: 98vw;
+    min-width: 0;
+    max-width: 360px;
+    margin: 0 auto 2em auto;
+    padding: 1.2em 0.5em 1.2em 0.5em;
+  }
+  .user-photo-wrap {
+    width: 90px;
+    height: 90px;
+  }
+  .user-photo {
+    width: 90px;
+    height: 90px;
+  }
+  .company-logo-overlay {
+    width: 36px;
+    height: 36px;
+    bottom: -4px;
+    right: -4px;
+  }
+  .company-logo-overlay img {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Footer Section */
+footer {
+    background-color: #35424a;
+    color: #ffffff;
+    padding: 40px 20px;
+    font-size: 14px;
+    position: relative;
+}
+
+.footer-image {
+    text-align: left;
+    padding: 15px 10px 0px 20px;
+    max-width: 1200px;
+    margin: 0;
+}
+
+.footer-image img {
+    max-height: 120px;
+    width: auto;
+    margin-left: 0;
+    mix-blend-mode: screen;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-section {
+    flex: 1 1 200px;
+    margin: 10px;
+}
+
+.footer-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #32ffbe;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #ffffff;
+}
+
+.footer-section ul li a:hover {
+    color: #008080;
+}
+
+.footer-section p {
+    margin: 5px 0;
+    opacity: 0.8;
+}
+
+.footer-section p a {
+    color: #ffffff;
+}
+
+.footer-section p a:hover {
+    color: #008080;
+}
+
+/* PSRA Number */
+.footer-psra-number {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 12px;
+    color: #d3d3d3;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 1000px) {
+    body {
+        font-size: 16px;
+    }
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+    .logo-container {
+        margin-bottom: 15px;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        padding: 0;
+        margin: 10px 0;
+    }
+    nav ul li {
+        margin: 5px 0;
+    }
+    nav a {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+    .login-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+    }
+    .login-button img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .agent-profiles {
+        padding: 20px;
+        text-align: center;
+    }
+    .agent-profiles h2 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+    }
+    .agent-card {
+        margin: 20px;
+        transform: scale(1);
+    }
+    .agent-photo {
+        width: 80px;
+        height: 80px;
+    }
+    .agent-card h3 {
+        font-size: 1.2rem;
+    }
+    .agent-card p {
+        font-size: 0.9rem;
+    }
+    footer {
+        padding: 20px;
+        text-align: center;
+    }
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-section {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        position: relative;
+    }
+    .footer-image {
+        text-align: center;
+        padding: 15px 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .footer-image img {
+        max-height: 120px;
+        width: auto;
+        margin: 0 auto;
+    }
+    .footer-section {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #35424a;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+    .nav-links a {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+    .hamburger-menu {
+        display: block;
+        font-size: 2rem;
+        cursor: pointer;
+        color: #ffffff;
+        background: none;
+        border: none;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        z-index: 1000;
+    }
+    .nav-links.show {
+        display: flex;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        padding: 0;
+        margin: 10px 0;
+    }
+    nav ul li {
+        display: inline-block;
+        margin: 0 10px;
+    }
+    .login-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+    }
+    .login-button img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+}
+
+@media (max-width: 600px) {
+    .logo img {
+        height: 70px;         /* Increased from 48px */
+        max-width: 150px;     /* Increased from 110px */
+    }
+ 
+}
+
+.modern-search-bar {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 0;
+  border: 1px solid #e0e0e0;
+  box-shadow: none;
+  padding: 0;
+  max-width: 100%;
+  margin: 0;         /* <-- Remove all margin */
+  gap: 0;
+  overflow: hidden;
+}
+
+.search-box,
+.search-dropdown {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border: none;
+  border-right: 1px solid #e0e0e0;
+  padding: 0 1em;
+  min-width: 140px;
+  height: 44px;
+  font-size: 1em;
+  flex: 1 1 140px;
+  border-radius: 0;
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  font-size: 1em;
+  width: 100%;
+  outline: none;
+  padding: 0.4em 0;
+}
+
+.search-dropdown select,
+.search-dropdown button,
+.search-dropdown input {
+  border: none;
+  background: transparent;
+  font-size: 1em;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+.search-dropdown:last-of-type {
+  border-right: none;
+}
+
+.search-btn {
+  background: #00ff4c;
+  color: #0c0c0c;
+  border: none;
+  border-radius: 0;
+  padding: 0 2em;
+  height: 44px;
+  font-size: 1.08em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  border-left: 1px solid #e0e0e0;
+}
+
+.search-box {
+  flex: 3 1 260px; /* Grow 3x as much as dropdowns, min-width 260px */
+}
+
+.search-btn:hover {
+  background: #0bbc40fd;
+}
+
+.search-dropdown {
+  flex: 1 1 120px; /* Default for dropdowns */
+}
+
+
+@media (max-width: 900px) {
+  .modern-search-bar {
+    flex-wrap: wrap;
+    max-width: 100vw;
+    gap: 0;
+    padding: 0;
+    margin: 0;
+    height: 38px; /* Make the bar itself shorter */
+  }
+  .search-box, .search-dropdown, .search-btn {
+    min-width: 80px;
+    flex: 1 1 80px;
+    font-size: 0.95em;
+    height: 32px;      /* Make each element shorter */
+    border-radius: 0;
+    padding: 0 0.5em;  /* Less padding for compactness */
+  }
+  .search-box input {
+    font-size: 0.95em;
+    padding: 0.2em 0;
+  }
+  .search-btn {
+    padding: 0 1em;
+    font-size: 1em;
+  }
+}
+
+/* Example for agent containers */
+@media (max-width: 600px) {
+  .agent-container, .agent-card {
+    width: 90% !important;      /* Make them take most of the screen width */
+    margin: 10px auto !important;
+    font-size: 14px !important; /* Smaller text */
+    padding: 8px !important;    /* Less padding */
+    box-sizing: border-box;
+  }
+}
+
+/* Make agent profile image bigger and user name larger/thinner in agent container */
+.agent-container .user-photo-wrap,
+.agent-card .user-photo-wrap {
+  width: 128px;
+  height: 128px;
+  margin-bottom: 1.2em;
+}
+
+.agent-container .user-photo,
+.agent-card .user-photo {
+  width: 128px;
+  height: 128px;
+  border-width: 4px;
+  box-shadow: 0 4px 16px rgba(232,73,29,0.12);
+}
+
+.agent-container .agent-name,
+.agent-card .agent-name {
+  font-size: 1.35em;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.2em;
+  color: #222;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+
+/* Responsive: smaller image and name on mobile */
+@media (max-width: 600px) {
+  .agent-container .user-photo-wrap,
+  .agent-card .user-photo-wrap {
+    width: 80px !important;
+    height: 80px !important;
+    margin-bottom: 0.8em !important;
+  }
+  .agent-container .user-photo,
+  .agent-card .user-photo {
+    width: 80px !important;
+    height: 80px !important;
+    border-width: 3px !important;
+  }
+  .agent-container .agent-name,
+  .agent-card .agent-name {
+    font-size: 1.12em !important;
+    font-weight: 300 !important;
+  }
+}
+
+/* --- AGENT DISCOVERY PAGE CLEANUP --- */
+
+/* Remove background and shadow from .main-content if present */
+.main-content {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove background from .agent-discovery-hero and make text clean */
+.agent-discovery-hero {
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 2.5em 1em 2em 1em !important;
+}
+
+.agent-discovery-hero h1 {
+    color: #1c0bff !important;
+    font-weight: 300 !important;
+    font-size: 2.6rem !important;
+    letter-spacing: 1px !important;
+    margin-bottom: 0.3em !important;
+    text-shadow: none !important;
+}
+
+.agent-discovery-hero p {
+    color: #222 !important;
+    font-size: 1.15rem !important;
+    font-weight: 300 !important;
+    text-shadow: none !important;
+}
+
+/* Remove background and shadow from agent grid containers */
+#agent-discovery-grid-section,
+#featured-agents-section,
+#new-agents-section,
+#service-agents-section,
+#user-agents-section {
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Remove background and shadow from agent cards, make them clean */
+.user-card {
+    background: #fff !important;
+    border-radius: 16px !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important;
+    border: 1px solid #f2f2f2 !important;
+    padding: 1.2em 1em !important;
+    margin: 0 0 2em 0 !important;
+    min-height: 280px !important;
+    transition: box-shadow 0.18s, transform 0.18s !important;
+}
+
+.user-card:hover {
+    box-shadow: 0 8px 32px rgba(53,66,74,0.10) !important;
+    transform: translateY(-2px) scale(1.025) !important;
+}
+
+/* Remove colored backgrounds from leaderboard and lock sections */
+#leaderboard-section,
+#leaderboard-section section,
+#leaderboard-section aside,
+#leaderboard-section div,
+#leaderboard-section ol,
+#leaderboard-section li,
+#leaderboard-section h3,
+#leaderboard-section span,
+#leaderboard-section .user-card,
+#leaderboard-section .agent-name {
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Remove background from lock section */
+aside section {
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Remove background from all agent grids */
+[id$="-grid"] {
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Remove background from all agent grid cards */
+[id$="-grid"] .user-card {
+    background: #fff !important;
+    border-radius: 16px !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06) !important;
+    border: 1px solid #f2f2f2 !important;
+}
+
+/* Remove background from planet hero image section if present */
+.planet-hero-section {
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* --- MOBILE AGENTS PAGE STYLES (smaller everything) --- */
+@media (max-width: 700px) {
+  html, body {
+    font-size: 13px !important;
+  }
+  .agent-search-bar {
+    flex-direction: column;
+    gap: 0.4em;
+    padding: 8px 2px 6px 2px;
+    max-width: 99vw;
+  }
+  .agent-search-bar input,
+  .agent-search-bar select {
+    width: 100%;
+    min-width: 0;
+    font-size: 0.92em;
+    padding: 8px 8px;
+  }
+  .agent-search-bar button[type="submit"] {
+    width: 100%;
+    margin-left: 0;
+    font-size: 0.95em;
+    padding: 10px 0;
+  }
+
+  .user-card {
+    width: 98vw !important;
+    min-width: 180px !important;
+    max-width: 99vw !important;
+    margin: 0 0.2em 0.7em 0.2em !important;
+    padding: 0.7em 0.3em !important;
+    min-height: 180px !important;
+  }
+  .user-photo-wrap {
+    width: 44px !important;
+    height: 44px !important;
+    margin-bottom: 0.4em !important;
+  }
+  .user-photo {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .company-logo-overlay {
+    width: 22px !important;
+    height: 22px !important;
+    bottom: -2px !important;
+    right: -2px !important;
+  }
+  .company-logo-overlay img {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  /* --- MOBILE: Make logo and action bars below nav much smaller --- */
+@media (max-width: 700px) {
+  /* Logo in nav bar */
+  .navbar .logo {
+    max-width: 80px !important;
+    height: 40px !important;
+    margin: 0 auto !important;
+  }
+  .navbar .logo img {
+    max-height: 50px !important;
+    width: auto !important;
+    margin: 0 auto !important;
+    display: block !important;
+  }
+
+  /* Top row below nav: logo and action bar */
+  .top-row-logo-action,
+  .top-row-logo-action > div,
+  .top-row-logo-action img {
+    height: 36px !important;
+    max-height: 36px !important;
+    min-height: 0 !important;
+    width: auto !important;
+    max-width: 80px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .top-row-logo-action {
+    gap: 4px !important; /* reduced gap */
+    margin: 16px auto 0 auto !important;
+    padding: 0 2px !important;
+  }
+  .top-row-logo-action > div:last-child {
+    gap: 4px !important; /* reduce gap between buttons */
+  }
+  .top-row-logo-action button,
+  .top-row-logo-action #friends-tab-btn,
+  .top-row-logo-action #inbox-tab-btn,
+  .top-row-logo-action #notifications-tab-btn,
+  .top-row-logo-action #profile-tab-btn {
+    font-size: 0.70em !important;    /* smaller font */
+    padding: 2px 6px !important;     /* less padding */
+    min-width: 0 !important;         /* remove min-width */
+    height: 22px !important;         /* less height */
+    border-radius: 999px !important;
+    gap: 2px !important;             /* less gap between icon and text */
+  }
+  .top-row-logo-action span {
+    font-size: 0.95em !important;    /* smaller icon/text */
+  }
+  /* Hide text on action bar buttons for extra compactness */
+  .top-row-logo-action button span:not(:first-child) {
+    display: none !important;
+  }
+}
+  #featured-agents-section h2,
+  #new-agents-section h2,
+  #service-agents-section h2,
+  #user-agents-section h2 {
+    font-size: 0.95rem !important;
+    margin-bottom: 0.3em !important;
+  }
+
+  .agent-name,
+  .agent-role,
+  .agent-company,
+  .agent-profession,
+  .agent-address,
+  .agent-tags {
+    font-size: 0.95em !important;
+    margin-bottom: 0.05em !important;
+  }
+
+  aside {
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    padding: 0 !important;
+    font-size: 0.95em !important;
+  }
+  #leaderboard-section,
+  #news-section {
+    padding: 0.7em 0.2em 0.7em 0.2em !important;
+    margin-bottom: 0.7em !important;
+  }
+
+  .footer-container {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 0 4px !important;
+    font-size: 0.95em !important;
+  }
+  .footer-section {
+    margin: 6px 0 !important;
+    width: 100% !important;
+  }
+  .footer-image img {
+    max-width: 70vw !important;
+    max-height: 36px !important;
+  }
+}
+
+/* Tablet and mobile: make action tabs on the right bigger */
+@media (max-width: 1024px) {
+  .top-row-logo-action > div:last-child {
+    width: 140px !important;
+    max-width: 140px !important;
+    min-width: 0 !important;
+    flex: 0 0 140px !important;
+    gap: 10px !important;
+  }
+  .top-row-logo-action > div:last-child button,
+  .top-row-logo-action > div:last-child #friends-tab-btn,
+  .top-row-logo-action > div:last-child #inbox-tab-btn,
+  .top-row-logo-action > div:last-child #notifications-tab-btn,
+  .top-row-logo-action > div:last-child #profile-tab-btn {
+    font-size: 1em !important;
+    padding: 8px 18px !important;
+    min-width: 60px !important;
+    height: 36px !important;
+    border-radius: 999px !important;
+    gap: 6px !important;
+  }
+  .top-row-logo-action > div:last-child span {
+    font-size: 1em !important;
+  }
+}
+
+/* Extra small screens: make action bar a bit smaller but still bigger than before */
+@media (max-width: 700px) {
+  .top-row-logo-action > div:last-child {
+    width: 120px !important;
+    max-width: 120px !important;
+    min-width: 0 !important;
+    flex: 0 0 120px !important;
+    gap: 8px !important;
+  }
+  .top-row-logo-action > div:last-child button,
+  .top-row-logo-action > div:last-child #friends-tab-btn,
+  .top-row-logo-action > div:last-child #inbox-tab-btn,
+  .top-row-logo-action > div:last-child #notifications-tab-btn,
+  .top-row-logo-action > div:last-child #profile-tab-btn {
+    font-size: 0.95em !important;
+    padding: 6px 14px !important;
+    min-width: 48px !important;
+    height: 28px !important;
+    gap: 4px !important;
+  }
+  .top-row-logo-action > div:last-child span {
+    font-size: 0.95em !important;
+  }
+}
+
+@media (max-width: 500px) {
+  .top-row-logo-action > div:last-child {
+    width: 80px !important;
+    max-width: 80px !important;
+    min-width: 0 !important;
+    flex: 0 0 80px !important;
+    gap: 4px !important;
+  }
+  .top-row-logo-action > div:last-child button,
+  .top-row-logo-action > div:last-child #friends-tab-btn,
+  .top-row-logo-action > div:last-child #inbox-tab-btn,
+  .top-row-logo-action > div:last-child #notifications-tab-btn,
+  .top-row-logo-action > div:last-child #profile-tab-btn {
+    font-size: 0.85em !important;
+    padding: 4px 10px !important;
+    height: 24px !important;
+    gap: 3px !important;
+  }
+  .top-row-logo-action > div:last-child span {
+    font-size: 0.85em !important;
+  }
+}

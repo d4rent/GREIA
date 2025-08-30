@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analytics - Profile - Greia</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="../css/profile.css" rel="stylesheet"/>
+<link href="../css/profile-nav.css" rel="stylesheet"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<script src="../scripts/main.js"></script>
+<style>
+/* Navigation Bar */
+.navbar {
+  background: linear-gradient(90deg, #1c0bff, #00c6d4, #1c0bff);
+  background-size: 200% 100%;
+  padding: 0.5rem 2rem;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(28,11,255,0.15);
+  margin-bottom: 2rem;
+  animation: gradientFlow 15s linear infinite;
+}
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .navbar-thirds {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .navbar-third {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-third.left { justify-content: flex-start; }
+    .navbar-third.center { justify-content: center; }
+    .navbar-third.right { justify-content: flex-end; }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .logo img {
+      max-width: 100%;
+      height: auto;
+      max-height: 140px;
+    }
+
+    /* Navigation styles */
+    .profile-sidebar {
+      margin: 0;
+      min-width: 220px;
+      background: #fff;
+      border-radius: 18px 0 0 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 32px 0;
+      height: 100%;
+      position: relative;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 14px 32px;
+      color: #222;
+      text-decoration: none;
+      font-size: 1.08em;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: all 0.2s ease-out;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: #1c0bff;
+      background: rgba(28,11,255,0.05);
+    }
+
+    .nav-link.active {
+      color: #1c0bff;
+      background: rgba(28,11,255,0.08);
+    }
+
+    .nav-link.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: #1c0bff;
+    }
+
+    /* Layout */
+    .profile-flex-layout {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      min-height: 80vh;
+    }
+
+    .profile-content-card {
+      flex: 1;
+      background: #fff;
+      border-radius: 0 18px 18px 0;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 40px 32px;
+      min-height: 80vh;
+    }
+
+    /* Analytics specific styles */
+    .analytics-section {
+      margin-bottom: 32px;
+    }
+
+    .analytics-section h3 {
+      color: #1c0bff;
+      font-size: 1.2em;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .chart-container {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .navbar-thirds {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        padding-left: 1rem;
+      }
+      
+      .logo img {
+        max-height: 80px;
+      }
+      
+      .profile-flex-layout {
+        flex-direction: column;
+      }
+      
+      .profile-sidebar {
+        width: 100%;
+        min-width: unset;
+        border-radius: 18px 18px 0 0;
+        padding: 16px 0;
+      }
+      
+      .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0 16px;
+      }
+      
+      .nav-link {
+        padding: 10px 16px;
+      }
+      
+      .profile-content-card {
+        border-radius: 0 0 18px 18px;
+        padding: 24px 16px;
+      }
+    }
+
+    .analytics-chart {
+      width: 100%;
+      max-width: 700px;
+      height: 260px;
+      margin: 0 auto 18px auto;
+      background: #f8fafc;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(10,35,66,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .analytics-summary {
+      text-align: center;
+      color: #0a2342;
+      font-size: 1.08em;
+      margin-bottom: 8px;
+    }
+    .analytics-controls {
+      text-align: right;
+      margin-bottom: 10px;
+    }
+    .analytics-controls select {
+      padding: 6px 12px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+      margin-left: 8px;
+    }
+  </style>
+<!-- Chart.js CDN for simple charts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="navbar-thirds">
+    <div class="navbar-third left">
+      <ul class="nav-links left-links" style="position:relative; z-index:100;">
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/buy.html" style="position:relative; z-index:101;">Property</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/buy.html">Buy</a></li>
+            <li><a href="/pages/rent.html">Rent</a></li>
+            <li><a href="/pages/commercial.html">Commercial</a></li>
+            <li><a href="/pages/buy.html">Apartments</a></li>
+            <li><a href="/pages/sell.html">Sell</a></li>
+            <li><a href="/pages/valuations.html">Valuations</a></li>
+            <li><a href="/pages/buy.html">New Homes</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/agents.html" style="color: rgb(78, 255, 146); position:relative; z-index:101;" class="referral-dropdown-toggle">Connect</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/agents.html">Find an Agent</a></li>
+            <li><a href="/pages/coaching.html">Coaching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="/index.html">
+          <img alt="Logo" src="../assets/greia (4).png" style="height: auto; max-height: 140px;"/>
+        </a>
+      </div>
+    </div>
+    <div class="navbar-third right">
+      <ul class="nav-links right-links">
+        <li>
+          <a href="/pages/services.html" class="fancy-underline">Our Services</a>
+        </li>
+        <li>
+          <a href="/pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown" id="auth-menu">
+          <a href="/pages/login.html" id="login-btn">Log In</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Analytics Header -->
+<div class="profile-flex-layout">
+  <!-- Sidebar Navigation -->
+  <aside class="profile-sidebar">
+    <nav class="sidebar-nav">
+      <a href="./profile.html" class="nav-link">Profile</a>
+      <a href="./profile-properties.html" class="nav-link">Properties</a>
+      <a href="./profile-ads.html" class="nav-link">Advertisements</a>
+      <a href="./profile-services.html" class="nav-link">Services</a>
+      <a href="./profile-inbox.html" class="nav-link">Inbox</a>
+      <a href="./profile-saved.html" class="nav-link">Saved Items</a>
+      <a href="./analytics.html" class="nav-link active">Analytics</a>
+      <a href="./profile-subscriptions.html" class="nav-link">Packages & Memberships</a>
+      <a href="./profile-settings.html" class="nav-link">Settings</a>
+      <a href="./admindashboard.html" class="nav-link" id="nav-admin-dashboard" style="display:none;">Admin Dashboard</a>
+      <a href="../auth/logout.html" class="nav-link" id="nav-logout">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <section class="profile-content-card">
+    <div class="analytics-header-section">
+      <h2 class="analytics-header-title">User Analytics Dashboard</h2>
+      <p class="analytics-header-sub">Track your loads, property views, service views, advertisement views, likes, and more over time.</p>
+    </div>
+    <!-- Analytics Container -->
+    <div class="analytics-container">
+<!-- Loads Section -->
+<div class="analytics-section">
+<div class="analytics-controls">
+<label for="loads-range">Range:</label>
+<select id="loads-range" onchange="updateChart('loads')">
+<option value="7">Last 7 Days</option>
+<option value="30">Last 30 Days</option>
+<option value="90">Last 90 Days</option>
+</select>
+</div>
+<h3 style="font-size: smaller;">Site Loads</h3>
+<div class="analytics-summary" id="loads-summary"></div>
+<div class="analytics-chart"><canvas id="loads-chart"></canvas></div>
+</div>
+<!-- Property Views Section -->
+<div class="analytics-section">
+<div class="analytics-controls">
+<label for="property-views-range">Range:</label>
+<select id="property-views-range" onchange="updateChart('propertyViews')">
+<option value="7">Last 7 Days</option>
+<option value="30">Last 30 Days</option>
+<option value="90">Last 90 Days</option>
+</select>
+</div>
+<h3 style="font-size: smaller;">Property Views</h3>
+<div class="analytics-summary" id="property-views-summary"></div>
+<div class="analytics-chart"><canvas id="property-views-chart"></canvas></div>
+</div>
+<!-- Service Views Section -->
+<div class="analytics-section">
+<div class="analytics-controls">
+<label for="service-views-range">Range:</label>
+<select id="service-views-range" onchange="updateChart('serviceViews')">
+<option value="7">Last 7 Days</option>
+<option value="30">Last 30 Days</option>
+<option value="90">Last 90 Days</option>
+</select>
+</div>
+<h3 style="font-size: smaller;">Service Views</h3>
+<div class="analytics-summary" id="service-views-summary"></div>
+<div class="analytics-chart"><canvas id="service-views-chart"></canvas></div>
+</div>
+<!-- Advertisement Views Section -->
+<div class="analytics-section">
+<div class="analytics-controls">
+<label for="ad-views-range">Range:</label>
+<select id="ad-views-range" onchange="updateChart('adViews')">
+<option value="7">Last 7 Days</option>
+<option value="30">Last 30 Days</option>
+<option value="90">Last 90 Days</option>
+</select>
+</div>
+<h3 style="font-size: smaller;">Advertisement Views</h3>
+<div class="analytics-summary" id="ad-views-summary"></div>
+<div class="analytics-chart"><canvas id="ad-views-chart"></canvas></div>
+</div>
+<!-- Likes Section -->
+<div class="analytics-section">
+<div class="analytics-controls">
+<label for="likes-range">Range:</label>
+<select id="likes-range" onchange="updateChart('likes')">
+<option value="7">Last 7 Days</option>
+<option value="30">Last 30 Days</option>
+<option value="90">Last 90 Days</option>
+</select>
+</div>
+<h3 style="font-size: smaller;">Likes</h3>
+<div class="analytics-summary" id="likes-summary"></div>
+<div class="analytics-chart"><canvas id="likes-chart"></canvas></div>
+</div>
+</div>
+<!-- Footer -->
+<!-- Analytics JS (demo data, replace with real API calls as needed) -->
+<script>
+    // Demo data generator
+    function generateData(days, min, max) {
+      const data = [];
+      for (let i = days - 1; i >= 0; i--) {
+        data.push(Math.floor(Math.random() * (max - min + 1)) + min);
+      }
+      return data;
+    }
+    function getLabels(days) {
+      const labels = [];
+      const now = new Date();
+      for (let i = days - 1; i >= 0; i--) {
+        const d = new Date(now);
+        d.setDate(now.getDate() - i);
+        labels.push(`${d.getDate()}/${d.getMonth() + 1}`);
+      }
+      return labels;
+    }
+
+    // Chart instances
+    let charts = {};
+
+    function renderChart(id, data, labels, label, color) {
+      const ctx = document.getElementById(id).getContext('2d');
+      if (charts[id]) charts[id].destroy();
+      charts[id] = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label,
+            data,
+            borderColor: color,
+            backgroundColor: 'rgba(255,133,0,0.08)',
+            fill: true,
+            tension: 0.3,
+            pointRadius: 3,
+            pointBackgroundColor: color
+          }]
+        },
+        options: {
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { display: false } },
+            y: { beginAtZero: true, grid: { color: '#f2f2f2' } }
+          }
+        }
+      });
+    }
+
+    async function fetchPropertyViews(days) {
+      // Adjust the URL to match your backend API
+      const res = await fetch(`/api/analytics/property-views?range=${days}`, {
+        headers: {
+          'Authorization': 'Bearer ' + (localStorage.getItem('token') || '')
+        }
+      });
+      if (!res.ok) return { labels: [], data: [] };
+      return await res.json();
+    }
+
+    async function updateChart(type) {
+      let days = 7;
+      let label = '';
+      let color = '#ff8500';
+      let summaryId = '';
+      let chartId = '';
+      let data = [];
+      let labels = [];
+      switch(type) {
+        case 'loads':
+          days = parseInt(document.getElementById('loads-range').value);
+          label = 'Site Loads';
+          summaryId = 'loads-summary';
+          chartId = 'loads-chart';
+          // Demo data
+          data = generateData(days, 10, 100);
+          labels = getLabels(days);
+          break;
+        case 'propertyViews':
+          days = parseInt(document.getElementById('property-views-range').value);
+          label = 'Property Views';
+          summaryId = 'property-views-summary';
+          chartId = 'property-views-chart';
+          // Fetch real data
+          const result = await fetchPropertyViews(days);
+          data = result.data || [];
+          labels = result.labels || [];
+          break;
+        case 'serviceViews':
+          days = parseInt(document.getElementById('service-views-range').value);
+          label = 'Service Views';
+          summaryId = 'service-views-summary';
+          chartId = 'service-views-chart';
+          data = generateData(days, 10, 100);
+          labels = getLabels(days);
+          break;
+        case 'adViews':
+          days = parseInt(document.getElementById('ad-views-range').value);
+          label = 'Advertisement Views';
+          summaryId = 'ad-views-summary';
+          chartId = 'ad-views-chart';
+          data = generateData(days, 10, 100);
+          labels = getLabels(days);
+          break;
+        case 'likes':
+          days = parseInt(document.getElementById('likes-range').value);
+          label = 'Likes';
+          summaryId = 'likes-summary';
+          chartId = 'likes-chart';
+          data = generateData(days, 10, 100);
+          labels = getLabels(days);
+          break;
+      }
+      renderChart(chartId, data, labels, label, color);
+      document.getElementById(summaryId).innerText = `Total: ${data.reduce((a, b) => a + b, 0)}`;
+    }
+
+    // Initial render
+    window.onload = function() {
+      updateChart('loads');
+      updateChart('propertyViews');
+      updateChart('serviceViews');
+      updateChart('adViews');
+      updateChart('likes');
+    };
+  </script>
+<!-- Chatbot icon -->
+<!-- Chatbot popup -->
+<script src="/scripts/chatbot.js"></script><div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>D4Rent - Landlords</title>
+<link href="/css/global-nav.css" rel="stylesheet"/>
+<link href="/css/landlord.css" rel="stylesheet"/>
+<link href="css/main.css" rel="stylesheet"/>
+<script src="/js/global-nav.js"></script>
+<script src="/js/global-search.js"></script>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="main-nav">
+    <div class="nav-container">
+        <div class="nav-left">
+            <div class="nav-item dropdown">
+                <a href="/pages/buy.html" class="nav-link">Buy</a>
+                <div class="dropdown-content">
+                    <a href="/pages/buy.html">New Homes</a>
+                    <a href="/pages/buy.html">Residential</a>
+                    <a href="/pages/buy.html">Commercial</a>
+                    <a href="/pages/buy.html">Luxury Homes</a>
+                    <a href="/pages/buy.html">New Developments</a>
+                    <a href="/pages/buy.html">Country Homes</a>
+                    <a href="/pages/buy.html">Apartments</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="/pages/rent.html" class="nav-link">Rent</a>
+                <div class="dropdown-content">
+                    <a href="/pages/rent.html">Apartments</a>
+                    <a href="/pages/rent.html">Lettings</a>
+                    <a href="/pages/rent.html">Residential</a>
+                    <a href="/pages/rent.html">Luxury Homes</a>
+                    <a href="/pages/rent.html">Timeshare Homes</a>
+                    <a href="/pages/rent.html">Houses</a>
+                    <a href="/pages/rent.html">Short-Term</a>
+                    <a href="/pages/rent.html">Student Accommodation</a>
+                    <a href="/pages/rent.html">Sublets</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="/pages/commercial.html" class="nav-link">Commercial</a>
+                <div class="dropdown-content">
+                    <a href="/pages/commercial.html">Office Space</a>
+                    <a href="/pages/commercial.html">Retail Unit</a>
+                    <a href="/pages/commercial.html">Industrial Unit</a>
+                    <a href="/pages/commercial.html">Restaurant / Bar / Hotel</a>
+                    <a href="/pages/commercial.html">Luxury Commercial</a>
+                    <a href="/pages/commercial.html">Commercial Site</a>
+                    <a href="/pages/commercial.html">Auction</a>
+                    <a href="/pages/commercial.html">Agricultural Site</a>
+                    <a href="/pages/commercial.html">Development Land</a>
+                    <a href="/pages/commercial.html">Investment Property</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="/pages/agents.html" class="nav-link">Find an Agent</a>
+            </div>
+        </div>
+        
+        <div class="nav-center">
+            <a href="/index.html" class="logo">
+                <img src="/assets/d4rent logo smaller.png" alt="D4Rent Logo">
+            </a>
+        </div>
+        
+        <div class="nav-right">
+            <div class="nav-item dropdown">
+                <a href="/pages/services.html" class="nav-link">Our Services</a>
+                <div class="dropdown-content">
+                    <a href="/pages/services.html">Property Management</a>
+                    <a href="/pages/services.html">Consulting</a>
+                    <a href="/pages/services.html">Legal Advice</a>
+                    <a href="/pages/services.html">Tradesmen</a>
+                    <a href="/pages/services.html">Interior Designers</a>
+                    <a href="/pages/services.html">Architect</a>
+                    <a href="/pages/services.html">Others</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="/pages/concierge.html" class="nav-link">Our Concierge</a>
+            </div>
+            <div class="nav-item">
+                <a href="/pages/sell.html" class="nav-link">Sell with D4rent?</a>
+            </div>
+            <div class="nav-item">
+                <a href="/pages/login.html" class="nav-link" id="login-btn">Sign In</a>
+            </div>
+        </div>
+        
+        <!-- Mobile menu button -->
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    
+    <!-- Global Search Bar -->
+    <div class="global-search-container">
+        <div class="search-wrapper">
+            <input type="text" id="global-search" placeholder="Search properties, locations, or services..." class="global-search-input">
+            <button type="button" class="global-search-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+        <div id="global-search-results" class="global-search-results"></div>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/buy.html" class="mobile-nav-link">Buy</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/buy.html">New Homes</a>
+                <a href="/pages/buy.html">Residential</a>
+                <a href="/pages/buy.html">Commercial</a>
+                <a href="/pages/buy.html">Luxury Homes</a>
+                <a href="/pages/buy.html">New Developments</a>
+                <a href="/pages/buy.html">Country Homes</a>
+                <a href="/pages/buy.html">Apartments</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/rent.html" class="mobile-nav-link">Rent</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/rent.html">Apartments</a>
+                <a href="/pages/rent.html">Lettings</a>
+                <a href="/pages/rent.html">Residential</a>
+                <a href="/pages/rent.html">Luxury Homes</a>
+                <a href="/pages/rent.html">Timeshare Homes</a>
+                <a href="/pages/rent.html">Houses</a>
+                <a href="/pages/rent.html">Short-Term</a>
+                <a href="/pages/rent.html">Student Accommodation</a>
+                <a href="/pages/rent.html">Sublets</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/commercial.html" class="mobile-nav-link">Commercial</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/commercial.html">Office Space</a>
+                <a href="/pages/commercial.html">Retail Unit</a>
+                <a href="/pages/commercial.html">Industrial Unit</a>
+                <a href="/pages/commercial.html">Restaurant / Bar / Hotel</a>
+                <a href="/pages/commercial.html">Luxury Commercial</a>
+                <a href="/pages/commercial.html">Commercial Site</a>
+                <a href="/pages/commercial.html">Auction</a>
+                <a href="/pages/commercial.html">Agricultural Site</a>
+                <a href="/pages/commercial.html">Development Land</a>
+                <a href="/pages/commercial.html">Investment Property</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/agents.html" class="mobile-nav-link">Find an Agent</a>
+        </div>
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/services.html" class="mobile-nav-link">Our Services</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/services.html">Property Management</a>
+                <a href="/pages/services.html">Consulting</a>
+                <a href="/pages/services.html">Legal Advice</a>
+                <a href="/pages/services.html">Tradesmen</a>
+                <a href="/pages/services.html">Interior Designers</a>
+                <a href="/pages/services.html">Architect</a>
+                <a href="/pages/services.html">Others</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/concierge.html" class="mobile-nav-link">Our Concierge</a>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/sell.html" class="mobile-nav-link">Sell with D4rent?</a>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/login.html" class="mobile-nav-link" id="mobile-login-btn">Sign In</a>
+        </div>
+    </div>
+</nav>
+
+<main class="main-content">
+<section class="full-width-slideshow">
+<div class="slideshow-container">
+<div class="slide fade">
+<img alt="Slideshow Image 1" src="/assets/IMAGE10.jpg"/>
+</div>
+<div class="slide fade">
+<img alt="Slideshow Image 2" src="/assets/IMAGE8.jpg"/>
+</div>
+<div class="slide fade">
+<img alt="Slideshow Image 3" src="/assets/IMAGE9.jpg"/>
+</div>
+<!-- Single text overlay -->
+<div class="slideshow-text">
+<h2 style="font-size: smaller;">Choose D4RENT.IE</h2>
+<p></p>
+</div>
+</div>
+</section>
+<!-- New Section -->
+<section class="intro-section">
+<div class="container">
+<div class="intro-grid">
+<!-- Image on the Left -->
+<div class="intro-image">
+<img alt="Landlord Intro Image" src="/assets/IMAGE10.jpg"/>
+</div>
+<!-- Text on the Right -->
+<div class="intro-text">
+<h2 style="font-size: smaller;">We are here for you.</h2>
+<p>
+                    At D4RENT.IE, we specialize in providing landlords with comprehensive property management solutions. 
+                    From tenant sourcing to maintenance, we ensure your property is in safe hands. 
+                    Our team of experts is dedicated to maximizing your investment while minimizing your stress.
+                </p>
+</div>
+</div>
+</div>
+</section>
+<section class="features">
+<div class="container">
+<div class="grid">
+<!-- Feature 1 -->
+<div class="feature-card">
+<img alt="Experts Icon" class="feature-icon" src="/assets/experts.png"/>
+<h3 style="font-size: smaller;">Experts</h3>
+<p>25+ years’ of global real estate experience.</p>
+</div>
+<!-- Feature 2 -->
+<div class="feature-card">
+<img alt="Trusted Icon" class="feature-icon" src="/assets/trust.png"/>
+<h3 style="font-size: smaller;">Trusted</h3>
+<p> We want to build communities for people</p>
+</div>
+<!-- Feature 3 -->
+<div class="feature-card">
+<img alt="Service Icon" class="feature-icon" src="/assets/service.png"/>
+<h3 style="font-size: smaller;">Service</h3>
+<p>Highly responsive with focus on tenant selection &amp; marketing.</p>
+</div>
+<!-- Feature 4 -->
+<div class="feature-card">
+<img alt="Knowledge Icon" class="feature-icon" src="/assets/lightbulb.png"/>
+<h3 style="font-size: smaller;">Knowledge</h3>
+<p>We know the Irish property market.</p>
+</div>
+<!-- Feature 5 -->
+<div class="feature-card">
+<img alt="Maintenance Icon" class="feature-icon" src="/assets/maintance.png"/>
+<h3 style="font-size: smaller;">Maintenance Team</h3>
+<p>We offer an ever-expanding selection of solutions to all your maintenance needs.</p>
+</div>
+<!-- Feature 6 -->
+<div class="feature-card">
+<img alt="Technology Icon" class="feature-icon" src="/assets/technology.png"/>
+<h3 style="font-size: smaller;">Technology</h3>
+<p>We are always innovating and moving with times to provide the best protection and efficient property management we can offer.</p>
+</div>
+<!-- Feature 7 -->
+<div class="feature-card">
+<img alt="Fees Icon" class="feature-icon" src="/assets/fees.png"/>
+<h3 style="font-size: smaller;">Fees</h3>
+<p>We offer a competitive and transparent fee structure.</p>
+</div>
+<!-- Feature 8 -->
+<div class="feature-card">
+<img alt="Overseas Icon" class="feature-icon" src="/assets/overseas.png"/>
+<h3 style="font-size: smaller;">Overseas</h3>
+<p>We have an ever-expanding Global network of agents.</p>
+</div>
+</div>
+</div>
+</section>
+<script src="/scripts/main.js"></script>
+<!-- Footer -->
+<!-- Chatbot icon -->
+<!-- Chatbot popup -->
+
+
+<script src="/scripts/chatbot.js"></script>
+<script>
+// Initialize global navigation
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof initializeGlobalNavigation === 'function') {
+        initializeGlobalNavigation();
+    }
+    if (typeof initializeGlobalSearch === 'function') {
+        initializeGlobalSearch();
+    }
+});
+</script>
+<div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body>
+</html>

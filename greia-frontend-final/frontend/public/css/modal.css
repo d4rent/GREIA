@@ -1,0 +1,155 @@
+/* Modal background */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Show modal when display is set to flex */
+.modal[style*="display: flex"] {
+    display: flex !important;
+}
+
+/* Modal content box */
+.modal-content {
+    background: #fff;
+    margin: auto;
+    padding: 2rem 1.5rem;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90vw;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    animation: modalFadeIn 0.25s;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Fade-in animation */
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(30px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* Close button */
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #888;
+    cursor: pointer;
+    background: none;
+    border: none;
+    z-index: 10;
+}
+
+/* Form container */
+.form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Auth forms */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.auth-form label {
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"],
+.auth-form input[type="number"],
+.auth-form input[type="file"],
+.auth-form textarea {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0.25rem;
+}
+
+.auth-form button[type="submit"] {
+    background: #2a7ae4;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.2s;
+}
+
+.auth-form button[type="submit"]:hover {
+    background: #185bb5;
+}
+
+.auth-form p {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.auth-form a {
+    color: #2a7ae4;
+    text-decoration: none;
+}
+
+
+
+/* Hide elements with .hidden */
+.hidden {
+    display: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+    .modal-content {
+        padding: 1rem 0.5rem;
+        max-width: 98vw;
+    }
+    .auth-form button[type="submit"] {
+        font-size: 1rem;
+        padding: 0.6rem;
+    }
+    .close-btn {
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 1.2rem;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: #0015ff;
+    color: #ffffff;
+    padding: 40px 20px;
+    font-size: 14px;
+    position: relative;
+}

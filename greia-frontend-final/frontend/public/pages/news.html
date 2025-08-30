@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>News • GREIA</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<link href="../css/footer.css" rel="stylesheet"/>
+<script src="../scripts/main.js"></script>
+</head><body>
+<header class="global-header"></header>
+<main class="container" style="max-width:1100px;margin:0 auto;padding:20px;">
+  <h1>News</h1>
+  <div id="list"></div>
+</main>
+<footer class="global-footer"></footer>
+<script>
+async function api(p){ const r = await fetch(p); return r.json(); }
+(async function(){
+  const rows = await api('/api/news');
+  const box = document.getElementById('list'); box.innerHTML='';
+  rows.forEach(n=>{
+    const a = document.createElement('a'); a.href = '/pages/news-article.html?id='+n.id; a.textContent = n.title;
+    const p = document.createElement('p'); p.appendChild(a); box.appendChild(p);
+  });
+})();
+</script>
+</body></html>

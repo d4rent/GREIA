@@ -1,0 +1,184 @@
+/* Profile Saved Items Section Styles */
+.profile-saved-section {
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(28,11,255,0.08);
+  margin: 20px 0;
+}
+
+/* Saved Items Tabs */
+.saved-items-tabs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 8px;
+}
+
+.tab-button {
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  font-size: 1em;
+  color: #64748b;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.tab-button::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #1c0bff;
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+.tab-button.active {
+  color: #1c0bff;
+  font-weight: 500;
+}
+
+.tab-button.active::after {
+  transform: scaleX(1);
+}
+
+/* Saved Items Grid */
+.saved-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* Saved Item Card */
+.saved-item-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.saved-item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(28,11,255,0.12);
+}
+
+.saved-item-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.saved-item-content {
+  padding: 20px;
+}
+
+.saved-item-title {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #1c0bff;
+  margin-bottom: 8px;
+}
+
+.saved-item-details {
+  font-size: 0.95em;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+
+/* Card Actions */
+.saved-item-actions {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.saved-item-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.95em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  flex: 1;
+  text-align: center;
+}
+
+.saved-item-btn.view {
+  background: #1c0bff;
+  color: white;
+}
+
+.saved-item-btn.view:hover {
+  background: #1609cc;
+}
+
+.saved-item-btn.remove {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.saved-item-btn.remove:hover {
+  background: #fecaca;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: #64748b;
+}
+
+.empty-state-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  color: #cbd5e1;
+}
+
+.empty-state-text {
+  font-size: 1.1em;
+  margin-bottom: 16px;
+}
+
+.empty-state-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #1c0bff;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.empty-state-btn:hover {
+  background: #1609cc;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .profile-saved-section {
+    padding: 16px;
+  }
+
+  .saved-items-tabs {
+    overflow-x: auto;
+    padding-bottom: 12px;
+  }
+
+  .saved-items-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .saved-item-card {
+    max-width: 100%;
+  }
+}

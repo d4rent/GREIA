@@ -1,0 +1,6 @@
+version: 1
+cron:
+ - name: daily-digest
+   url: /_tasks/run-digest
+   schedule: "0 8 * * *"
+   enabled: true

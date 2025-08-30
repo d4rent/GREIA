@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Purchase Advertisement Package</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="/css/purchase.css" rel="stylesheet"/>
+<link href="css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<style>
+    .disabled { pointer-events: none; opacity: 0.5; }
+    .orange-btn { background: #cf3b01; color: #fff; border: none; padding: 0.7em 2em; border-radius: 6px; font-size: 1.1em; cursor: pointer; }
+    .orange-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  </style>
+</head>
+<body><nav class="navbar">
+<ul class="nav-links left-links">
+<li class="dropdown" style="font-size: smaller;">
+<a href="buy.html" style="font-size: smaller;">Buy</a>
+<div class="dropdown-menu">
+<a href="buy.html" style="font-size: smaller;">New Homes</a>
+<a href="buy.html" style="font-size: smaller;">Residential</a>
+<a href="buy.html" style="font-size: smaller;">Commercial</a>
+<a href="buy.html" style="font-size: smaller;">Luxury</a>
+</div>
+</li>
+<li class="dropdown" style="font-size: smaller;">
+<a href="rent.html" style="font-size: smaller;">Rent</a>
+<div class="dropdown-menu">
+<a href="rent.html" style="font-size: smaller;">Apartments</a>
+<a href="rent.html" style="font-size: smaller;">Houses</a>
+<a href="rent.html" style="font-size: smaller;">Short-Term</a>
+<a href="rent.html" style="font-size: smaller;">Student Accommodation</a>
+</div>
+</li>
+<li class="dropdown" style="font-size: smaller;">
+<a href="sell.html" style="font-size: smaller;">Sell</a>
+</li>
+<li class="dropdown" style="font-size: smaller;">
+<a href="agents.html" style="font-size: smaller;">Find an Agent</a>
+<div class="dropdown-menu">
+<a href="agents.html" style="font-size: smaller;">Residential Agents</a>
+<a href="agents.html" style="font-size: smaller;">Luxury Homes Agents</a>
+<a href="agents.html" style="font-size: smaller;">Commercial Agents</a>
+<a href="agents.html" style="font-size: smaller;">Development Site Agents</a>
+<a href="agents.html" style="font-size: smaller;">New Homes Agents</a>
+<a href="agents.html" style="font-size: smaller;">Timeshare Agents</a>
+<a href="agents.html" style="font-size: smaller;">Letting Agents</a>
+<a href="agents.html" style="font-size: smaller;">Buyers Agents</a>
+<a href="agents.html" style="font-size: smaller;">Seller Agents</a>
+</div>
+</li>
+</ul>
+<a class="logo" href="/index.html" style="font-size: smaller;">
+<img alt="Logo" src="/assets/d4rent logo smaller.png" style="height: auto; max-height: 100px;"/>
+</a>
+<ul class="nav-links right-links">
+<li class="dropdown" style="font-size: smaller;">
+<a href="commercial.html" style="font-size: smaller;">Commercial</a>
+<div class="dropdown-menu">
+<a href="commercial.html" style="font-size: smaller;">Office Spaces</a>
+<a href="commercial.html" style="font-size: smaller;">Retail</a>
+<a href="commercial.html" style="font-size: smaller;">Industrial</a>
+<a href="commercial.html" style="font-size: smaller;">Luxury Commercial</a>
+</div>
+</li>
+<li class="dropdown" style="font-size: smaller;">
+<a href="services.html" style="font-size: smaller;">Services</a>
+<div class="dropdown-menu">
+<a href="services.html" style="font-size: smaller;">Property Management</a>
+<a href="services.html" style="font-size: smaller;">Consulting</a>
+<a href="services.html" style="font-size: smaller;">Legal Advice</a>
+<a href="services.html" style="font-size: smaller;">Tradesmen</a>
+<a href="services.html" style="font-size: smaller;">Interior Designers</a>
+<a href="services.html" style="font-size: smaller;">Architect</a>
+<a href="services.html" style="font-size: smaller;">Others</a>
+</div>
+</li>
+<li style="font-size: smaller;"><a href="concierge.html" style="font-size: smaller;">Conceirge</a></li>
+<li style="font-size: smaller;"><a href="sell.html" style="font-size: smaller;">Why Us?</a></li>
+<li style="font-size: smaller;"><a href="login.html" id="login-btn" style="font-size: smaller;">Sign In</a></li>
+</ul>
+</nav>
+<div class="purchase-container">
+<h2 style="font-size: smaller;">Purchase Advertisement Package</h2>
+<div class="terms">
+<strong>Terms and Conditions</strong>
+<ul>
+<li>Your advertisement will be reviewed before publishing.</li>
+<li>No illegal, offensive, or misleading content is allowed.</li>
+<li>All sales are final and non-refundable.</li>
+<li>By proceeding, you agree to our <a href="terms-of-service.html" target="_blank">Terms of Service</a>.</li>
+</ul>
+</div>
+<label class="checkbox-label">
+<input id="agree-terms" type="checkbox"/>
+      I have read and agree to the Terms and Conditions
+    </label>
+<h3 style="margin-top:2em;; font-size: smaller;">Select a Package</h3>
+<select id="package-select" style="width:100%;padding:0.5em;margin-bottom:1em;">
+<option value="basic">Basic Ad - €5 weekly</option>
+<option value="featured">Featured Ad - €10 weekly</option>
+<option value="premium">Premium Ad - €20 weekly </option>
+<option value="free">FREE - €0</option>
+</select>
+<h3 style="font-size: smaller;">Choose Payment Method</h3>
+<div class="payment-links">
+<a class="paypal disabled" href="#" id="paypal-link">Pay with PayPal</a>
+<a class="stripe disabled" href="#" id="stripe-link">Pay with Stripe</a>
+<a class="bank disabled" href="#" id="bank-link">Pay by Bank Transfer</a>
+</div>
+<div id="bank-details" style="display:none; font-size:0.95em; background:#f7f7f7; padding:1em; border-radius:6px;">
+<strong>Bank Transfer Details:</strong><br/>
+      Account Name: D4Rent Ltd<br/>
+      IBAN: IE00BANK00000000000000<br/>
+      BIC: BANKIE2D<br/>
+      Reference: Your Email or User ID<br/>
+<br/>
+      Please email <a href="mailto:info@d4rent.ie">info@d4rent.ie</a> after payment.
+      <br/><br/>
+<button class="orange-btn" id="bank-paid-btn" style="width:100%;margin-top:1em;">I have paid by Bank Transfer</button>
+</div>
+<div id="free-continue-container" style="display:none; margin-top:1.5em;">
+<button class="orange-btn" id="free-continue-btn" style="width:100%;">Continue</button>
+</div>
+</div>
+<!-- Footer -->
+<script src="/scripts/main.js"></script>
+<script>
+  // Set your backend API base URL
+
+  const agreeBox = document.getElementById('agree-terms');
+  const paypalLink = document.getElementById('paypal-link');
+  const stripeLink = document.getElementById('stripe-link');
+  const bankLink = document.getElementById('bank-link');
+  const bankDetails = document.getElementById('bank-details');
+  const packageSelect = document.getElementById('package-select');
+  const freeContinueBtn = document.getElementById('free-continue-btn');
+  const freeContinueContainer = document.getElementById('free-continue-container');
+  const bankPaidBtn = document.getElementById('bank-paid-btn');
+
+  function getProfileRedirect() {
+    const params = new URLSearchParams(window.location.search);
+    const next = params.get('next');
+    let hash = '#ad-upload-section'; // default to ad upload
+    if (next === 'service') {
+      hash = '#service-upload-section';
+    }
+    return '/pages/profile.html' + hash;
+  }
+
+  function updateLinks() {
+    const agreed = agreeBox.checked;
+    [paypalLink, stripeLink, bankLink].forEach(link => {
+      if (agreed) {
+        link.classList.remove('disabled');
+      } else {
+        link.classList.add('disabled');
+      }
+    });
+  }
+
+  agreeBox.addEventListener('change', updateLinks);
+
+  paypalLink.onclick = function(e) {
+    if (paypalLink.classList.contains('disabled')) return e.preventDefault();
+    const packageValue = packageSelect.value;
+    if (packageValue === 'free') {
+      alert('You selected the Free Ad. No payment required!');
+      return false;
+    }
+    // Simulate PayPal payment and redirect after "payment"
+    setTimeout(() => {
+      alert('Thank you for your payment!');
+      window.location.href = getProfileRedirect();
+    }, 500);
+    return false;
+  };
+
+  stripeLink.onclick = async function(e) {
+    if (stripeLink.classList.contains('disabled')) return e.preventDefault();
+    e.preventDefault();
+    const packageValue = packageSelect.value;
+    if (packageValue === 'free') {
+      alert('You selected the Free Ad. No payment required!');
+      return;
+    }
+    // Call your backend to create a Stripe Checkout session
+    const token = localStorage.getItem('token');
+    const res = await fetch(API_BASE_URL + '/api/payments/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ package: packageValue })
+    });
+    const data = await res.json();
+    if (data.url) {
+      // Instead of redirecting to Stripe, simulate payment and redirect to profile
+      // window.location.href = data.url; // (Real Stripe)
+      setTimeout(() => {
+        alert('Thank you for your payment!');
+        window.location.href = getProfileRedirect();
+      }, 500);
+    } else {
+      alert('Stripe payment failed.');
+    }
+  };
+
+  bankLink.onclick = function(e) {
+    if (bankLink.classList.contains('disabled')) return e.preventDefault();
+    bankDetails.style.display = 'block';
+    e.preventDefault();
+  };
+
+  if (bankPaidBtn) {
+    bankPaidBtn.onclick = function() {
+      alert('Thank you for your payment!');
+      window.location.href = getProfileRedirect();
+    };
+  }
+
+  // Show/hide the Continue button if "free" is selected
+  function updateFreeContinue() {
+    const isFree = packageSelect.value === 'free';
+    freeContinueContainer.style.display = isFree ? 'block' : 'none';
+  }
+  packageSelect.addEventListener('change', updateFreeContinue);
+  updateFreeContinue();
+
+  freeContinueBtn.onclick = function() {
+    window.location.href = getProfileRedirect();
+  };
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+      const hamburger = document.querySelector(".hamburger-menu");
+      const navDropdown = document.querySelector(".nav-dropdown");
+
+      if (hamburger && navDropdown) {
+        hamburger.addEventListener("click", () => {
+          navDropdown.classList.toggle("show");
+        });
+      }
+    });
+  </script>
+<!-- Chatbot icon -->
+<!-- Chatbot popup -->
+<footer>
+<div class="footer-container">
+<div class="footer-image">
+<img alt="D4Rent Footer Logo" src="/assets/d4rent logo smaller.png" style="height: auto; max-height: 100px;"/>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Contact Details</h3>
+<p>D4Rent.ie</p>
+<p>36 Upper Baggot St, Ballsbridge, D4</p>
+<p>Phone: 01 442 7303</p>
+<p>087 169 9498</p>
+<p>Email: <a href="mailto:info@d4rent.ie">info@d4rent.ie</a></p>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Quick Links</h3>
+<ul>
+<li><a href="pages/buy.html">Buy</a></li>
+<li><a href="pages/rent.html">Rent</a></li>
+<li><a href="pages/sell.html">Sell</a></li>
+<li><a href="pages/commercial.html">Commercial</a></li>
+<li><a href="pages/agents.html">Agents</a></li>
+<li><a href="pages/contact-us.html">Contact Us</a></li>
+<li><a href="pages/listyourrentalsfree.html">List Your Rentals Free</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Policy Links</h3>
+<ul>
+<li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
+<li><a href="pages/terms-of-service.html">Terms of Service</a></li>
+<li><a href="pages/cookie-policy.html">Cookie Policy</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Connect with Us</h3>
+<ul>
+<li><a href="https://www.facebook.com/profile.php?id=61577099380616" target="_blank">Facebook</a></li>
+<li><a href="https://www.instagram.com/dublin4rent/" target="_blank">Instagram</a></li>
+<li><a href="https://www.tiktok.com/@d4rent.ie" target="_blank">Tiktok</a></li>
+</ul>
+</div>
+</div>
+</footer><script src="/scripts/chatbot.js"></script></body>
+</html>

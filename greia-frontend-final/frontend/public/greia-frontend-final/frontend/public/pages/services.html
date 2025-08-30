@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Greia - Services</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<link href="../css/services.css" rel="stylesheet"/>
+<link href="css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="/js/global-nav.js"></script>
+<script src="/js/global-search.js"></script>
+</head>
+<body>
+<!-- Fullscreen Filter Popup Modal (shows before main content) -->
+<div id="filter-intro-modal" style="display:flex; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(255,255,255,1); z-index:3000; align-items:center; justify-content:center;">
+  <div id="filter-intro-inner" style="background:#fff; border-radius:18px; padding:40px 32px 32px 32px; max-width:820px; width:98vw; position:relative; margin:auto; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+    <button id="close-filter-intro" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.6rem; color:#888; cursor:pointer; z-index:10;">×</button>
+    <div style="font-size:2rem; font-weight:700; color:#0a2342; margin-bottom:24px; text-align:center; width:100%; font-family:'Segoe UI', Arial, sans-serif;">What Service Are You Looking For?</div>
+    <div class="filter-boxes-container" style="margin-bottom:18px; display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(2,1fr); gap:18px; width:7000px; height:400px; max-width:700px; max-height:400px;">
+      <div class="filter-box" data-filter="apartments" tabindex="0" style="aspect-ratio:1/1; box-shadow:none;">
+        <img src="../assets/finance.png" alt="Apartments" class="filter-img">
+        <span style="font-size:0.97em;">Financial</span>
+      </div>
+      <div class="filter-box" data-filter="houses" tabindex="0" style="aspect-ratio:1/1; box-shadow:none;">
+        <img src="../assets/legal.png" alt="Houses" class="filter-img">
+        <span style="font-size:0.97em;">Legal</span>
+      </div>
+      <div class="filter-box" data-filter="commercial" tabindex="0" style="aspect-ratio:1/1; box-shadow:none;">
+        <img src="../assets/home services.png" alt="Commercial" class="filter-img">
+        <span style="font-size:0.97em;">Home</span>
+      </div>
+      <div class="filter-box" data-filter="luxury" tabindex="0" style="aspect-ratio:1/1; box-shadow:none;">
+        <img src="../assets/moving.png" alt="Luxury" class="filter-img">
+        <span style="font-size:0.97em;">Moving</span>
+      </div>
+      <div class="filter-box" data-filter="short-term" tabindex="0" style="aspect-ratio:1/1; box-shadow:none;">
+        <img src="../assets/gardening.png" alt="Short-Term" class="filter-img">
+        <span style="font-size:0.97em;">Gardening & Landscaping</span>
+      </div>
+      <div class="filter-box" data-filter="student" tabindex="0" style="aspect-ratio:1/1; box-shadow:none;">
+        <img src="../assets/creative.png" alt="Student" class="filter-img">
+        <span style="font-size:0.97em;">Media, Design & Creative</span>
+      </div>
+    </div>
+    <div id="filter-choice-step" style="display:none; width:100%;">
+      <form id="filter-choice-form" style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+        <div id="filter-choice-title" style="font-size:1.2rem; font-weight:600; margin-bottom:8px;"></div>
+        <div id="filter-choice-checkbox-list" style="display:flex; flex-direction:column; gap:8px; margin-bottom:10px; max-height:180px; overflow-y:auto; text-align:left; width:100%;"></div>
+        <button type="submit" style="width:100%; background:#008080; color:#fff; border:none; font-size:1.1rem; font-weight:600; padding:12px 0; border-radius:18px; cursor:pointer; transition:background 0.18s;">Next</button>
+      </form>
+    </div>
+    <a href="#" id="skip-filter-intro" style="margin-top:10px; color:#0015ff; text-decoration:underline; font-size:1.05rem; font-weight:500; background:none; border:none; cursor:pointer; display:inline-block;">Skip and View All Services</a>
+  </div>
+</div>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="navbar-thirds">
+    <div class="navbar-third left">
+      <ul class="nav-links left-links" style="position:relative; z-index:100;">
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/buy.html" style="position:relative; z-index:101;">Property</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/buy.html">Buy</a></li>
+            <li><a href="/pages/rent.html">Rent</a></li>
+            <li><a href="/pages/commercial.html">Commercial</a></li>
+            <li><a href="/pages/buy.html">Apartments</a></li>
+            <li><a href="/pages/sell.html">Sell</a></li>
+            <li><a href="/pages/valuations.html">Valuations</a></li>
+            <li><a href="/pages/buy.html">New Homes</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" style="position:relative;">
+          <a href="#" style="color: rgb(78, 255, 146); position:relative; z-index:101;" class="referral-dropdown-toggle">Connect</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/agents.html">Find an Agent</a>
+            <li class="nested-dropdown" style="position: relative;">
+              <a href="/pages/agents.html" class="referral-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false">Referral Agents ▸</a>
+              <ul class="dropdown-menu referral-dropdown" style="display:none; position: absolute; left: 100%; top: 0; background: white; list-style:none; padding:10px; border:1px solid #ccc; min-width: 220px; z-index: 2000;">
+                <li><a href="/pages/agents.html?subtype=luxury">Luxury Home Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=lettings">Lettings Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=newhomes">New Homes Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=commercial">Commercial Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=residential">Residential Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=developer">Developer Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=timeshare">Timeshare Agents</a></li>
+              </ul>
+            </li>
+            <li><a href="/pages/coaching.html">Coaching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="/index.html">
+          <img alt="Logo" src="../assets/greia (4).png" style="height: auto; max-height: 140px;"/>
+        </a>
+      </div>
+    </div>
+    <div class="navbar-third right">
+      <ul class="nav-links right-links">
+        <li>
+          <a href="/pages/services.html" class="fancy-underline">Our Services</a>
+        </li>
+        <li>
+          <a href="/pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown">
+          <a href="/pages/login.html" id="login-btn">Log In</a>
+          <ul class="dropdown-menu">
+            <li><a href="/pages/login.html">Sign In</a></li>
+            <li><a href="/pages/register.html">Register</a></li>
+            <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button aria-label="Toggle navigation" class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+
+  </button>
+  <!-- Mobile nav menu -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav">
+    <ul>
+      <li class="dropdown">
+        <a href="/pages/buy.html" class="dropdown-toggle">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/buy.html">Buy</a></li>
+          <li><a href="/pages/rent.html">Rent</a></li>
+          <li><a href="/pages/commercial.html">Commercial</a></li>
+          <li><a href="/pages/buy.html">Apartments</a></li>
+          <li><a href="/pages/sell.html">Sell</a></li>
+          <li><a href="/pages/valuations.html">Valuations</a></li>
+          <li><a href="/pages/buy.html">New Homes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" style="color: rgb(78, 255, 146);">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/agents.html">Find an Agent</a></li>
+          <li><a href="/pages/agents.html">Referral Agents</a></li>
+          <li><a href="/pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+      <li><a href="/pages/services.html">Our Services</a></li>
+      <li><a href="/pages/concierge.html">Concierge</a></li>
+      <li class="dropdown">
+        <a href="/pages/login.html" class="dropdown-toggle">Log In</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/login.html">Sign In</a></li>
+          <li><a href="/pages/register.html">Register</a></li>
+          <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<main class="main-content">
+<!-- ...existing code... -->
+<!-- Remove the in-page filter boxes section, keep only the modal version -->
+<!-- Popup Location Search Modal -->
+<div id="location-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgb(255, 255, 255); z-index:9999; align-items:center; justify-content:center;">
+  <div id="location-modal-inner" style="background:#fff; border-radius:18px; padding:32px 28px 24px 28px; max-width:420px; width:90vw; position:relative; margin:auto;">
+    <button id="close-location-modal" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:1.6rem; color:#888; cursor:pointer;">×</button>
+    <form id="service-select-form" autocomplete="off">
+      <div id="service-modal-title" style="font-size:2rem; font-weight:600; color:#0a2342; margin-bottom:16px; text-align:center; font-family:'Segoe UI', Arial, sans-serif;">I'm Looking For...</div>
+      <div id="service-checkbox-list" style="display:flex; flex-direction:column; gap:10px; margin-bottom:18px; max-height:220px; overflow-y:auto; text-align:left; font-family:'Segoe UI', Arial, sans-serif;">
+        <!-- Service checkboxes will be injected here -->
+      </div>
+      <button id="service-next-btn" type="submit" style="width:100%; background:#008080; color:#fff; border:none; font-size:1.1rem; font-weight:600; padding:12px 0; border-radius:18px; cursor:pointer; transition:background 0.18s; font-family:'Segoe UI', Arial, sans-serif;">Next</button>
+    </form>
+  </div>
+</div>
+<!-- Slideshow Section -->
+<section class="full-width-slideshow">
+<div class="slideshow-container">
+<div class="slide fade">
+<img alt="Slideshow Image 1" src="../assets/architect-working-on-construction-drawing-951523974-5b258b89a474be00362272d0-scaled.jpg"/>
+</div>
+<div class="slide fade">
+<img alt="Slideshow Image 2" src="../assets/istockphoto-1445807259-612x612.jpg"/>
+</div>
+<div class="slide fade">
+<img alt="Slideshow Image 3" src="../assets/foto_autunno_hero.webp"/>
+</div>
+<div class="slideshow-text">
+<h2 style="font-size: smaller;; font-size: larger;">We Provide a Host of Premium Services.</h2>
+</div>
+</div>
+</section>
+<!-- Page Title -->
+<section class="page-title">
+</section>
+<section class="search-filter">
+<form class="modern-search-bar" id="rent-filter-form">
+<div class="search-box">
+<span class="search-icon">🔍</span>
+<input id="area" name="area" placeholder="County, City, Town or Area" type="text"/>
+</div>
+<div class="search-dropdown">
+<button class="dropdown-btn" type="button">+0km <span class="arrow">▾</span></button>
+<!-- Optional: dropdown menu here -->
+</div>
+<div class="search-dropdown">
+<button class="dropdown-btn" type="button">Service <span class="arrow">▾</span></button>
+<!-- Optional: dropdown menu here -->
+</div>
+<!-- Add this search button -->
+<button class="search-btn" type="submit">Search</button>
+</form>
+<!-- Additional filters -->
+<div id="extra-filters" style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;align-items:center;justify-content:center;"></div>
+</section>
+<!-- Service List Section -->
+<section class="services-list-section">
+<div class="services-list">
+<!-- Service cards will be injected here by JS -->
+</div>
+</section>
+<!-- Service Discount Modal Popup -->
+<div class="service-popup-overlay" id="service-popup" style="display:none;">
+<div class="service-popup-content">
+<span class="service-popup-close" id="service-popup-close">×</span>
+<h2 style="font-size: smaller;; font-size: larger;">Service Discount Survey</h2>
+<form id="service-discount-form">
+<div class="popup-step" id="step-1">
+<label for="popup-service-q">What service are you looking for?</label>
+<input id="popup-service-q" name="service_query" placeholder="e.g. Cleaning, Moving, etc." required="" type="text"/>
+<button class="orange-btn next-step-btn" type="button">Next</button>
+</div>
+<div class="popup-step" id="step-2" style="display:none;">
+<label for="popup-other-services">What other services would you like to see on this website?</label>
+<input id="popup-other-services" name="other_services" placeholder="e.g. Gardening, Repairs, etc." type="text"/>
+<button class="orange-btn next-step-btn" type="button">Next</button>
+</div>
+<div class="popup-step" id="step-3" style="display:none;">
+<label for="popup-notify-slider">Would you like to receive notifications on services like this?</label>
+<div class="slider-row">
+<span>No</span>
+<input id="popup-notify-slider" max="1" min="0" name="notify" step="1" type="range" value="0"/>
+<span>Yes</span>
+</div>
+<div class="notify-methods" style="display:none;">
+<label><input checked="" name="notify_email" type="checkbox"/> Email</label>
+<label><input name="notify_sms" type="checkbox"/> SMS</label>
+</div>
+<button class="orange-btn next-step-btn" type="button">Next</button>
+</div>
+<div class="popup-step" id="step-4" style="display:none;">
+<label for="popup-email">Your Email:</label>
+<input id="popup-email" name="email" placeholder="Enter your email" required="" type="email"/>
+<button class="orange-btn" type="submit">Send Me My Code</button>
+</div>
+</form>
+<div id="service-popup-message" style="margin-top:1em;"></div>
+</div>
+</div>
+<section class="services-map-section" style="margin: 2em 0;">
+<h2 style="text-align:center;; font-size: smaller;; font-size: larger;">Services Map</h2>
+<div id="services-map" style="height: 400px; width: 100%;"></div>
+</section>
+<script src="/scripts/main.js"></script>
+<script>
+// Paywall logic
+document.addEventListener('DOMContentLoaded', function() {
+  const paywallModal = document.getElementById('paywall-modal');
+  const openPaywallBtn = document.getElementById('open-paywall-btn');
+  const closePaywallModal = document.getElementById('close-paywall-modal');
+  const payBtn = document.getElementById('paywall-pay-btn');
+  const paywallStatus = document.getElementById('paywall-status');
+  let paymentComplete = false;
+
+  if (openPaywallBtn) {
+    openPaywallBtn.onclick = function() {
+      paywallModal.style.display = 'flex';
+      paywallStatus.textContent = '';
+    };
+  }
+  if (closePaywallModal) {
+    closePaywallModal.onclick = function() {
+      paywallModal.style.display = 'none';
+    };
+  }
+  if (payBtn) {
+    payBtn.onclick = function() {
+      payBtn.disabled = true;
+      paywallStatus.style.color = '#888';
+      paywallStatus.textContent = 'Processing payment...';
+      // Dummy payment logic (simulate success after 2s)
+      setTimeout(function() {
+        paymentComplete = true;
+        paywallStatus.style.color = '#2e7d32';
+        paywallStatus.textContent = 'Payment successful! You may now post your service.';
+        // Redirect to post service page or show form (replace below as needed)
+        setTimeout(function() {
+          paywallModal.style.display = 'none';
+          window.location.href = '/pages/post-service.html';
+        }, 1200);
+      }, 2000);
+    };
+  }
+});
+  let selectedServiceId = null;
+  const S3_BASE_URL = 'http://d4rent.ie.s3-website-eu-west-1.amazonaws.com/';
+
+  // Fetch all approved services and render them
+  let allServices = [];
+  document.addEventListener('DOMContentLoaded', () => {
+    fetch(`${API_BASE_URL}/api/services?approved=1`)
+      .then(res => res.json())
+      .then(services => {
+        // Show all services with status 'active' (approved)
+        allServices = services;
+        renderServicesList(allServices);
+        renderServicesMap(allServices);
+      });
+
+    // Multi-step popup logic
+    const steps = [
+      document.getElementById('step-1'),
+      document.getElementById('step-2'),
+      document.getElementById('step-3'),
+      document.getElementById('step-4')
+    ];
+    let currentStep = 0;
+
+    window.showStep = function(idx) {
+      steps.forEach((step, i) => step && (step.style.display = i === idx ? 'flex' : 'none'));
+      currentStep = idx;
+    };
+
+    document.querySelectorAll('.next-step-btn').forEach((btn, idx) => {
+      btn.onclick = function(e) {
+        e.preventDefault();
+        if (idx === 2) { // On step 3, validate at least one notify method if slider is Yes
+          const slider = document.getElementById('popup-notify-slider');
+          if (slider && slider.value === "1") {
+            const emailChecked = document.querySelector('input[name="notify_email"]')?.checked;
+            const smsChecked = document.querySelector('input[name="notify_sms"]')?.checked;
+            if (!emailChecked && !smsChecked) {
+              alert('Please select at least one notification method.');
+              return;
+            }
+          }
+          // New: Collect and log service data on step 3
+          const serviceData = {
+            id: selectedServiceId,
+            title: document.querySelector('.service-title')?.textContent,
+            email: document.getElementById('popup-email').value,
+            notifyMethods: {
+              email: document.querySelector('input[name="notify_email"]')?.checked,
+              sms: document.querySelector('input[name="notify_sms"]')?.checked
+            }
+          };
+          console.log('Service Data on Step 3:', serviceData);
+        }
+        showStep(idx + 1);
+      };
+    });
+
+    // Show/hide notification methods based on slider
+    const slider = document.getElementById('popup-notify-slider');
+    if (slider) {
+      slider.addEventListener('input', function() {
+        const notifyMethods = document.querySelector('.notify-methods');
+        if (notifyMethods) {
+          notifyMethods.style.display = this.value === "1" ? "flex" : "none";
+        }
+      });
+    }
+
+    // Popup close
+    const closeBtn = document.getElementById('service-popup-close');
+    if (closeBtn) {
+      closeBtn.onclick = function() {
+        const popup = document.getElementById('service-popup');
+        if (popup) popup.style.display = 'none';
+      };
+    }
+    // Close popup on overlay click
+    const popupOverlay = document.getElementById('service-popup');
+    if (popupOverlay) {
+      popupOverlay.onclick = function(e) {
+        if (e.target === this) this.style.display = 'none';
+      };
+    }
+
+    // Handle discount form submit
+    const discountForm = document.getElementById('service-discount-form');
+    if (discountForm) {
+      discountForm.onsubmit = async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('popup-email').value;
+        const msg = document.getElementById('service-popup-message');
+        const btn = this.querySelector('button[type="submit"]');
+        if (msg) {
+          msg.textContent = 'Sending...';
+          msg.style.color = '';
+        }
+        btn.disabled = true;
+        try {
+          const res = await fetch(`${API_BASE_URL}/api/services/discount`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, service_id: selectedServiceId })
+          });
+          const data = await res.json();
+          if (msg) {
+            if (data.success) {
+              msg.textContent = 'Discount code sent! Check your email.';
+              msg.style.color = '#2e7d32';
+            } else {
+              msg.textContent = data.error || 'Failed to send code.';
+              msg.style.color = '#e53935';
+            }
+          }
+        } catch (error) {
+          if (msg) {
+            msg.textContent = 'Server error. Please try again later.';
+            msg.style.color = '#e53935';
+          }
+        }
+        btn.disabled = false;
+      };
+    }
+  });
+  </script>
+<script>
+// Mobile Menu Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const mobileNavOverlay = document.querySelector('.mobile-nav-overlay');
+    const dropdownToggles = document.querySelectorAll('.mobile-nav .dropdown-toggle');
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+        hamburgerMenu.classList.toggle('active');
+        mobileNav.classList.toggle('open');
+        mobileNavOverlay.classList.toggle('show');
+        document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    }
+
+    // Close mobile menu
+    function closeMobileMenu() {
+        hamburgerMenu.classList.remove('active');
+        mobileNav.classList.remove('open');
+        mobileNavOverlay.classList.remove('show');
+        document.body.style.overflow = '';
+        
+        // Close all dropdowns
+        document.querySelectorAll('.mobile-nav .dropdown').forEach(dropdown => {
+            dropdown.classList.remove('open');
+        });
+    }
+
+    // Hamburger menu click
+    if (hamburgerMenu) {
+        hamburgerMenu.addEventListener('click', toggleMobileMenu);
+    }
+
+    // Overlay click to close
+    if (mobileNavOverlay) {
+        mobileNavOverlay.addEventListener('click', closeMobileMenu);
+    }
+
+    // Dropdown functionality
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const dropdown = this.parentElement;
+            const isOpen = dropdown.classList.contains('open');
+            
+            // Close all other dropdowns
+            document.querySelectorAll('.mobile-nav .dropdown').forEach(otherDropdown => {
+                if (otherDropdown !== dropdown) {
+                    otherDropdown.classList.remove('open');
+                }
+            });
+            
+            // Toggle current dropdown
+            dropdown.classList.toggle('open', !isOpen);
+        });
+    });
+
+    // Close menu when clicking on non-dropdown links
+    document.querySelectorAll('.mobile-nav a:not(.dropdown-toggle)').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close menu on window resize if open
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 700 && mobileNav.classList.contains('open')) {
+            closeMobileMenu();
+        }
+    });
+});
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Main and nested dropdown hover logic
+    const dropdowns = document.querySelectorAll("li.dropdown, li.nested-dropdown");
+    dropdowns.forEach(dropdown => {
+      dropdown.addEventListener("mouseenter", () => {
+        const menu = dropdown.querySelector(":scope > ul.dropdown-menu");
+        if (menu) menu.style.display = "block";
+      });
+      dropdown.addEventListener("mouseleave", () => {
+        const menu = dropdown.querySelector(":scope > ul.dropdown-menu");
+        if (menu) menu.style.display = "none";
+      });
+    });
+    
+    // Keyboard accessibility for nested dropdown
+    document.querySelectorAll('.nested-dropdown > a.referral-dropdown-toggle').forEach(function(link) {
+      link.addEventListener('focus', function() {
+        const menu = this.parentElement.querySelector(':scope > ul.dropdown-menu');
+        if (menu) menu.style.display = "block";
+      });
+      link.addEventListener('blur', function() {
+        const menu = this.parentElement.querySelector(':scope > ul.dropdown-menu');
+        if (menu) menu.style.display = "none";
+      });
+      link.addEventListener('keydown', function(e) {
+        if (e.key === "ArrowRight" || e.key === "Enter" || e.key === " ") {
+          const menu = this.parentElement.querySelector(':scope > ul.dropdown-menu');
+          if (menu) {
+            menu.style.display = "block";
+            menu.querySelector('a').focus();
+            e.preventDefault();
+          }
+        }
+      });
+    });
+  });
+</script>
+<script>
+async function geocode(address) {
+  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data && data.length) {
+      return [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+    }
+  } catch (e) {}
+  return null;
+}
+
+async function renderServicesMap(services) {
+  const mapDiv = document.getElementById('services-map');
+  if (!mapDiv) return;
+  // Remove any existing map instance
+  if (window.servicesMapInstance) {
+    window.servicesMapInstance.remove();
+  }
+  // Initialize map (centered on Dublin)
+  const map = L.map('services-map').setView([53.3498, -6.2603], 11);
+  window.servicesMapInstance = map;
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Add markers for each service with an address
+  for (const service of services) {
+    if (!service.address) continue;
+    const coords = await geocode(service.address);
+    if (coords) {
+      L.marker(coords).addTo(map)
+        .bindPopup(`<b>${service.title || ''}</b><br>${service.address}`);
+    }
+  }
+}
+
+// After services are fetched and rendered, call renderServicesMap(services)
+document.addEventListener('DOMContentLoaded', () => {
+  fetch(`${API_BASE_URL}/api/services?approved=1`)
+    .then(res => res.json())
+    .then(services => {
+      // Filter for approved services only
+      const approvedServices = services.filter(service => service.approved === 1);
+      renderServicesMap(approvedServices);
+      // ...existing rendering code...
+    });
+});
+
+// ...existing code...
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Fetch and render approved services only
+  fetch(`${API_BASE_URL}/api/services?approved=1`)
+    .then(res => res.json())
+    .then(services => {
+      // Filter for approved services only
+      const approvedServices = services.filter(service => service.approved === 1);
+      allServices = approvedServices;
+      renderServicesList(approvedServices);
+      renderServicesMap(approvedServices);
+      setupExtraFilters(approvedServices);
+    });
+
+  // Listen for search form submit
+  const form = document.getElementById('rent-filter-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const area = document.getElementById('area').value.trim().toLowerCase();
+      // Get extra filter values
+      const category = document.getElementById('filter-category')?.value || '';
+      const type = document.getElementById('filter-type')?.value || '';
+      const priceStructure = document.getElementById('filter-price-structure')?.value || '';
+      const availability = document.getElementById('filter-availability')?.value || '';
+      const responseTime = document.getElementById('filter-response-time')?.value || '';
+      const expMin = parseInt(document.getElementById('filter-exp-min')?.value || '0');
+      const expMax = parseInt(document.getElementById('filter-exp-max')?.value || '100');
+      const tag = document.getElementById('filter-tag')?.value || '';
+      const location = document.getElementById('filter-location')?.value || '';
+      const discountMin = parseInt(document.getElementById('filter-discount-min')?.value || '0');
+      const discountMax = parseInt(document.getElementById('filter-discount-max')?.value || '100');
+      // Filter by all criteria
+      const filtered = allServices.filter(service => {
+        let match = true;
+        if (area) {
+          match = match && (
+            (service.address && service.address.toLowerCase().includes(area)) ||
+            (service.title && service.title.toLowerCase().includes(area)) ||
+            (service.name && service.name.toLowerCase().includes(area)) ||
+            (service.description && service.description.toLowerCase().includes(area))
+          );
+        }
+        if (category) {
+          match = match && service.category && service.category.toLowerCase() === category.toLowerCase();
+        }
+        if (type) {
+          match = match && service.service_type && service.service_type.toLowerCase() === type.toLowerCase();
+        }
+        if (priceStructure) {
+          match = match && service.price_structure && service.price_structure.toLowerCase() === priceStructure.toLowerCase();
+        }
+        if (availability) {
+          match = match && typeof service.availability === 'string' && service.availability.toLowerCase() === availability.toLowerCase();
+        }
+        if (responseTime) {
+          match = match && service.response_time && service.response_time.toLowerCase() === responseTime.toLowerCase();
+        }
+        if (service.experience_years !== undefined && service.experience_years !== null) {
+          match = match && service.experience_years >= expMin && service.experience_years <= expMax;
+        }
+        if (tag) {
+          match = match && service.tags && service.tags.toLowerCase().includes(tag.toLowerCase());
+        }
+        if (location) {
+          match = match && service.address && service.address.toLowerCase().includes(location.toLowerCase());
+        }
+        if (service.discount_percent !== undefined && service.discount_percent !== null) {
+          match = match && service.discount_percent >= discountMin && service.discount_percent <= discountMax;
+        }
+        return match;
+      });
+      renderServicesList(filtered);
+      renderServicesMap(filtered);
+    });
+  }
+
+  // Setup extra filters UI
+  function setupExtraFilters(services) {
+    const extraFilters = document.getElementById('extra-filters');
+    if (!extraFilters) return;
+    // Service Category
+    const categorySet = new Set();
+    services.forEach(s => { if (s.category) categorySet.add(s.category.trim()); });
+    const categories = Array.from(categorySet).filter(c => c);
+    // Service Type
+    const typeSet = new Set();
+    services.forEach(s => { if (s.service_type) typeSet.add(s.service_type.trim()); });
+    const types = Array.from(typeSet).filter(t => t);
+    // Price Structure
+    const priceStructureSet = new Set();
+    services.forEach(s => { if (s.price_structure) priceStructureSet.add(s.price_structure.trim()); });
+    const priceStructures = Array.from(priceStructureSet).filter(p => p);
+    // Availability
+    const availabilitySet = new Set();
+    services.forEach(s => { if (typeof s.availability === 'string') availabilitySet.add(s.availability.trim()); });
+    const availabilities = Array.from(availabilitySet).filter(a => a);
+    // Response Time
+    const responseTimeSet = new Set();
+    services.forEach(s => { if (s.response_time) responseTimeSet.add(s.response_time.trim()); });
+    const responseTimes = Array.from(responseTimeSet).filter(r => r);
+    // Years of Experience
+    const experienceYears = services.map(s => s.experience_years).filter(e => e !== undefined && e !== null);
+    const minExp = experienceYears.length ? Math.min(...experienceYears) : 0;
+    const maxExp = experienceYears.length ? Math.max(...experienceYears) : 30;
+    // Tags
+    const tagsSet = new Set();
+    services.forEach(s => { if (s.tags) s.tags.split(',').forEach(tag => tagsSet.add(tag.trim())); });
+    const tags = Array.from(tagsSet).filter(t => t);
+    // Locations
+    const locationsSet = new Set();
+    services.forEach(s => { if (s.address) locationsSet.add(s.address.trim()); });
+    const locations = Array.from(locationsSet).filter(l => l);
+    // Discount
+    const discounts = services.map(s => s.discount_percent).filter(d => d !== undefined && d !== null);
+    const minDiscount = discounts.length ? Math.min(...discounts) : 0;
+    const maxDiscount = discounts.length ? Math.max(...discounts) : 100;
+    // Build filters
+    let html = '';
+    if (categories.length) {
+      html += `<label style="font-weight:500;">Category: <select id="filter-category" style="border-radius:8px;padding:6px 12px;">`+
+        `<option value="">Any</option>`+
+        categories.map(cat => `<option value="${cat}">${cat}</option>`).join('')+
+        `</select></label>`;
+    }
+    if (types.length) {
+      html += `<label style="font-weight:500;">Type: <select id="filter-type" style="border-radius:8px;padding:6px 12px;">`+
+        `<option value="">Any</option>`+
+        types.map(type => `<option value="${type}">${type}</option>`).join('')+
+        `</select></label>`;
+    }
+    if (priceStructures.length) {
+      html += `<label style="font-weight:500;">Price Structure: <select id="filter-price-structure" style="border-radius:8px;padding:6px 12px;">`+
+        `<option value="">Any</option>`+
+        priceStructures.map(ps => `<option value="${ps}">${ps}</option>`).join('')+
+        `</select></label>`;
+    }
+    if (availabilities.length) {
+      html += `<label style="font-weight:500;">Availability: <select id="filter-availability" style="border-radius:8px;padding:6px 12px;">`+
+        `<option value="">Any</option>`+
+        availabilities.map(a => `<option value="${a}">${a}</option>`).join('')+
+        `</select></label>`;
+    }
+    if (responseTimes.length) {
+      html += `<label style="font-weight:500;">Response Time: <select id="filter-response-time" style="border-radius:8px;padding:6px 12px;">`+
+        `<option value="">Any</option>`+
+        responseTimes.map(r => `<option value="${r}">${r}</option>`).join('')+
+        `</select></label>`;
+    }
+    // Removed experience filter
+    if (tags.length) {
+      html += `<label style="font-weight:500;">Tag: <select id="filter-tag" style="border-radius:8px;padding:6px 12px;">`+
+        `<option value="">Any</option>`+
+        tags.map(tag => `<option value="${tag}">${tag}</option>`).join('')+
+        `</select></label>`;
+    }
+    if (locations.length) {
+      html += `<label style="font-weight:500;">Location: <select id="filter-location" style="border-radius:8px;padding:6px 12px;">`+
+        `<option value="">Any</option>`+
+        locations.map(loc => `<option value="${loc}">${loc}</option>`).join('')+
+        `</select></label>`;
+    }
+    if (discounts.length) {
+      html += `<label style="font-weight:500;">Discount: <input type="number" id="filter-discount-min" min="0" max="100" value="${minDiscount}" style="width:50px;border-radius:8px;padding:6px 8px;"> - <input type="number" id="filter-discount-max" min="0" max="100" value="${maxDiscount}" style="width:50px;border-radius:8px;padding:6px 8px;">%</label>`;
+    }
+    extraFilters.innerHTML = html;
+  }
+});
+
+// Helper to render the service cards
+function renderServicesList(services) {
+  const container = document.querySelector('.services-list');
+  if (!container) return;
+  if (!services.length) {
+    container.innerHTML = '<p>No services found.</p>';
+    return;
+  }
+  const S3_BASE_URL = 'http://d4rent.ie.s3-website-eu-west-1.amazonaws.com/';
+  container.innerHTML = `
+    <div class="services-cards-container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:40px;justify-items:center;align-items:stretch;">
+      ${services.map(service => {
+        // Use title, fallback to name if missing
+        const title = service.title || service.name || '';
+        if (!title) return '';
+        // ...existing code for bio, phone, website, photoUrl, and card rendering...
+        const bio = service.bio || service.description || '';
+        const phone = service.phone_number || service.phone || '';
+        const website = service.link || service.website || '';
+        const photoUrl = service.photo
+          ? (service.photo.startsWith('http')
+              ? service.photo
+              : S3_BASE_URL + (service.photo.startsWith('uploads/') ? service.photo : 'uploads/' + service.photo))
+          : 'https://via.placeholder.com/340x191?text=No+Image';
+        return `
+          <div class="service-card" style="background:linear-gradient(135deg,#f8f8fa 60%,#e9e9f6 100%);border-radius:28px;box-shadow:0 6px 32px rgba(0,0,0,0.10);padding:32px 28px 28px 28px;display:flex;flex-direction:column;align-items:center;transition:box-shadow 0.2s;min-height:480px;max-width:400px;width:100%;position:relative;">
+            <div class="service-image-container" style="width:100%;height:200px;display:flex;justify-content:center;align-items:center;">
+              <img src="${photoUrl}" alt="${title}" class="service-profile-img" style="border-radius:18px;width:100%;height:100%;object-fit:cover;box-shadow:0 2px 16px rgba(0,0,0,0.09);margin-bottom:18px;">
+            </div>
+            <div class="service-info" style="width:100%;margin-top:8px;text-align:center;">
+              <div class="service-title" style="font-size:1.7rem;font-weight:700;color:#222;margin-bottom:8px;letter-spacing:-0.5px;">${title}</div>
+              ${service.tags ? `<div class="service-tags" style="margin-bottom:8px;font-size:0.98rem;color:#008080;">${service.tags}</div>` : ''}
+              <div class="service-bio" style="font-size:1.08rem;color:#444;margin-bottom:10px;">${bio}</div>
+              ${service.address ? `<div class="service-address" style="font-size:1.05rem;color:#555;margin-bottom:4px;"><span style="font-weight:500;">Address:</span> ${service.address}</div>` : ''}
+              ${phone ? `<div class="service-phone" style="margin-bottom:2px;"><span style="font-weight:500;">Phone:</span> <a href="tel:${phone}" style="color:#008080;text-decoration:underline;">${phone}</a></div>` : ''}
+              ${service.email ? `<div class="service-email" style="margin-bottom:2px;"><span style="font-weight:500;">Email:</span> <a href="mailto:${service.email}" style="color:#008080;text-decoration:underline;">${service.email}</a></div>` : ''}
+              ${website ? `<div class="service-link" style="margin-bottom:2px;"><span style="font-weight:500;">Website:</span> <a href="${website}" target="_blank" style="color:#1c0bff;text-decoration:underline;">${website}</a></div>` : ''}
+              ${service.discount_percent ? `<div class="service-discount" style="margin-bottom:2px;color:#ff9800;font-weight:600;">Discount: ${service.discount_percent}%</div>` : ''}
+              ${service.social_links ? `<div class="service-social" style="margin-top:8px;font-size:0.98rem;color:#555;">${renderSocialLinks(service.social_links)}</div>` : ''}
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;margin-top:22px;justify-content:center;width:100%;gap:8px;">
+              <button type="button" class="discount-btn service-popup-trigger" data-service-id="${service.id}" style="background: linear-gradient(90deg, #00ffd0 0%, #1c0bff 100%); color: #fff; padding: 10px 22px; border-radius: 12px; font-weight: 500; border: none; cursor: pointer; transition: background 0.18s; font-size: 1.08rem; box-shadow: 0 1px 12px rgba(0,255,208,0.18); text-shadow: 0 0 6px #00ffd0, 0 0 2px #fff;">Get Discount</button>
+              <a href="servicePage.html?id=${service.id}" class="view-details-btn" style="color:#1c0bff;text-decoration:underline;font-weight:600;font-size:1.05rem;background:none;border:none;padding:0;margin-top:6px;">View Details</a>
+            </div>
+            <div style="position:absolute;top:18px;right:18px;font-size:0.98rem;color:#888;">${service.created_at ? new Date(service.created_at).toLocaleDateString() : ''}</div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+
+  // Helper to render social links (JSON)
+  function renderSocialLinks(socialLinks) {
+let links = '';
+    try {
+      const obj = typeof socialLinks === 'string' ? JSON.parse(socialLinks) : socialLinks;
+      for (const key in obj) {
+        if (obj[key]) {
+          links += `<a href="${obj[key]}" target="_blank" style="margin-right:10px;color:#1c0bff;text-decoration:underline;">${key.charAt(0).toUpperCase() + key.slice(1)}</a>`;
+        }
+      }
+    } catch (e) {}
+    return links;
+  }
+
+  // Re-attach popup triggers if needed
+  container.querySelectorAll('.service-popup-trigger').forEach(btn => {
+    btn.onclick = function(e) {
+      e.preventDefault();
+      selectedServiceId = this.getAttribute('data-service-id');
+      const popup = document.getElementById('service-popup');
+      if (popup) popup.style.display = 'flex';
+      const msg = document.getElementById('service-popup-message');
+      if (msg) {
+        msg.textContent = '';
+        msg.style.color = '';
+      }
+      const form = document.getElementById('service-discount-form');
+      if (form) form.reset();
+      if (typeof showStep === 'function') showStep(0);
+    };
+  });
+}
+</script>
+<script>
+  // Reference logic from services2.html for filter modal and filter boxes
+  document.addEventListener("DOMContentLoaded", function() {
+    // Service lists for each filter
+    const serviceLists = {
+      apartments: [
+        "Accountants",
+        "Tax Advisors",
+        "Financial Advisors",
+        "Insurance Brokers",
+        "Pension Consultants",
+        "Investment Advisors",
+        "Wealth Management",
+        "Financial Consultants"
+      ],
+      houses: [
+        "Solicitors",
+        "Conveyancers",
+        "Notaries",
+        "Property Law Specialists",
+        "Probate Lawyers",
+        "Mediators",
+        "Litigation Experts"
+      ],
+      commercial: [
+        "Plumbers",
+        "Electricians",
+        "Carpenters",
+        "Painters",
+        "Cleaners",
+        "Security Services",
+        "HVAC Technicians"
+      ],
+      luxury: [
+        "Moving Companies",
+        "Storage Solutions",
+        "Packing Services",
+        "International Movers",
+        "Pet Relocation",
+        "Vehicle Transport"
+      ],
+      "short-term": [
+        "Gardeners",
+        "Landscapers",
+        "Tree Surgeons",
+        "Lawn Care",
+        "Irrigation Specialists",
+        "Garden Designers"
+      ],
+      student: [
+        "Graphic Designers",
+        "Photographers",
+        "Videographers",
+        "Web Designers",
+        "Interior Designers",
+        "Copywriters",
+        "Brand Consultants"
+      ]
+    };
+
+    const serviceTitles = {
+      apartments: "Financial Services",
+      houses: "Legal Services",
+      commercial: "Home Services",
+      luxury: "Moving Services",
+      "short-term": "Gardening & Landscaping",
+      student: "Media, Design & Creative"
+    };
+
+    // --- Fullscreen intro modal logic ---
+    const introModal = document.getElementById('filter-intro-modal');
+    const closeIntroBtn = document.getElementById('close-filter-intro');
+    const skipIntroBtn = document.getElementById('skip-filter-intro');
+    const introFilterBoxes = introModal ? introModal.querySelectorAll('.filter-box') : [];
+    const filterChoiceStep = document.getElementById('filter-choice-step');
+    const filterChoiceForm = document.getElementById('filter-choice-form');
+    const filterChoiceTitle = document.getElementById('filter-choice-title');
+    const filterChoiceCheckboxList = document.getElementById('filter-choice-checkbox-list');
+    let selectedFilter = null;
+
+
+    // If no filter modal, or it's hidden, show all services immediately
+    if (!introModal || introModal.style.display === 'none') {
+      if (typeof renderServicesList === 'function' && window.allServices) {
+        renderServicesList(window.allServices);
+      }
+    } else {
+      // Only show modal if needed (optional: set to display:none by default)
+      introModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeIntro() {
+      if (introModal) introModal.style.display = 'none';
+      document.body.style.overflow = '';
+      // Reset step
+      if (filterChoiceStep) filterChoiceStep.style.display = 'none';
+      // Always render services list after closing modal
+      if (typeof renderServicesList === 'function' && window.allServices) {
+        renderServicesList(window.allServices);
+      }
+    }
+
+    if (closeIntroBtn) {
+      closeIntroBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeIntro();
+      });
+    }
+    if (skipIntroBtn) {
+      skipIntroBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeIntro();
+      });
+    }
+
+    introFilterBoxes.forEach(box => {
+      function selectFilter(e) {
+        e.preventDefault();
+        selectedFilter = box.getAttribute('data-filter');
+        // Show choices step
+        if (filterChoiceStep && filterChoiceTitle && filterChoiceCheckboxList) {
+          filterChoiceStep.style.display = 'block';
+          // Hide filter boxes
+          box.parentElement.style.display = 'none';
+          filterChoiceTitle.textContent = serviceTitles[selectedFilter] || "I'm Looking For...";
+          const services = serviceLists[selectedFilter] || [];
+          filterChoiceCheckboxList.innerHTML = services.map(service =>
+            `<label><input type="checkbox" name="service" value="${service}"> ${service}</label>`
+          ).join('');
+        }
+      }
+      box.addEventListener('click', selectFilter);
+      box.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') selectFilter(e);
+      });
+    });
+
+    if (filterChoiceForm) {
+      filterChoiceForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const checked = Array.from(filterChoiceForm.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+        if (checked.length === 0) {
+          alert('Please select at least one service.');
+          return;
+        }
+        window.location.href = 'services-list.html?filter=' + encodeURIComponent(selectedFilter) + '&services=' + encodeURIComponent(checked.join(','));
+      });
+    }
+
+    // --- In-page filter boxes logic (for modal with checkboxes) ---
+    const filterBoxes = document.querySelectorAll('.filter-boxes-section .filter-box');
+    const locationModal = document.getElementById('location-modal');
+    const closeModalBtn = document.getElementById('close-location-modal');
+    const serviceForm = document.getElementById('service-select-form');
+    const modalInner = document.getElementById('location-modal-inner');
+    const serviceCheckboxList = document.getElementById('service-checkbox-list');
+    const serviceModalTitle = document.getElementById('service-modal-title');
+    let selectedFilterInPage = null;
+
+    if (locationModal) locationModal.style.display = 'none';
+
+    filterBoxes.forEach(box => {
+      function showModal(e) {
+        e.preventDefault();
+        selectedFilterInPage = box.getAttribute('data-filter');
+        serviceModalTitle.textContent = serviceTitles[selectedFilterInPage] || "I'm Looking For...";
+        const services = serviceLists[selectedFilterInPage] || [];
+        serviceCheckboxList.innerHTML = services.map(service =>
+          `<label><input type="checkbox" name="service" value="${service}"> ${service}</label>`
+        ).join('');
+        locationModal.style.display = 'flex';
+      }
+      box.addEventListener('click', showModal);
+      box.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') showModal(e);
+      });
+    });
+
+    if (closeModalBtn) {
+      closeModalBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        locationModal.style.display = 'none';
+        serviceCheckboxList.innerHTML = '';
+      });
+    }
+
+    if (locationModal) {
+      locationModal.addEventListener('click', function(e) {
+        if (e.target === locationModal) {
+          locationModal.style.display = 'none';
+          serviceCheckboxList.innerHTML = '';
+        }
+      });
+    }
+
+    if (modalInner) {
+      modalInner.addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    }
+
+    if (serviceForm) {
+      serviceForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const checked = Array.from(serviceForm.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+        if (checked.length === 0) {
+          alert('Please select at least one service.');
+          return;
+        }
+        window.location.href = 'services-list.html?filter=' + encodeURIComponent(selectedFilterInPage) + '&services=' + encodeURIComponent(checked.join(','));
+      });
+    }
+  });
+</script>
+
+
+<script src="/scripts/chatbot.js"></script>
+<div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body>
+</html>

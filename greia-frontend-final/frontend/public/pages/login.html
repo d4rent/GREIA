@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - Greia</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="../css/login.css" rel="stylesheet"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+</head>
+<body>
+<nav class="navbar">
+  <div class="navbar-thirds">
+    <div class="navbar-third left">
+      <ul class="nav-links left-links" style="position:relative; z-index:100;">
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/buy.html" style="position:relative; z-index:101;">Property</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/buy.html">Buy</a></li>
+            <li><a href="/pages/rent.html">Rent</a></li>
+            <li><a href="/pages/commercial.html">Commercial</a></li>
+            <li><a href="/pages/buy.html">Apartments</a></li>
+            <li><a href="/pages/sell.html">Sell</a></li>
+            <li><a href="/pages/valuations.html">Valuations</a></li>
+            <li><a href="/pages/buy.html">New Homes</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" style="position:relative;">
+          <a href="#" style="color: rgb(78, 255, 146); position:relative; z-index:101;" class="referral-dropdown-toggle">Connect</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/agents.html">Find an Agent</a>
+            <li class="nested-dropdown" style="position: relative;">
+              <a href="/pages/agents.html" class="referral-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false">Referral Agents ▸</a>
+              <ul class="dropdown-menu referral-dropdown" style="display:none; position: absolute; left: 100%; top: 0; background: white; list-style:none; padding:10px; border:1px solid #ccc; min-width: 220px; z-index: 2000;">
+                <li><a href="/pages/agents.html?subtype=luxury">Luxury Home Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=lettings">Lettings Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=newhomes">New Homes Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=commercial">Commercial Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=residential">Residential Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=developer">Developer Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=timeshare">Timeshare Agents</a></li>
+              </ul>
+            </li>
+            <li><a href="/pages/coaching.html">Coaching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="/index.html">
+          <img alt="Logo" src="../assets/greia (4).png" style="height: auto; max-height: 140px;"/>
+        </a>
+      </div>
+    </div>
+    <div class="navbar-third right">
+      <ul class="nav-links right-links">
+        <li>
+          <a href="/pages/services.html" class="fancy-underline">Our Services</a>
+        </li>
+        <li>
+          <a href="/pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown">
+          <a href="/pages/login.html" id="login-btn">Log In</a>
+          <ul class="dropdown-menu">
+            <li><a href="/pages/login.html">Sign In</a></li>
+            <li><a href="/pages/register.html">Register</a></li>
+            <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button aria-label="Toggle navigation" class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <!-- Mobile nav menu -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav">
+    <ul>
+      <li class="dropdown">
+        <a href="/pages/buy.html" class="dropdown-toggle">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/buy.html">Buy</a></li>
+          <li><a href="/pages/rent.html">Rent</a></li>
+          <li><a href="/pages/commercial.html">Commercial</a></li>
+          <li><a href="/pages/buy.html">Apartments</a></li>
+          <li><a href="/pages/sell.html">Sell</a></li>
+          <li><a href="/pages/valuations.html">Valuations</a></li>
+          <li><a href="/pages/buy.html">New Homes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" style="color: rgb(78, 255, 146);">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/agents.html">Find an Agent</a></li>
+          <li><a href="/pages/agents.html">Referral Agents</a></li>
+          <li><a href="/pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+      <li><a href="/pages/services.html">Our Services</a></li>
+      <li><a href="/pages/concierge.html">Concierge</a></li>
+      <li class="dropdown">
+        <a href="/pages/login.html" class="dropdown-toggle">Log In</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/login.html">Sign In</a></li>
+          <li><a href="/pages/register.html">Register</a></li>
+          <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/buy.html" class="mobile-nav-link">Buy</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/buy.html">New Homes</a>
+                <a href="/pages/buy.html">Residential</a>
+                <a href="/pages/buy.html">Commercial</a>
+                <a href="/pages/buy.html">Luxury Homes</a>
+                <a href="/pages/buy.html">New Developments</a>
+                <a href="/pages/buy.html">Country Homes</a>
+                <a href="/pages/buy.html">Apartments</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/rent.html" class="mobile-nav-link">Rent</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/rent.html">Apartments</a>
+                <a href="/pages/rent.html">Lettings</a>
+                <a href="/pages/rent.html">Residential</a>
+                <a href="/pages/rent.html">Luxury Homes</a>
+                <a href="/pages/rent.html">Timeshare Homes</a>
+                <a href="/pages/rent.html">Houses</a>
+                <a href="/pages/rent.html">Short-Term</a>
+                <a href="/pages/rent.html">Student Accommodation</a>
+                <a href="/pages/rent.html">Sublets</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/commercial.html" class="mobile-nav-link">Commercial</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/commercial.html">Office Space</a>
+                <a href="/pages/commercial.html">Retail Unit</a>
+                <a href="/pages/commercial.html">Industrial Unit</a>
+                <a href="/pages/commercial.html">Restaurant / Bar / Hotel</a>
+                <a href="/pages/commercial.html">Luxury Commercial</a>
+                <a href="/pages/commercial.html">Commercial Site</a>
+                <a href="/pages/commercial.html">Auction</a>
+                <a href="/pages/commercial.html">Agricultural Site</a>
+                <a href="/pages/commercial.html">Development Land</a>
+                <a href="/pages/commercial.html">Investment Property</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/agents.html" class="mobile-nav-link">Find an Agent</a>
+        </div>
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/services.html" class="mobile-nav-link">Our Services</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/services.html">Property Management</a>
+                <a href="/pages/services.html">Consulting</a>
+                <a href="/pages/services.html">Legal Advice</a>
+                <a href="/pages/services.html">Tradesmen</a>
+                <a href="/pages/services.html">Interior Designers</a>
+                <a href="/pages/services.html">Architect</a>
+                <a href="/pages/services.html">Others</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/concierge.html" class="mobile-nav-link active">Our Concierge</a>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/sell.html" class="mobile-nav-link">Sell with D4rent?</a>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/login.html" class="mobile-nav-link" id="mobile-login-btn">Sign In</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="main-content">
+<style>
+/* Super minimal, Apple-style login form, smaller, perfectly centered vertically */
+.login-form-standalone {
+  width: 100%;
+  max-width: 340px;
+  min-height: calc(100vh - 180px); /* Adjust for nav/footer if needed */
+  margin: 0 auto;
+  padding: 110px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login-form-standalone .login-box,
+.login-form-standalone .auth-form {
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 340px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-form-standalone .login-box h1,
+.login-form-standalone .auth-form h2 {
+  color: #111;
+  font-size: 1.7rem;
+  font-weight: 500;
+  margin-bottom: 28px;
+  margin-top: 0;
+  text-align: center;
+  letter-spacing: 0.01em;
+  font-family: 'Poppins', 'Quicksand', Arial, sans-serif;
+  width: 100%;
+  line-height: 1.1;
+}
+.login-form-standalone form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-form-standalone input[type="text"],
+.login-form-standalone input[type="email"],
+.login-form-standalone input[type="password"] {
+  background: #fff;
+  border: 1.2px solid #222;
+  border-radius: 10px;
+  padding: 13px 14px;
+  font-size: 1rem;
+  margin-bottom: 14px;
+  outline: none;
+  transition: border 0.18s;
+  font-family: 'Poppins', 'Quicksand', Arial, sans-serif;
+  color: #111;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+.login-form-standalone input:focus {
+  border-color: #00ff91;
+  background: #151515;
+}
+.login-form-standalone button[type="submit"] {
+  background: #00ff91;
+  color: #111;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 0;
+  font-size: 1rem;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  margin-top: 8px;
+  margin-bottom: 14px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+.login-form-standalone button[type="submit"]:hover {
+  background: #0400ff;
+  color: #000;
+}
+.login-form-standalone .oauth-buttons {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.login-form-standalone .oauth-button {
+  background: #fff;
+  color: #333;
+  border: 1.2px solid #ddd;
+  border-radius: 10px;
+  padding: 13px 0;
+  font-size: 1rem;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.login-form-standalone .oauth-button:hover {
+  background: #f5f5f5;
+  border-color: #bbb;
+}
+.login-form-standalone .oauth-button.google {
+  border-color: #0bf195;
+}
+.login-form-standalone .oauth-button.google:hover {
+  background: #08ce7b;
+  color: white;
+  border-color: #0bf195;
+}
+.login-form-standalone .divider {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+  color: #666;
+  font-size: 0.9rem;
+}
+.login-form-standalone .divider:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #ddd;
+  z-index: 1;
+}
+.login-form-standalone .divider span {
+  background: white;
+  padding: 0 15px;
+  position: relative;
+  z-index: 2;
+}
+.login-form-standalone a {
+  color: #0c34ff;
+  text-decoration: underline;
+  font-size: 1.08rem;
+  margin-top: 10px;
+  text-align: center;
+  font-family: 'Poppins', Arial, sans-serif;
+  display: block;
+  width: 100%;
+}
+.login-form-standalone label {
+  color: #111;
+  font-size: 1.08rem;
+  font-weight: 400;
+  margin-bottom: 3px;
+  margin-top: 8px;
+  font-family: 'Poppins', Arial, sans-serif;
+  text-align: left;
+  width: 100%;
+  display: block;
+  letter-spacing: 0.01em;
+}
+.register-role-group {
+  margin-bottom: 12px;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+.register-role-group label {
+  margin-right: 0;
+  font-size: 1.08rem;
+  font-weight: 400;
+  color: #111;
+  text-align: left;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.register-role-group input[type="radio"],
+.register-role-group input[type="checkbox"] {
+  accent-color: #00e6e6;
+  margin-right: 4px;
+}
+@media (max-width: 700px) {
+  .login-form-standalone {
+    max-width: 96vw;
+    padding: 40px 2vw;
+    min-height: calc(100vh - 120px);
+  }
+  .login-form-standalone .login-box h1,
+  .login-form-standalone .auth-form h2 {
+    font-size: 1.2rem;
+    margin-bottom: 18px;
+  }
+  .login-form-standalone input[type="text"],
+  .login-form-standalone input[type="email"],
+  .login-form-standalone input[type="password"] {
+    font-size: 0.95rem;
+    padding: 10px 8px;
+    margin-bottom: 10px;
+  }
+  .login-form-standalone button[type="submit"] {
+    font-size: 0.95rem;
+    padding: 10px 0;
+    margin-bottom: 10px;
+  }
+}
+</style>
+<div class="login-form-standalone">
+  <div class="login-box" id="login-box">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <input aria-label="Email" id="email" placeholder="Email" required="" type="email"/>
+      <input aria-label="Password" autocomplete="current-password" id="password" placeholder="Password" required="" type="password"/>
+      <button type="submit">Login</button>
+    </form>
+    
+    <div class="divider">
+      <span>or</span>
+    </div>
+    
+    <div class="oauth-buttons">
+      <a href="#" class="oauth-button google" id="google-login">
+        <svg width="18" height="18" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Continue with Google
+      </a>
+    </div>
+    
+    <a href="#" id="show-register">Don't have an account? Register here</a>
+  </div>
+  <form class="auth-form hidden" id="register-form">
+    <h2>Register</h2>
+    <label for="register-full_name">Full Name:</label>
+    <input id="register-full_name" name="full_name" required="" type="text"/>
+    <label for="register-email">Email:</label>
+    <input id="register-email" name="email" required="" type="email"/>
+    <label for="register-phone_number">Phone Number:</label>
+    <input id="register-phone_number" name="phone_number" required="" type="text"/>
+    <label for="register-password">Password:</label>
+    <input id="register-password" name="password" required="" type="password"/>
+    <label>Role:</label>
+    <div class="register-role-group">
+      <label>
+        <input name="role" required="" type="radio" value="User"/> User
+      </label>
+      <label>
+        <input name="role" required="" type="radio" value="Concierge Agent"/> Concierge Agent
+      </label>
+      <label>
+        <input name="role" required="" type="radio" value="Service Agent"/> Service Agent
+      </label>
+      <label>
+        <input name="role" required="" type="radio" value="Real Estate Agent"/> Real Estate Agent
+      </label>
+      <label class="hidden" for="register-license">License Number:</label>
+      <input class="hidden" id="register-psra" name="psra_number" type="text"/>
+      <label>
+        <input id="receive-notifications" name="receive_notifications" type="checkbox"/>
+        Receive Email Notifications
+      </label>
+      <label>
+        <input id="receive-sms" name="receive_sms" type="checkbox"/>
+        Receive SMS Notifications
+      </label>
+      <button type="submit">Register</button>
+    </div>
+    
+    <div class="divider">
+      <span>or</span>
+    </div>
+    
+    <div class="oauth-buttons">
+      <a href="#" class="oauth-button google" id="google-register">
+        <svg width="18" height="18" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Sign up with Google
+      </a>
+    </div>
+    
+    <p>Already have an account? <a href="#" id="show-login-link">Login here</a>.</p>
+    </div>
+  </form>
+</div>
+<!-- Load main.js first so API_BASE_URL is available -->
+<script src="/scripts/main.js"></script>
+<script src="/js/auth-utils.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check for OAuth callback first
+      const callbackResult = AuthUtils.handleOAuthCallback();
+      if (callbackResult.success) {
+        alert('Login successful!');
+        window.location.href = '/pages/profile.html';
+        return;
+      } else if (callbackResult.error && window.location.search.includes('token=')) {
+        alert('OAuth authentication failed: ' + callbackResult.error);
+      }
+      
+      // Add Google OAuth button handlers
+      const googleLoginBtn = document.getElementById('google-login');
+      const googleRegisterBtn = document.getElementById('google-register');
+      
+      if (googleLoginBtn) {
+        googleLoginBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          AuthUtils.initiateGoogleAuth('login');
+        });
+      }
+      
+      if (googleRegisterBtn) {
+        googleRegisterBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          AuthUtils.initiateGoogleAuth('register');
+        });
+      }
+
+      // Toggle Register/Login forms
+      const loginBox = document.getElementById('login-box');
+      const registerForm = document.getElementById('register-form');
+      const showRegister = document.getElementById('show-register');
+      const showLoginLink = document.getElementById('show-login-link');
+      if (showRegister && loginBox && registerForm) {
+        showRegister.onclick = function(e) {
+          e.preventDefault();
+          loginBox.classList.add('hidden');
+          registerForm.classList.remove('hidden');
+        };
+      }
+      if (showLoginLink && registerForm && loginBox) {
+        showLoginLink.onclick = function(e) {
+          e.preventDefault();
+          registerForm.classList.add('hidden');
+          loginBox.classList.remove('hidden');
+        };
+      }
+
+      // Show/hide PSRA input for Real Estate Agent
+      const agentRadios = document.querySelectorAll('input[name="role"]');
+      const psraInput = document.getElementById('register-psra');
+      const psraLabel = document.querySelector('label[for="register-license"]');
+      agentRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+          if (this.value === 'Real Estate Agent') {
+            psraInput && psraInput.classList.remove('hidden');
+            psraLabel && psraLabel.classList.remove('hidden');
+          } else {
+            psraInput && psraInput.classList.add('hidden');
+            psraLabel && psraLabel.classList.add('hidden');
+          }
+        });
+      });
+
+      // Login form submission
+      const loginForm = document.getElementById('loginForm');
+      if (loginForm) {
+        loginForm.onsubmit = async function(e) {
+          e.preventDefault();
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+          try {
+            const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+            if(res.ok && data.access_token) {
+              AuthUtils.setToken(data.access_token);
+              alert('Login successful!');
+              window.location.href = '/pages/profile.html';
+            } else {
+              alert(data.message || data.error || 'Login failed');
+            }
+          } catch (err) {
+            alert('Server error. Please try again later.');
+          }
+        };
+      }
+
+      // Register form submission (actual registration)
+      if (registerForm) {
+        registerForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const form = e.target;
+          const data = {
+            full_name: form['full_name'].value,
+            email: form['email'].value,
+            phone_number: form['phone_number'].value,
+            password: form['password'].value,
+            role: form['role'].value,
+            psra_number: form['psra_number'].value,
+            receive_notifications: form['receive_notifications'].checked,
+            receive_sms: form['receive_sms'].checked
+          };
+          try {
+            const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+            });
+            const result = await res.json();
+            if (res.ok && result.access_token) {
+              AuthUtils.setToken(result.access_token);
+              alert('Registration successful!');
+              window.location.href = '/pages/profile.html';
+            } else if (res.ok) {
+              // Registration succeeded but no token returned
+              alert('Registration successful! Please log in.');
+              registerForm.classList.add('hidden');
+              loginBox.classList.remove('hidden');
+            } else {
+              alert(result.error || result.message || 'Registration failed');
+            }
+          } catch (err) {
+            alert('Server error. Please try again later.');
+          }
+        });
+      }
+    });
+  </script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const hamburger = document.querySelector(".hamburger-menu");
+      const navDropdown = document.querySelector(".nav-dropdown");
+      if (hamburger && navDropdown) {
+        hamburger.addEventListener("click", () => {
+          navDropdown.classList.toggle("show");
+        });
+      }
+    });
+  </script>
+<!-- Chatbot icon -->
+<!-- Chatbot popup -->
+</main>
+<footer>
+<div class="footer-container">
+<div class="footer-image">
+<img alt="Greia Footer Logo" src="/assets/greia (4).png" style="height: auto; max-height: 100px;"/>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Contact Details</h3>
+<p>Greia</p>
+<p>36 Upper Baggot St, Ballsbridge, D4</p>
+<p>Phone: 01 442 7303</p>
+<p>087 169 9498</p>
+<p>Email: <a href="mailto:info@greia.ie">info@greia.ie</a></p>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Quick Links</h3>
+<ul>
+<li><a href="pages/buy.html">Buy</a></li>
+<li><a href="pages/rent.html">Rent</a></li>
+<li><a href="pages/sell.html">Sell</a></li>
+<li><a href="pages/commercial.html">Commercial</a></li>
+<li><a href="pages/agents.html">Agents</a></li>
+<li><a href="pages/contact-us.html">Contact Us</a></li>
+<li><a href="pages/listyourrentalsfree.html">List Your Rentals Free</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Policy Links</h3>
+<ul>
+<li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
+<li><a href="pages/terms-of-service.html">Terms of Service</a></li>
+<li><a href="pages/cookie-policy.html">Cookie Policy</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Connect with Us</h3>
+<ul>
+<li><a href="https://www.facebook.com/profile.php?id=61577099380616" target="_blank">Facebook</a></li>
+<li><a href="https://www.instagram.com/dublin4rent/" target="_blank">Instagram</a></li>
+<li><a href="https://www.tiktok.com/@d4rent.ie" target="_blank">Tiktok</a></li>
+</ul>
+</div>
+</div>
+</footer>
+
+<!-- Global Navigation Scripts -->
+<script src="/js/global-nav.js"></script>
+<script src="/js/global-search.js"></script>
+<script src="/scripts/chatbot.js"></script><script>
+document.addEventListener("DOMContentLoaded", function() {
+    const navLinks = document.querySelectorAll("nav a");
+    navLinks.forEach(link => {
+        if (link.textContent.trim().toLowerCase() === "login") {
+            link.textContent = "My Account";
+        }
+    });
+});
+</script></body>
+</html>

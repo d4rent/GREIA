@@ -1,0 +1,178 @@
+/* Profile Analytics Section Styles */
+.profile-analytics-section {
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(28,11,255,0.08);
+  margin: 20px 0;
+}
+
+/* Analytics Dashboard */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+/* Stats Card */
+.stats-card {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.stats-card:hover {
+  transform: translateY(-4px);
+}
+
+.stats-value {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #1c0bff;
+  margin-bottom: 8px;
+}
+
+.stats-label {
+  font-size: 0.95em;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+
+.stats-trend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 0.9em;
+}
+
+.trend-up {
+  color: #10b981;
+}
+
+.trend-down {
+  color: #ef4444;
+}
+
+/* Charts Section */
+.charts-section {
+  margin-top: 32px;
+}
+
+.chart-container {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.chart-title {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+/* Time Period Selector */
+.time-selector {
+  display: flex;
+  gap: 8px;
+  background: #fff;
+  padding: 4px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.time-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9em;
+  border: none;
+  background: none;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.time-btn.active,
+.time-btn:hover {
+  background: #1c0bff;
+  color: white;
+}
+
+/* Activity Feed */
+.activity-feed {
+  margin-top: 32px;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.activity-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e0e7ff;
+  color: #1c0bff;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-title {
+  font-weight: 500;
+  color: #1e293b;
+  margin-bottom: 4px;
+}
+
+.activity-time {
+  font-size: 0.85em;
+  color: #64748b;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .profile-analytics-section {
+    padding: 16px;
+  }
+
+  .stats-card {
+    padding: 16px;
+  }
+
+  .stats-value {
+    font-size: 2em;
+  }
+
+  .chart-container {
+    padding: 16px;
+  }
+
+  .chart-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .time-selector {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,155 @@
+/* Sidebar Navigation Styles */
+.profile-sidebar {
+  width: 240px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 0;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+  padding: 32px 0;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(8px);
+  border-right: 1.5px solid #e0e7ef;
+  overflow-y: auto;
+}
+
+/* Sidebar Profile Photo */
+#sidebar-profile-photo-wrap {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+#sidebar-profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #1c0bff;
+}
+
+/* Navigation Buttons */
+.sidebar-nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.sidebar-nav button {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 14px 32px;
+  font-size: 1.08em;
+  color: #222;
+  border-radius: 0;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.sidebar-nav button.active,
+.sidebar-nav button:hover {
+  background: rgba(28,11,255,0.08);
+  color: #1c0bff;
+}
+
+/* Admin Dashboard Button */
+.sidebar-nav button#nav-admin-dashboard {
+  background: linear-gradient(135deg, #1c0bff 0%, #4c1bff 100%);
+  color: white;
+  font-weight: 600;
+  margin: 8px 0;
+  border-radius: 8px;
+}
+
+.sidebar-nav button#nav-admin-dashboard:hover {
+  background: linear-gradient(135deg, #1a0ae6 0%, #461ae6 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(28,11,255,0.3);
+}
+
+/* Logo Container */
+.sidebar-logo {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.sidebar-logo img {
+  max-width: 160px;
+  height: auto;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .profile-sidebar {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    min-height: unset;
+    padding: 16px 0;
+    position: sticky;
+    justify-content: center;
+    gap: 0;
+    border-radius: 0;
+    border-right: none;
+    border-bottom: 1.5px solid #e0e7ef;
+    margin-bottom: 16px;
+    overflow-x: auto;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .sidebar-nav button {
+    width: auto;
+    padding: 8px 16px;
+    font-size: 0.95em;
+    white-space: nowrap;
+  }
+
+  .sidebar-logo {
+    display: none;
+  }
+
+  #sidebar-profile-photo-wrap {
+    width: 40px;
+    height: 40px;
+    margin: 0 16px;
+  }
+
+  .sidebar-nav button#nav-admin-dashboard {
+    margin: 0 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-sidebar {
+    padding: 12px 0;
+  }
+
+  .sidebar-nav button {
+    padding: 6px 12px;
+    font-size: 0.9em;
+  }
+
+  #sidebar-profile-photo-wrap {
+    width: 32px;
+    height: 32px;
+    margin: 0 8px;
+  }
+}

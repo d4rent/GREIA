@@ -1,0 +1,655 @@
+/* General Reset */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1, h2, h3 {
+    color: #35424a; /* Consistent heading color */
+    margin: 0;
+}
+
+a {
+    text-decoration: none; /* Remove underline from all links */
+    transition: color 0.3s; /* Smooth transition for hover effects */
+}
+
+a:hover {
+    color: #008080; /* Highlight links on hover */
+}
+
+/* Utility Classes */
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bg-dark {
+    background-color: #35424a;
+    color: #ffffff;
+}
+
+.padding-large {
+    padding: 80px 20px;
+}
+
+.padding-medium {
+    padding: 20px 30px;
+}
+
+.box-shadow {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.rounded {
+    border-radius: 5px;
+}
+
+/* --- NAVIGATION BAR --- */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 50px;
+    background: linear-gradient(to right, #35424a, #1f2a31);
+    position: relative;
+    z-index: 100;
+}
+
+.logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0px;
+    margin-left: 26px;
+    z-index: 1001;
+     mix-blend-mode: screen;
+
+}
+
+.logo img {
+    height: 150px;
+    width: auto;
+    margin: 0;
+    mix-blend-mode: screen;
+
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-links li {
+    margin: 0;
+    text-align: left;
+}
+
+.nav-links.left-links li {
+    margin-right: 43px;
+}
+
+.nav-links.right-links li {
+    margin-left: 19px;
+}
+
+.nav-links a {
+    font-size: 10px;
+    padding: 15px;
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+}
+
+.nav-links a:hover {
+    color: #d9370aeb;
+}
+
+.nav-links .dropdown {
+    position: relative;
+}
+
+.nav-links .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.nav-links .dropdown-menu a {
+    color: #333;
+    padding: 10px 20px;
+    background: none;
+}
+
+.nav-links .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Hamburger menu (hidden on desktop) */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 101;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    margin: 4px 0;
+    background: #fff !important;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* --- MOBILE/TABLET NAVIGATION --- */
+@media (max-width: 1024px) {
+    .navbar {
+        justify-content: center;
+        padding: 12px 10px;
+    }
+    .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        z-index: 102;
+    }
+    .logo img {
+        height: 48px;
+        max-width: 110px;
+    }
+    .nav-links {
+        display: none !important;
+    }
+    .hamburger-menu {
+        display: flex !important;
+    }
+    .nav-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100vw;
+        background: #35424a;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        z-index: 1000;
+        padding: 30px 0 20px 0;
+        animation: fadeIn 0.2s;
+    }
+    .nav-dropdown.show {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 30px;
+    }
+    .nav-dropdown .left-links,
+    .nav-dropdown .right-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 24px;
+    }
+    .nav-dropdown li {
+        margin: 0 0 18px 0;
+        width: 100%;
+    }
+    .nav-dropdown a {
+        font-size: 1.1rem;
+        color: #fff;
+        padding: 12px 0;
+        border-radius: 4px;
+        width: 100%;
+        display: block;
+        text-align: left;
+    }
+    .nav-dropdown a:hover {
+        background: #22303a;
+        color: #008080;
+    }
+    /* Show all dropdown-menus in mobile */
+    .nav-dropdown .dropdown-menu {
+        display: block !important;
+        position: static;
+        background: none;
+        box-shadow: none;
+        padding-left: 15px;
+        margin-bottom: 0;
+    }
+    .nav-dropdown .dropdown-menu a {
+        color: #fff;
+        font-size: 1rem;
+        padding: 8px 0 8px 18px;
+    }
+}
+
+/* Animation for dropdown */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* Desktop only: show nav links, hide hamburger/dropdown */
+@media (min-width: 1025px) {
+    .hamburger-menu,
+    .nav-dropdown {
+        display: none !important;
+    }
+    .nav-links {
+        display: flex !important;
+    }
+}
+
+/* Local Experts Section */
+.local-global {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.local-global h2 {
+    font-size: 34px;
+    font-weight: 300;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.local-global p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 10px 0;
+}
+
+/* Search Bar Container */
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background: #f4f4f4; /* Light background for contrast */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 8px; /* Rounded corners */
+    margin: 20px auto; /* Center the search bar */
+    max-width: 800px; /* Limit the width */
+}
+
+/* Search Input */
+.search-input {
+    flex: 1;
+    padding: 15px 20px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px 0 0 8px; /* Rounded corners on the left */
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    border-color: #008080; /* Highlight border on focus */
+}
+
+/* Search Button */
+.search-button {
+    padding: 30px 60px;
+    font-size: 16px;
+    background: #008080;
+    color: #ffffff;
+    border: none;
+    border-radius: 0 8px 8px 0; /* Rounded corners on the right */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background: #d73814; /* Darker red on hover */
+}
+
+.slide img {
+    width: 100%;
+    height: 900px; /* Match the height of the slideshow container */
+    object-fit: cover; /* Ensure the image covers the container without distortion */
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.slide img {
+    width: 100%;
+    height: auto;
+    transform: translateY(-100px);
+    transition: transform 0.3s ease-in-out;
+}
+
+.dots-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+
+/* Featured Properties Section */
+.featured-properties {
+    background: linear-gradient(to right, #35424a, #1f2a31);
+    color: #ffffff;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.featured-properties h2 {
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.property-card {
+    flex: 0 0 auto;
+    width: 300px;
+    background: #ffffff;
+    color: #333;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.property-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer Section */
+footer {
+    background-color: #35424a;
+    color: #ffffff;
+    padding: 40px 20px;
+    font-size: 14px;
+    position: relative;
+}
+
+.footer-image {
+    text-align: left;
+    padding: 15px 10px 0px 20px; /* Reduced left padding from 40px to 20px */
+    max-width: 1200px;
+    margin: 0; /* Remove auto margin to align completely to the left */
+}
+
+.footer-image img {
+    max-height: 120px;
+    width: auto;
+    margin-left: 0; /* Ensure no left margin on the image */
+}
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-section {
+    flex: 1 1 200px;
+    margin: 10px;
+}
+
+.footer-section h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #008080;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #ffffff;
+}
+
+.footer-section ul li a:hover {
+    color: #008080;
+}
+
+.footer-section p {
+    margin: 5px 0;
+    opacity: 0.8;
+}
+
+.footer-section p a {
+    color: #ffffff;
+}
+
+.footer-section p a:hover {
+    color: #008080;
+}
+
+/* PSRA Number */
+.footer-psra-number {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 12px;
+    color: #d3d3d3;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+        position: relative; /* For positioning the login button */
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center; /* Center the navigation menu */
+        padding: 0;
+        margin: 10px 0; /* Add spacing around the nav */
+    }
+
+    nav ul li {
+        display: inline-block; /* Keep nav items inline */
+        margin: 0 10px; /* Add spacing between items */
+    }
+
+    .login-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 40px; /* Adjust size for mobile */
+        height: 40px;
+    }
+
+    .login-button img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%; /* Make it circular */
+    }
+
+    .slideshow-container {
+        position: relative; /* Ensure the search bar stays inside */
+        height: 280px; /* Allow slideshow to adjust height dynamically */
+    }
+
+    .slide img {
+        transform: scale(1.4); /* Increase image size by 40% */
+        object-fit: cover; /* Ensure the image still covers the container */
+        margin-top: 5px; /* Add margin to bring it down */
+    }
+
+    .search-bar-container {
+        position: absolute; /* Position it inside the slideshow */
+        top: 420px; /* Adjust vertical position */
+        left: 50%;
+        transform: translateX(-50%); /* Center it horizontally */
+        width: 80%; /* Reduce the width to make it smaller */
+        max-width: 600px; /* Limit the maximum width */
+        background: rgba(255, 255, 255, 0.8); /* Add a semi-transparent background */
+        padding: 10px; /* Reduce padding to make it more compact */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+        border-radius: 5px; /* Rounded corners */
+    }
+    
+    .search-input {
+        width: calc(100% - 100px); /* Adjust width to leave space for the button */
+        padding: 8px; /* Reduce padding for a smaller input */
+        font-size: 14px; /* Reduce font size */
+        border: 1px solid #ddd;
+        border-radius: 5px 0 0 5px; /* Rounded corners on the left */
+        outline: none;
+    }
+    
+    .search-button {
+        width: 80px; /* Reduce the button width */
+        padding: 8px; /* Reduce padding for a smaller button */
+        font-size: 14px; /* Reduce font size */
+        background: #008080;
+        color: #ffffff;
+        border: none;
+        border-radius: 0 5px 5px 0; /* Rounded corners on the right */
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .search-button:hover {
+        background: #d73814;
+    }
+
+       /* Local Experts Section */
+       .local-global {
+        padding: 10px; /* Reduce padding */
+        text-align: center; /* Center-align text for better readability */
+    }
+
+    .local-global h2 {
+        font-size: 15px; /* Reduce font size */
+        line-height: 1.2; /* Adjust line height */
+    }
+
+    .local-global p {
+        font-size: 8px; /* Reduce font size */
+        line-height: 1.5; /* Adjust line height */
+        letter-spacing: 0.5px; /* Adjust letter spacing */
+    }
+
+    /* Meet Your Experts Section */
+    .meet-your-experts {
+        padding: 50px 10px; /* Reduce padding */
+    }
+
+    .meet-your-experts h2 {
+        font-size: 2rem; /* Reduce font size */
+        margin-bottom: 50px; /* Reduce bottom margin */
+    }
+
+    .experts-container {
+        gap: 10px; /* Reduce gap between expert cards */
+    }
+
+    .expert-card {
+        transform: scale(1); /* Reset scaling for smaller screens */
+    }
+
+    .profile-picture {
+        width: 80px; /* Reduce profile picture size */
+        height: 80px;
+    }
+
+    .expert-card h3 {
+        font-size: 1.2rem; /* Reduce font size */
+    }
+
+    .job-title {
+        font-size: 1rem; /* Reduce font size */
+    }
+
+    .expert-card p {
+        font-size: 0.9rem; /* Reduce font size */
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-section {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .logo img {
+        height: 70px;         /* Increased from 48px */
+        max-width: 150px;     /* Increased from 110px */
+    }
+ 
+}

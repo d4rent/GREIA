@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Property Details</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<link href="../css/footer.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+<style>
+  :root {
+    --primary-accent: #1c0bff;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f8f9fc;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  .page-container {
+    max-width: 1400px;
+    margin: 1rem auto;
+    padding: 0 2rem;
+  }
+  
+  .listing-container {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 2rem;
+    background: transparent;
+    margin-bottom: 2rem;
+    align-items: start;
+  }
+
+  .listing-features {
+    background: #f8f9fc;
+    padding: 2rem;
+    border-radius: 16px;
+    margin: 2rem 0;
+  }
+
+  .listing-features h2 {
+    font-size: 1.4rem;
+    margin: 0 0 1.5rem 0;
+    color: #1a1a1a;
+  }
+
+  .feature-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .feature-list li {
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+  }
+
+  .feature-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .feature-list li i {
+    color: #00c6a2;
+    font-size: 1.2rem;
+    min-width: 1.2rem;
+    text-align: center;
+  }
+
+  .feature-list li span {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.5rem;
+    color: #444;
+  }
+
+  .feature-list li span span {
+    font-weight: 500;
+    color: #1a1a1a;
+  }
+
+  .listing-features {
+    background: #f8f9fc;
+    padding: 2rem;
+    border-radius: 16px;
+    margin: 1.5rem 0;
+  }
+
+  .listing-features h2 {
+    font-size: 1.4rem;
+    margin: 0 0 1.5rem 0;
+    color: #1a1a1a;
+    border-bottom: 2px solid var(--primary-accent);
+    padding-bottom: 0.5rem;
+  }
+
+  .main-content {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 0;
+  }
+
+  .gallery-container {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    background: #f8f9fc;
+    margin: 0;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .gallery-main {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #1c0bff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.2s;
+  }
+
+  .gallery-nav:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .gallery-nav {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-nav {
+      width: 36px;
+      height: 36px;
+      font-size: 0.9rem;
+    }
+  }
+
+  .gallery-nav.prev { left: 1rem; }
+  .gallery-nav.next { right: 1rem; }
+
+  .gallery-thumbnails {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(255,255,255,0.9);
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .thumbnail {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+    object-fit: cover;
+  }
+
+  .thumbnail:hover {
+    transform: scale(1.05);
+  }
+
+  .thumbnail.active {
+    border-color: #1c0bff;
+  }
+
+  .listing-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 1rem 0;
+  }
+
+  .listing-meta {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    color: #666;
+  }
+
+  .listing-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .listing-meta i {
+    color: #00c6a2;
+    font-size: 1.2rem;
+  }
+
+  .listing-description {
+    color: #444;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    background: #f7f8fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .service-description-section {
+    background: #f7f8fa;
+    padding: 2rem;
+    border-radius: 16px;
+    margin: 2rem 0;
+  }
+
+  .service-description-section h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.4rem;
+    color: #1a1a1a;
+  }
+
+  .service-description {
+    color: #444;
+    line-height: 1.6;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+    margin: 1rem 0;
+    font-style: italic;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    height: fit-content;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    padding: 2rem;
+    margin-top: 0;
+  }
+  
+  .provider-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .provider-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #f0f0f0;
+  }
+
+  .provider-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00c6a2;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .provider-info {
+    flex: 1;
+  }
+
+  .provider-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+  }
+
+  .provider-role {
+    margin: 0.3rem 0 0 0;
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: #f7f8fa;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #1a1a1a;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .contact-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: white;
+  }
+
+  .contact-link i {
+    color: #00c6a2;
+    font-size: 1.2rem;
+  }
+
+  .address-block {
+    background: #f7f8fa;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* Navigation Bar */
+  .navbar {
+    background: linear-gradient(90deg, #1c0bff, #00c6d4, #1c0bff);
+    background-size: 200% 100%;
+    padding: 0.5rem 2rem;
+    position: relative;
+    box-shadow: 0 8px 20px rgba(28,11,255,0.15);
+    margin-bottom: 2rem;
+    animation: gradientFlow 15s linear infinite;
+  }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    /* Navigation text colors */
+    .navbar a {
+      color: white !important;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+
+    .navbar a:hover {
+      opacity: 1;
+    }
+
+    .navbar .dropdown-menu {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar .dropdown-menu a {
+      color: #1c0bff !important;
+    }
+
+    .navbar .dropdown-menu a:hover {
+      background: rgba(28, 11, 255, 0.1);
+    }
+
+    /* Reset body styles */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f7f8fa;
+      font-family: 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
+    }
+
+    .property-details {
+      max-width: 1200px;
+      margin: 6rem auto 2rem auto;
+      padding: 0;
+      background: #fff;
+      border-radius: 32px;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.13);
+      display: flex;
+      flex-direction: row;
+      gap: 0;
+      overflow: hidden;
+      border: none;
+    }
+
+    .property-gallery {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      background: #f7f8fa;
+      padding: 3.5rem 2.5rem 3.5rem 2.5rem;
+      border-right: 1px solid #f0f0f0;
+      min-width: 0;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .main-image-container {
+      position: relative;
+      width: 90%;
+      max-width: 600px;
+      height: 380px;
+      min-width: 320px;
+      min-height: 220px;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.09);
+      margin: 0 auto 2rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+      border-radius: 24px;
+      background: #eee;
+      display: block;
+    }
+
+    .main-image:hover {
+      transform: scale(1.025);
+    }
+
+    .image-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #1c0bff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: all 0.2s;
+      z-index: 10;
+    }
+
+    .image-nav:hover {
+      background: white;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .image-nav:hover {
+      background: rgba(0,0,0,0.75);
+    }
+
+    .image-nav.prev {
+      left: 18px;
+    }
+    .image-nav.next {
+      right: 18px;
+    }
+
+    .image-counter {
+      position: absolute;
+      bottom: 18px;
+      right: 18px;
+      background: rgba(0,0,0,0.65);
+      color: #fff;
+      padding: 8px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .single-image .image-nav,
+    .single-image .image-counter {
+      display: none;
+    }
+
+    .thumbnail-gallery {
+      display: flex;
+      gap: 0.7rem;
+      margin-top: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .thumbnail-gallery img {
+      width: 80px;
+      height: 64px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: opacity 0.18s, border-color 0.18s;
+      background: #eee;
+      border-radius: 12px;
+      display: block;
+
+  .contact-service-btn {
+    background: linear-gradient(90deg,#00c6a2 60%,#0077cc 100%);
+    color: #fff;
+    border: none;
+    padding: 1.1rem 2.2rem;
+    font-size: 1.13rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+    margin-top: 1.2rem;
+    width: 100%;
+    border-radius: 22px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    letter-spacing: 0.5px;
+  }
+
+  .contact-service-btn:hover {
+    background: linear-gradient(90deg,#0077cc 60%,#00c6a2 100%);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+  }    .contact-agent:hover {
+      background: linear-gradient(90deg, #32ffbe 0%, var(--primary-accent) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .agent-section-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      margin-top: 1.2rem;
+    }
+
+    .agent-section {
+      background: #f7f8fa;
+      border-radius: 28px;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.1rem;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+      transition: box-shadow 0.18s,transform 0.18s;
+    }
+
+    .agent-section:hover {
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .agent-avatar {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #00c6a2;
+      background: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    }
+
+    .toggle-agent-button {
+      background: linear-gradient(90deg,#0077cc 60%,#00c6a2 100%);
+      color: #fff;
+      border: none;
+      padding: 1rem 2rem;
+      cursor: pointer;
+      font-size: 1.13rem;
+      font-weight: 600;
+      transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.09);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .toggle-agent-button:hover {
+      background: linear-gradient(90deg,#00c6a2 60%,#0077cc 100%);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+    }
+      border-radius: 12px;
+      margin: 0.7rem 0 1.2rem 0;
+      line-height: 1.6;
+      color: #555;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+    }
+
+    .key-features {
+      grid-column: 1 / -1;
+      list-style: none;
+      padding: 0;
+      margin: 0.7rem 0 1.2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .key-features li {
+      background: #e8f4fd;
+      padding: 0.7rem 1.1rem;
+      border-radius: 10px;
+      font-weight: 500;
+      color: #0077cc;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    .key-features li::before {
+      content: "\2713";
+      color: #00c6a2;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .contact-agent {
+      background: linear-gradient(90deg, var(--primary-accent) 0%, #32ffbe 100%);
+      color: #1a1a1a;
+      border: none;
+      padding: 1.1rem 2.2rem;
+      font-size: 1.13rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s,transform 0.18s;
+      margin-top: 1.2rem;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    }
+
+    .contact-agent:hover {
+      background: linear-gradient(90deg,#0077cc 60%,#00c6a2 100%);
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .agent-section-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      margin-top: 1.2rem;
+    }
+
+    .agent-section {
+      background: #f7f8fa;
+      border-radius: 18px;
+      padding: 1.5rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: box-shadow 0.18s,transform 0.18s;
+    }
+
+    .agent-section:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    .agent-avatar {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #00c6a2;
+      background: #fff;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+
+    .agent-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      width: 100%;
+    }
+
+    .agent-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #222;
+      margin: 0;
+    }
+
+    .agent-agency {
+      font-size: 1.08rem;
+      color: #0077cc;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .agent-contact-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      padding: 0.7rem 1rem;
+      background: #fff;
+      border-radius: 10px;
+      margin: 0.3rem 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    .agent-contact-row span {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .agent-contact-row a {
+      color: #0077cc;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      transition: color 0.18s;
+    }
+
+    .agent-contact-row a:hover {
+      color: #00c6a2;
+      text-decoration: underline;
+    }
+
+    .toggle-agent-button {
+      background: linear-gradient(90deg,#0077cc 60%,#00c6a2 100%);
+      color: #fff;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      font-size: 1.08rem;
+      font-weight: 600;
+      transition: background 0.18s,transform 0.18s;
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+
+    .toggle-agent-button:hover {
+      background: linear-gradient(90deg,#00c6a2 60%,#0077cc 100%);
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    /* Slideshow Improvements - keep 90 degree corners */
+    .slideshow {
+      background: rgba(0,0,0,0.95);
+    }
+
+    .slideshow-content img {
+      max-width: 90vw;
+      max-height: 80vh;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    .close-slideshow {
+      font-size: 3rem;
+      color: #fff;
+      background: rgba(255,255,255,0.2);
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+
+    .close-slideshow:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .slideshow-controls button {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      border: none;
+      padding: 1rem 1.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .slideshow-controls button:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* Remove footer improvements to keep original */
+
+    /* Responsive Design */
+  @media (max-width: 768px) {
+    .page-container {
+      padding: 0 1rem;
+    }
+
+    .listing-container {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .main-content {
+      margin-bottom: 2rem;
+    }
+
+    .gallery-container {
+      height: 300px;
+    }
+
+    .listing-title {
+      font-size: 1.8rem;
+    }
+
+    .listing-meta {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .listing-features {
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .listing-features h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-list {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-list li {
+      padding: 0.8rem 1rem;
+    }
+
+    .feature-list li i {
+      font-size: 1rem;
+    }
+
+    .feature-list li span {
+      font-size: 0.95rem;
+    }
+
+    .service-description-section {
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .service-description {
+      padding: 1rem;
+    }
+
+    .sidebar {
+      position: static;
+      width: 100%;
+    }
+
+    .contact-details {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }    @media (max-width: 480px) {
+      .page-container {
+        padding: 0 0.5rem;
+      }
+
+      .listing-container {
+        margin: 1rem 0;
+      }
+
+      .gallery-container {
+        height: 250px;
+      }
+
+      .listing-title {
+        font-size: 1.5rem;
+      }
+
+      .listing-meta span {
+        font-size: 0.9rem;
+      }
+
+      .listing-description {
+        font-size: 1rem;
+        padding: 1rem;
+      }
+
+      .feature-list li {
+        padding: 0.8rem 1rem;
+      }
+
+      .service-description-section {
+        padding: 1rem;
+      }
+
+      .service-description {
+        padding: 0.8rem;
+        font-size: 0.95rem;
+      }
+
+      .provider-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+
+      .provider-avatar {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+      }
+
+      .contact-service-btn {
+        padding: 0.8rem;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="navbar-thirds">
+    <div class="navbar-third left">
+      <ul class="nav-links left-links" style="position:relative; z-index:100;">
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/buy.html" style="position:relative; z-index:101;">Property</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/buy.html">Buy</a></li>
+            <li><a href="/pages/rent.html">Rent</a></li>
+            <li><a href="/pages/commercial.html">Commercial</a></li>
+            <li><a href="/pages/buy.html">Apartments</a></li>
+            <li><a href="/pages/sell.html">Sell</a></li>
+            <li><a href="/pages/valuations.html">Valuations</a></li>
+            <li><a href="/pages/buy.html">New Homes</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" style="position:relative;">
+          <a href="#" style="color: #32ffbe; position:relative; z-index:101;" class="referral-dropdown-toggle">Connect</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/agents.html">Find an Agent</a>
+            <li class="nested-dropdown" style="position: relative;">
+<div style="height: 32px;"></div>
+              <a href="/pages/agents.html" class="referral-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false">Referral Agents ▸</a>
+              <ul class="dropdown-menu referral-dropdown" style="display:none; position: absolute; left: 100%; top: 0; background: white; list-style:none; padding:10px; border:1px solid #ccc; min-width: 220px; z-index: 2000;">
+                <li><a href="/pages/agents.html?subtype=luxury">Luxury Home Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=lettings">Lettings Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=newhomes">New Homes Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=commercial">Commercial Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=residential">Residential Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=developer">Developer Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=timeshare">Timeshare Agents</a></li>
+              </ul>
+            </li>
+            <li><a href="/pages/coaching.html">Coaching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="/index.html">
+          <img alt="Logo" src="../assets/greia (4).png" style="height: auto; max-height: 140px;"/>
+        </a>
+      </div>
+    </div>
+    <div class="navbar-third right">
+      <ul class="nav-links right-links">
+        <li>
+          <a href="/pages/services.html" class="fancy-underline">Our Services</a>
+        </li>
+        <li>
+          <a href="/pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown">
+          <a href="/pages/login.html" id="login-btn">Log In</a>
+          <ul class="dropdown-menu">
+            <li><a href="/pages/login.html">Sign In</a></li>
+            <li><a href="/pages/register.html">Register</a></li>
+            <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button aria-label="Toggle navigation" class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <!-- Mobile nav menu -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav">
+    <ul>
+      <li class="dropdown">
+        <a href="/pages/buy.html" class="dropdown-toggle">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/buy.html">Buy</a></li>
+          <li><a href="/pages/rent.html">Rent</a></li>
+          <li><a href="/pages/commercial.html">Commercial</a></li>
+          <li><a href="/pages/buy.html">Apartments</a></li>
+          <li><a href="/pages/sell.html">Sell</a></li>
+          <li><a href="/pages/valuations.html">Valuations</a></li>
+          <li><a href="/pages/buy.html">New Homes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" style="color: #32ffbe;">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/agents.html">Find an Agent</a></li>
+          <li><a href="/pages/agents.html">Referral Agents</a></li>
+          <li><a href="/pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+      <li><a href="/pages/services.html">Our Services</a></li>
+      <li><a href="/pages/concierge.html">Concierge</a></li>
+      <li class="dropdown">
+        <a href="/pages/login.html" class="dropdown-toggle">Log In</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/login.html">Sign In</a></li>
+          <li><a href="/pages/register.html">Register</a></li>
+          <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav">
+    <ul>
+      <li class="dropdown">
+        <a href="/pages/buy.html" class="dropdown-toggle">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/buy.html">Buy</a></li>
+          <li><a href="/pages/rent.html">Rent</a></li>
+          <li><a href="/pages/commercial.html">Commercial</a></li>
+          <li><a href="/pages/buy.html">Apartments</a></li>
+          <li><a href="/pages/sell.html">Sell</a></li>
+          <li><a href="/pages/valuations.html">Valuations</a></li>
+          <li><a href="/pages/buy.html">New Homes</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" style="color: #32ffbe;">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/agents.html">Find an Agent</a></li>
+          <li><a href="/pages/agents.html">Referral Agents</a></li>
+          <li><a href="/pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+      <li><a href="/pages/services.html">Our Services</a></li>
+      <li><a href="/pages/concierge.html">Concierge</a></li>
+      <li class="dropdown">
+        <a href="/pages/login.html" class="dropdown-toggle">Log In</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/login.html">Sign In</a></li>
+          <li><a href="/pages/register.html">Register</a></li>
+          <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- Property Details Section -->
+<div class="page-container">
+  <div class="listing-container">
+    <div class="main-content">
+      <!-- Gallery Section -->
+      <div class="gallery-container">
+        <div class="gallery-main">
+          <img id="main-image" class="gallery-image" src="/assets/sold rent.png" alt="Property Image" />
+          <button class="gallery-nav prev" onclick="prevImage()">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="gallery-nav next" onclick="nextImage()">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <div class="gallery-thumbnails" id="thumbnails"></div>
+        </div>
+      </div>
+      
+      <!-- Property Details -->
+      <div class="listing-details">
+        <h1 id="property-title" class="listing-title">Loading...</h1>
+        <div class="listing-meta">
+          <span class="category"><i class="fas fa-tag"></i> <span id="property-type">Type</span></span>
+          <span class="location"><i class="fas fa-map-marker-alt"></i> <span id="property-location">Location</span></span>
+          <span class="price"><i class="fas fa-euro-sign"></i> <span id="property-price">Price</span></span>
+        </div>
+        <div class="listing-description" id="property-description">Loading...</div>
+        
+        <!-- Property Features -->
+        <div class="listing-features">
+          <h2>Core Details</h2>
+          <ul class="feature-list" id="core-features">
+            <li><i class="fas fa-home"></i><span>Property Type: <span id="property-type-value"></span></span></li>
+            <li><i class="fas fa-tag"></i><span>Status: <span id="property-status-value"></span></span></li>
+            <li><i class="fas fa-euro-sign"></i><span>Price: <span id="property-price-value"></span></span></li>
+            <li><i class="fas fa-calendar"></i><span>Available From: <span id="available-from-value"></span></span></li>
+          </ul>
+        </div>
+
+        <!-- Property Specifications -->
+        <div class="listing-features">
+          <h2>Property Specifications</h2>
+          <ul class="feature-list" id="property-specs">
+            <li><i class="fas fa-ruler-combined"></i><span>Size: <span id="size-value"></span></span></li>
+            <li><i class="fas fa-bed"></i><span>Bedrooms: <span id="bedrooms-value"></span></span></li>
+            <li><i class="fas fa-bath"></i><span>Bathrooms: <span id="bathrooms-value"></span></span></li>
+            <li><i class="fas fa-calendar-alt"></i><span>Year Built: <span id="year-built-value"></span></span></li>
+          </ul>
+        </div>
+
+        <!-- Property Features -->
+        <div class="listing-features">
+          <h2>Property Features</h2>
+          <ul class="feature-list" id="additional-features">
+            <li><i class="fas fa-charging-station"></i><span>Energy Rating: <span id="energy-rating-value"></span></span></li>
+            <li><i class="fas fa-parking"></i><span>Parking: <span id="parking-value"></span></span></li>
+            <li><i class="fas fa-seedling"></i><span>Garden: <span id="garden-value"></span></span></li>
+            <li><i class="fas fa-thermometer-half"></i><span>Heating: <span id="heating-value"></span></span></li>
+          </ul>
+        </div>
+
+        <!-- Rental Information -->
+        <div class="listing-features">
+          <h2>Rental Details</h2>
+          <ul class="feature-list" id="rental-details">
+            <li><i class="fas fa-money-bill-wave"></i><span>Rent: <span id="rent-value"></span></span></li>
+            <li><i class="fas fa-piggy-bank"></i><span>Deposit: <span id="deposit-value"></span></span></li>
+            <li><i class="fas fa-file-contract"></i><span>Lease Term: <span id="lease-term-value"></span></span></li>
+            <li><i class="fas fa-paw"></i><span>Pets Allowed: <span id="pets-allowed-value"></span></span></li>
+            <li><i class="fas fa-smoking-ban"></i><span>Smoking: <span id="smoking-value"></span></span></li>
+            <li><i class="fas fa-couch"></i><span>Furnished: <span id="furnished-value"></span></span></li>
+          </ul>
+        </div>
+
+        <!-- Location Details -->
+        <div class="listing-features">
+          <h2>Location Information</h2>
+          <ul class="feature-list" id="location-details">
+            <li><i class="fas fa-map-marker-alt"></i><span>Address: <span id="address-value"></span></span></li>
+            <li><i class="fas fa-map"></i><span>Area: <span id="area-value"></span></span></li>
+            <li><i class="fas fa-city"></i><span>City: <span id="city-value"></span></span></li>
+            <li><i class="fas fa-globe-europe"></i><span>County: <span id="county-value"></span></span></li>
+            <li><i class="fas fa-mail-bulk"></i><span>Eircode: <span id="eircode-value"></span></span></li>
+          </ul>
+        </div>
+
+        <!-- Property Details Section -->
+        <div class="service-description-section">
+          <h2>About This Property</h2>
+          <div class="service-description" id="property-about">
+            <p>This exceptional property offers an unrivaled combination of luxury, comfort, and prime location. Step inside to discover a thoughtfully designed living space that caters to modern lifestyles while maintaining a timeless elegance.</p>
+            <p>Whether you're looking for an investment opportunity or your next home, this property presents a unique offering in one of Dublin's most sought-after locations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Sidebar with Agent Info -->
+    <div class="sidebar">
+      <div class="provider-card">
+        <div class="provider-header">
+          <img id="agent-avatar" src="/assets/blank-profile-picture-973460_960_720.webp" alt="Agent Avatar" class="provider-avatar">
+          <div class="provider-info">
+            <h3 id="agent-name">Loading...</h3>
+            <p class="provider-role">Property Agent</p>
+          </div>
+        </div>
+        
+        <!-- Contact Information -->
+        <div class="contact-details">
+          <a id="agent-phone" href="#" class="contact-link phone">
+            <i class="fas fa-phone"></i>
+            <span>Loading...</span>
+          </a>
+          <a id="agent-email" href="#" class="contact-link email">
+            <i class="fas fa-envelope"></i>
+            <span>Loading...</span>
+          </a>
+          <a id="agent-website" href="#" class="contact-link website" target="_blank">
+            <i class="fas fa-globe"></i>
+            <span>Loading...</span>
+          </a>
+          <div class="address-block">
+            <span style="font-size: 1.05rem; font-weight: 600; color: #333;">Office Address</span>
+            <span id="agent-address" style="font-size: 1.05rem; color: #555;"></span>
+          </div>
+        </div>
+
+        <button 
+          class="contact-service-btn" 
+          id="contact-agent-btn" 
+          onclick="toggleInquiryForm()"
+          style="
+            background: linear-gradient(90deg, #00ff73 0%, #32ffbe 100%);
+            color: #1a1a1a;
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            margin-top: 1.5rem;
+            width: 100%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+          ">
+          Contact Agent
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Property Inquiry Form -->
+  <div id="inquiryFormContainer" style="display: none; margin-top: 40px; padding: 30px; background: white; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+      <div style="text-align: center; margin-bottom: 24px;">
+          <img src="../assets/d4rent logo smaller.png" alt="D4Rent Logo" style="height: 80px; margin-bottom: 16px;">
+          <h3 style="color: #1c0bff; margin: 0;">Property Inquiry Form</h3>
+      </div>
+
+      <form id="propertyInquiryForm" onsubmit="submitInquiry(event)" style="display: grid; gap: 20px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div>
+                  <label for="firstName" style="display: block; margin-bottom: 8px; color: #444;">First Name*</label>
+                  <input type="text" id="firstName" required 
+                      style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+              </div>
+              <div>
+                  <label for="lastName" style="display: block; margin-bottom: 8px; color: #444;">Last Name*</label>
+                  <input type="text" id="lastName" required 
+                      style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+              </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div>
+                  <label for="email" style="display: block; margin-bottom: 8px; color: #444;">Email Address*</label>
+                  <input type="email" id="email" required 
+                      style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+              </div>
+              <div>
+                  <label for="phone" style="display: block; margin-bottom: 8px; color: #444;">Phone Number*</label>
+                  <input type="tel" id="phone" required 
+                      style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+              </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+              <div>
+                  <label for="adults" style="display: block; margin-bottom: 8px; color: #444;">Number of Adults*</label>
+                  <input type="number" id="adults" min="1" value="1" required 
+                      style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+              </div>
+              <div>
+                  <label for="moveInDate" style="display: block; margin-bottom: 8px; color: #444;">Move-in Date*</label>
+                  <input type="date" id="moveInDate" required 
+                      style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+              </div>
+          </div>
+
+          <div>
+              <label style="display: block; margin-bottom: 8px; color: #444;">Pets?*</label>
+              <div style="display: flex; gap: 20px;">
+                  <label style="display: flex; align-items: center; gap: 8px;">
+                      <input type="radio" name="pets" value="yes" required>
+                      Yes
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 8px;">
+                      <input type="radio" name="pets" value="no" required>
+                      No
+                  </label>
+              </div>
+          </div>
+
+          <div>
+              <label style="display: block; margin-bottom: 8px; color: #444;">Smoking?*</label>
+              <div style="display: flex; gap: 20px;">
+                  <label style="display: flex; align-items: center; gap: 8px;">
+                      <input type="radio" name="smoking" value="yes" required>
+                      Yes
+                  </label>
+                  <label style="display: flex; align-items: center; gap: 8px;">
+                      <input type="radio" name="smoking" value="no" required>
+                      No
+                  </label>
+              </div>
+          </div>
+
+          <div>
+              <label for="message" style="display: block; margin-bottom: 8px; color: #444;">Additional Message</label>
+              <textarea id="message" rows="4" 
+                  style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; resize: vertical;"></textarea>
+          </div>
+
+          <input type="hidden" id="agent-id" />
+          <div style="display: flex; gap: 12px;">
+              <button type="submit" 
+                  style="flex: 1; background: linear-gradient(90deg, var(--primary-accent) 0%, #32ffbe 100%); color: #1a1a1a; border: none; padding: 12px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+                  Send Inquiry
+              </button>
+              <button type="button" onclick="toggleInquiryForm()" 
+                  style="background: #f7f8fa; color: #1a1a1a; border: none; padding: 12px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                  Cancel
+              </button>
+          </div>
+      </form>
+  </div>
+
+  <!-- Agent Section integrated -->
+  <div class="agent-section-container" style="display:none;">
+    <button class="toggle-agent-button" onclick="toggleAgentSection()">View Agent Details</button>
+    <div class="agent-section" id="agent-section" style="display:none;">
+      <img alt="Agent Photo" class="agent-avatar" id="agent-avatar" src="/assets/default-user.png"/>
+      <div class="agent-details">
+        <div class="agent-name" id="agent-name"></div>
+        <div class="agent-agency" id="agent-agency"></div>
+        <div class="agency-logo-container" style="margin: 0.7rem 0;">
+          <img id="agency-logo" alt="Agency Logo" style="max-width: 120px; max-height: 60px; object-fit: contain; display: none; background: #fff; border-radius: 12px; box-shadow: 0 1px 6px rgba(0,0,0,0.07);" />
+        </div>
+        <div class="agent-contact-row" id="agent-email-row" style="display:none;">
+          <span>📧 Email</span><a href="#" id="agent-email"></a>
+        </div>
+        <div class="agent-contact-row" id="agent-phone-row" style="display:none;">
+          <span>📞 Phone</span><a href="#" id="agent-phone"></a>
+        </div>
+        <div style="display: flex; gap: 0.7rem; margin-top: 0.5rem;">
+          <button id="toggle-email" style="background: linear-gradient(90deg,#00c6a2 60%,#0077cc 100%); color: #fff; border: none; padding: 0.5rem 1.2rem; border-radius: 8px; cursor: pointer; font-size: 0.98rem; font-weight: 600;">Show Email</button>
+          <button id="toggle-phone" style="background: linear-gradient(90deg,#0077cc 60%,#00c6a2 100%); color: #fff; border: none; padding: 0.5rem 1.2rem; border-radius: 8px; cursor: pointer; font-size: 0.98rem; font-weight: 600;">Show Phone</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<!-- Full-Screen Slideshow -->
+<div class="slideshow" id="slideshow" style="display:none;">
+<span class="close-slideshow" onclick="closeSlideshow()">×</span>
+<div class="slideshow-content">
+<img alt="Slideshow Image" id="slideshow-image" src=""/>
+<div class="slideshow-controls">
+<button class="prev" onclick="changeSlide(-1)">❮</button>
+<button class="next" onclick="changeSlide(1)">❯</button>
+</div>
+</div>
+</div>
+<script src="/scripts/main.js"></script>
+<script>
+    // API base URL
+    const API_BASE_URL = 'https://api.d4rent.ie';
+    
+    // Utility to get query param
+    function getQueryParam(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+
+    // S3 bucket base URL
+    const S3_BASE_URL = 'http://d4rent.ie.s3-website-eu-west-1.amazonaws.com/';
+
+    // Helper to get image URL (S3 or backend)
+    function getImageUrl(photo) {
+      if (!photo) return '/assets/sold rent.png';
+      if (photo.startsWith('http')) return photo;
+      return S3_BASE_URL + (photo.startsWith('uploads/') ? photo : 'uploads/' + photo);
+    }
+
+    // Slideshow logic
+    let currentSlide = 0;
+    let currentMainImageIndex = 0;
+    let mainGalleryImages = [];
+
+    // Main image slideshow functions
+    function changeMainImage(direction) {
+      if (mainGalleryImages.length <= 1) return;
+      
+      currentMainImageIndex += direction;
+      if (currentMainImageIndex < 0) currentMainImageIndex = mainGalleryImages.length - 1;
+      if (currentMainImageIndex >= mainGalleryImages.length) currentMainImageIndex = 0;
+      
+      updateMainImage();
+      updateThumbnailSelection();
+    }
+
+    function setMainImage(index) {
+      currentMainImageIndex = index;
+      updateMainImage();
+      updateThumbnailSelection();
+    }
+
+    function updateMainImage() {
+      const mainImage = document.getElementById('main-image');
+      const imageCounter = document.getElementById('image-counter');
+      
+      if (mainGalleryImages.length > 0) {
+        mainImage.src = getImageUrl(mainGalleryImages[currentMainImageIndex]);
+        imageCounter.textContent = `${currentMainImageIndex + 1} / ${mainGalleryImages.length}`;
+      }
+    }
+
+    function updateThumbnailSelection() {
+      const thumbnails = document.querySelectorAll('#thumbnail-gallery img');
+      thumbnails.forEach((thumb, index) => {
+        thumb.classList.toggle('active', index === currentMainImageIndex);
+      });
+    }
+
+    // Full-screen slideshow functions
+    function openSlideshow(imagesJson, startIdx = 0) {
+      const images = JSON.parse(decodeURIComponent(imagesJson));
+      window.slideshowImages = images;
+      currentSlide = startIdx;
+      document.getElementById('slideshow').style.display = 'flex';
+      showSlide(currentSlide);
+    }
+    function closeSlideshow() {
+      document.getElementById('slideshow').style.display = 'none';
+    }
+    function changeSlide(n) {
+      if (!window.slideshowImages) return;
+      currentSlide += n;
+      if (currentSlide < 0) currentSlide = window.slideshowImages.length - 1;
+      if (currentSlide >= window.slideshowImages.length) currentSlide = 0;
+      showSlide(currentSlide);
+    }
+    function showSlide(idx) {
+      if (!window.slideshowImages) return;
+      document.getElementById('slideshow-image').src = getImageUrl(window.slideshowImages[idx]);
+    }
+
+    // Toggle inquiry form visibility
+    function toggleInquiryForm() {
+        // Check if user is logged in
+        const token = localStorage.getItem('token');
+        if (!token) {
+            // Save current URL to redirect back after login
+            localStorage.setItem('redirectAfterLogin', window.location.href);
+            // Redirect to login page
+            window.location.href = '/pages/login.html';
+            return;
+        }
+
+        const form = document.getElementById('inquiryFormContainer');
+        const currentDisplay = form.style.display;
+        
+        if (currentDisplay === 'none' || !currentDisplay) {
+            // Get the agent ID from the current property data
+            if (currentProperty && currentProperty.agent_id) {
+                document.getElementById('agent-id').value = currentProperty.agent_id;
+            } else {
+                alert('Unable to load agent information. Please try again later.');
+                return;
+            }
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    }
+
+    // Handle inquiry form submission
+    async function submitInquiry(event) {
+        event.preventDefault();
+        
+        // Get the submit button and add loading state
+        const submitButton = event.target.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+        
+        try {
+            // Check if user is still logged in
+            const token = localStorage.getItem('token');
+            if (!token) {
+                localStorage.setItem('redirectAfterLogin', window.location.href);
+                window.location.href = '/pages/login.html';
+                return;
+            }
+
+            // Get the current agent ID
+            const agentIdElement = document.getElementById('agent-id');
+            const agentId = agentIdElement ? agentIdElement.value : null;
+
+            if (!agentId) {
+                throw new Error('Agent information not available');
+            }
+            
+            // Gather form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                adults: document.getElementById('adults').value,
+                moveInDate: document.getElementById('moveInDate').value,
+                pets: document.querySelector('input[name="pets"]:checked').value,
+                smoking: document.querySelector('input[name="smoking"]:checked').value,
+                message: document.getElementById('message').value,
+            };
+
+            // Send inquiry as a message
+            const response = await fetch(`${API_BASE_URL}/api/messages`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    receiver_id: agentId,
+                    content: `Property Inquiry\n\n` +
+                            `From: ${formData.firstName} ${formData.lastName}\n` +
+                            `Email: ${formData.email}\n` +
+                            `Phone: ${formData.phone}\n` +
+                            `Number of Adults: ${formData.adults}\n` +
+                            `Move-in Date: ${formData.moveInDate}\n` +
+                            `Pets: ${formData.pets}\n` +
+                            `Smoking: ${formData.smoking}\n\n` +
+                            `Message:\n${formData.message}`,
+                    type: 'property_inquiry'
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to send inquiry');
+            }
+
+            // Show success message with nice styling
+            const successDiv = document.createElement('div');
+            successDiv.style.cssText = `
+                background: #e8f5e9;
+                color: #1b5e20;
+                padding: 1rem;
+                border-radius: 8px;
+                margin: 1rem 0;
+                text-align: center;
+                font-weight: 500;
+            `;
+            successDiv.textContent = 'Your inquiry has been sent successfully! The agent will contact you soon.';
+            
+            const form = document.getElementById('propertyInquiryForm');
+            form.reset();
+            form.insertBefore(successDiv, form.firstChild);
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successDiv.style.transition = 'opacity 0.5s ease';
+                successDiv.style.opacity = '0';
+                setTimeout(() => successDiv.remove(), 500);
+            }, 5000);
+
+            // Close the form after a short delay
+            setTimeout(() => {
+                toggleInquiryForm();
+            }, 6000);
+
+        } catch (error) {
+            console.error('Error sending inquiry:', error);
+            
+            // Show error message with nice styling
+            const errorDiv = document.createElement('div');
+            errorDiv.style.cssText = `
+                background: #ffebee;
+                color: #c62828;
+                padding: 1rem;
+                border-radius: 8px;
+                margin: 1rem 0;
+                text-align: center;
+                font-weight: 500;
+            `;
+            errorDiv.textContent = error.message || 'Failed to send inquiry. Please try again.';
+            
+            const form = document.getElementById('propertyInquiryForm');
+            form.insertBefore(errorDiv, form.firstChild);
+
+            // Hide error message after 5 seconds
+            setTimeout(() => {
+                errorDiv.style.transition = 'opacity 0.5s ease';
+                errorDiv.style.opacity = '0';
+                setTimeout(() => errorDiv.remove(), 500);
+            }, 5000);
+        } finally {
+            // Reset the submit button
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+        }
+    }
+
+    function toggleAgentSection() {
+      const agentSection = document.getElementById('agent-section');
+      const toggleButton = document.querySelector('.toggle-agent-button');
+      if (agentSection.style.display === 'none' || agentSection.style.display === '') {
+        agentSection.style.display = 'flex';
+        toggleButton.textContent = 'Hide Agent Details';
+      } else {
+        agentSection.style.display = 'none';
+        toggleButton.textContent = 'View Agent Details';
+      }
+    }
+
+    // Global variables
+    let currentProperty = null;
+    let images = [];
+    let currentImageIndex = 0;
+
+    // Gallery functions
+    function updateGallery() {
+      const mainImage = document.getElementById('main-image');
+      mainImage.src = images[currentImageIndex] || '/assets/sold rent.png';
+      
+      const thumbnails = document.getElementById('thumbnails');
+      thumbnails.innerHTML = images.map((img, idx) => `
+        <img src="${img}" 
+             class="thumbnail ${idx === currentImageIndex ? 'active' : ''}" 
+             onclick="setImage(${idx})"
+             alt="Thumbnail ${idx + 1}"
+        />`).join('');
+    }
+
+    function nextImage() {
+      if (images.length <= 1) return;
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      updateGallery();
+    }
+
+    function prevImage() {
+      if (images.length <= 1) return;
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      updateGallery();
+    }
+
+    function setImage(index) {
+      currentImageIndex = index;
+      updateGallery();
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Add keyboard navigation for gallery
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'ArrowRight') nextImage();
+      });
+
+      const propertyId = getQueryParam('id');
+      if (!propertyId) return;
+
+      // Fetch property details from your backend using API_BASE_URL
+      const res = await fetch(`${API_BASE_URL}/api/properties/${propertyId}`);
+      if (!res.ok) return;
+      currentProperty = await res.json();
+
+      // Build images array for gallery
+      const mainImg = currentProperty.photo || currentProperty.image || (currentProperty.photos && currentProperty.photos[0]);
+      images = [];
+      if (mainImg) images.push(getImageUrl(mainImg));
+      if (currentProperty.photos && Array.isArray(currentProperty.photos)) {
+        currentProperty.photos.forEach(photo => {
+          const url = getImageUrl(photo);
+          if (!images.includes(url)) {
+            images.push(url);
+          }
+        });
+      }
+      updateGallery();
+
+      // Set up main gallery images
+      mainGalleryImages = slideshowImages;
+      currentMainImageIndex = 0;
+
+      // Main image setup
+      const mainImageContainer = document.getElementById('main-image-container');
+      const mainImage = document.getElementById('main-image');
+      
+      if (slideshowImages.length > 0) {
+        mainImage.src = getImageUrl(slideshowImages[0]);
+        mainImage.alt = currentProperty.title || 'Property Image';
+        
+        // Add click handler for full-screen slideshow
+        mainImage.onclick = () => openSlideshow(encodeURIComponent(JSON.stringify(slideshowImages)), currentMainImageIndex);
+        
+        // Show/hide navigation based on image count
+        if (slideshowImages.length <= 1) {
+          mainImageContainer.classList.add('single-image');
+        } else {
+          mainImageContainer.classList.remove('single-image');
+        }
+        
+        updateMainImage();
+      }
+
+      // Thumbnails
+      const gallery = document.getElementById('thumbnail-gallery');
+      if (slideshowImages.length > 1) {
+        gallery.innerHTML = slideshowImages.map((photo, idx) =>
+          `<img src="${getImageUrl(photo)}" alt="Thumbnail ${idx + 1}" onclick="setMainImage(${idx})">`
+        ).join('');
+        updateThumbnailSelection();
+      } else {
+        gallery.innerHTML = '';
+      }
+
+
+      // Info fields
+      // Update property details
+      document.getElementById('property-title').textContent = currentProperty.title || '';
+      document.getElementById('property-type').textContent = currentProperty.property_type || 'N/A';
+      document.getElementById('property-location').textContent = currentProperty.address || 'N/A';
+      document.getElementById('property-price').textContent = currentProperty.price ? `€${currentProperty.price}` : 'Contact for Price';
+      document.getElementById('property-description').textContent = currentProperty.description || '';
+      document.getElementById('property-about').textContent = currentProperty.description || '';
+
+      // Key features (add more as needed)
+      // Update property features list
+      const features = [];
+      
+      // Basic features
+      if (currentProperty.beds) features.push(`<li><i class="fas fa-bed"></i> ${currentProperty.beds} Bedroom${currentProperty.beds > 1 ? 's' : ''}</li>`);
+      if (currentProperty.bathrooms) features.push(`<li><i class="fas fa-bath"></i> ${currentProperty.bathrooms} Bathroom${currentProperty.bathrooms > 1 ? 's' : ''}</li>`);
+      if (currentProperty.property_size) features.push(`<li><i class="fas fa-ruler-combined"></i> ${currentProperty.property_size} m²</li>`);
+      if (currentProperty.ber_rating) features.push(`<li><i class="fas fa-leaf"></i> BER Rating: ${currentProperty.ber_rating}</li>`);
+      
+      // Additional features
+      if (currentProperty.parking) features.push(`<li><i class="fas fa-car"></i> Parking Available</li>`);
+      if (currentProperty.balcony) features.push(`<li><i class="fas fa-door-open"></i> Balcony</li>`);
+      if (currentProperty.garden) features.push(`<li><i class="fas fa-tree"></i> Garden</li>`);
+      if (currentProperty.garage) features.push(`<li><i class="fas fa-warehouse"></i> Garage</li>`);
+      if (currentProperty.attic) features.push(`<li><i class="fas fa-home"></i> Attic</li>`);
+      if (currentProperty.kitchen) features.push(`<li><i class="fas fa-utensils"></i> Modern Kitchen</li>`);
+      
+      // Special features for property types
+      if (currentProperty.property_type?.toLowerCase().includes('apartment')) {
+        if (currentProperty.floor) features.push(`<li><i class="fas fa-building"></i> Floor: ${currentProperty.floor}</li>`);
+      }
+      if (currentProperty.property_type?.toLowerCase().includes('commercial')) {
+        if (currentProperty.floor_area) features.push(`<li><i class="fas fa-ruler"></i> Floor Area: ${currentProperty.floor_area} m²</li>`);
+        if (currentProperty.parking_spaces) features.push(`<li><i class="fas fa-parking"></i> ${currentProperty.parking_spaces} Parking Spaces</li>`);
+        if (currentProperty.lease_terms) features.push(`<li><i class="fas fa-file-contract"></i> ${currentProperty.lease_terms}</li>`);
+      }
+      // Add any other custom fields you want to display
+      document.querySelector('.property-info .key-features').innerHTML =
+        features.map(f => `<li>${f}</li>`).join('');
+
+      // Modern Agent Section
+      const agentContainer = document.querySelector('.agent-section-container');
+      const agentSection = document.getElementById('agent-section');
+      if (currentProperty.user_name || currentProperty.user_profile_picture || currentProperty.user_email || currentProperty.user_phone || currentProperty.agency_name) {
+        agentContainer.style.display = 'flex';
+        document.getElementById('agent-name').textContent = currentProperty.user_name || 'Unknown Agent';
+        document.getElementById('agent-agency').textContent = currentProperty.agency_name ? `Agency: ${currentProperty.agency_name}` : '';
+        // Agency Logo
+        const agencyLogoElem = document.getElementById('agency-logo');
+        if (currentProperty.agency_logo) {
+          agencyLogoElem.src = currentProperty.agency_logo.startsWith('http') ? currentProperty.agency_logo : getImageUrl(currentProperty.agency_logo);
+          agencyLogoElem.style.display = 'block';
+        } else {
+          agencyLogoElem.style.display = 'none';
+        }
+        // Email
+        const emailElem = document.getElementById('agent-email');
+        const emailRow = document.getElementById('agent-email-row');
+        if (currentProperty.user_email) {
+          emailElem.textContent = currentProperty.user_email;
+          emailElem.href = `mailto:${currentProperty.user_email}`;
+          emailRow.style.display = 'none'; // Hidden by default
+        } else {
+          emailElem.textContent = 'No email available';
+          emailElem.removeAttribute('href');
+          emailRow.style.display = 'none';
+        }
+        // Phone
+        const phoneElem = document.getElementById('agent-phone');
+        const phoneRow = document.getElementById('agent-phone-row');
+        if (currentProperty.user_phone) {
+          phoneElem.textContent = currentProperty.user_phone;
+          phoneElem.href = `tel:${currentProperty.user_phone}`;
+          phoneRow.style.display = 'none'; // Hidden by default
+        } else {
+          phoneElem.textContent = 'No phone available';
+          phoneElem.removeAttribute('href');
+          phoneRow.style.display = 'none';
+        }
+        // Avatar
+        const avatarElem = document.getElementById('agent-avatar');
+        if (currentProperty.user_profile_picture) {
+          avatarElem.src = currentProperty.user_profile_picture.startsWith('http')
+            ? currentProperty.user_profile_picture
+            : getImageUrl(currentProperty.user_profile_picture);
+        } else {
+          avatarElem.src = '/assets/default-user.png';
+        }
+        // Toggle buttons
+        document.getElementById('toggle-email').onclick = function() {
+          if (emailRow.style.display === 'none') {
+            emailRow.style.display = 'flex';
+            this.textContent = 'Hide Email';
+          } else {
+            emailRow.style.display = 'none';
+            this.textContent = 'Show Email';
+          }
+        };
+        document.getElementById('toggle-phone').onclick = function() {
+          if (phoneRow.style.display === 'none') {
+            phoneRow.style.display = 'flex';
+            this.textContent = 'Hide Phone';
+          } else {
+            phoneRow.style.display = 'none';
+            this.textContent = 'Show Phone';
+          }
+        };
+      } else {
+        agentContainer.style.display = 'none';
+      }
+    });
+  </script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const hamburger = document.querySelector(".hamburger-menu");
+      const navDropdown = document.querySelector(".nav-dropdown");
+      if (hamburger && navDropdown) {
+        hamburger.addEventListener("click", () => {
+          navDropdown.classList.toggle("show");
+        });
+      }
+    });
+  </script>
+<!-- Chatbot icon -->
+<!-- Chatbot popup -->
+<script src="/scripts/chatbot.js"></script><div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body>
+</html>

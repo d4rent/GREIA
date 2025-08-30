@@ -1,0 +1,26 @@
+<!-- ...existing code... -->
+<script>
+  document.getElementById('chatbot-popup-send').onclick = async function() {
+    const input = document.getElementById('chatbot-popup-text');
+    const message = input.value.trim();
+    if (!message) return;
+
+    // Show user message
+    const messagesDiv = document.getElementById('chatbot-popup-messages');
+    messagesDiv.innerHTML += `<div class="user-message">${message}</div>`;
+
+    // Send to backend
+    const res = await fetch('/api/chatbot', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message })
+    });
+    const data = await res.json();
+
+    // Show bot reply
+    messagesDiv.innerHTML += `<div class="bot-message">${data.reply}</div>`;
+    input.value = '';
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  };
+</script>
+<!-- ...existing code... -->

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Public Marketplace - Greia</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="/css/global-nav.css" rel="stylesheet"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="../css/rent.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<!-- Google Fonts for rounded modern font -->
+<link href="https://fonts.googleapis.com/css?family=Quicksand:700|Nunito:700|Poppins:700&display=swap" rel="stylesheet"/>
+<link href="https://unpkg.com/leaflet/dist/leaflet.css" rel="stylesheet"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<style>
+/* Navigation Bar */
+.navbar {
+  background: linear-gradient(90deg, #1c0bff, #00c6d4, #1c0bff);
+  background-size: 200% 100%;
+  padding: 0.5rem 2rem;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(28,11,255,0.15);
+  animation: gradientFlow 15s linear infinite;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Logo - No Filter (Original Colors) */
+.logo img {
+  max-width: 100%;
+  height: auto;
+  max-height: 140px;
+  transition: all 0.3s ease;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+
+/* Enhanced Navigation Links */
+.nav-links a {
+  color: #ffffff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: #f0f0f0;
+  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+
+/* Keep Connect link green */
+.nav-links a[style*="rgb(78, 255, 146)"] {
+  color: rgb(78, 255, 146) !important;
+}
+
+.nav-links a[style*="rgb(78, 255, 146)"]:hover {
+  color: rgb(58, 235, 126) !important;
+}
+
+/* Dropdown Menu Styling */
+.dropdown-menu {
+  background: #ffffff;
+  border: 1px solid rgba(28, 11, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(28, 11, 255, 0.15);
+  border-radius: 8px;
+}
+
+.dropdown-menu a {
+  color: #1c0bff !important;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(28, 11, 255, 0.1);
+  color: #1c0bff !important;
+}
+
+/* Enhanced Footer - Match Header */
+footer {
+  background: linear-gradient(90deg, #1c0bff, #00c6d4, #1c0bff);
+  background-size: 200% 100%;
+  animation: gradientFlow 15s linear infinite;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -8px 20px rgba(28,11,255,0.15);
+  padding: 2rem 0;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.footer-container {
+  position: relative;
+  z-index: 1;
+}
+
+footer h3 {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+footer a {
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+footer a:hover {
+  color: #f0f0f0;
+  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+
+/* Footer Logo - No Filter (Original Colors) */
+footer .footer-image img {
+  max-width: 100%;
+  height: auto;
+  max-height: 100px;
+  transition: all 0.3s ease;
+}
+
+footer .footer-image img:hover {
+  transform: scale(1.05);
+}
+
+/* Enhanced Slideshow Text */
+.slideshow-text h2 {
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+
+/* Page Title Enhancement */
+.page-title h1 {
+  font-family: 'Quicksand', 'Nunito', 'Poppins', Arial, Helvetica, sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 3.2rem !important;
+  background: linear-gradient(135deg, #1100ff 0%, #0026ff 50%, #5c6bc0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-title p {
+  color: #0026ff;
+  font-weight: 500;
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  background: linear-gradient(90deg, #1c0bff, #00c6d4, #1c0bff);
+  background-size: 200% 100%;
+  animation: gradientFlow 15s linear infinite;
+}
+
+.mobile-nav a {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.mobile-nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+/* Keep mobile Connect link green */
+.mobile-nav a[style*="rgb(78, 255, 146)"] {
+  color: rgb(78, 255, 146) !important;
+}
+
+/* Remove space above slideshow */
+.main-content {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.full-width-slideshow {
+  margin-top: 0;
+  padding-top: 0;
+}
+</style>
+
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="navbar-thirds">
+    <div class="navbar-third left">
+      <ul class="nav-links left-links" style="position:relative; z-index:100;">
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/buy.html" style="position:relative; z-index:101;">Property</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/buy.html">Buy</a></li>
+            <li><a href="/pages/rent.html">Rent</a></li>
+            <li><a href="/pages/commercial.html">Commercial</a></li>
+            <li><a href="/pages/buy.html">Apartments</a></li>
+            <li><a href="/pages/sell.html">Sell</a></li>
+            <li><a href="/pages/valuations.html">Valuations</a></li>
+            <li><a href="/pages/buy.html">New Homes</a></li>
+            <li><a href="/pages/public-marketplace.html">Public Marketplace</a></li>
+          </ul>
+        </li>
+        <li class="dropdown" style="position:relative;">
+          <a href="/pages/agents.html" style="color: rgb(78, 255, 146); position:relative; z-index:101;" class="referral-dropdown-toggle">Connect</a>
+          <ul class="dropdown-menu" style="top:100%; left:0; margin-top:0; padding-top:0; border-top:0;">
+            <li><a href="/pages/agents.html">Find an Agent</a></li>
+            <li class="nested-dropdown" style="position: relative;">
+              <a href="/pages/agents.html" class="referral-dropdown-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false">Referral Agents ▸</a>
+              <ul class="dropdown-menu referral-dropdown" style="display:none; position: absolute; left: 100%; top: 0; background: white; list-style:none; padding:10px; border:1px solid #ccc; min-width: 220px; z-index: 2000;">
+                <li><a href="/pages/agents.html?subtype=luxury">Luxury Home Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=lettings">Lettings Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=newhomes">New Homes Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=commercial">Commercial Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=residential">Residential Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=developer">Developer Agents</a></li>
+                <li><a href="/pages/agents.html?subtype=timeshare">Timeshare Agents</a></li>
+              </ul>
+            </li>
+            <li><a href="/pages/coaching.html">Coaching</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-third center">
+      <div class="logo">
+        <a href="/index.html">
+          <img alt="Logo" src="../assets/greia (4).png" style="height: auto; max-height: 140px;"/>
+        </a>
+      </div>
+    </div>
+    <div class="navbar-third right">
+      <ul class="nav-links right-links">
+        <li>
+          <a href="/pages/services.html" class="fancy-underline">Our Services</a>
+        </li>
+        <li>
+          <a href="/pages/concierge.html" class="fancy-underline">Concierge</a>
+        </li>
+        <li class="dropdown" id="auth-menu">
+          <a href="/pages/login.html" id="login-btn">Log In</a>
+          <ul class="dropdown-menu" id="login-dropdown">
+            <li><a href="/pages/login.html">Sign In</a></li>
+            <li><a href="/pages/register.html">Register</a></li>
+            <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <button aria-label="Toggle navigation" class="hamburger-menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <!-- Mobile nav menu -->
+  <div class="mobile-nav-overlay"></div>
+  <div class="mobile-nav">
+    <ul>
+      <li class="dropdown">
+        <a href="/pages/buy.html" class="dropdown-toggle">Property</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/buy.html">Buy</a></li>
+          <li><a href="/pages/rent.html">Rent</a></li>
+          <li><a href="/pages/commercial.html">Commercial</a></li>
+          <li><a href="/pages/buy.html">Apartments</a></li>
+          <li><a href="/pages/sell.html">Sell</a></li>
+          <li><a href="/pages/valuations.html">Valuations</a></li>
+          <li><a href="/pages/buy.html">New Homes</a></li>
+          <li><a href="/pages/public-marketplace.html">Public Marketplace</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="/pages/agents.html" class="dropdown-toggle" style="color: rgb(78, 255, 146);">Connect</a>
+        <ul class="dropdown-menu">
+          <li><a href="/pages/agents.html">Find an Agent</a></li>
+          <li><a href="/pages/agents.html">Referral Agents</a></li>
+          <li><a href="/pages/coaching.html">Coaching</a></li>
+        </ul>
+      </li>
+      <li><a href="/pages/services.html">Our Services</a></li>
+      <li><a href="/pages/concierge.html">Concierge</a></li>
+      <li class="dropdown" id="mobile-auth-menu">
+        <a href="/pages/login.html" class="dropdown-toggle" id="mobile-login-btn">Log In</a>
+        <ul class="dropdown-menu" id="mobile-login-dropdown">
+          <li><a href="/pages/login.html">Sign In</a></li>
+          <li><a href="/pages/register.html">Register</a></li>
+          <li><a href="/pages/forgot-password.html">Forgot Password?</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main class="main-content">
+
+<section class="full-width-slideshow">
+<div class="slideshow-container">
+<div class="slide fade">
+<img alt="Slideshow Image 1" src="../assets/IMAGE10.jpg"/>
+</div>
+<div class="slide fade">
+<img alt="Slideshow Image 2" src="./assets/IMAGE8.jpg"/>
+</div>
+<div class="slide fade">
+<img alt="Slideshow Image 3" src="../assets/IMAGE9.jpg"/>
+</div>
+<div class="slideshow-text">
+<h2 style="font-size: smaller;; font-size: larger;">Discover Properties</h2>
+</div>
+</div>
+</section>
+
+<!-- Page Title -->
+<section class="page-title">
+<h1 style="font-size: smaller;; font-size: larger;">Public Property Marketplace</h1>
+<p style="text-align: center; color: #666; margin-top: 16px; font-size: 1.1rem;">
+  Properties listed by property owners looking for licensed agent representation
+</p>
+</section>
+
+<section class="search-filter">
+<form class="modern-search-bar" id="marketplace-filter-form">
+<div id="dynamic-filters" style="display: flex; gap: 0.5em; flex-wrap: wrap;"></div>
+<button class="search-btn" type="submit">Search</button>
+</form>
+</section>
+
+<!-- Properties Section -->
+<section class="properties">
+<div class="property-grid" id="marketplace-property-grid">
+<!-- Properties will be rendered here by JS -->
+</div>
+</section>
+
+<!-- Marketplace Map Section -->
+<section class="buy-map-section" style="margin: 2em 0;">
+<h2 style="text-align:center;; font-size: smaller;">Property Locations</h2>
+<div id="marketplace-properties-map" style="height: 400px; width: 100%;"></div>
+</section>
+
+<!-- Add before <div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body> -->
+<div id="chatbot-widget"></div>
+
+<!-- Load main.js first so API_BASE_URL is available -->
+<script src="/scripts/main.js"></script>
+<script>
+const S3_BASE_URL = 'http://d4rent.ie.s3-website-eu-west-1.amazonaws.com/';
+
+function filterPrice(price, range) {
+  if (!price) return false;
+  price = parseFloat(price);
+  if (range === "0-5000") return price >= 0 && price <= 5000;
+  if (range === "5000-10000") return price > 5000 && price <= 10000;
+  if (range === "10000-25000") return price > 10000 && price <= 25000;
+  if (range === "50000+") return price > 50000;
+  return true;
+}
+
+function getUniqueValues(properties, key) {
+  const values = new Set();
+  properties.forEach(p => {
+    if (p[key]) {
+      String(p[key]).split(',').map(v => v.trim()).forEach(v => {
+        if (v) values.add(v);
+      });
+    }
+  });
+  return Array.from(values).sort();
+}
+
+function getMinMax(properties, key) {
+  const nums = properties.map(p => Number(p[key])).filter(n => !isNaN(n));
+  return nums.length ? { min: Math.min(...nums), max: Math.max(...nums) } : { min: 0, max: 0 };
+}
+
+function renderDynamicFilters(properties, filters = {}) {
+  const container = document.getElementById('dynamic-filters');
+  if (!container) return;
+
+  // Property Types
+  const propertyTypes = getUniqueValues(properties, 'property_type');
+  let html = '';
+  if (propertyTypes.length) {
+    html += `<div class="search-dropdown">
+      <select id="type" name="type">
+        <option value="">All Property Types</option>
+        ${propertyTypes.map(type => `<option value="${type}"${filters.type === type ? ' selected' : ''}>${type.charAt(0).toUpperCase() + type.slice(1)}</option>`).join('')}
+      </select>
+    </div>`;
+  }
+
+  // Beds
+  const beds = getUniqueValues(properties, 'beds');
+  if (beds.length) {
+    html += `<div class="search-dropdown">
+      <select id="beds" name="beds">
+        <option value="">Any Beds</option>
+        ${beds.map(b => `<option value="${b}"${filters.beds == b ? ' selected' : ''}>${b}</option>`).join('')}
+      </select>
+    </div>`;
+  }
+
+  // Price
+  const { min: minPrice, max: maxPrice } = getMinMax(properties, 'price');
+  if (maxPrice > 0) {
+    html += `<div class="search-dropdown">
+      <select id="price" name="price">
+        <option value="">Any Price</option>
+        <option value="0-${Math.ceil(maxPrice/4)}">Up to €${Math.ceil(maxPrice/4).toLocaleString()}</option>
+        <option value="${Math.ceil(maxPrice/4)}-${Math.ceil(maxPrice/2)}">€${Math.ceil(maxPrice/4).toLocaleString()} - €${Math.ceil(maxPrice/2).toLocaleString()}</option>
+        <option value="${Math.ceil(maxPrice/2)}-${maxPrice}">€${Math.ceil(maxPrice/2).toLocaleString()} - €${maxPrice.toLocaleString()}</option>
+        <option value="${maxPrice}+">€${maxPrice.toLocaleString()}+</option>
+      </select>
+    </div>`;
+  }
+
+  // Energy Ratings
+  const energyRatings = getUniqueValues(properties, 'energy_rating');
+  if (energyRatings.length) {
+    html += `<div class="search-dropdown">
+      <select id="energy_rating" name="energy_rating">
+        <option value="">Any BER</option>
+        ${energyRatings.map(r => `<option value="${r}"${filters.energy_rating === r ? ' selected' : ''}>${r}</option>`).join('')}
+      </select>
+    </div>`;
+  }
+
+  // Area (text input)
+  html += `<div class="search-box">
+    <span class="search-icon">&#128269;</span>
+    <input type="text" id="area" name="area" placeholder="County, City, Town or Area" value="${filters.area || ''}">
+  </div>`;
+
+  container.innerHTML = html;
+}
+
+function filterMarketplaceProperties(properties, filters) {
+  return properties.filter(p =>
+    // Only show public marketplace properties
+    (p.public_marketplace === 1 || p.public_marketplace === '1' || p.public_marketplace === true) &&
+    (p.workflow_status === 'public_listing') &&
+    // Existing filters
+    (!filters.title || (p.title && p.title.toLowerCase().includes(filters.title.toLowerCase()))) &&
+    (!filters.area || (p.address && p.address.toLowerCase().includes(filters.area.toLowerCase()))) &&
+    (!filters.price || filterPrice(p.price, filters.price)) &&
+    (!filters.beds || (p.beds && (filters.beds === "4+" ? parseInt(p.beds) >= 4 : String(p.beds) === filters.beds))) &&
+    (!filters.type || (p.property_type && p.property_type.toLowerCase() === filters.type.toLowerCase())) &&
+    (!filters.energy_rating || (p.energy_rating && p.energy_rating === filters.energy_rating))
+  );
+}
+
+function renderMarketplaceProperties(properties) {
+  const grid = document.getElementById('marketplace-property-grid');
+  if (!grid) return;
+  if (!properties || properties.length === 0) {
+    grid.innerHTML = '<p style="grid-column: 1/-1; color: #888;">No properties in the public marketplace at the moment.</p>';
+    return;
+  }
+  grid.innerHTML = properties.map(listing => {
+    // Prepare features as bullet list if present
+    let featuresHtml = '';
+    if (listing.features) {
+      const featuresArr = listing.features.split('\n').filter(f => f.trim());
+      if (featuresArr.length) {
+        featuresHtml = `<ul class="property-features-list">${featuresArr.map(f => `<li>${f}</li>`).join('')}</ul>`;
+      }
+    }
+
+    // Check user role for contact buttons
+    const token = localStorage.getItem('token');
+    let contactButtonHtml = '';
+    
+    return `
+  <div class="modern-property-card">
+    <div class="marketplace-badge" style="position: absolute; top: 8px; left: 8px; background: rgb(78, 255, 146); color: black; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; z-index: 10;">
+      🏠 Public Listing
+    </div>
+    <img class="property-image" src="${
+      listing.image
+        ? (listing.image.startsWith('http')
+            ? listing.image
+            : S3_BASE_URL + (listing.image.startsWith('uploads/') ? listing.image : 'uploads/' + listing.image))
+        : '/assets/placeholder-property.png'
+    }" alt="Property Photo">
+    <button class="favourite-btn" data-id="${listing.id}" title="Save to favourites">&#9825;</button>
+    <div class="property-details">
+      <div class="property-title">${listing.title || ''}</div>
+      <div class="property-address">${listing.address || ''}</div>
+      <div class="property-user">Listed by: ${listing.user_name || 'Property Owner'}</div>
+      <div class="property-status" style="color: rgb(78, 255, 146); font-weight: 600;">AVAILABLE FOR AGENT REPRESENTATION</div>
+      <div class="property-price"><strong>Price:</strong> €${listing.price}</div>
+      ${featuresHtml}
+      <div style="margin-top:0.7em; display: flex; gap: 8px; flex-wrap: wrap;">
+        <a href="propertyPage.html?id=${listing.id}" class="view-property-btn">View Details</a>
+        <button class="contact-owner-btn" data-id="${listing.id}" style="background: #1c0bff; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 14px; flex: 1;">Contact Owner</button>
+      </div>
+    </div>
+    ${listing.energy_rating ? `<img class="ber-corner" src="/assets/ber/ber-${listing.energy_rating}.png" alt="BER ${listing.energy_rating}">` : ''}
+  </div>
+`}).join('');
+
+  // Attach favourite button logic
+  grid.querySelectorAll('.favourite-btn').forEach(btn => {
+    btn.onclick = async function() {
+      const propertyId = this.getAttribute('data-id');
+      const token = localStorage.getItem('token');
+      if (!token) {
+        window.location.href = 'login.html';
+        return;
+      }
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/favourites/favourite`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({ property_id: propertyId })
+        });
+        if (res.ok) {
+          this.innerHTML = '&#10084;';
+          this.classList.add('favourited');
+        } else {
+          alert('Failed to save favourite.');
+        }
+      } catch {
+        alert('Failed to save favourite.');
+      }
+    };
+  });
+
+  // Attach contact owner button logic
+  grid.querySelectorAll('.contact-owner-btn').forEach(btn => {
+    btn.onclick = async function() {
+      const propertyId = this.getAttribute('data-id');
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Please log in to contact property owners.');
+        window.location.href = 'login.html';
+        return;
+      }
+      
+      // Check if user is a property agent
+      try {
+        const userResponse = await fetch(`${API_BASE_URL}/api/user/profile`, {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (userResponse.ok) {
+          const user = await userResponse.json();
+          if (user.role === 'property_agent') {
+            // Open contact modal or redirect to contact form
+            window.location.href = `contact-property-owner.html?property_id=${propertyId}`;
+          } else {
+            alert('Only licensed property agents can contact property owners in the marketplace.');
+          }
+        }
+      } catch {
+        alert('Error checking user permissions.');
+      }
+    };
+  });
+
+  // Attach property view tracking to "View Property" buttons
+  function attachViewTracking() {
+    document.querySelectorAll('.view-property-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const href = btn.getAttribute('href');
+        const match = href && href.match(/id=(\d+)/);
+        if (match) {
+          const propertyId = match[1];
+          // Fire and forget, don't block navigation
+          fetch(`${API_BASE_URL}/api/properties/${propertyId}/view`, { method: 'POST' });
+        }
+        // Allow normal navigation to property page
+      });
+    });
+  }
+
+  attachViewTracking();
+}
+
+async function renderMarketplacePropertiesMap(properties) {
+  const mapDiv = document.getElementById('marketplace-properties-map');
+  if (!mapDiv) return;
+
+  // Remove any existing map instance
+  if (window.marketplaceMap && window.marketplaceMap.remove) {
+    window.marketplaceMap.remove();
+  }
+
+  // Center on Ireland by default
+  const defaultCenter = [53.3498, -6.2603];
+  const validProps = properties.filter(p => p.latitude && p.longitude);
+
+  const map = L.map('marketplace-properties-map').setView(
+    validProps.length ? [validProps[0].latitude, validProps[0].longitude] : defaultCenter,
+    8
+  );
+  window.marketplaceMap = map;
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Collect marker instances
+  const markers = [];
+  validProps.forEach(listing => {
+    const marker = L.marker([listing.latitude, listing.longitude]).addTo(map);
+    marker.bindPopup(`
+      <strong>${listing.title || ''}</strong><br>
+      ${listing.address || ''}<br>
+      €${listing.price || ''} ${listing.price_period ? 'per ' + listing.price_period : ''}
+      <br><span style="color: rgb(78, 255, 146); font-weight: 600;">Available for Agent Representation</span>
+      <br><a href="property.html?id=${listing.id}">View Property</a>
+    `);
+    markers.push(marker);
+  });
+
+  // Fit map to markers if any
+  if (markers.length) {
+    const group = new L.featureGroup(markers);
+    map.fitBounds(group.getBounds().pad(0.2));
+  }
+}
+
+async function fetchAndRenderMarketplaceProperties(filters = {}) {
+  let url = `${API_BASE_URL}/api/properties`;
+  const params = [];
+  
+  // Always request only public marketplace properties
+  params.push('public_marketplace=1');
+  params.push('workflow_status=public_listing');
+  
+  if (filters.status) params.push('status=' + encodeURIComponent(filters.status));
+  if (filters.title) params.push('title=' + encodeURIComponent(filters.title));
+  if (filters.area) params.push('area=' + encodeURIComponent(filters.area));
+  if (filters.price) params.push('price=' + encodeURIComponent(filters.price));
+  if (filters.beds) params.push('beds=' + encodeURIComponent(filters.beds));
+  if (filters.type) params.push('type=' + encodeURIComponent(filters.type));
+  if (filters.energy_rating) params.push('energy_rating=' + encodeURIComponent(filters.energy_rating));
+  if (params.length) url += '?' + params.join('&');
+
+  let properties = [];
+  try {
+    const res = await fetch(url);
+    properties = await res.json();
+  } catch (e) {
+    properties = [];
+  }
+  renderDynamicFilters(properties, filters);
+  properties = filterMarketplaceProperties(properties, filters);
+  renderMarketplaceProperties(properties);
+  renderMarketplacePropertiesMap(properties);
+}
+
+document.getElementById('marketplace-filter-form').onsubmit = function(e) {
+  e.preventDefault();
+  const filters = {};
+  ['type', 'beds', 'price', 'energy_rating', 'area'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.value) filters[id] = el.value;
+  });
+  fetchAndRenderMarketplaceProperties(filters);
+};
+
+// Initial load
+fetchAndRenderMarketplaceProperties();
+
+// Hamburger menu logic (if needed)
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburger = document.querySelector(".hamburger-menu");
+  const navDropdown = document.querySelector(".nav-dropdown");
+  if (hamburger && navDropdown) {
+    hamburger.addEventListener("click", () => {
+      navDropdown.classList.toggle("show");
+    });
+  }
+});
+</script>
+
+</main>
+
+
+
+<!-- Global Navigation Scripts -->
+<script src="/js/global-nav.js"></script>
+<script src="/js/global-search.js"></script>
+<script>
+  // Check user authentication status and update navigation
+  document.addEventListener("DOMContentLoaded", function() {
+    // Check if user is logged in (you can modify this logic based on your auth system)
+    function isUserLoggedIn() {
+      // Check for auth token in localStorage, sessionStorage, or cookies
+      const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+      return token && token.length > 0;
+    }
+
+    function updateNavigation() {
+      const isLoggedIn = isUserLoggedIn();
+      
+      // Desktop navigation
+      const authMenu = document.getElementById('auth-menu');
+      const loginBtn = document.getElementById('login-btn');
+      const loginDropdown = document.getElementById('login-dropdown');
+      
+      // Mobile navigation
+      const mobileAuthMenu = document.getElementById('mobile-auth-menu');
+      const mobileLoginBtn = document.getElementById('mobile-login-btn');
+      const mobileLoginDropdown = document.getElementById('mobile-login-dropdown');
+
+      if (isLoggedIn) {
+        // User is logged in - show direct link to dashboard
+        
+        // Desktop
+        if (authMenu && loginBtn && loginDropdown) {
+          authMenu.classList.remove('dropdown');
+          loginBtn.textContent = 'myGREIA';
+          loginBtn.href = '/pages/profile.html';
+          loginDropdown.style.display = 'none';
+        }
+        
+        // Mobile
+        if (mobileAuthMenu && mobileLoginBtn && mobileLoginDropdown) {
+          mobileAuthMenu.classList.remove('dropdown');
+          mobileLoginBtn.textContent = 'myGREIA';
+          mobileLoginBtn.href = '/pages/profile.html';
+          mobileLoginBtn.classList.remove('dropdown-toggle');
+          mobileLoginDropdown.style.display = 'none';
+        }
+      } else {
+        // User is not logged in - show login dropdown
+        
+        // Desktop
+        if (authMenu && loginBtn && loginDropdown) {
+          authMenu.classList.add('dropdown');
+          loginBtn.textContent = 'Log In';
+          loginBtn.href = '/pages/login.html';
+          loginDropdown.style.display = '';
+        }
+        
+        // Mobile
+        if (mobileAuthMenu && mobileLoginBtn && mobileLoginDropdown) {
+          mobileAuthMenu.classList.add('dropdown');
+          mobileLoginBtn.textContent = 'Log In';
+          mobileLoginBtn.href = '/pages/login.html';
+          mobileLoginBtn.classList.add('dropdown-toggle');
+          mobileLoginDropdown.style.display = '';
+        }
+      }
+    }
+
+    // Initial navigation update
+    updateNavigation();
+
+    // Listen for storage changes (when user logs in/out in another tab)
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'authToken') {
+        updateNavigation();
+      }
+    });
+
+    // Listen for custom login/logout events
+    window.addEventListener('userLoggedIn', updateNavigation);
+    window.addEventListener('userLoggedOut', updateNavigation);
+  });
+</script>
+<script src="/scripts/chatbot.js"></script>
+<div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body>
+</html>

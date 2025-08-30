@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">\1
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="../css/profile.css" rel="stylesheet"/>
+<link href="../css/profile-nav.css" rel="stylesheet"/>
+<link href="../css/main.css" rel="stylesheet"/>
+<link href="../css/global-nav.css" rel="stylesheet"/>
+<link href="../css/footer.css" rel="stylesheet"/>
+<script src="../scripts/main.js"></script>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Company • GREIA</title><link href="../css/main.css" rel="stylesheet"/><link href="../css/global-nav.css" rel="stylesheet"/></head>
+<body>
+<div class="container" style="max-width:1100px;margin:0 auto;padding:20px;">
+  <h1 id="name">Company</h1>
+  <div id="members" class="grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;"></div>
+</div>
+<script>
+function qp(k){ return new URLSearchParams(location.search).get(k); }
+async function api(p){ const r = await fetch(p); return r.json(); }
+(async function(){
+  const slug = qp('c'); if(!slug){ document.getElementById('name').textContent='Unknown company'; return; }
+  const d = await api('/api/public/companies/'+encodeURIComponent(slug));
+  document.getElementById('name').textContent = d.name;
+  const box = document.getElementById('members'); box.innerHTML='';
+  (d.members||[]).forEach(m=>{
+    const el = document.createElement('div'); el.className='card';
+    el.style = 'border:1px solid #e5e7eb;border-radius:12px;padding:12px;background:#fff;';
+    el.innerHTML = '<h3>'+ (m.full_name||'') +'</h3><div>'+ (m.title||'') +'</div><div>'+ (m.location||'') +'</div>';
+    box.appendChild(el);
+  });
+})();
+</script>
+<div data-include="/components/footer.html"></div>
+<script src="/public/js/greia-auto-mount.js"></script>
+<script src="/scripts/includes.js"></script>
+</body></html>

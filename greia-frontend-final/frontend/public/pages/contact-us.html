@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Greia - Contact Us</title>
+<link rel="icon" type="image/png" href="../assets/greia (4).png"/>
+<link href="/css/global-nav.css" rel="stylesheet"/>
+<link href="/css/contact-us.css" rel="stylesheet"/>
+<link href="css/main.css" rel="stylesheet"/>
+<script src="/js/global-nav.js"></script>
+<script src="/js/global-search.js"></script>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="main-nav">
+    <div class="nav-container">
+        <div class="nav-left">
+            <div class="nav-item dropdown">
+                <a href="/pages/buy.html" class="nav-link">Buy</a>
+                <div class="dropdown-content">
+                    <a href="/pages/buy.html">New Homes</a>
+                    <a href="/pages/buy.html">Residential</a>
+                    <a href="/pages/buy.html">Commercial</a>
+                    <a href="/pages/buy.html">Luxury Homes</a>
+                    <a href="/pages/buy.html">New Developments</a>
+                    <a href="/pages/buy.html">Country Homes</a>
+                    <a href="/pages/buy.html">Apartments</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="/pages/rent.html" class="nav-link">Rent</a>
+                <div class="dropdown-content">
+                    <a href="/pages/rent.html">Apartments</a>
+                    <a href="/pages/rent.html">Lettings</a>
+                    <a href="/pages/rent.html">Residential</a>
+                    <a href="/pages/rent.html">Luxury Homes</a>
+                    <a href="/pages/rent.html">Timeshare Homes</a>
+                    <a href="/pages/rent.html">Houses</a>
+                    <a href="/pages/rent.html">Short-Term</a>
+                    <a href="/pages/rent.html">Student Accommodation</a>
+                    <a href="/pages/rent.html">Sublets</a>
+                </div>
+            </div>
+            <div class="nav-item dropdown">
+                <a href="/pages/commercial.html" class="nav-link">Commercial</a>
+                <div class="dropdown-content">
+                    <a href="/pages/commercial.html">Office Space</a>
+                    <a href="/pages/commercial.html">Retail Unit</a>
+                    <a href="/pages/commercial.html">Industrial Unit</a>
+                    <a href="/pages/commercial.html">Restaurant / Bar / Hotel</a>
+                    <a href="/pages/commercial.html">Luxury Commercial</a>
+                    <a href="/pages/commercial.html">Commercial Site</a>
+                    <a href="/pages/commercial.html">Auction</a>
+                    <a href="/pages/commercial.html">Agricultural Site</a>
+                    <a href="/pages/commercial.html">Development Land</a>
+                    <a href="/pages/commercial.html">Investment Property</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="/pages/agents.html" class="nav-link">Find an Agent</a>
+            </div>
+        </div>
+        
+        <div class="nav-center">
+            <a href="/index.html" class="logo">
+                <img src="/assets/d4rent logo smaller.png" alt="D4Rent Logo">
+            </a>
+        </div>
+        
+        <div class="nav-right">
+            <div class="nav-item dropdown">
+                <a href="/pages/services.html" class="nav-link">Our Services</a>
+                <div class="dropdown-content">
+                    <a href="/pages/services.html">Property Management</a>
+                    <a href="/pages/services.html">Consulting</a>
+                    <a href="/pages/services.html">Legal Advice</a>
+                    <a href="/pages/services.html">Tradesmen</a>
+                    <a href="/pages/services.html">Interior Designers</a>
+                    <a href="/pages/services.html">Architect</a>
+                    <a href="/pages/services.html">Others</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="/pages/concierge.html" class="nav-link">Our Concierge</a>
+            </div>
+            <div class="nav-item">
+                <a href="/pages/sell.html" class="nav-link">Sell with D4rent?</a>
+            </div>
+            <div class="nav-item">
+                <a href="/pages/login.html" class="nav-link" id="login-btn">Sign In</a>
+            </div>
+        </div>
+        
+        <!-- Mobile menu button -->
+        <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    
+    <!-- Global Search Bar -->
+    <div class="global-search-container">
+        <div class="search-wrapper">
+            <input type="text" id="global-search" placeholder="Search properties, locations, or services..." class="global-search-input">
+            <button type="button" class="global-search-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+        <div id="global-search-results" class="global-search-results"></div>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/buy.html" class="mobile-nav-link">Buy</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/buy.html">New Homes</a>
+                <a href="/pages/buy.html">Residential</a>
+                <a href="/pages/buy.html">Commercial</a>
+                <a href="/pages/buy.html">Luxury Homes</a>
+                <a href="/pages/buy.html">New Developments</a>
+                <a href="/pages/buy.html">Country Homes</a>
+                <a href="/pages/buy.html">Apartments</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/rent.html" class="mobile-nav-link">Rent</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/rent.html">Apartments</a>
+                <a href="/pages/rent.html">Lettings</a>
+                <a href="/pages/rent.html">Residential</a>
+                <a href="/pages/rent.html">Luxury Homes</a>
+                <a href="/pages/rent.html">Timeshare Homes</a>
+                <a href="/pages/rent.html">Houses</a>
+                <a href="/pages/rent.html">Short-Term</a>
+                <a href="/pages/rent.html">Student Accommodation</a>
+                <a href="/pages/rent.html">Sublets</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/commercial.html" class="mobile-nav-link">Commercial</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/commercial.html">Office Space</a>
+                <a href="/pages/commercial.html">Retail Unit</a>
+                <a href="/pages/commercial.html">Industrial Unit</a>
+                <a href="/pages/commercial.html">Restaurant / Bar / Hotel</a>
+                <a href="/pages/commercial.html">Luxury Commercial</a>
+                <a href="/pages/commercial.html">Commercial Site</a>
+                <a href="/pages/commercial.html">Auction</a>
+                <a href="/pages/commercial.html">Agricultural Site</a>
+                <a href="/pages/commercial.html">Development Land</a>
+                <a href="/pages/commercial.html">Investment Property</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/agents.html" class="mobile-nav-link">Find an Agent</a>
+        </div>
+        <div class="mobile-nav-item dropdown">
+            <a href="/pages/services.html" class="mobile-nav-link">Our Services</a>
+            <div class="mobile-dropdown-content">
+                <a href="/pages/services.html">Property Management</a>
+                <a href="/pages/services.html">Consulting</a>
+                <a href="/pages/services.html">Legal Advice</a>
+                <a href="/pages/services.html">Tradesmen</a>
+                <a href="/pages/services.html">Interior Designers</a>
+                <a href="/pages/services.html">Architect</a>
+                <a href="/pages/services.html">Others</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/concierge.html" class="mobile-nav-link">Our Concierge</a>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/sell.html" class="mobile-nav-link">Sell with D4rent?</a>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="/pages/login.html" class="mobile-nav-link" id="mobile-login-btn">Sign In</a>
+        </div>
+    </div>
+</nav>
+
+<main class="main-content">
+<!-- Contact Section -->
+<section class="contact-section">
+<div class="contact-container">
+<!-- Contact Details -->
+<div class="contact-details">
+<h2 style="font-size: smaller;">Contact Details</h2>
+<p><strong>Address:</strong> 36 Upper Baggot St, Ballsbridge, D4</p>
+<p><strong>Phone:</strong> 01 442 7303, 087 169 9498</p>
+<p><strong>Email:</strong> <a href="mailto:info@d4rent.ie">info@d4rent.ie</a></p>
+<p><strong>PSRA No:</strong> 003328</p>
+</div>
+<!-- Contact Form -->
+<div class="contact-form">
+<h2 style="font-size: smaller;">Send Us a Message</h2>
+<form action="#" method="POST">
+<div class="form-group">
+<label for="name">Name:</label>
+<input id="name" name="name" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="email">Email:</label>
+<input id="email" name="email" required="" type="email"/>
+</div>
+<div class="form-group">
+<label for="phone">Phone:</label>
+<input id="phone" name="phone" type="tel"/>
+</div>
+<div class="form-group">
+<label for="message">Message:</label>
+<textarea id="message" name="message" required="" rows="5"></textarea>
+</div>
+<button class="contact-button" type="submit">Submit</button>
+</form>
+</div>
+</div>
+</section>
+<!-- Map Section -->
+<section class="map-section">
+<div id="map" style="width: 100%; height: 400px;"></div>
+</section>
+<!-- Google Maps Script -->
+<script async="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8dkrqVKGGQS8fX3avGMDjw-NTZa8bLqQ&amp;callback=initMap">
+</script>
+<script>
+    function initMap() {
+      const location = { lat: 53.334028, lng: -6.253549 }; // Replace with your desired coordinates
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 15,
+        center: location,
+      });
+      const marker = new google.maps.Marker({
+        position: location,
+        map: map,
+      });
+    }
+  </script>
+<!-- Footer -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+      const hamburger = document.querySelector(".hamburger-menu");
+      const navDropdown = document.querySelector(".nav-dropdown");
+
+      if (hamburger && navDropdown) {
+        hamburger.addEventListener("click", () => {
+          navDropdown.classList.toggle("show");
+        });
+      }
+    });
+  </script>
+<!-- Chatbot icon -->
+<!-- Chatbot popup -->
+<footer>
+<div class="footer-container">
+<div class="footer-image">
+<img alt="D4Rent Footer Logo" src="/assets/d4rent logo smaller.png" style="height: auto; max-height: 100px;"/>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Contact Details</h3>
+<p>D4Rent.ie</p>
+<p>36 Upper Baggot St, Ballsbridge, D4</p>
+<p>Phone: 01 442 7303</p>
+<p>087 169 9498</p>
+<p>Email: <a href="mailto:info@d4rent.ie">info@d4rent.ie</a></p>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Quick Links</h3>
+<ul>
+<li><a href="pages/buy.html">Buy</a></li>
+<li><a href="pages/rent.html">Rent</a></li>
+<li><a href="pages/sell.html">Sell</a></li>
+<li><a href="pages/commercial.html">Commercial</a></li>
+<li><a href="pages/agents.html">Agents</a></li>
+<li><a href="pages/contact-us.html">Contact Us</a></li>
+<li><a href="pages/listyourrentalsfree.html">List Your Rentals Free</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Policy Links</h3>
+<ul>
+<li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
+<li><a href="pages/terms-of-service.html">Terms of Service</a></li>
+<li><a href="pages/cookie-policy.html">Cookie Policy</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;">Connect with Us</h3>
+<ul>
+<li><a href="https://www.facebook.com/profile.php?id=61577099380616" target="_blank">Facebook</a></li>
+<li><a href="https://www.instagram.com/dublin4rent/" target="_blank">Instagram</a></li>
+<li><a href="https://www.tiktok.com/@d4rent.ie" target="_blank">Tiktok</a></li>
+</ul>
+</div>
+</div>
+</</main>
+
+<footer>
+<div class="footer-container">
+<div class="footer-image">
+<img alt="D4Rent Footer Logo" src="/assets/d4rent logo smaller.png" style="height: auto; max-height: 100px;"/>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;; font-size: larger;">Contact Details</h3>
+<p style="font-size: larger;">D4Rent.ie</p>
+<p style="font-size: larger;">36 Upper Baggot St, Ballsbridge, D4</p>
+<p style="font-size: larger;">Phone: 01 442 7303</p>
+<p style="font-size: larger;">087 169 9498</p>
+<p>Email: <a href="mailto:info@d4rent.ie">info@d4rent.ie</a></p>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;; font-size: larger;">Quick Links</h3>
+<ul>
+<li><a href="pages/buy.html">Buy</a></li>
+<li><a href="pages/rent.html">Rent</a></li>
+<li><a href="pages/sell.html">Sell</a></li>
+<li><a href="pages/commercial.html">Commercial</a></li>
+<li><a href="pages/agents.html">Agents</a></li>
+<li><a href="pages/contact-us.html">Contact Us</a></li>
+<li><a href="pages/listyourrentalsfree.html">List Your Rentals Free</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;; font-size: larger;">Policy Links</h3>
+<ul>
+<li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
+<li><a href="pages/terms-of-service.html">Terms of Service</a></li>
+<li><a href="pages/cookie-policy.html">Cookie Policy</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3 style="font-size: smaller;; font-size: larger;">Connect with Us</h3>
+<ul>
+<li><a href="https://www.facebook.com/profile.php?id=61577099380616" target="_blank">Facebook</a></li>
+<li><a href="https://www.instagram.com/dublin4rent/" target="_blank">Instagram</a></li>
+<li><a href="https://www.tiktok.com/@d4rent.ie" target="_blank">Tiktok</a></li>
+</ul>
+</div>
+</div>
+</footer>
+
+<script src="/scripts/chatbot.js"></script>
+<script>
+// Initialize global navigation
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof initializeGlobalNavigation === 'function') {
+        initializeGlobalNavigation();
+    }
+    if (typeof initializeGlobalSearch === 'function') {
+        initializeGlobalSearch();
+    }
+});
+</script>
+</body>
+</html>
